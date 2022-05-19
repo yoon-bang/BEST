@@ -13,12 +13,15 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
 import androidx.lifecycle.Observer
 import com.baconbeacon.beaconexample.csv.CSVHelper
+import com.baconbeacon.beaconexample.kalman.KalmanFilter
 import org.altbeacon.beacon.Beacon
 import org.altbeacon.beacon.BeaconManager
 import org.altbeacon.beacon.MonitorNotifier
 import org.altbeacon.beaconreference.R
 import java.time.LocalDateTime
 import java.time.format.DateTimeFormatter
+import kotlin.math.abs
+import kotlin.math.pow
 
 class MainActivity : AppCompatActivity() {
     lateinit var beaconListView: ListView
@@ -31,9 +34,13 @@ class MainActivity : AppCompatActivity() {
 
     private val fileName = "AOS_exp3_"
     var beaconDataList = arrayListOf<Array<String>>()
+    var filteredRssiArr = arrayListOf<Float>()
     lateinit var filePath: String
     lateinit var csvHelper: CSVHelper
     private lateinit var timer: CountDownTimer
+
+    private lateinit var kalman: KalmanFilter
+    var previousRssi = 0
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -55,16 +62,22 @@ class MainActivity : AppCompatActivity() {
         beaconListView.adapter =
             ArrayAdapter(this, android.R.layout.simple_list_item_1, arrayOf("--"))
 
-        beaconDataList.add(arrayOf("Date", "UUID", "Major", "Minor", "RSSI"))
+        beaconDataList.add(arrayOf("Date",
+            "UUID",
+            "Major",
+            "Minor",
+            "RSSI",
+            "Filtered RSSI",
+            "Error"))
 //        filePath = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS)
 //            .toString()
         filePath = Environment.getExternalStorageDirectory().absolutePath + "/Download"
-        Log.w("aaaaaaaa", filePath)
         csvHelper = CSVHelper(filePath)
         permission()
         Toast.makeText(this@MainActivity.applicationContext, "Start Detect", Toast.LENGTH_LONG)
             .show()
         setupTimer()
+        kalman = KalmanFilter(R = 0.001f, Q = 2f)
     }
 
     private fun setupTimer() {
@@ -129,24 +142,46 @@ class MainActivity : AppCompatActivity() {
     }
 
     private val rangingObserver = Observer<Collection<Beacon>> { beacons ->
+
         Log.d(TAG, "Ranged: ${beacons.count()} beacons")
         if (BeaconManager.getInstanceForApplication(this).rangedRegions.isNotEmpty()) {
             beaconCountTextView.text = "Ranging enabled: ${beacons.count()} beacon(s) detected"
             beaconListView.adapter = ArrayAdapter(this,
                 android.R.layout.simple_list_item_1,
-                beacons.sortedBy { it.distance }
-                    .map { "UUID: ${it.id1}\nmajor: ${it.id2} minor:${it.id3}\nRSSI: ${it.rssi}\n" }
-                    .toTypedArray())
-
+                beacons.sortedBy { it.distance }.map {
+                    "UUID: ${it.id1}\nmajor: ${it.id2} minor:${it.id3}\nRSSI: ${it.rssi}\n Filtered RSSI: ${
+                        kalman.filter(it.rssi.toFloat())
+                    }"
+                }.toTypedArray())
 
             if (beacons.map { it.rssi }.isNotEmpty()) {
+                var uuid = beacons.map { it.id1 }[0].toString()
+                var major = beacons.map { it.id2 }[0].toString()
+                var minor = beacons.map { it.id3 }[0].toString()
+                var rssi = beacons.map { it.rssi }[0].toString()
+                var filteredRssi = kalman.filter(rssi.toFloat()).toString()
+                var error = (abs(rssi.toDouble()) - abs(filteredRssi.toDouble())).pow(2).toString()
+
+                // threshold 넘어가면 reset
+//                if (abs(abs(previousRssi)) - abs(rssi.toInt()) > 15) {
+//                    kalman = KalmanFilter(R = 0.001f, Q = 2f)
+//                    Log.w("$$$ Detected Beacons $$$", "Filter Reset")
+//                }
+
                 beaconDataList.add(arrayOf(LocalDateTime.now().toString(),
-                    beacons.map { it.id1 }[0].toString(),
-                    beacons.map { it.id2 }[0].toString(),
-                    beacons.map { it.id3 }[0].toString(),
-                    beacons.map { it.rssi }[0].toString()))
+                    uuid,
+                    major,
+                    minor,
+                    rssi,
+                    filteredRssi,
+                    error))
+                filteredRssiArr.add(filteredRssi.toFloat())
+//                Log.i("$$$ Detected Beacons $$$",
+//                    "UUID: $uuid major: $major minor:$minor RSSI: $rssi Filtered RSSI: $filteredRssi")
                 Log.i("$$$ Detected Beacons $$$",
-                    "UUID: ${beacons.map { it.id1 }} major: ${beacons.map { it.id2 }} minor:${beacons.map { it.id3 }} RSSI: ${beacons.map { it.rssi }}")
+                    "RSSI: $rssi Filtered RSSI: $filteredRssi, Error: $error")
+                previousRssi = rssi.toInt()
+
             } else {
                 Log.w("$$$ Detected Empty Beacons $$$", beacons.map { it.rssi }.toString())
             }
