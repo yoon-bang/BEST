@@ -11,11 +11,11 @@
 
 🧖🏻‍♀️ *Problem Statement*
     
-    There are many people injured due to the fire. However, current evacuation system is not good enough to evacuate 
+    There are many people injured due to the fire. However, the current evacuation system is not good enough to evacuate 
     many people due to the smoke.
-
+    
     There were several attempts to try to fix this issue, However, they are not good enough. Wi-Fi based localization and 
-    Pedestrian Dead Reckoning has its limits on accuracy, and 2-dimentional Navigation is not good enough to make people 
+    Pedestrian Dead Reckoning has its limits on the accuracy, and 2-dimensional Navigation is not good enough to make people 
     evacuate efficiently.
 
 
@@ -23,7 +23,7 @@
 
     🥕Software : Develop an algorithm that can evacuate people efficiently.
     
-    🥕Hardware : Using Beacons which consumes less energy to locate it every floors
+    🥕Hardware : Using Beacons consumes less energy to locate every floor
 
 💡 *Novelty*
 
