@@ -20,9 +20,9 @@
     Pedestrian Dead Reckoning has its limits on the accuracy, and 2-dimensional Navigation is not good enough to make people 
     evacuate efficiently.
 
-Therefore, a system that can both provide high accuracy localization and efficiently way to evacuating people is needed.
+    Therefore, a system that can both provide high accuracy localization and efficiently way to evacuating people is needed.
 
-[1] U.S. Fire Administration, FEMA[2021 online]. Available: Fire Estimate Summary
+    [1] U.S. Fire Administration, FEMA[2021 online]. Available: Fire Estimate Summary
 
 
 📖 *Considerations*
