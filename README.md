@@ -72,6 +72,12 @@
     
     6. Server calculates the fastest way to escape and sends it back to the smartphone. At this part, A* or 
     Dijkstra Algorithm will be used
+    
+    Localize each user’s position : When raspberry pi detects fire with sensor, it send HTTP request to our server. As ther server with connected with a user’s smartphone with TCP connection, it makes the smartphone to receive beacon’s signal. After receiving the signal, it calculates RSSI values and localize the user’s position by using triangulation.
+
+Optimal Evacuation Algorithm : The smartphone sends the calculated position to the server through TCP connection. The position can be synchronized in real-time due to TCP connection. The server configures an optimal evacuation route with the received position and our algorithm. If any change occurs, server will find a new evacuation route and notify it to the smartphone.
+
+
  
 🖥️ *Environment Setting*
 
