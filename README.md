@@ -13,7 +13,7 @@
     
     There are many people injured due to the fire. However, the current evacuation system is not good enough to evacuate 
     many people due to the smoke.
-    
+
     There were several attempts to try to fix this issue, However, they are not good enough. Wi-Fi based localization and 
     Pedestrian Dead Reckoning has its limits on the accuracy, and 2-dimensional Navigation is not good enough to make people 
     evacuate efficiently.
@@ -23,48 +23,48 @@
 
     🥕Software : Develop an algorithm that can evacuate people efficiently.
     
-    🥕Hardware : Using Beacons consumes less energy to locate every floor
+    🥕Hardware : Using Beacons which consumes less energy to locate every floor.
 
 💡 *Novelty*
 
     1. High accuracy of indoor localization using iBeacon
-       => We researched about Wi-Fi based indoor localization, and we figured out that it is not accurate enough due 
-       to lack of Access Point.
-      We include beacon and Access Point when we localize, and we will gain 22% increase in accuracy.
+       => We researched Wi-Fi based indoor localization, and we figured out that it is not accurate enough due 
+       to lack of Access Points.
+       We include beacon and Access Point when we localize, and we will gain a 22% increase in accuracy.
       
     2. Real-Time socket communication and Optimized Route Algorithm
-       => Most previous research works on Evacuation Algorithm based on database. It means that they cannot modify 
+       => Most previous research works on Evacuation Algorithms based on the database. It means that they cannot modify 
        the evacuation route based on real-time data.
-      Our team concentrates on real-time route modification to make sure that victims can stay away from hazards
-      Our project also detects location of fire, so people may know the location of fire.
+       Our team concentrates on real-time route modification to make sure that victims can stay away from hazards
+       Our project also detects the location of the fire, so people may know the location of the fire.
       
     3. Augmented Reality
-      Since we developed optimized route algorithm to calculate the best route, if we cannot give advice to victims 
-      clearly, it would be useless.
-      Previous work used 2D navigation and image-based navigation. for 2D navigation, It has its limits on being too 
-      dependent on angles, that users cannot notice if they are on the right route.
-      Image based navigation, has its limits on malfunctioning at real situation full of smoke.
-      We developed Augmented Reality for those who cannot notice exit sign. It is clear to see, and it works when 
-      they does not have clear sight.
+       => Since we developed an optimized route algorithm to calculate the best route, if we cannot advise victims 
+       it would be useless.
+       Previous work used 2D navigation and image-based navigation. for 2D navigation, It has its limits on being too 
+       dependent on angles, that users cannot notice if they are on the right route.
+       Image-based navigation has its limits on malfunctioning in a real situation full of smoke.
+       We developed Augmented Reality for those who cannot notice exit sign. It is clear to see, and it works when 
+       they do not have clear sight.
 
 🏛 *System Overview*
  <p align="center">
    <img src="https://github.com/BeaconAR/BEST/raw/main/image/Overview.png" alt="Image Error"/>
 </p>
     
-    1. Raspberry Pi always tries to detect fire, and server always checks if Raspberry Pi works or not. Once 
-    Raspberry Pi detects fire, It sends to server HTTP request to let the server know the situation of fire.
+    1. Raspberry Pi always tries to detect fire, and the server always checks if Raspberry Pi works or not. Once 
+    Raspberry Pi detects a fire, It sends to a server an HTTP request to let the server know the situation of fire.
     
-    2. Server gets blueprint of building from Database, and sends the beacon status if it works well.
+    2. Server gets blueprint of building from Database and sends the beacon status if it works well.
     
-    3. Server sends notification to victim's mobile device, and 
+    3. Server sends a notification to the victim's mobile device, and 
     
-    4. If smartphone opens the application, it start collecting Beacon's RSSI, UUID, major and minor value.
+    4. If the smartphone opens the application, it starts collecting Beacon's RSSI, UUID, major and minor value.
     
-    5. Smartphone start calculating current location from the data collected via machine learning, and sends 
+    5. Smartphone starts calculating the current location from the data collected via machine learning and sends 
     server location data
     
-    6. Server calculates the fastest way to escape, and sends back to smartphone. At this part, A* or 
+    6. Server calculates the fastest way to escape and sends it back to the smartphone. At this part, A* or 
     Dijkstra Algorithm will be used
  
 🖥️ *Environment Setting*
@@ -110,7 +110,7 @@
        
     
     👨🏻‍🦱Suhyun Park
-       -Paicai University
+       -Paichai University
        -Major in Computer Science
        -2061013@pcu.ac.kr
 
