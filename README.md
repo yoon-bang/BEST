@@ -11,8 +11,7 @@
 
 🧖🏻‍♀️ *Problem Statement*
     
-    There are many people injured due to the fire. However, the current evacuation system is not good enough to evacuate 
-    many people due to the smoke.
+    Due to the limitation of current evacuation plan using EXIT sign, people feels hard to escape during actual situation of fire.
 
     There were several attempts to try to fix this issue, However, they are not good enough. Wi-Fi based localization and 
     Pedestrian Dead Reckoning has its limits on the accuracy, and 2-dimensional Navigation is not good enough to make people 
