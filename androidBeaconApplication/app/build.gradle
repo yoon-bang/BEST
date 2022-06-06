@@ -4,7 +4,6 @@ apply plugin: 'kotlin-android-extensions'
 
 android {
     compileSdkVersion 32
-    buildToolsVersion "30.0.0"
 
     defaultConfig {
         applicationId "com.baconbeacon.beaconexample"
