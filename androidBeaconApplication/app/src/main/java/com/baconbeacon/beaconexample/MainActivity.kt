@@ -1,8 +1,11 @@
 package com.baconbeacon.beaconexample
 
 import android.Manifest
+import android.annotation.SuppressLint
 import android.app.AlertDialog
+import android.content.Context
 import android.content.pm.PackageManager
+import android.net.wifi.WifiManager
 import android.os.Bundle
 import android.os.CountDownTimer
 import android.os.Environment
@@ -18,6 +21,7 @@ import org.altbeacon.beacon.Beacon
 import org.altbeacon.beacon.BeaconManager
 import org.altbeacon.beacon.MonitorNotifier
 import org.altbeacon.beaconreference.R
+import java.net.NetworkInterface
 import java.time.LocalDateTime
 import java.time.format.DateTimeFormatter
 import kotlin.math.abs
@@ -28,7 +32,7 @@ class MainActivity : AppCompatActivity() {
     lateinit var beaconCountTextView: TextView
     lateinit var monitoringButton: Button
     lateinit var rangingButton: Button
-    lateinit var beaconReferenceApplication: BeaconExample
+    private lateinit var beaconReferenceApplication: BeaconExample
     var alertDialog: AlertDialog? = null
     var neverAskAgainPermissions = ArrayList<String>()
 
@@ -41,6 +45,8 @@ class MainActivity : AppCompatActivity() {
 
     private lateinit var kalman: KalmanFilter
     var previousRssi = 0
+
+    lateinit var wifiManager: WifiManager
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -68,7 +74,8 @@ class MainActivity : AppCompatActivity() {
             "Minor",
             "RSSI",
             "Filtered RSSI",
-            "Error"))
+            "Error",
+            "AP RSSI"))
 //        filePath = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS)
 //            .toString()
         filePath = Environment.getExternalStorageDirectory().absolutePath + "/Download"
@@ -78,6 +85,8 @@ class MainActivity : AppCompatActivity() {
             .show()
         setupTimer()
         kalman = KalmanFilter(R = 0.001f, Q = 2f)
+        wifiManager = applicationContext.getSystemService(Context.WIFI_SERVICE) as WifiManager
+        Log.w("dddd", "${getMacAddress()}")
     }
 
     private fun setupTimer() {
@@ -102,12 +111,22 @@ class MainActivity : AppCompatActivity() {
                     this,
                     Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED || ActivityCompat.checkSelfPermission(
                     this,
-                    Manifest.permission.ACCESS_BACKGROUND_LOCATION) != PackageManager.PERMISSION_GRANTED
+                    Manifest.permission.ACCESS_BACKGROUND_LOCATION) != PackageManager.PERMISSION_GRANTED || ActivityCompat.checkSelfPermission(
+                    this,
+                    Manifest.permission.ACCESS_NETWORK_STATE) != PackageManager.PERMISSION_GRANTED || ActivityCompat.checkSelfPermission(
+                    this,
+                    Manifest.permission.ACCESS_WIFI_STATE) != PackageManager.PERMISSION_GRANTED || ActivityCompat.checkSelfPermission(
+                    this,
+                    Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED
+
         ) {
             val permission = arrayOf(Manifest.permission.WRITE_EXTERNAL_STORAGE,
                 Manifest.permission.BLUETOOTH_SCAN,
                 Manifest.permission.ACCESS_FINE_LOCATION,
-                Manifest.permission.ACCESS_BACKGROUND_LOCATION)
+                Manifest.permission.ACCESS_BACKGROUND_LOCATION,
+                Manifest.permission.ACCESS_NETWORK_STATE,
+                Manifest.permission.ACCESS_WIFI_STATE,
+                Manifest.permission.ACCESS_COARSE_LOCATION)
             ActivityCompat.requestPermissions(this, permission, 100)
         }
     }
@@ -141,8 +160,8 @@ class MainActivity : AppCompatActivity() {
         // alertDialog?.show()
     }
 
+    @SuppressLint("MissingPermission")
     private val rangingObserver = Observer<Collection<Beacon>> { beacons ->
-
         Log.d(TAG, "Ranged: ${beacons.count()} beacons")
         if (BeaconManager.getInstanceForApplication(this).rangedRegions.isNotEmpty()) {
             beaconCountTextView.text = "Ranging enabled: ${beacons.count()} beacon(s) detected"
@@ -162,6 +181,11 @@ class MainActivity : AppCompatActivity() {
                 var filteredRssi = kalman.filter(rssi.toFloat()).toString()
                 var error = (abs(rssi.toDouble()) - abs(filteredRssi.toDouble())).pow(2).toString()
 
+                val wifi = wifiManager.connectionInfo
+                // bssid : access point 의 주소
+                Log.w("$$$ WIFI INFO $$$",
+                    "mac: ${wifi.macAddress}, RSSI: ${wifi.rssi}, BSSID:${wifi.bssid}, SSID:${wifi.ssid}")
+
                 // threshold 넘어가면 reset
 //                if (abs(abs(previousRssi)) - abs(rssi.toInt()) > 15) {
 //                    kalman = KalmanFilter(R = 0.001f, Q = 2f)
@@ -174,14 +198,14 @@ class MainActivity : AppCompatActivity() {
                     minor,
                     rssi,
                     filteredRssi,
-                    error))
+                    error,
+                    wifi.rssi.toString()))
                 filteredRssiArr.add(filteredRssi.toFloat())
 //                Log.i("$$$ Detected Beacons $$$",
 //                    "UUID: $uuid major: $major minor:$minor RSSI: $rssi Filtered RSSI: $filteredRssi")
                 Log.i("$$$ Detected Beacons $$$",
                     "RSSI: $rssi Filtered RSSI: $filteredRssi, Error: $error")
                 previousRssi = rssi.toInt()
-
             } else {
                 Log.w("$$$ Detected Empty Beacons $$$", beacons.map { it.rssi }.toString())
             }
@@ -249,6 +273,15 @@ class MainActivity : AppCompatActivity() {
                 }
             }
         }
+    }
+
+    private fun getMacAddress(): String? = try {
+        NetworkInterface.getNetworkInterfaces().toList().find { networkInterface ->
+            networkInterface.name.equals("wlan0", ignoreCase = true)
+        }?.hardwareAddress?.joinToString(separator = ":") { byte -> "%02X".format(byte) }
+    } catch (ex: Exception) {
+        ex.printStackTrace()
+        null
     }
 
     companion object {
