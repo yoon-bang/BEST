@@ -9,6 +9,7 @@ import android.net.wifi.WifiManager
 import android.os.Bundle
 import android.os.CountDownTimer
 import android.os.Environment
+import android.provider.Settings
 import android.util.Log
 import android.view.View
 import android.widget.*
@@ -24,6 +25,7 @@ import org.altbeacon.beaconreference.R
 import java.net.NetworkInterface
 import java.time.LocalDateTime
 import java.time.format.DateTimeFormatter
+import java.util.*
 import kotlin.math.abs
 import kotlin.math.pow
 
@@ -87,6 +89,10 @@ class MainActivity : AppCompatActivity() {
         kalman = KalmanFilter(R = 0.001f, Q = 2f)
         wifiManager = applicationContext.getSystemService(Context.WIFI_SERVICE) as WifiManager
         Log.w("dddd", "${getMacAddress()}")
+
+
+        // UUID 는 앱을 삭제하고 다시 설치하면 값이 변경됨
+        Log.w("cccc", "${UUID.randomUUID()}")
     }
 
     private fun setupTimer() {
@@ -275,13 +281,40 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
+    // 랜덤 mac 주소 : 0A:7B:45:A0:E2:6C
+    // 휴대전화 mac 주소 : D4:11:A3:7C:89:0B
+    // Android 8.0 부터 Android 기기는 네트워크와 현재 연결되지 않은 상태에서 새 네트워크를 탐색할 때 무작위 MAC 주소 사용.
+    // Android 10 에서는 기본적으로 클라이언트 모드, SoftAP, Wi-Fi Direct 에서 MAC 주소 무작위 순서 지정이 사용 설정됨.
+    // Why? MAC 주소로 Wi-Fi 패킷 추적을 통해 단말기 위치를 파악하는 걸 방지하기 위함
+
+    // 삭제 후 재설치 or 재부팅해도 값이 변경되지 않음!
+
+    // wifi 설정에서 랜덤 MAC / 휴대전화 MAC 중에서 랜덤 MAC 이 기본으로 설정돼있어서
+    // 코드상에서 가져오는 값이랑 휴대전화 정보의 Wi-Fi Mac 주소가 다른 이슈가 있음
+    // WiFi 연결 후 설정에서 휴대전화 MAC 로 변경하면 다바이스 wifi mac 주소 가져올 수 있음!
+    // 그럼 네트워크에 연결될 때마다 설정을 바꿔줘야하는데, 어떻게 함??
     private fun getMacAddress(): String? = try {
         NetworkInterface.getNetworkInterfaces().toList().find { networkInterface ->
             networkInterface.name.equals("wlan0", ignoreCase = true)
         }?.hardwareAddress?.joinToString(separator = ":") { byte -> "%02X".format(byte) }
-    } catch (ex: Exception) {
-        ex.printStackTrace()
+    } catch (exception: Exception) {
+        exception.printStackTrace()
         null
+    }
+
+    // ANDROID_ID : 디바이스가 최초 Boot 될 때 생성 되는 64-bit 값
+    // 디바이스를 공장초기화 하지 않는 이상 바뀌지 않는 고유 값
+    // 앱 서명 키별로 ANDROID_ID 의 범위가 지정된다.
+    // => 즉 릴리즈 버전과 디버깅 버전 APK 의 Android ID 가 다를 수 있다!
+    // 보통 릴리즈 버전을 다운받기 때문에 큰 문제는 없을 듯!
+    // 그러나, 공장 초기화와 인증키가 변경 될 때는 ANDROID_ID 가 변경된다.
+
+    // 단말기 고유값만 필요한 경우라면 이걸 사용해도 괜찮을 것 같다!
+    // 현재값: 100e2e222cfe79e1
+    // 재설치 or 재부팅해도 값이 변경되지 않음
+    private fun deviceID(): String {
+        return Settings.Secure.getString(applicationContext.contentResolver,
+            Settings.Secure.ANDROID_ID)
     }
 
     companion object {
