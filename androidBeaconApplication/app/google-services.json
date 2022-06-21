@@ -1,0 +1,98 @@
+{
+  "project_info": {
+    "project_number": "654559994186",
+    "project_id": "bacon-beacon-353516",
+    "storage_bucket": "bacon-beacon-353516.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:654559994186:android:61cccab7757f20e5ba61b3",
+        "android_client_info": {
+          "package_name": "com.baconbeacon.beaconexample"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "654559994186-apu2oukij0iqi1p81vcsqe8b407j4s5p.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.baconbeacon.beaconexample",
+            "certificate_hash": "eca95ca2e96078f38a23a77a56d94c56a68adfd7"
+          }
+        },
+        {
+          "client_id": "654559994186-hispu2g4ld1ivqs4btpdr7k3el3ivr0a.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB4dN3fDhvvP8Fd1hAacK6EH4Qug86tcL0"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "654559994186-hispu2g4ld1ivqs4btpdr7k3el3ivr0a.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "654559994186-gde63uo5tkccrlko6vjtr6e5afhuqjj3.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.baconbeacon.team2"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:654559994186:android:d9ac4d7c8bf3fbeeba61b3",
+        "android_client_info": {
+          "package_name": "org.altbeacon.beaconreference"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "654559994186-m1tod50fui5nmtn7nr6kc0hfagk5qo38.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "org.altbeacon.beaconreference",
+            "certificate_hash": "eca95ca2e96078f38a23a77a56d94c56a68adfd7"
+          }
+        },
+        {
+          "client_id": "654559994186-hispu2g4ld1ivqs4btpdr7k3el3ivr0a.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB4dN3fDhvvP8Fd1hAacK6EH4Qug86tcL0"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "654559994186-hispu2g4ld1ivqs4btpdr7k3el3ivr0a.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "654559994186-gde63uo5tkccrlko6vjtr6e5afhuqjj3.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.baconbeacon.team2"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
