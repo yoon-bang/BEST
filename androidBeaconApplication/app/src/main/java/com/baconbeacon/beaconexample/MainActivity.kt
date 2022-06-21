@@ -25,7 +25,7 @@ import com.google.firebase.ml.modeldownloader.FirebaseModelDownloader
 import org.altbeacon.beacon.Beacon
 import org.altbeacon.beacon.BeaconManager
 import org.altbeacon.beacon.MonitorNotifier
-import org.altbeacon.beaconreference.R
+import org.altbeacon.beaconreference.databinding.ActivityMainBinding
 import org.tensorflow.lite.Interpreter
 import java.io.File
 import java.net.NetworkInterface
@@ -38,10 +38,8 @@ import kotlin.math.abs
 import kotlin.math.pow
 
 class MainActivity : AppCompatActivity() {
-    lateinit var beaconListView: ListView
-    lateinit var beaconCountTextView: TextView
-    lateinit var monitoringButton: Button
-    lateinit var rangingButton: Button
+    private lateinit var binding: ActivityMainBinding
+
     private lateinit var beaconReferenceApplication: BeaconExample
     var alertDialog: AlertDialog? = null
     var neverAskAgainPermissions = ArrayList<String>()
@@ -64,7 +62,10 @@ class MainActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
+        binding = ActivityMainBinding.inflate(layoutInflater)
+        val view = binding.root
+        setContentView(view)
+
         beaconReferenceApplication = application as BeaconExample
 
         // Set up a Live Data observer for beacon data
@@ -74,14 +75,19 @@ class MainActivity : AppCompatActivity() {
         regionViewModel.regionState.observe(this, monitoringObserver)
         // observer will be called each time a new list of beacons is ranged (typically ~1 second in the foreground)
         regionViewModel.rangedBeacons.observe(this, rangingObserver)
-        rangingButton = findViewById(R.id.rangingButton)
-        monitoringButton = findViewById(R.id.monitoringButton)
-        beaconListView = findViewById(R.id.beaconList)
-        beaconCountTextView = findViewById(R.id.beaconCount)
-        beaconCountTextView.text = "No beacons detected"
-        beaconListView.adapter = ArrayAdapter(this, android.R.layout.simple_list_item_1, arrayOf("--"))
 
-        beaconDataList.add(arrayOf("Date", "UUID", "Major", "Minor", "RSSI", "Filtered RSSI", "Error", "AP RSSI"))
+        binding.beaconCount.text = "No beacons detected"
+        binding.beaconList.adapter =
+            ArrayAdapter(this, android.R.layout.simple_list_item_1, arrayOf("--"))
+
+        beaconDataList.add(arrayOf("Date",
+            "UUID",
+            "Major",
+            "Minor",
+            "RSSI",
+            "Filtered RSSI",
+            "Error",
+            "AP RSSI"))
 //        filePath = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS)
 //            .toString()
         filePath = Environment.getExternalStorageDirectory().absolutePath + "/Download"
@@ -105,8 +111,7 @@ class MainActivity : AppCompatActivity() {
 
     private fun loadMLmodel() {
         // Firebase 에서 ML 모델 불러오기
-        conditions = CustomModelDownloadConditions.Builder()
-            .requireWifi().build()
+        conditions = CustomModelDownloadConditions.Builder().requireWifi().build()
 
         FirebaseModelDownloader.getInstance()
             .getModel("AOS_rssi_Model", DownloadType.LOCAL_MODEL_UPDATE_IN_BACKGROUND, conditions)
@@ -120,8 +125,8 @@ class MainActivity : AppCompatActivity() {
 
     private fun setupTimer() {
         timer = object : CountDownTimer(300000, 1000) {
-            override fun onTick(p0: Long) {
-                Log.v("timer: ", p0.toString())
+            override fun onTick(time: Long) {
+                Log.v("timer: ", time.toString())
             }
 
             override fun onFinish() {
@@ -133,10 +138,29 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun permission() {
-        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED || ActivityCompat.checkSelfPermission(this, Manifest.permission.BLUETOOTH_SCAN) != PackageManager.PERMISSION_GRANTED || ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED || ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_BACKGROUND_LOCATION) != PackageManager.PERMISSION_GRANTED || ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_NETWORK_STATE) != PackageManager.PERMISSION_GRANTED || ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_WIFI_STATE) != PackageManager.PERMISSION_GRANTED || ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED
+        if (ActivityCompat.checkSelfPermission(this,
+                    Manifest.permission.WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED || ActivityCompat.checkSelfPermission(
+                    this,
+                    Manifest.permission.BLUETOOTH_SCAN) != PackageManager.PERMISSION_GRANTED || ActivityCompat.checkSelfPermission(
+                    this,
+                    Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED || ActivityCompat.checkSelfPermission(
+                    this,
+                    Manifest.permission.ACCESS_BACKGROUND_LOCATION) != PackageManager.PERMISSION_GRANTED || ActivityCompat.checkSelfPermission(
+                    this,
+                    Manifest.permission.ACCESS_NETWORK_STATE) != PackageManager.PERMISSION_GRANTED || ActivityCompat.checkSelfPermission(
+                    this,
+                    Manifest.permission.ACCESS_WIFI_STATE) != PackageManager.PERMISSION_GRANTED || ActivityCompat.checkSelfPermission(
+                    this,
+                    Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED
 
         ) {
-            val permission = arrayOf(Manifest.permission.WRITE_EXTERNAL_STORAGE, Manifest.permission.BLUETOOTH_SCAN, Manifest.permission.ACCESS_FINE_LOCATION, Manifest.permission.ACCESS_BACKGROUND_LOCATION, Manifest.permission.ACCESS_NETWORK_STATE, Manifest.permission.ACCESS_WIFI_STATE, Manifest.permission.ACCESS_COARSE_LOCATION)
+            val permission = arrayOf(Manifest.permission.WRITE_EXTERNAL_STORAGE,
+                Manifest.permission.BLUETOOTH_SCAN,
+                Manifest.permission.ACCESS_FINE_LOCATION,
+                Manifest.permission.ACCESS_BACKGROUND_LOCATION,
+                Manifest.permission.ACCESS_NETWORK_STATE,
+                Manifest.permission.ACCESS_WIFI_STATE,
+                Manifest.permission.ACCESS_COARSE_LOCATION)
             ActivityCompat.requestPermissions(this, permission, 100)
         }
     }
@@ -150,20 +174,23 @@ class MainActivity : AppCompatActivity() {
         var dialogTitle = "Beacons detected"
         var dialogMessage = "didEnterRegionEvent has fired"
         var stateString = "inside"
+
         if (state == MonitorNotifier.OUTSIDE) {
             dialogTitle = "No beacons detected"
             dialogMessage = "didExitRegionEvent has fired"
             stateString == "outside"
-            beaconCountTextView.text = "Outside of the beacon region -- no beacons detected"
-            beaconListView.adapter = ArrayAdapter(this, android.R.layout.simple_list_item_1, arrayOf("--"))
+            binding.beaconCount.text = "Outside of the beacon region -- no beacons detected"
+            binding.beaconList.adapter =
+                ArrayAdapter(this, android.R.layout.simple_list_item_1, arrayOf("--"))
         } else {
-            beaconCountTextView.text = "Inside the beacon region."
+            binding.beaconCount.text = "Inside the beacon region."
         }
         Log.d(TAG, "monitoring state changed to : $stateString")
+
         val builder = AlertDialog.Builder(this)
-        builder.setTitle(dialogTitle)
-        builder.setMessage(dialogMessage)
-        builder.setPositiveButton(android.R.string.ok, null)
+        builder.setTitle(dialogTitle).setMessage(dialogMessage)
+            .setPositiveButton(android.R.string.ok, null)
+
         alertDialog?.dismiss()
         alertDialog = builder.create()
         // alertDialog?.show()
@@ -173,28 +200,27 @@ class MainActivity : AppCompatActivity() {
     private val rangingObserver = Observer<Collection<Beacon>> { beacons ->
         Log.d(TAG, "Ranged: ${beacons.count()} beacons")
         if (BeaconManager.getInstanceForApplication(this).rangedRegions.isNotEmpty()) {
-            beaconCountTextView.text = "Ranging enabled: ${beacons.count()} beacon(s) detected"
-            beaconListView.adapter = ArrayAdapter(this, android.R.layout.simple_list_item_1, beacons.sortedBy { it.distance }
-                .map {
+            binding.beaconCount.text = "Ranging enabled: ${beacons.count()} beacon(s) detected"
+            binding.beaconList.adapter = ArrayAdapter(this,
+                android.R.layout.simple_list_item_1,
+                beacons.sortedBy { it.distance }.map {
                     "UUID: ${it.id1}\nmajor: ${it.id2} minor:${it.id3}\nRSSI: ${it.rssi}\n Filtered RSSI: ${
                         kalman.filter(it.rssi.toFloat())
                     }"
                 }.toTypedArray())
 
-            if (beacons.map { it.rssi }
-                        .isNotEmpty()) {
+            if (beacons.map { it.rssi }.isNotEmpty()) {
                 var uuid = beacons.map { it.id1 }[0].toString()
                 var major = beacons.map { it.id2 }[0].toString()
                 var minor = beacons.map { it.id3 }[0].toString()
                 var rssi = beacons.map { it.rssi }[0].toString()
-                var filteredRssi = kalman.filter(rssi.toFloat())
-                    .toString()
-                var error = (abs(rssi.toDouble()) - abs(filteredRssi.toDouble())).pow(2)
-                    .toString()
+                var filteredRssi = kalman.filter(rssi.toFloat()).toString()
+                var error = (abs(rssi.toDouble()) - abs(filteredRssi.toDouble())).pow(2).toString()
                 val wifi = wifiManager.connectionInfo
 
                 // bssid : access point 의 주소
-                Log.w("$$$ WIFI INFO $$$", "mac: ${wifi.macAddress}, RSSI: ${wifi.rssi}, BSSID:${wifi.bssid}, SSID:${wifi.ssid}")
+                Log.w("$$$ WIFI INFO $$$",
+                    "mac: ${wifi.macAddress}, RSSI: ${wifi.rssi}, BSSID:${wifi.bssid}, SSID:${wifi.ssid}")
 
                 // threshold 넘어가면 reset
 //                if (abs(abs(previousRssi)) - abs(rssi.toInt()) > 15) {
@@ -202,40 +228,46 @@ class MainActivity : AppCompatActivity() {
 //                    Log.w("$$$ Detected Beacons $$$", "Filter Reset")
 //                }
 
-                beaconDataList.add(arrayOf(LocalDateTime.now()
-                                               .toString(), uuid, major, minor, rssi, filteredRssi, error, wifi.rssi.toString()))
+                beaconDataList.add(arrayOf(LocalDateTime.now().toString(),
+                    uuid,
+                    major,
+                    minor,
+                    rssi,
+                    filteredRssi,
+                    error,
+                    wifi.rssi.toString()))
                 filteredRssiArr.add(filteredRssi.toFloat())
                 doInference(filteredRssi)
 
 //                Log.i("$$$ Detected Beacons $$$",
 //                    "UUID: $uuid major: $major minor:$minor RSSI: $rssi Filtered RSSI: $filteredRssi")
-                Log.i("$$$ Detected Beacons $$$", "RSSI: $rssi Filtered RSSI: $filteredRssi, Error: $error")
+                Log.i("$$$ Detected Beacons $$$",
+                    "RSSI: $rssi Filtered RSSI: $filteredRssi, Error: $error")
                 previousRssi = rssi.toInt()
             } else {
-                Log.w("$$$ Detected Empty Beacons $$$", beacons.map { it.rssi }
-                    .toString())
+                Log.w("$$$ Detected Empty Beacons $$$", beacons.map { it.rssi }.toString())
             }
         }
     }
 
     fun save() {
         csvHelper.writeData("$fileName${
-            LocalDateTime.now()
-                .format(DateTimeFormatter.ISO_LOCAL_TIME)
+            LocalDateTime.now().format(DateTimeFormatter.ISO_LOCAL_TIME)
         }.csv", beaconDataList)
     }
 
-    fun rangingButtonTapped(view: View) {
+    fun rangingButtonTapped() {
         val beaconManager = BeaconManager.getInstanceForApplication(this)
         if (beaconManager.rangedRegions.isEmpty()) {
             beaconManager.startRangingBeacons(beaconReferenceApplication.region)
-            rangingButton.text = "Stop Ranging"
-            beaconCountTextView.text = "Ranging enabled -- awaiting first callback"
+            binding.rangingButton.text = "Stop Ranging"
+            binding.beaconCount.text = "Ranging enabled -- awaiting first callback"
         } else {
             beaconManager.stopRangingBeacons(beaconReferenceApplication.region)
-            rangingButton.text = "Start Ranging"
-            beaconCountTextView.text = "Ranging disabled -- no beacons detected"
-            beaconListView.adapter = ArrayAdapter(this, android.R.layout.simple_list_item_1, arrayOf("--"))
+            binding.rangingButton.text = "Start Ranging"
+            binding.beaconCount.text = "Ranging disabled -- no beacons detected"
+            binding.beaconList.adapter =
+                ArrayAdapter(this, android.R.layout.simple_list_item_1, arrayOf("--"))
         }
     }
 
@@ -246,14 +278,15 @@ class MainActivity : AppCompatActivity() {
         if (beaconManager.monitoredRegions.isEmpty()) {
             beaconManager.startMonitoring(beaconReferenceApplication.region)
             dialogTitle = "Beacon monitoring started."
-            dialogMessage = "You will see a dialog if a beacon is detected, and another if beacons then stop being detected."
-            monitoringButton.text = "Stop Monitoring"
+            dialogMessage =
+                "You will see a dialog if a beacon is detected, and another if beacons then stop being detected."
+            binding.monitoringButton.text = "Stop Monitoring"
 
         } else {
             beaconManager.stopMonitoring(beaconReferenceApplication.region)
             dialogTitle = "Beacon monitoring stopped."
             dialogMessage = "You will no longer see dialogs when becaons start/stop being detected."
-            monitoringButton.text = "Start Monitoring"
+            binding.monitoringButton.text = "Start Monitoring"
         }
         val builder = AlertDialog.Builder(this)
         builder.setTitle(dialogTitle)
@@ -262,10 +295,11 @@ class MainActivity : AppCompatActivity() {
         alertDialog?.dismiss()
         alertDialog = builder.create()
         alertDialog?.show()
-
     }
 
-    override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<out String>, grantResults: IntArray) {
+    override fun onRequestPermissionsResult(requestCode: Int,
+                                            permissions: Array<out String>,
+                                            grantResults: IntArray) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults)
         for (i in 1 until permissions.size) {
             Log.d(TAG, "onRequestPermissionResult for " + permissions[i] + ":" + grantResults[i])
@@ -291,10 +325,9 @@ class MainActivity : AppCompatActivity() {
     // WiFi 연결 후 설정에서 휴대전화 MAC 로 변경하면 다바이스 wifi mac 주소 가져올 수 있음!
     // 그럼 네트워크에 연결될 때마다 설정을 바꿔줘야하는데, 어떻게 함??
     private fun getMacAddress(): String? = try {
-        NetworkInterface.getNetworkInterfaces()
-            .toList().find { networkInterface ->
-                networkInterface.name.equals("wlan0", ignoreCase = true)
-            }?.hardwareAddress?.joinToString(separator = ":") { byte -> "%02X".format(byte) }
+        NetworkInterface.getNetworkInterfaces().toList().find { networkInterface ->
+            networkInterface.name.equals("wlan0", ignoreCase = true)
+        }?.hardwareAddress?.joinToString(separator = ":") { byte -> "%02X".format(byte) }
     } catch (exception: Exception) {
         exception.printStackTrace()
         null
@@ -311,17 +344,16 @@ class MainActivity : AppCompatActivity() {
     // 현재값: 100e2e222cfe79e1
     // 재설치 or 재부팅해도 값이 변경되지 않음
     private fun deviceID(): String {
-        return Settings.Secure.getString(applicationContext.contentResolver, Settings.Secure.ANDROID_ID)
+        return Settings.Secure.getString(applicationContext.contentResolver,
+            Settings.Secure.ANDROID_ID)
     }
 
     private fun doInference(rssi: String) {
-        val input = ByteBuffer.allocateDirect(4)
-            .order(ByteOrder.nativeOrder())
+        val input = ByteBuffer.allocateDirect(4).order(ByteOrder.nativeOrder())
         input.putFloat(rssi.toFloat())
 
         val bufferSize = 1000 * java.lang.Float.SIZE / java.lang.Byte.SIZE
-        val modelOutput = ByteBuffer.allocateDirect(bufferSize)
-            .order(ByteOrder.nativeOrder())
+        val modelOutput = ByteBuffer.allocateDirect(bufferSize).order(ByteOrder.nativeOrder())
         interpreter?.run(input, modelOutput)
 
         modelOutput.rewind()
