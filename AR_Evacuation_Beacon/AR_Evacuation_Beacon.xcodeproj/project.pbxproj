@@ -1,0 +1,809 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 55;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		B1915932287A76AA001CB91E /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1915931287A76AA001CB91E /* AppDelegate.swift */; };
+		B1915934287A76AA001CB91E /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1915933287A76AA001CB91E /* SceneDelegate.swift */; };
+		B1915939287A76AA001CB91E /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B1915937287A76AA001CB91E /* Main.storyboard */; };
+		B191593B287A76AA001CB91E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B191593A287A76AA001CB91E /* Assets.xcassets */; };
+		B191593E287A76AA001CB91E /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B191593C287A76AA001CB91E /* LaunchScreen.storyboard */; };
+		B1915947287A77A1001CB91E /* FirebaseMLModelDownloader in Frameworks */ = {isa = PBXBuildFile; productRef = B1915946287A77A1001CB91E /* FirebaseMLModelDownloader */; };
+		B1915949287A77A1001CB91E /* FirebaseMessaging in Frameworks */ = {isa = PBXBuildFile; productRef = B1915948287A77A1001CB91E /* FirebaseMessaging */; };
+		B191594B287A781E001CB91E /* SocketStreamManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B191594A287A781E001CB91E /* SocketStreamManager.swift */; };
+		B191594D287A7AFE001CB91E /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = B191594C287A7AFE001CB91E /* GoogleService-Info.plist */; };
+		B191594F287A7B4C001CB91E /* BeaconViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B191594E287A7B4C001CB91E /* BeaconViewController.swift */; };
+		B1915951287A7BDA001CB91E /* ModelInterpreter.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1915950287A7BDA001CB91E /* ModelInterpreter.swift */; };
+		B1915953287A7E0F001CB91E /* Beacon.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1915952287A7E0F001CB91E /* Beacon.swift */; };
+		B1915955287A7E28001CB91E /* KalmanFilter.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1915954287A7E28001CB91E /* KalmanFilter.swift */; };
+		B1915957287A7E71001CB91E /* BeaconManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1915956287A7E71001CB91E /* BeaconManager.swift */; };
+		B1915959287A7EA7001CB91E /* CSVService.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1915958287A7EA7001CB91E /* CSVService.swift */; };
+		B191595B287A8681001CB91E /* BeaconCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B191595A287A8681001CB91E /* BeaconCell.swift */; };
+		B191595E287AA69F001CB91E /* ARNavigationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B191595D287AA69F001CB91E /* ARNavigationViewController.swift */; };
+		B1915961287DC053001CB91E /* SocketIO in Frameworks */ = {isa = PBXBuildFile; productRef = B1915960287DC053001CB91E /* SocketIO */; };
+		B1915963287DDDCF001CB91E /* SocketIOManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1915962287DDDCF001CB91E /* SocketIOManager.swift */; };
+		B19159A8287E1E3A001CB91E /* ios_clf_data7A01.csv in Resources */ = {isa = PBXBuildFile; fileRef = B1915964287E1E39001CB91E /* ios_clf_data7A01.csv */; };
+		B19159A9287E1E3A001CB91E /* ios_clf_data7E03.csv in Resources */ = {isa = PBXBuildFile; fileRef = B1915965287E1E39001CB91E /* ios_clf_data7E03.csv */; };
+		B19159AA287E1E3A001CB91E /* ios_clf_dataR02.csv in Resources */ = {isa = PBXBuildFile; fileRef = B1915966287E1E39001CB91E /* ios_clf_dataR02.csv */; };
+		B19159AB287E1E3A001CB91E /* ios_clf_data7A02.csv in Resources */ = {isa = PBXBuildFile; fileRef = B1915967287E1E39001CB91E /* ios_clf_data7A02.csv */; };
+		B19159AC287E1E3A001CB91E /* ios_clf_data7E05.csv in Resources */ = {isa = PBXBuildFile; fileRef = B1915968287E1E39001CB91E /* ios_clf_data7E05.csv */; };
+		B19159AD287E1E3A001CB91E /* ios_clf_dataH01.csv in Resources */ = {isa = PBXBuildFile; fileRef = B1915969287E1E39001CB91E /* ios_clf_dataH01.csv */; };
+		B19159AE287E1E3A001CB91E /* ios_clf_dataA10.csv in Resources */ = {isa = PBXBuildFile; fileRef = B191596A287E1E39001CB91E /* ios_clf_dataA10.csv */; };
+		B19159AF287E1E3A001CB91E /* ios_clf_dataA05.csv in Resources */ = {isa = PBXBuildFile; fileRef = B191596B287E1E39001CB91E /* ios_clf_dataA05.csv */; };
+		B19159B0287E1E3A001CB91E /* ios_clf_data7R05.csv in Resources */ = {isa = PBXBuildFile; fileRef = B191596C287E1E39001CB91E /* ios_clf_data7R05.csv */; };
+		B19159B1287E1E3A001CB91E /* ios_clf_data7E04.csv in Resources */ = {isa = PBXBuildFile; fileRef = B191596D287E1E39001CB91E /* ios_clf_data7E04.csv */; };
+		B19159B2287E1E3A001CB91E /* ios_clf_data7S04.csv in Resources */ = {isa = PBXBuildFile; fileRef = B191596E287E1E39001CB91E /* ios_clf_data7S04.csv */; };
+		B19159B3287E1E3A001CB91E /* ios_clf_dataA11.csv in Resources */ = {isa = PBXBuildFile; fileRef = B191596F287E1E39001CB91E /* ios_clf_dataA11.csv */; };
+		B19159B4287E1E3A001CB91E /* ios_clf_dataE02.csv in Resources */ = {isa = PBXBuildFile; fileRef = B1915970287E1E39001CB91E /* ios_clf_dataE02.csv */; };
+		B19159B5287E1E3A001CB91E /* ios_clf_dataA08.csv in Resources */ = {isa = PBXBuildFile; fileRef = B1915971287E1E39001CB91E /* ios_clf_dataA08.csv */; };
+		B19159B6287E1E3A001CB91E /* ios_clf_data7A06.csv in Resources */ = {isa = PBXBuildFile; fileRef = B1915972287E1E39001CB91E /* ios_clf_data7A06.csv */; };
+		B19159B7287E1E3A001CB91E /* ios_clf_dataE05.csv in Resources */ = {isa = PBXBuildFile; fileRef = B1915973287E1E39001CB91E /* ios_clf_dataE05.csv */; };
+		B19159B8287E1E3A001CB91E /* ios_clf_data7A09.csv in Resources */ = {isa = PBXBuildFile; fileRef = B1915974287E1E39001CB91E /* ios_clf_data7A09.csv */; };
+		B19159B9287E1E3A001CB91E /* ios_clf_data7S08.csv in Resources */ = {isa = PBXBuildFile; fileRef = B1915975287E1E39001CB91E /* ios_clf_data7S08.csv */; };
+		B19159BA287E1E3A001CB91E /* ios_clf_dataS06.csv in Resources */ = {isa = PBXBuildFile; fileRef = B1915976287E1E39001CB91E /* ios_clf_dataS06.csv */; };
+		B19159BB287E1E3A001CB91E /* ios_clf_dataS08.csv in Resources */ = {isa = PBXBuildFile; fileRef = B1915977287E1E39001CB91E /* ios_clf_dataS08.csv */; };
+		B19159BC287E1E3A001CB91E /* ios_clf_data7R04.csv in Resources */ = {isa = PBXBuildFile; fileRef = B1915978287E1E39001CB91E /* ios_clf_data7R04.csv */; };
+		B19159BD287E1E3A001CB91E /* ios_clf_data7A08.csv in Resources */ = {isa = PBXBuildFile; fileRef = B1915979287E1E39001CB91E /* ios_clf_data7A08.csv */; };
+		B19159BE287E1E3A001CB91E /* ios_clf_data7H02.csv in Resources */ = {isa = PBXBuildFile; fileRef = B191597A287E1E39001CB91E /* ios_clf_data7H02.csv */; };
+		B19159BF287E1E3A001CB91E /* ios_clf_data7S06.csv in Resources */ = {isa = PBXBuildFile; fileRef = B191597B287E1E39001CB91E /* ios_clf_data7S06.csv */; };
+		B19159C0287E1E3A001CB91E /* ios_clf_data7S09.csv in Resources */ = {isa = PBXBuildFile; fileRef = B191597C287E1E39001CB91E /* ios_clf_data7S09.csv */; };
+		B19159C1287E1E3A001CB91E /* ios_clf_data7A03.csv in Resources */ = {isa = PBXBuildFile; fileRef = B191597D287E1E39001CB91E /* ios_clf_data7A03.csv */; };
+		B19159C2287E1E3A001CB91E /* ios_clf_dataE01.csv in Resources */ = {isa = PBXBuildFile; fileRef = B191597E287E1E39001CB91E /* ios_clf_dataE01.csv */; };
+		B19159C3287E1E3A001CB91E /* ios_clf_data7S05.csv in Resources */ = {isa = PBXBuildFile; fileRef = B191597F287E1E39001CB91E /* ios_clf_data7S05.csv */; };
+		B19159C4287E1E3A001CB91E /* ios_clf_data7A10.csv in Resources */ = {isa = PBXBuildFile; fileRef = B1915980287E1E39001CB91E /* ios_clf_data7A10.csv */; };
+		B19159C5287E1E3A001CB91E /* ios_clf_dataA09.csv in Resources */ = {isa = PBXBuildFile; fileRef = B1915981287E1E39001CB91E /* ios_clf_dataA09.csv */; };
+		B19159C6287E1E3A001CB91E /* ios_clf_data7S02.csv in Resources */ = {isa = PBXBuildFile; fileRef = B1915982287E1E39001CB91E /* ios_clf_data7S02.csv */; };
+		B19159C7287E1E3A001CB91E /* ios_clf_data7R06.csv in Resources */ = {isa = PBXBuildFile; fileRef = B1915983287E1E39001CB91E /* ios_clf_data7R06.csv */; };
+		B19159C8287E1E3A001CB91E /* ios_clf_dataA04.csv in Resources */ = {isa = PBXBuildFile; fileRef = B1915984287E1E39001CB91E /* ios_clf_dataA04.csv */; };
+		B19159C9287E1E3A001CB91E /* ios_clf_dataA03.csv in Resources */ = {isa = PBXBuildFile; fileRef = B1915985287E1E3A001CB91E /* ios_clf_dataA03.csv */; };
+		B19159CA287E1E3A001CB91E /* ios_clf_dataA01.csv in Resources */ = {isa = PBXBuildFile; fileRef = B1915986287E1E3A001CB91E /* ios_clf_dataA01.csv */; };
+		B19159CB287E1E3A001CB91E /* ios_clf_data7R03.csv in Resources */ = {isa = PBXBuildFile; fileRef = B1915987287E1E3A001CB91E /* ios_clf_data7R03.csv */; };
+		B19159CC287E1E3A001CB91E /* ios_clf_data7U01.csv in Resources */ = {isa = PBXBuildFile; fileRef = B1915988287E1E3A001CB91E /* ios_clf_data7U01.csv */; };
+		B19159CD287E1E3A001CB91E /* ios_clf_data7S01.csv in Resources */ = {isa = PBXBuildFile; fileRef = B1915989287E1E3A001CB91E /* ios_clf_data7S01.csv */; };
+		B19159CE287E1E3A001CB91E /* ios_clf_dataA02.csv in Resources */ = {isa = PBXBuildFile; fileRef = B191598A287E1E3A001CB91E /* ios_clf_dataA02.csv */; };
+		B19159CF287E1E3A001CB91E /* ios_clf_dataH02.csv in Resources */ = {isa = PBXBuildFile; fileRef = B191598B287E1E3A001CB91E /* ios_clf_dataH02.csv */; };
+		B19159D0287E1E3A001CB91E /* ios_clf_data7R01.csv in Resources */ = {isa = PBXBuildFile; fileRef = B191598C287E1E3A001CB91E /* ios_clf_data7R01.csv */; };
+		B19159D1287E1E3A001CB91E /* ios_clf_dataR01.csv in Resources */ = {isa = PBXBuildFile; fileRef = B191598D287E1E3A001CB91E /* ios_clf_dataR01.csv */; };
+		B19159D2287E1E3A001CB91E /* ios_clf_data7R02.csv in Resources */ = {isa = PBXBuildFile; fileRef = B191598E287E1E3A001CB91E /* ios_clf_data7R02.csv */; };
+		B19159D3287E1E3A001CB91E /* ios_clf_data7A04.csv in Resources */ = {isa = PBXBuildFile; fileRef = B191598F287E1E3A001CB91E /* ios_clf_data7A04.csv */; };
+		B19159D4287E1E3A001CB91E /* ios_clf_dataR06.csv in Resources */ = {isa = PBXBuildFile; fileRef = B1915990287E1E3A001CB91E /* ios_clf_dataR06.csv */; };
+		B19159D5287E1E3A001CB91E /* ios_clf_data7S07.csv in Resources */ = {isa = PBXBuildFile; fileRef = B1915991287E1E3A001CB91E /* ios_clf_data7S07.csv */; };
+		B19159D6287E1E3A001CB91E /* ios_clf_dataS03.csv in Resources */ = {isa = PBXBuildFile; fileRef = B1915992287E1E3A001CB91E /* ios_clf_dataS03.csv */; };
+		B19159D7287E1E3A001CB91E /* ios_clf_dataS02.csv in Resources */ = {isa = PBXBuildFile; fileRef = B1915993287E1E3A001CB91E /* ios_clf_dataS02.csv */; };
+		B19159D8287E1E3A001CB91E /* ios_clf_dataA06.csv in Resources */ = {isa = PBXBuildFile; fileRef = B1915994287E1E3A001CB91E /* ios_clf_dataA06.csv */; };
+		B19159D9287E1E3A001CB91E /* ios_clf_dataR03.csv in Resources */ = {isa = PBXBuildFile; fileRef = B1915995287E1E3A001CB91E /* ios_clf_dataR03.csv */; };
+		B19159DA287E1E3A001CB91E /* ios_clf_dataR05.csv in Resources */ = {isa = PBXBuildFile; fileRef = B1915996287E1E3A001CB91E /* ios_clf_dataR05.csv */; };
+		B19159DB287E1E3A001CB91E /* ios_clf_dataS04.csv in Resources */ = {isa = PBXBuildFile; fileRef = B1915997287E1E3A001CB91E /* ios_clf_dataS04.csv */; };
+		B19159DC287E1E3A001CB91E /* ios_clf_dataS07.csv in Resources */ = {isa = PBXBuildFile; fileRef = B1915998287E1E3A001CB91E /* ios_clf_dataS07.csv */; };
+		B19159DD287E1E3A001CB91E /* ios_clf_data7A11.csv in Resources */ = {isa = PBXBuildFile; fileRef = B1915999287E1E3A001CB91E /* ios_clf_data7A11.csv */; };
+		B19159DE287E1E3A001CB91E /* ios_clf_dataE04.csv in Resources */ = {isa = PBXBuildFile; fileRef = B191599A287E1E3A001CB91E /* ios_clf_dataE04.csv */; };
+		B19159DF287E1E3A001CB91E /* ios_clf_data7A05.csv in Resources */ = {isa = PBXBuildFile; fileRef = B191599B287E1E3A001CB91E /* ios_clf_data7A05.csv */; };
+		B19159E0287E1E3A001CB91E /* ios_clf_dataS09.csv in Resources */ = {isa = PBXBuildFile; fileRef = B191599C287E1E3A001CB91E /* ios_clf_dataS09.csv */; };
+		B19159E1287E1E3A001CB91E /* ios_clf_dataU01.csv in Resources */ = {isa = PBXBuildFile; fileRef = B191599D287E1E3A001CB91E /* ios_clf_dataU01.csv */; };
+		B19159E2287E1E3A001CB91E /* ios_clf_dataA07.csv in Resources */ = {isa = PBXBuildFile; fileRef = B191599E287E1E3A001CB91E /* ios_clf_dataA07.csv */; };
+		B19159E3287E1E3A001CB91E /* ios_clf_data7E02.csv in Resources */ = {isa = PBXBuildFile; fileRef = B191599F287E1E3A001CB91E /* ios_clf_data7E02.csv */; };
+		B19159E4287E1E3A001CB91E /* ios_clf_data7H01.csv in Resources */ = {isa = PBXBuildFile; fileRef = B19159A0287E1E3A001CB91E /* ios_clf_data7H01.csv */; };
+		B19159E5287E1E3A001CB91E /* ios_clf_data7E01.csv in Resources */ = {isa = PBXBuildFile; fileRef = B19159A1287E1E3A001CB91E /* ios_clf_data7E01.csv */; };
+		B19159E6287E1E3A001CB91E /* ios_clf_dataS05.csv in Resources */ = {isa = PBXBuildFile; fileRef = B19159A2287E1E3A001CB91E /* ios_clf_dataS05.csv */; };
+		B19159E7287E1E3A001CB91E /* ios_clf_dataE03.csv in Resources */ = {isa = PBXBuildFile; fileRef = B19159A3287E1E3A001CB91E /* ios_clf_dataE03.csv */; };
+		B19159E8287E1E3A001CB91E /* ios_clf_dataS01.csv in Resources */ = {isa = PBXBuildFile; fileRef = B19159A4287E1E3A001CB91E /* ios_clf_dataS01.csv */; };
+		B19159E9287E1E3A001CB91E /* ios_clf_data7S03.csv in Resources */ = {isa = PBXBuildFile; fileRef = B19159A5287E1E3A001CB91E /* ios_clf_data7S03.csv */; };
+		B19159EA287E1E3A001CB91E /* ios_clf_dataR04.csv in Resources */ = {isa = PBXBuildFile; fileRef = B19159A6287E1E3A001CB91E /* ios_clf_dataR04.csv */; };
+		B19159EB287E1E3A001CB91E /* ios_clf_data7A07.csv in Resources */ = {isa = PBXBuildFile; fileRef = B19159A7287E1E3A001CB91E /* ios_clf_data7A07.csv */; };
+		B19159EF287F345A001CB91E /* LabelTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B19159ED287F345A001CB91E /* LabelTableViewCell.swift */; };
+		B19159F0287F345A001CB91E /* LabelTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = B19159EE287F345A001CB91E /* LabelTableViewCell.xib */; };
+		CB578D0A86EC2FEA06A1ADE0 /* Pods_AR_Evacuation_Beacon.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ED6DF6F1FA424AB8DEB00784 /* Pods_AR_Evacuation_Beacon.framework */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		0AAA225C72513DDADD22C250 /* Pods-AR_Evacuation_Beacon.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-AR_Evacuation_Beacon.release.xcconfig"; path = "Target Support Files/Pods-AR_Evacuation_Beacon/Pods-AR_Evacuation_Beacon.release.xcconfig"; sourceTree = "<group>"; };
+		51691426705F53637B5D5A41 /* Pods-AR_Evacuation_Beacon.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-AR_Evacuation_Beacon.debug.xcconfig"; path = "Target Support Files/Pods-AR_Evacuation_Beacon/Pods-AR_Evacuation_Beacon.debug.xcconfig"; sourceTree = "<group>"; };
+		B191592E287A76AA001CB91E /* AR_Evacuation_Beacon.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = AR_Evacuation_Beacon.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		B1915931287A76AA001CB91E /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		B1915933287A76AA001CB91E /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
+		B1915938287A76AA001CB91E /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		B191593A287A76AA001CB91E /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		B191593D287A76AA001CB91E /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		B191593F287A76AA001CB91E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		B191594A287A781E001CB91E /* SocketStreamManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SocketStreamManager.swift; sourceTree = "<group>"; };
+		B191594C287A7AFE001CB91E /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		B191594E287A7B4C001CB91E /* BeaconViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BeaconViewController.swift; sourceTree = "<group>"; };
+		B1915950287A7BDA001CB91E /* ModelInterpreter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModelInterpreter.swift; sourceTree = "<group>"; };
+		B1915952287A7E0F001CB91E /* Beacon.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Beacon.swift; sourceTree = "<group>"; };
+		B1915954287A7E28001CB91E /* KalmanFilter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KalmanFilter.swift; sourceTree = "<group>"; };
+		B1915956287A7E71001CB91E /* BeaconManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BeaconManager.swift; sourceTree = "<group>"; };
+		B1915958287A7EA7001CB91E /* CSVService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CSVService.swift; sourceTree = "<group>"; };
+		B191595A287A8681001CB91E /* BeaconCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BeaconCell.swift; sourceTree = "<group>"; };
+		B191595C287AA58D001CB91E /* AR_Evacuation_Beacon.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = AR_Evacuation_Beacon.entitlements; sourceTree = "<group>"; };
+		B191595D287AA69F001CB91E /* ARNavigationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ARNavigationViewController.swift; sourceTree = "<group>"; };
+		B1915962287DDDCF001CB91E /* SocketIOManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SocketIOManager.swift; sourceTree = "<group>"; };
+		B1915964287E1E39001CB91E /* ios_clf_data7A01.csv */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = ios_clf_data7A01.csv; sourceTree = "<group>"; };
+		B1915965287E1E39001CB91E /* ios_clf_data7E03.csv */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = ios_clf_data7E03.csv; sourceTree = "<group>"; };
+		B1915966287E1E39001CB91E /* ios_clf_dataR02.csv */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = ios_clf_dataR02.csv; sourceTree = "<group>"; };
+		B1915967287E1E39001CB91E /* ios_clf_data7A02.csv */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = ios_clf_data7A02.csv; sourceTree = "<group>"; };
+		B1915968287E1E39001CB91E /* ios_clf_data7E05.csv */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = ios_clf_data7E05.csv; sourceTree = "<group>"; };
+		B1915969287E1E39001CB91E /* ios_clf_dataH01.csv */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = ios_clf_dataH01.csv; sourceTree = "<group>"; };
+		B191596A287E1E39001CB91E /* ios_clf_dataA10.csv */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = ios_clf_dataA10.csv; sourceTree = "<group>"; };
+		B191596B287E1E39001CB91E /* ios_clf_dataA05.csv */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = ios_clf_dataA05.csv; sourceTree = "<group>"; };
+		B191596C287E1E39001CB91E /* ios_clf_data7R05.csv */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = ios_clf_data7R05.csv; sourceTree = "<group>"; };
+		B191596D287E1E39001CB91E /* ios_clf_data7E04.csv */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = ios_clf_data7E04.csv; sourceTree = "<group>"; };
+		B191596E287E1E39001CB91E /* ios_clf_data7S04.csv */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = ios_clf_data7S04.csv; sourceTree = "<group>"; };
+		B191596F287E1E39001CB91E /* ios_clf_dataA11.csv */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = ios_clf_dataA11.csv; sourceTree = "<group>"; };
+		B1915970287E1E39001CB91E /* ios_clf_dataE02.csv */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = ios_clf_dataE02.csv; sourceTree = "<group>"; };
+		B1915971287E1E39001CB91E /* ios_clf_dataA08.csv */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = ios_clf_dataA08.csv; sourceTree = "<group>"; };
+		B1915972287E1E39001CB91E /* ios_clf_data7A06.csv */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = ios_clf_data7A06.csv; sourceTree = "<group>"; };
+		B1915973287E1E39001CB91E /* ios_clf_dataE05.csv */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = ios_clf_dataE05.csv; sourceTree = "<group>"; };
+		B1915974287E1E39001CB91E /* ios_clf_data7A09.csv */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = ios_clf_data7A09.csv; sourceTree = "<group>"; };
+		B1915975287E1E39001CB91E /* ios_clf_data7S08.csv */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = ios_clf_data7S08.csv; sourceTree = "<group>"; };
+		B1915976287E1E39001CB91E /* ios_clf_dataS06.csv */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = ios_clf_dataS06.csv; sourceTree = "<group>"; };
+		B1915977287E1E39001CB91E /* ios_clf_dataS08.csv */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = ios_clf_dataS08.csv; sourceTree = "<group>"; };
+		B1915978287E1E39001CB91E /* ios_clf_data7R04.csv */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = ios_clf_data7R04.csv; sourceTree = "<group>"; };
+		B1915979287E1E39001CB91E /* ios_clf_data7A08.csv */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = ios_clf_data7A08.csv; sourceTree = "<group>"; };
+		B191597A287E1E39001CB91E /* ios_clf_data7H02.csv */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = ios_clf_data7H02.csv; sourceTree = "<group>"; };
+		B191597B287E1E39001CB91E /* ios_clf_data7S06.csv */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = ios_clf_data7S06.csv; sourceTree = "<group>"; };
+		B191597C287E1E39001CB91E /* ios_clf_data7S09.csv */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = ios_clf_data7S09.csv; sourceTree = "<group>"; };
+		B191597D287E1E39001CB91E /* ios_clf_data7A03.csv */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = ios_clf_data7A03.csv; sourceTree = "<group>"; };
+		B191597E287E1E39001CB91E /* ios_clf_dataE01.csv */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = ios_clf_dataE01.csv; sourceTree = "<group>"; };
+		B191597F287E1E39001CB91E /* ios_clf_data7S05.csv */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = ios_clf_data7S05.csv; sourceTree = "<group>"; };
+		B1915980287E1E39001CB91E /* ios_clf_data7A10.csv */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = ios_clf_data7A10.csv; sourceTree = "<group>"; };
+		B1915981287E1E39001CB91E /* ios_clf_dataA09.csv */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = ios_clf_dataA09.csv; sourceTree = "<group>"; };
+		B1915982287E1E39001CB91E /* ios_clf_data7S02.csv */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = ios_clf_data7S02.csv; sourceTree = "<group>"; };
+		B1915983287E1E39001CB91E /* ios_clf_data7R06.csv */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = ios_clf_data7R06.csv; sourceTree = "<group>"; };
+		B1915984287E1E39001CB91E /* ios_clf_dataA04.csv */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = ios_clf_dataA04.csv; sourceTree = "<group>"; };
+		B1915985287E1E3A001CB91E /* ios_clf_dataA03.csv */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = ios_clf_dataA03.csv; sourceTree = "<group>"; };
+		B1915986287E1E3A001CB91E /* ios_clf_dataA01.csv */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = ios_clf_dataA01.csv; sourceTree = "<group>"; };
+		B1915987287E1E3A001CB91E /* ios_clf_data7R03.csv */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = ios_clf_data7R03.csv; sourceTree = "<group>"; };
+		B1915988287E1E3A001CB91E /* ios_clf_data7U01.csv */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = ios_clf_data7U01.csv; sourceTree = "<group>"; };
+		B1915989287E1E3A001CB91E /* ios_clf_data7S01.csv */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = ios_clf_data7S01.csv; sourceTree = "<group>"; };
+		B191598A287E1E3A001CB91E /* ios_clf_dataA02.csv */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = ios_clf_dataA02.csv; sourceTree = "<group>"; };
+		B191598B287E1E3A001CB91E /* ios_clf_dataH02.csv */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = ios_clf_dataH02.csv; sourceTree = "<group>"; };
+		B191598C287E1E3A001CB91E /* ios_clf_data7R01.csv */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = ios_clf_data7R01.csv; sourceTree = "<group>"; };
+		B191598D287E1E3A001CB91E /* ios_clf_dataR01.csv */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = ios_clf_dataR01.csv; sourceTree = "<group>"; };
+		B191598E287E1E3A001CB91E /* ios_clf_data7R02.csv */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = ios_clf_data7R02.csv; sourceTree = "<group>"; };
+		B191598F287E1E3A001CB91E /* ios_clf_data7A04.csv */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = ios_clf_data7A04.csv; sourceTree = "<group>"; };
+		B1915990287E1E3A001CB91E /* ios_clf_dataR06.csv */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = ios_clf_dataR06.csv; sourceTree = "<group>"; };
+		B1915991287E1E3A001CB91E /* ios_clf_data7S07.csv */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = ios_clf_data7S07.csv; sourceTree = "<group>"; };
+		B1915992287E1E3A001CB91E /* ios_clf_dataS03.csv */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = ios_clf_dataS03.csv; sourceTree = "<group>"; };
+		B1915993287E1E3A001CB91E /* ios_clf_dataS02.csv */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = ios_clf_dataS02.csv; sourceTree = "<group>"; };
+		B1915994287E1E3A001CB91E /* ios_clf_dataA06.csv */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = ios_clf_dataA06.csv; sourceTree = "<group>"; };
+		B1915995287E1E3A001CB91E /* ios_clf_dataR03.csv */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = ios_clf_dataR03.csv; sourceTree = "<group>"; };
+		B1915996287E1E3A001CB91E /* ios_clf_dataR05.csv */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = ios_clf_dataR05.csv; sourceTree = "<group>"; };
+		B1915997287E1E3A001CB91E /* ios_clf_dataS04.csv */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = ios_clf_dataS04.csv; sourceTree = "<group>"; };
+		B1915998287E1E3A001CB91E /* ios_clf_dataS07.csv */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = ios_clf_dataS07.csv; sourceTree = "<group>"; };
+		B1915999287E1E3A001CB91E /* ios_clf_data7A11.csv */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = ios_clf_data7A11.csv; sourceTree = "<group>"; };
+		B191599A287E1E3A001CB91E /* ios_clf_dataE04.csv */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = ios_clf_dataE04.csv; sourceTree = "<group>"; };
+		B191599B287E1E3A001CB91E /* ios_clf_data7A05.csv */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = ios_clf_data7A05.csv; sourceTree = "<group>"; };
+		B191599C287E1E3A001CB91E /* ios_clf_dataS09.csv */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = ios_clf_dataS09.csv; sourceTree = "<group>"; };
+		B191599D287E1E3A001CB91E /* ios_clf_dataU01.csv */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = ios_clf_dataU01.csv; sourceTree = "<group>"; };
+		B191599E287E1E3A001CB91E /* ios_clf_dataA07.csv */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = ios_clf_dataA07.csv; sourceTree = "<group>"; };
+		B191599F287E1E3A001CB91E /* ios_clf_data7E02.csv */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = ios_clf_data7E02.csv; sourceTree = "<group>"; };
+		B19159A0287E1E3A001CB91E /* ios_clf_data7H01.csv */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = ios_clf_data7H01.csv; sourceTree = "<group>"; };
+		B19159A1287E1E3A001CB91E /* ios_clf_data7E01.csv */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = ios_clf_data7E01.csv; sourceTree = "<group>"; };
+		B19159A2287E1E3A001CB91E /* ios_clf_dataS05.csv */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = ios_clf_dataS05.csv; sourceTree = "<group>"; };
+		B19159A3287E1E3A001CB91E /* ios_clf_dataE03.csv */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = ios_clf_dataE03.csv; sourceTree = "<group>"; };
+		B19159A4287E1E3A001CB91E /* ios_clf_dataS01.csv */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = ios_clf_dataS01.csv; sourceTree = "<group>"; };
+		B19159A5287E1E3A001CB91E /* ios_clf_data7S03.csv */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = ios_clf_data7S03.csv; sourceTree = "<group>"; };
+		B19159A6287E1E3A001CB91E /* ios_clf_dataR04.csv */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = ios_clf_dataR04.csv; sourceTree = "<group>"; };
+		B19159A7287E1E3A001CB91E /* ios_clf_data7A07.csv */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = ios_clf_data7A07.csv; sourceTree = "<group>"; };
+		B19159ED287F345A001CB91E /* LabelTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LabelTableViewCell.swift; sourceTree = "<group>"; };
+		B19159EE287F345A001CB91E /* LabelTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = LabelTableViewCell.xib; sourceTree = "<group>"; };
+		ED6DF6F1FA424AB8DEB00784 /* Pods_AR_Evacuation_Beacon.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_AR_Evacuation_Beacon.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		B191592B287A76AA001CB91E /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				B1915949287A77A1001CB91E /* FirebaseMessaging in Frameworks */,
+				B1915961287DC053001CB91E /* SocketIO in Frameworks */,
+				B1915947287A77A1001CB91E /* FirebaseMLModelDownloader in Frameworks */,
+				CB578D0A86EC2FEA06A1ADE0 /* Pods_AR_Evacuation_Beacon.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		1EB5BF083C7E106250BA5123 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				51691426705F53637B5D5A41 /* Pods-AR_Evacuation_Beacon.debug.xcconfig */,
+				0AAA225C72513DDADD22C250 /* Pods-AR_Evacuation_Beacon.release.xcconfig */,
+			);
+			path = Pods;
+			sourceTree = "<group>";
+		};
+		772EA2A341090682D7BCD80A /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				ED6DF6F1FA424AB8DEB00784 /* Pods_AR_Evacuation_Beacon.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		B1915925287A76AA001CB91E = {
+			isa = PBXGroup;
+			children = (
+				B1915930287A76AA001CB91E /* AR_Evacuation_Beacon */,
+				B191592F287A76AA001CB91E /* Products */,
+				1EB5BF083C7E106250BA5123 /* Pods */,
+				772EA2A341090682D7BCD80A /* Frameworks */,
+			);
+			sourceTree = "<group>";
+		};
+		B191592F287A76AA001CB91E /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				B191592E287A76AA001CB91E /* AR_Evacuation_Beacon.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		B1915930287A76AA001CB91E /* AR_Evacuation_Beacon */ = {
+			isa = PBXGroup;
+			children = (
+				B191595C287AA58D001CB91E /* AR_Evacuation_Beacon.entitlements */,
+				B191594C287A7AFE001CB91E /* GoogleService-Info.plist */,
+				B19159EC287E1E44001CB91E /* data */,
+				B1915931287A76AA001CB91E /* AppDelegate.swift */,
+				B1915933287A76AA001CB91E /* SceneDelegate.swift */,
+				B1915937287A76AA001CB91E /* Main.storyboard */,
+				B191593A287A76AA001CB91E /* Assets.xcassets */,
+				B191593C287A76AA001CB91E /* LaunchScreen.storyboard */,
+				B191593F287A76AA001CB91E /* Info.plist */,
+				B191594A287A781E001CB91E /* SocketStreamManager.swift */,
+				B191594E287A7B4C001CB91E /* BeaconViewController.swift */,
+				B1915950287A7BDA001CB91E /* ModelInterpreter.swift */,
+				B1915952287A7E0F001CB91E /* Beacon.swift */,
+				B1915954287A7E28001CB91E /* KalmanFilter.swift */,
+				B1915956287A7E71001CB91E /* BeaconManager.swift */,
+				B1915958287A7EA7001CB91E /* CSVService.swift */,
+				B191595A287A8681001CB91E /* BeaconCell.swift */,
+				B191595D287AA69F001CB91E /* ARNavigationViewController.swift */,
+				B1915962287DDDCF001CB91E /* SocketIOManager.swift */,
+				B19159ED287F345A001CB91E /* LabelTableViewCell.swift */,
+				B19159EE287F345A001CB91E /* LabelTableViewCell.xib */,
+			);
+			path = AR_Evacuation_Beacon;
+			sourceTree = "<group>";
+		};
+		B19159EC287E1E44001CB91E /* data */ = {
+			isa = PBXGroup;
+			children = (
+				B1915964287E1E39001CB91E /* ios_clf_data7A01.csv */,
+				B1915967287E1E39001CB91E /* ios_clf_data7A02.csv */,
+				B191597D287E1E39001CB91E /* ios_clf_data7A03.csv */,
+				B191598F287E1E3A001CB91E /* ios_clf_data7A04.csv */,
+				B191599B287E1E3A001CB91E /* ios_clf_data7A05.csv */,
+				B1915972287E1E39001CB91E /* ios_clf_data7A06.csv */,
+				B19159A7287E1E3A001CB91E /* ios_clf_data7A07.csv */,
+				B1915979287E1E39001CB91E /* ios_clf_data7A08.csv */,
+				B1915974287E1E39001CB91E /* ios_clf_data7A09.csv */,
+				B1915980287E1E39001CB91E /* ios_clf_data7A10.csv */,
+				B1915999287E1E3A001CB91E /* ios_clf_data7A11.csv */,
+				B19159A1287E1E3A001CB91E /* ios_clf_data7E01.csv */,
+				B191599F287E1E3A001CB91E /* ios_clf_data7E02.csv */,
+				B1915965287E1E39001CB91E /* ios_clf_data7E03.csv */,
+				B191596D287E1E39001CB91E /* ios_clf_data7E04.csv */,
+				B1915968287E1E39001CB91E /* ios_clf_data7E05.csv */,
+				B19159A0287E1E3A001CB91E /* ios_clf_data7H01.csv */,
+				B191597A287E1E39001CB91E /* ios_clf_data7H02.csv */,
+				B191598C287E1E3A001CB91E /* ios_clf_data7R01.csv */,
+				B191598E287E1E3A001CB91E /* ios_clf_data7R02.csv */,
+				B1915987287E1E3A001CB91E /* ios_clf_data7R03.csv */,
+				B1915978287E1E39001CB91E /* ios_clf_data7R04.csv */,
+				B191596C287E1E39001CB91E /* ios_clf_data7R05.csv */,
+				B1915983287E1E39001CB91E /* ios_clf_data7R06.csv */,
+				B1915989287E1E3A001CB91E /* ios_clf_data7S01.csv */,
+				B1915982287E1E39001CB91E /* ios_clf_data7S02.csv */,
+				B19159A5287E1E3A001CB91E /* ios_clf_data7S03.csv */,
+				B191596E287E1E39001CB91E /* ios_clf_data7S04.csv */,
+				B191597F287E1E39001CB91E /* ios_clf_data7S05.csv */,
+				B191597B287E1E39001CB91E /* ios_clf_data7S06.csv */,
+				B1915991287E1E3A001CB91E /* ios_clf_data7S07.csv */,
+				B1915975287E1E39001CB91E /* ios_clf_data7S08.csv */,
+				B191597C287E1E39001CB91E /* ios_clf_data7S09.csv */,
+				B1915988287E1E3A001CB91E /* ios_clf_data7U01.csv */,
+				B1915986287E1E3A001CB91E /* ios_clf_dataA01.csv */,
+				B191598A287E1E3A001CB91E /* ios_clf_dataA02.csv */,
+				B1915985287E1E3A001CB91E /* ios_clf_dataA03.csv */,
+				B1915984287E1E39001CB91E /* ios_clf_dataA04.csv */,
+				B191596B287E1E39001CB91E /* ios_clf_dataA05.csv */,
+				B1915994287E1E3A001CB91E /* ios_clf_dataA06.csv */,
+				B191599E287E1E3A001CB91E /* ios_clf_dataA07.csv */,
+				B1915971287E1E39001CB91E /* ios_clf_dataA08.csv */,
+				B1915981287E1E39001CB91E /* ios_clf_dataA09.csv */,
+				B191596A287E1E39001CB91E /* ios_clf_dataA10.csv */,
+				B191596F287E1E39001CB91E /* ios_clf_dataA11.csv */,
+				B191597E287E1E39001CB91E /* ios_clf_dataE01.csv */,
+				B1915970287E1E39001CB91E /* ios_clf_dataE02.csv */,
+				B19159A3287E1E3A001CB91E /* ios_clf_dataE03.csv */,
+				B191599A287E1E3A001CB91E /* ios_clf_dataE04.csv */,
+				B1915973287E1E39001CB91E /* ios_clf_dataE05.csv */,
+				B1915969287E1E39001CB91E /* ios_clf_dataH01.csv */,
+				B191598B287E1E3A001CB91E /* ios_clf_dataH02.csv */,
+				B191598D287E1E3A001CB91E /* ios_clf_dataR01.csv */,
+				B1915966287E1E39001CB91E /* ios_clf_dataR02.csv */,
+				B1915995287E1E3A001CB91E /* ios_clf_dataR03.csv */,
+				B19159A6287E1E3A001CB91E /* ios_clf_dataR04.csv */,
+				B1915996287E1E3A001CB91E /* ios_clf_dataR05.csv */,
+				B1915990287E1E3A001CB91E /* ios_clf_dataR06.csv */,
+				B19159A4287E1E3A001CB91E /* ios_clf_dataS01.csv */,
+				B1915993287E1E3A001CB91E /* ios_clf_dataS02.csv */,
+				B1915992287E1E3A001CB91E /* ios_clf_dataS03.csv */,
+				B1915997287E1E3A001CB91E /* ios_clf_dataS04.csv */,
+				B19159A2287E1E3A001CB91E /* ios_clf_dataS05.csv */,
+				B1915976287E1E39001CB91E /* ios_clf_dataS06.csv */,
+				B1915998287E1E3A001CB91E /* ios_clf_dataS07.csv */,
+				B1915977287E1E39001CB91E /* ios_clf_dataS08.csv */,
+				B191599C287E1E3A001CB91E /* ios_clf_dataS09.csv */,
+				B191599D287E1E3A001CB91E /* ios_clf_dataU01.csv */,
+			);
+			path = data;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		B191592D287A76AA001CB91E /* AR_Evacuation_Beacon */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = B1915942287A76AA001CB91E /* Build configuration list for PBXNativeTarget "AR_Evacuation_Beacon" */;
+			buildPhases = (
+				0055888D4345EB59E96DCABC /* [CP] Check Pods Manifest.lock */,
+				B191592A287A76AA001CB91E /* Sources */,
+				B191592B287A76AA001CB91E /* Frameworks */,
+				B191592C287A76AA001CB91E /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = AR_Evacuation_Beacon;
+			packageProductDependencies = (
+				B1915946287A77A1001CB91E /* FirebaseMLModelDownloader */,
+				B1915948287A77A1001CB91E /* FirebaseMessaging */,
+				B1915960287DC053001CB91E /* SocketIO */,
+			);
+			productName = AR_Evacuation_Beacon;
+			productReference = B191592E287A76AA001CB91E /* AR_Evacuation_Beacon.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		B1915926287A76AA001CB91E /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				BuildIndependentTargetsInParallel = 1;
+				LastSwiftUpdateCheck = 1330;
+				LastUpgradeCheck = 1330;
+				TargetAttributes = {
+					B191592D287A76AA001CB91E = {
+						CreatedOnToolsVersion = 13.3.1;
+					};
+				};
+			};
+			buildConfigurationList = B1915929287A76AA001CB91E /* Build configuration list for PBXProject "AR_Evacuation_Beacon" */;
+			compatibilityVersion = "Xcode 13.0";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = B1915925287A76AA001CB91E;
+			packageReferences = (
+				B1915945287A77A1001CB91E /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
+				B191595F287DC053001CB91E /* XCRemoteSwiftPackageReference "socket" */,
+			);
+			productRefGroup = B191592F287A76AA001CB91E /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				B191592D287A76AA001CB91E /* AR_Evacuation_Beacon */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		B191592C287A76AA001CB91E /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				B19159D2287E1E3A001CB91E /* ios_clf_data7R02.csv in Resources */,
+				B19159E5287E1E3A001CB91E /* ios_clf_data7E01.csv in Resources */,
+				B19159B1287E1E3A001CB91E /* ios_clf_data7E04.csv in Resources */,
+				B19159D3287E1E3A001CB91E /* ios_clf_data7A04.csv in Resources */,
+				B19159C0287E1E3A001CB91E /* ios_clf_data7S09.csv in Resources */,
+				B19159E4287E1E3A001CB91E /* ios_clf_data7H01.csv in Resources */,
+				B19159E3287E1E3A001CB91E /* ios_clf_data7E02.csv in Resources */,
+				B19159CB287E1E3A001CB91E /* ios_clf_data7R03.csv in Resources */,
+				B19159B0287E1E3A001CB91E /* ios_clf_data7R05.csv in Resources */,
+				B19159C9287E1E3A001CB91E /* ios_clf_dataA03.csv in Resources */,
+				B19159BA287E1E3A001CB91E /* ios_clf_dataS06.csv in Resources */,
+				B19159E8287E1E3A001CB91E /* ios_clf_dataS01.csv in Resources */,
+				B19159CA287E1E3A001CB91E /* ios_clf_dataA01.csv in Resources */,
+				B19159D0287E1E3A001CB91E /* ios_clf_data7R01.csv in Resources */,
+				B19159AB287E1E3A001CB91E /* ios_clf_data7A02.csv in Resources */,
+				B19159DF287E1E3A001CB91E /* ios_clf_data7A05.csv in Resources */,
+				B19159AE287E1E3A001CB91E /* ios_clf_dataA10.csv in Resources */,
+				B19159AC287E1E3A001CB91E /* ios_clf_data7E05.csv in Resources */,
+				B19159E6287E1E3A001CB91E /* ios_clf_dataS05.csv in Resources */,
+				B191593E287A76AA001CB91E /* LaunchScreen.storyboard in Resources */,
+				B19159B2287E1E3A001CB91E /* ios_clf_data7S04.csv in Resources */,
+				B19159C5287E1E3A001CB91E /* ios_clf_dataA09.csv in Resources */,
+				B19159D9287E1E3A001CB91E /* ios_clf_dataR03.csv in Resources */,
+				B19159BB287E1E3A001CB91E /* ios_clf_dataS08.csv in Resources */,
+				B19159B7287E1E3A001CB91E /* ios_clf_dataE05.csv in Resources */,
+				B19159CD287E1E3A001CB91E /* ios_clf_data7S01.csv in Resources */,
+				B19159E0287E1E3A001CB91E /* ios_clf_dataS09.csv in Resources */,
+				B19159C1287E1E3A001CB91E /* ios_clf_data7A03.csv in Resources */,
+				B19159E2287E1E3A001CB91E /* ios_clf_dataA07.csv in Resources */,
+				B19159A9287E1E3A001CB91E /* ios_clf_data7E03.csv in Resources */,
+				B19159B5287E1E3A001CB91E /* ios_clf_dataA08.csv in Resources */,
+				B19159DA287E1E3A001CB91E /* ios_clf_dataR05.csv in Resources */,
+				B19159BE287E1E3A001CB91E /* ios_clf_data7H02.csv in Resources */,
+				B19159BC287E1E3A001CB91E /* ios_clf_data7R04.csv in Resources */,
+				B19159BF287E1E3A001CB91E /* ios_clf_data7S06.csv in Resources */,
+				B19159B3287E1E3A001CB91E /* ios_clf_dataA11.csv in Resources */,
+				B19159DD287E1E3A001CB91E /* ios_clf_data7A11.csv in Resources */,
+				B19159AD287E1E3A001CB91E /* ios_clf_dataH01.csv in Resources */,
+				B19159A8287E1E3A001CB91E /* ios_clf_data7A01.csv in Resources */,
+				B19159BD287E1E3A001CB91E /* ios_clf_data7A08.csv in Resources */,
+				B19159D8287E1E3A001CB91E /* ios_clf_dataA06.csv in Resources */,
+				B19159DC287E1E3A001CB91E /* ios_clf_dataS07.csv in Resources */,
+				B19159C3287E1E3A001CB91E /* ios_clf_data7S05.csv in Resources */,
+				B19159D1287E1E3A001CB91E /* ios_clf_dataR01.csv in Resources */,
+				B191594D287A7AFE001CB91E /* GoogleService-Info.plist in Resources */,
+				B19159B9287E1E3A001CB91E /* ios_clf_data7S08.csv in Resources */,
+				B19159C7287E1E3A001CB91E /* ios_clf_data7R06.csv in Resources */,
+				B19159B8287E1E3A001CB91E /* ios_clf_data7A09.csv in Resources */,
+				B19159DE287E1E3A001CB91E /* ios_clf_dataE04.csv in Resources */,
+				B19159E1287E1E3A001CB91E /* ios_clf_dataU01.csv in Resources */,
+				B19159D4287E1E3A001CB91E /* ios_clf_dataR06.csv in Resources */,
+				B19159E9287E1E3A001CB91E /* ios_clf_data7S03.csv in Resources */,
+				B19159C6287E1E3A001CB91E /* ios_clf_data7S02.csv in Resources */,
+				B19159EB287E1E3A001CB91E /* ios_clf_data7A07.csv in Resources */,
+				B19159F0287F345A001CB91E /* LabelTableViewCell.xib in Resources */,
+				B19159AA287E1E3A001CB91E /* ios_clf_dataR02.csv in Resources */,
+				B19159C2287E1E3A001CB91E /* ios_clf_dataE01.csv in Resources */,
+				B19159EA287E1E3A001CB91E /* ios_clf_dataR04.csv in Resources */,
+				B19159CE287E1E3A001CB91E /* ios_clf_dataA02.csv in Resources */,
+				B19159CF287E1E3A001CB91E /* ios_clf_dataH02.csv in Resources */,
+				B19159D5287E1E3A001CB91E /* ios_clf_data7S07.csv in Resources */,
+				B191593B287A76AA001CB91E /* Assets.xcassets in Resources */,
+				B19159E7287E1E3A001CB91E /* ios_clf_dataE03.csv in Resources */,
+				B1915939287A76AA001CB91E /* Main.storyboard in Resources */,
+				B19159C4287E1E3A001CB91E /* ios_clf_data7A10.csv in Resources */,
+				B19159B4287E1E3A001CB91E /* ios_clf_dataE02.csv in Resources */,
+				B19159C8287E1E3A001CB91E /* ios_clf_dataA04.csv in Resources */,
+				B19159CC287E1E3A001CB91E /* ios_clf_data7U01.csv in Resources */,
+				B19159AF287E1E3A001CB91E /* ios_clf_dataA05.csv in Resources */,
+				B19159DB287E1E3A001CB91E /* ios_clf_dataS04.csv in Resources */,
+				B19159B6287E1E3A001CB91E /* ios_clf_data7A06.csv in Resources */,
+				B19159D7287E1E3A001CB91E /* ios_clf_dataS02.csv in Resources */,
+				B19159D6287E1E3A001CB91E /* ios_clf_dataS03.csv in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		0055888D4345EB59E96DCABC /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-AR_Evacuation_Beacon-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		B191592A287A76AA001CB91E /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				B1915955287A7E28001CB91E /* KalmanFilter.swift in Sources */,
+				B191595B287A8681001CB91E /* BeaconCell.swift in Sources */,
+				B1915957287A7E71001CB91E /* BeaconManager.swift in Sources */,
+				B191594F287A7B4C001CB91E /* BeaconViewController.swift in Sources */,
+				B1915963287DDDCF001CB91E /* SocketIOManager.swift in Sources */,
+				B1915932287A76AA001CB91E /* AppDelegate.swift in Sources */,
+				B191594B287A781E001CB91E /* SocketStreamManager.swift in Sources */,
+				B191595E287AA69F001CB91E /* ARNavigationViewController.swift in Sources */,
+				B1915951287A7BDA001CB91E /* ModelInterpreter.swift in Sources */,
+				B1915934287A76AA001CB91E /* SceneDelegate.swift in Sources */,
+				B19159EF287F345A001CB91E /* LabelTableViewCell.swift in Sources */,
+				B1915959287A7EA7001CB91E /* CSVService.swift in Sources */,
+				B1915953287A7E0F001CB91E /* Beacon.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXVariantGroup section */
+		B1915937287A76AA001CB91E /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				B1915938287A76AA001CB91E /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+		B191593C287A76AA001CB91E /* LaunchScreen.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				B191593D287A76AA001CB91E /* Base */,
+			);
+			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		B1915940287A76AA001CB91E /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++17";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		B1915941287A76AA001CB91E /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++17";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		B1915943287A76AA001CB91E /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 51691426705F53637B5D5A41 /* Pods-AR_Evacuation_Beacon.debug.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = AR_Evacuation_Beacon/AR_Evacuation_Beacon.entitlements;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 693WY75AQY;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = AR_Evacuation_Beacon/Info.plist;
+				INFOPLIST_KEY_NSLocationAlwaysAndWhenInUseUsageDescription = "To find Beacon";
+				INFOPLIST_KEY_NSLocationAlwaysUsageDescription = "To find Beacon";
+				INFOPLIST_KEY_NSLocationUsageDescription = "To find Beacon";
+				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "To find Beacon";
+				INFOPLIST_KEY_NSMotionUsageDescription = "To get the sensor";
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
+				INFOPLIST_KEY_UIMainStoryboardFile = Main;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.baconbeacon.AR-Evacuation-Beacon";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		B1915944287A76AA001CB91E /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 0AAA225C72513DDADD22C250 /* Pods-AR_Evacuation_Beacon.release.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = AR_Evacuation_Beacon/AR_Evacuation_Beacon.entitlements;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 693WY75AQY;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = AR_Evacuation_Beacon/Info.plist;
+				INFOPLIST_KEY_NSLocationAlwaysAndWhenInUseUsageDescription = "To find Beacon";
+				INFOPLIST_KEY_NSLocationAlwaysUsageDescription = "To find Beacon";
+				INFOPLIST_KEY_NSLocationUsageDescription = "To find Beacon";
+				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "To find Beacon";
+				INFOPLIST_KEY_NSMotionUsageDescription = "To get the sensor";
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
+				INFOPLIST_KEY_UIMainStoryboardFile = Main;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.baconbeacon.AR-Evacuation-Beacon";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		B1915929287A76AA001CB91E /* Build configuration list for PBXProject "AR_Evacuation_Beacon" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				B1915940287A76AA001CB91E /* Debug */,
+				B1915941287A76AA001CB91E /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		B1915942287A76AA001CB91E /* Build configuration list for PBXNativeTarget "AR_Evacuation_Beacon" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				B1915943287A76AA001CB91E /* Debug */,
+				B1915944287A76AA001CB91E /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		B1915945287A77A1001CB91E /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/firebase/firebase-ios-sdk.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 9.2.0;
+			};
+		};
+		B191595F287DC053001CB91E /* XCRemoteSwiftPackageReference "socket" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/socketio/socket.io-client-swift";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 15.0.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		B1915946287A77A1001CB91E /* FirebaseMLModelDownloader */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = B1915945287A77A1001CB91E /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseMLModelDownloader;
+		};
+		B1915948287A77A1001CB91E /* FirebaseMessaging */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = B1915945287A77A1001CB91E /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseMessaging;
+		};
+		B1915960287DC053001CB91E /* SocketIO */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = B191595F287DC053001CB91E /* XCRemoteSwiftPackageReference "socket" */;
+			productName = SocketIO;
+		};
+/* End XCSwiftPackageProductDependency section */
+	};
+	rootObject = B1915926287A76AA001CB91E /* Project object */;
+}
