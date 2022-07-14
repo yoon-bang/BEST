@@ -3,7 +3,7 @@
 //  AR_Evacuation_Beacon
 //
 //  Created by Jung peter on 7/9/22.
-//
+//s
 
 import UIKit
 
@@ -13,9 +13,9 @@ import FirebaseMLModelDownloader
 import TensorFlowLite
 import CoreMotion
 
-var modelName: String = "ios_model_beacon5"
-var beaconNum: Int = 5
-var fileName: String = "ios_clf_dataE04"
+var modelName: String = "ios_model_beacon4"
+var beaconNum: Int = 4
+var fileName: String = "ios_clf_dataE01"
 var debugMode: Bool = false
 
 class BeaconViewController: UITableViewController, CLLocationManagerDelegate, UNUserNotificationCenterDelegate {
@@ -197,8 +197,8 @@ extension BeaconViewController {
                         locationList.append("unknown")
                         return
                     }
-    //                SocketIOManager.shared.sendLocation(location: location)
                     let locationLabel = classificationDic[location] ?? "unknown"
+                    SocketIOManager.shared.sendLocation(location: locationLabel)
                     print(locationLabel)
                     locationlistForCSV.append(locationLabel)
                     locationList.append(locationLabel)
@@ -208,9 +208,9 @@ extension BeaconViewController {
                 
                 if locationList.count == 3 {
                     //칼만필터 초기화
-                    beaconInfoArr.forEach {
-                        $0.reinitFilter()
-                    }
+//                    beaconInfoArr.forEach {
+//                        $0.reinitFilter()
+//                    }
                 } else if locationList.count == 5 {
                     print("5개 최빈값", mode(array: locationList))
                     locationList.removeAll()

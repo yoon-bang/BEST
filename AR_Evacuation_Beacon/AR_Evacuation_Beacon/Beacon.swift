@@ -8,6 +8,8 @@
 import Foundation
 import CoreLocation
 
+// E01이랑 A01이랑 변경으로 인해서 변경₩
+
 var classificationDic = [
                          "S01":"A01",
                          "S04":"A02",

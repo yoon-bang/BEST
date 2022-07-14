@@ -10,7 +10,8 @@ import SocketIO
 
 class SocketIOManager: NSObject {
     static let shared = SocketIOManager()
-    var manager = SocketManager(socketURL: URL(string: "http://146.148.59.28:12000")!, config: [.log(true), .compress])
+//    var manager = SocketManager(socketURL: URL(string: "http://146.148.59.28:12000")!, config: [.log(true), .compress])
+    var manager = SocketManager(socketURL: URL(string: "http://192.168.2.183:5001")!, config: [.log(true), .compress])
     var socket: SocketIOClient!
     
     override init() {
@@ -29,11 +30,11 @@ class SocketIOManager: NSObject {
     }
    
     func sendLocation(location: String) {
-        socket.emit("location", [location])
+        socket.emit("location", location)
     }
     
     func receivePath(completionHandler: @escaping ([String]) -> Void) {
-        socket.on("path") { (dataArr, socketAck) in
+        socket.on("message") { (dataArr, socketAck) in
             var pathArr = [String]()
             print("Received Path from server via socket😄")
             print(type(of: dataArr))

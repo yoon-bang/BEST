@@ -114,21 +114,31 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="AR ViewController" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="UfZ-SK-dly">
-                                <rect key="frame" x="138" y="437.5" width="138" height="21"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <nil key="textColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
+                            <arscnView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Bkp-Gs-L3b">
+                                <rect key="frame" x="0.0" y="44" width="414" height="769"/>
+                            </arscnView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="YWU-IH-5Ok">
+                                <rect key="frame" x="179" y="762" width="56" height="31"/>
+                                <state key="normal" title="Button"/>
+                                <buttonConfiguration key="configuration" style="plain" title="Start"/>
+                            </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="zU9-cS-gG0"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
-                            <constraint firstItem="UfZ-SK-dly" firstAttribute="centerY" secondItem="M5U-eJ-tll" secondAttribute="centerY" id="AZ1-2F-MxM"/>
-                            <constraint firstItem="UfZ-SK-dly" firstAttribute="centerX" secondItem="M5U-eJ-tll" secondAttribute="centerX" id="kK3-8a-7gC"/>
+                            <constraint firstItem="zU9-cS-gG0" firstAttribute="trailing" secondItem="Bkp-Gs-L3b" secondAttribute="trailing" id="1Ib-vq-FBe"/>
+                            <constraint firstItem="zU9-cS-gG0" firstAttribute="bottom" secondItem="Bkp-Gs-L3b" secondAttribute="bottom" id="4hz-AO-NEc"/>
+                            <constraint firstItem="Bkp-Gs-L3b" firstAttribute="top" secondItem="zU9-cS-gG0" secondAttribute="top" id="9fB-6D-qkk"/>
+                            <constraint firstItem="zU9-cS-gG0" firstAttribute="bottom" secondItem="YWU-IH-5Ok" secondAttribute="bottom" constant="20" id="SPn-Uj-cRu"/>
+                            <constraint firstItem="YWU-IH-5Ok" firstAttribute="centerX" secondItem="M5U-eJ-tll" secondAttribute="centerX" id="cbS-Q7-9SE"/>
+                            <constraint firstItem="Bkp-Gs-L3b" firstAttribute="leading" secondItem="zU9-cS-gG0" secondAttribute="leading" id="l5K-Je-HcY"/>
                         </constraints>
                     </view>
                     <tabBarItem key="tabBarItem" title="Navigation" image="location.fill" catalog="system" id="hWm-Nf-fKV"/>
+                    <connections>
+                        <outlet property="sceneView" destination="Bkp-Gs-L3b" id="V5D-nW-gz0"/>
+                        <outlet property="startButton" destination="YWU-IH-5Ok" id="bP1-n3-2mV"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="gAA-RQ-TZ0" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>

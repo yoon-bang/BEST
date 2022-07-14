@@ -7,6 +7,40 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		B14B8DFC287F660600BE0E6E /* ios_clf_data4H01.csv in Resources */ = {isa = PBXBuildFile; fileRef = B14B8DDA287F660500BE0E6E /* ios_clf_data4H01.csv */; };
+		B14B8DFD287F660600BE0E6E /* ios_clf_data4A10.csv in Resources */ = {isa = PBXBuildFile; fileRef = B14B8DDB287F660500BE0E6E /* ios_clf_data4A10.csv */; };
+		B14B8DFE287F660600BE0E6E /* ios_clf_data4E05.csv in Resources */ = {isa = PBXBuildFile; fileRef = B14B8DDC287F660500BE0E6E /* ios_clf_data4E05.csv */; };
+		B14B8DFF287F660600BE0E6E /* ios_clf_data4A01.csv in Resources */ = {isa = PBXBuildFile; fileRef = B14B8DDD287F660500BE0E6E /* ios_clf_data4A01.csv */; };
+		B14B8E00287F660600BE0E6E /* ios_clf_data4E04.csv in Resources */ = {isa = PBXBuildFile; fileRef = B14B8DDE287F660500BE0E6E /* ios_clf_data4E04.csv */; };
+		B14B8E01287F660600BE0E6E /* ios_clf_data4R06.csv in Resources */ = {isa = PBXBuildFile; fileRef = B14B8DDF287F660500BE0E6E /* ios_clf_data4R06.csv */; };
+		B14B8E02287F660600BE0E6E /* ios_clf_data4A02.csv in Resources */ = {isa = PBXBuildFile; fileRef = B14B8DE0287F660500BE0E6E /* ios_clf_data4A02.csv */; };
+		B14B8E03287F660600BE0E6E /* ios_clf_data4A11.csv in Resources */ = {isa = PBXBuildFile; fileRef = B14B8DE1287F660500BE0E6E /* ios_clf_data4A11.csv */; };
+		B14B8E04287F660600BE0E6E /* ios_clf_data4R03.csv in Resources */ = {isa = PBXBuildFile; fileRef = B14B8DE2287F660500BE0E6E /* ios_clf_data4R03.csv */; };
+		B14B8E05287F660600BE0E6E /* ios_clf_data4A08.csv in Resources */ = {isa = PBXBuildFile; fileRef = B14B8DE3287F660500BE0E6E /* ios_clf_data4A08.csv */; };
+		B14B8E06287F660600BE0E6E /* ios_clf_data4R01.csv in Resources */ = {isa = PBXBuildFile; fileRef = B14B8DE4287F660500BE0E6E /* ios_clf_data4R01.csv */; };
+		B14B8E07287F660600BE0E6E /* ios_clf_data4A07.csv in Resources */ = {isa = PBXBuildFile; fileRef = B14B8DE5287F660500BE0E6E /* ios_clf_data4A07.csv */; };
+		B14B8E08287F660600BE0E6E /* ios_clf_data4U01.csv in Resources */ = {isa = PBXBuildFile; fileRef = B14B8DE6287F660500BE0E6E /* ios_clf_data4U01.csv */; };
+		B14B8E09287F660600BE0E6E /* ios_clf_data4R04.csv in Resources */ = {isa = PBXBuildFile; fileRef = B14B8DE7287F660500BE0E6E /* ios_clf_data4R04.csv */; };
+		B14B8E0A287F660600BE0E6E /* ios_clf_data4E02.csv in Resources */ = {isa = PBXBuildFile; fileRef = B14B8DE8287F660600BE0E6E /* ios_clf_data4E02.csv */; };
+		B14B8E0B287F660600BE0E6E /* ios_clf_data4S02.csv in Resources */ = {isa = PBXBuildFile; fileRef = B14B8DE9287F660600BE0E6E /* ios_clf_data4S02.csv */; };
+		B14B8E0C287F660600BE0E6E /* ios_clf_data4A04.csv in Resources */ = {isa = PBXBuildFile; fileRef = B14B8DEA287F660600BE0E6E /* ios_clf_data4A04.csv */; };
+		B14B8E0D287F660600BE0E6E /* ios_clf_data4A03.csv in Resources */ = {isa = PBXBuildFile; fileRef = B14B8DEB287F660600BE0E6E /* ios_clf_data4A03.csv */; };
+		B14B8E0E287F660600BE0E6E /* ios_clf_data4S04.csv in Resources */ = {isa = PBXBuildFile; fileRef = B14B8DEC287F660600BE0E6E /* ios_clf_data4S04.csv */; };
+		B14B8E0F287F660600BE0E6E /* ios_clf_data4S07.csv in Resources */ = {isa = PBXBuildFile; fileRef = B14B8DED287F660600BE0E6E /* ios_clf_data4S07.csv */; };
+		B14B8E10287F660600BE0E6E /* ios_clf_data4R02.csv in Resources */ = {isa = PBXBuildFile; fileRef = B14B8DEE287F660600BE0E6E /* ios_clf_data4R02.csv */; };
+		B14B8E11287F660600BE0E6E /* ios_clf_data4A06.csv in Resources */ = {isa = PBXBuildFile; fileRef = B14B8DEF287F660600BE0E6E /* ios_clf_data4A06.csv */; };
+		B14B8E12287F660600BE0E6E /* ios_clf_data4S03.csv in Resources */ = {isa = PBXBuildFile; fileRef = B14B8DF0287F660600BE0E6E /* ios_clf_data4S03.csv */; };
+		B14B8E13287F660600BE0E6E /* ios_clf_data4S08.csv in Resources */ = {isa = PBXBuildFile; fileRef = B14B8DF1287F660600BE0E6E /* ios_clf_data4S08.csv */; };
+		B14B8E14287F660600BE0E6E /* ios_clf_data4A09.csv in Resources */ = {isa = PBXBuildFile; fileRef = B14B8DF2287F660600BE0E6E /* ios_clf_data4A09.csv */; };
+		B14B8E15287F660600BE0E6E /* ios_clf_data4E03.csv in Resources */ = {isa = PBXBuildFile; fileRef = B14B8DF3287F660600BE0E6E /* ios_clf_data4E03.csv */; };
+		B14B8E16287F660600BE0E6E /* ios_clf_data4H02.csv in Resources */ = {isa = PBXBuildFile; fileRef = B14B8DF4287F660600BE0E6E /* ios_clf_data4H02.csv */; };
+		B14B8E17287F660600BE0E6E /* ios_clf_data4S01.csv in Resources */ = {isa = PBXBuildFile; fileRef = B14B8DF5287F660600BE0E6E /* ios_clf_data4S01.csv */; };
+		B14B8E18287F660600BE0E6E /* ios_clf_data4A05.csv in Resources */ = {isa = PBXBuildFile; fileRef = B14B8DF6287F660600BE0E6E /* ios_clf_data4A05.csv */; };
+		B14B8E19287F660600BE0E6E /* ios_clf_data4S09.csv in Resources */ = {isa = PBXBuildFile; fileRef = B14B8DF7287F660600BE0E6E /* ios_clf_data4S09.csv */; };
+		B14B8E1A287F660600BE0E6E /* ios_clf_data4E01.csv in Resources */ = {isa = PBXBuildFile; fileRef = B14B8DF8287F660600BE0E6E /* ios_clf_data4E01.csv */; };
+		B14B8E1B287F660600BE0E6E /* ios_clf_data4R05.csv in Resources */ = {isa = PBXBuildFile; fileRef = B14B8DF9287F660600BE0E6E /* ios_clf_data4R05.csv */; };
+		B14B8E1C287F660600BE0E6E /* ios_clf_data4S05.csv in Resources */ = {isa = PBXBuildFile; fileRef = B14B8DFA287F660600BE0E6E /* ios_clf_data4S05.csv */; };
+		B14B8E1D287F660600BE0E6E /* ios_clf_data4S06.csv in Resources */ = {isa = PBXBuildFile; fileRef = B14B8DFB287F660600BE0E6E /* ios_clf_data4S06.csv */; };
 		B1915932287A76AA001CB91E /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1915931287A76AA001CB91E /* AppDelegate.swift */; };
 		B1915934287A76AA001CB91E /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1915933287A76AA001CB91E /* SceneDelegate.swift */; };
 		B1915939287A76AA001CB91E /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B1915937287A76AA001CB91E /* Main.storyboard */; };
@@ -102,6 +136,40 @@
 /* Begin PBXFileReference section */
 		0AAA225C72513DDADD22C250 /* Pods-AR_Evacuation_Beacon.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-AR_Evacuation_Beacon.release.xcconfig"; path = "Target Support Files/Pods-AR_Evacuation_Beacon/Pods-AR_Evacuation_Beacon.release.xcconfig"; sourceTree = "<group>"; };
 		51691426705F53637B5D5A41 /* Pods-AR_Evacuation_Beacon.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-AR_Evacuation_Beacon.debug.xcconfig"; path = "Target Support Files/Pods-AR_Evacuation_Beacon/Pods-AR_Evacuation_Beacon.debug.xcconfig"; sourceTree = "<group>"; };
+		B14B8DDA287F660500BE0E6E /* ios_clf_data4H01.csv */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = ios_clf_data4H01.csv; sourceTree = "<group>"; };
+		B14B8DDB287F660500BE0E6E /* ios_clf_data4A10.csv */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = ios_clf_data4A10.csv; sourceTree = "<group>"; };
+		B14B8DDC287F660500BE0E6E /* ios_clf_data4E05.csv */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = ios_clf_data4E05.csv; sourceTree = "<group>"; };
+		B14B8DDD287F660500BE0E6E /* ios_clf_data4A01.csv */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = ios_clf_data4A01.csv; sourceTree = "<group>"; };
+		B14B8DDE287F660500BE0E6E /* ios_clf_data4E04.csv */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = ios_clf_data4E04.csv; sourceTree = "<group>"; };
+		B14B8DDF287F660500BE0E6E /* ios_clf_data4R06.csv */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = ios_clf_data4R06.csv; sourceTree = "<group>"; };
+		B14B8DE0287F660500BE0E6E /* ios_clf_data4A02.csv */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = ios_clf_data4A02.csv; sourceTree = "<group>"; };
+		B14B8DE1287F660500BE0E6E /* ios_clf_data4A11.csv */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = ios_clf_data4A11.csv; sourceTree = "<group>"; };
+		B14B8DE2287F660500BE0E6E /* ios_clf_data4R03.csv */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = ios_clf_data4R03.csv; sourceTree = "<group>"; };
+		B14B8DE3287F660500BE0E6E /* ios_clf_data4A08.csv */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = ios_clf_data4A08.csv; sourceTree = "<group>"; };
+		B14B8DE4287F660500BE0E6E /* ios_clf_data4R01.csv */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = ios_clf_data4R01.csv; sourceTree = "<group>"; };
+		B14B8DE5287F660500BE0E6E /* ios_clf_data4A07.csv */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = ios_clf_data4A07.csv; sourceTree = "<group>"; };
+		B14B8DE6287F660500BE0E6E /* ios_clf_data4U01.csv */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = ios_clf_data4U01.csv; sourceTree = "<group>"; };
+		B14B8DE7287F660500BE0E6E /* ios_clf_data4R04.csv */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = ios_clf_data4R04.csv; sourceTree = "<group>"; };
+		B14B8DE8287F660600BE0E6E /* ios_clf_data4E02.csv */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = ios_clf_data4E02.csv; sourceTree = "<group>"; };
+		B14B8DE9287F660600BE0E6E /* ios_clf_data4S02.csv */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = ios_clf_data4S02.csv; sourceTree = "<group>"; };
+		B14B8DEA287F660600BE0E6E /* ios_clf_data4A04.csv */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = ios_clf_data4A04.csv; sourceTree = "<group>"; };
+		B14B8DEB287F660600BE0E6E /* ios_clf_data4A03.csv */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = ios_clf_data4A03.csv; sourceTree = "<group>"; };
+		B14B8DEC287F660600BE0E6E /* ios_clf_data4S04.csv */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = ios_clf_data4S04.csv; sourceTree = "<group>"; };
+		B14B8DED287F660600BE0E6E /* ios_clf_data4S07.csv */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = ios_clf_data4S07.csv; sourceTree = "<group>"; };
+		B14B8DEE287F660600BE0E6E /* ios_clf_data4R02.csv */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = ios_clf_data4R02.csv; sourceTree = "<group>"; };
+		B14B8DEF287F660600BE0E6E /* ios_clf_data4A06.csv */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = ios_clf_data4A06.csv; sourceTree = "<group>"; };
+		B14B8DF0287F660600BE0E6E /* ios_clf_data4S03.csv */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = ios_clf_data4S03.csv; sourceTree = "<group>"; };
+		B14B8DF1287F660600BE0E6E /* ios_clf_data4S08.csv */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = ios_clf_data4S08.csv; sourceTree = "<group>"; };
+		B14B8DF2287F660600BE0E6E /* ios_clf_data4A09.csv */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = ios_clf_data4A09.csv; sourceTree = "<group>"; };
+		B14B8DF3287F660600BE0E6E /* ios_clf_data4E03.csv */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = ios_clf_data4E03.csv; sourceTree = "<group>"; };
+		B14B8DF4287F660600BE0E6E /* ios_clf_data4H02.csv */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = ios_clf_data4H02.csv; sourceTree = "<group>"; };
+		B14B8DF5287F660600BE0E6E /* ios_clf_data4S01.csv */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = ios_clf_data4S01.csv; sourceTree = "<group>"; };
+		B14B8DF6287F660600BE0E6E /* ios_clf_data4A05.csv */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = ios_clf_data4A05.csv; sourceTree = "<group>"; };
+		B14B8DF7287F660600BE0E6E /* ios_clf_data4S09.csv */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = ios_clf_data4S09.csv; sourceTree = "<group>"; };
+		B14B8DF8287F660600BE0E6E /* ios_clf_data4E01.csv */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = ios_clf_data4E01.csv; sourceTree = "<group>"; };
+		B14B8DF9287F660600BE0E6E /* ios_clf_data4R05.csv */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = ios_clf_data4R05.csv; sourceTree = "<group>"; };
+		B14B8DFA287F660600BE0E6E /* ios_clf_data4S05.csv */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = ios_clf_data4S05.csv; sourceTree = "<group>"; };
+		B14B8DFB287F660600BE0E6E /* ios_clf_data4S06.csv */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = ios_clf_data4S06.csv; sourceTree = "<group>"; };
 		B191592E287A76AA001CB91E /* AR_Evacuation_Beacon.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = AR_Evacuation_Beacon.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B1915931287A76AA001CB91E /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		B1915933287A76AA001CB91E /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -275,6 +343,40 @@
 		B19159EC287E1E44001CB91E /* data */ = {
 			isa = PBXGroup;
 			children = (
+				B14B8DDD287F660500BE0E6E /* ios_clf_data4A01.csv */,
+				B14B8DE0287F660500BE0E6E /* ios_clf_data4A02.csv */,
+				B14B8DEB287F660600BE0E6E /* ios_clf_data4A03.csv */,
+				B14B8DEA287F660600BE0E6E /* ios_clf_data4A04.csv */,
+				B14B8DF6287F660600BE0E6E /* ios_clf_data4A05.csv */,
+				B14B8DEF287F660600BE0E6E /* ios_clf_data4A06.csv */,
+				B14B8DE5287F660500BE0E6E /* ios_clf_data4A07.csv */,
+				B14B8DE3287F660500BE0E6E /* ios_clf_data4A08.csv */,
+				B14B8DF2287F660600BE0E6E /* ios_clf_data4A09.csv */,
+				B14B8DDB287F660500BE0E6E /* ios_clf_data4A10.csv */,
+				B14B8DE1287F660500BE0E6E /* ios_clf_data4A11.csv */,
+				B14B8DF8287F660600BE0E6E /* ios_clf_data4E01.csv */,
+				B14B8DE8287F660600BE0E6E /* ios_clf_data4E02.csv */,
+				B14B8DF3287F660600BE0E6E /* ios_clf_data4E03.csv */,
+				B14B8DDE287F660500BE0E6E /* ios_clf_data4E04.csv */,
+				B14B8DDC287F660500BE0E6E /* ios_clf_data4E05.csv */,
+				B14B8DDA287F660500BE0E6E /* ios_clf_data4H01.csv */,
+				B14B8DF4287F660600BE0E6E /* ios_clf_data4H02.csv */,
+				B14B8DE4287F660500BE0E6E /* ios_clf_data4R01.csv */,
+				B14B8DEE287F660600BE0E6E /* ios_clf_data4R02.csv */,
+				B14B8DE2287F660500BE0E6E /* ios_clf_data4R03.csv */,
+				B14B8DE7287F660500BE0E6E /* ios_clf_data4R04.csv */,
+				B14B8DF9287F660600BE0E6E /* ios_clf_data4R05.csv */,
+				B14B8DDF287F660500BE0E6E /* ios_clf_data4R06.csv */,
+				B14B8DF5287F660600BE0E6E /* ios_clf_data4S01.csv */,
+				B14B8DE9287F660600BE0E6E /* ios_clf_data4S02.csv */,
+				B14B8DF0287F660600BE0E6E /* ios_clf_data4S03.csv */,
+				B14B8DEC287F660600BE0E6E /* ios_clf_data4S04.csv */,
+				B14B8DFA287F660600BE0E6E /* ios_clf_data4S05.csv */,
+				B14B8DFB287F660600BE0E6E /* ios_clf_data4S06.csv */,
+				B14B8DED287F660600BE0E6E /* ios_clf_data4S07.csv */,
+				B14B8DF1287F660600BE0E6E /* ios_clf_data4S08.csv */,
+				B14B8DF7287F660600BE0E6E /* ios_clf_data4S09.csv */,
+				B14B8DE6287F660500BE0E6E /* ios_clf_data4U01.csv */,
 				B1915964287E1E39001CB91E /* ios_clf_data7A01.csv */,
 				B1915967287E1E39001CB91E /* ios_clf_data7A02.csv */,
 				B191597D287E1E39001CB91E /* ios_clf_data7A03.csv */,
@@ -419,9 +521,11 @@
 				B19159E5287E1E3A001CB91E /* ios_clf_data7E01.csv in Resources */,
 				B19159B1287E1E3A001CB91E /* ios_clf_data7E04.csv in Resources */,
 				B19159D3287E1E3A001CB91E /* ios_clf_data7A04.csv in Resources */,
+				B14B8E16287F660600BE0E6E /* ios_clf_data4H02.csv in Resources */,
 				B19159C0287E1E3A001CB91E /* ios_clf_data7S09.csv in Resources */,
 				B19159E4287E1E3A001CB91E /* ios_clf_data7H01.csv in Resources */,
 				B19159E3287E1E3A001CB91E /* ios_clf_data7E02.csv in Resources */,
+				B14B8E18287F660600BE0E6E /* ios_clf_data4A05.csv in Resources */,
 				B19159CB287E1E3A001CB91E /* ios_clf_data7R03.csv in Resources */,
 				B19159B0287E1E3A001CB91E /* ios_clf_data7R05.csv in Resources */,
 				B19159C9287E1E3A001CB91E /* ios_clf_dataA03.csv in Resources */,
@@ -431,60 +535,92 @@
 				B19159D0287E1E3A001CB91E /* ios_clf_data7R01.csv in Resources */,
 				B19159AB287E1E3A001CB91E /* ios_clf_data7A02.csv in Resources */,
 				B19159DF287E1E3A001CB91E /* ios_clf_data7A05.csv in Resources */,
+				B14B8E12287F660600BE0E6E /* ios_clf_data4S03.csv in Resources */,
 				B19159AE287E1E3A001CB91E /* ios_clf_dataA10.csv in Resources */,
+				B14B8E1D287F660600BE0E6E /* ios_clf_data4S06.csv in Resources */,
 				B19159AC287E1E3A001CB91E /* ios_clf_data7E05.csv in Resources */,
 				B19159E6287E1E3A001CB91E /* ios_clf_dataS05.csv in Resources */,
+				B14B8E00287F660600BE0E6E /* ios_clf_data4E04.csv in Resources */,
+				B14B8E08287F660600BE0E6E /* ios_clf_data4U01.csv in Resources */,
 				B191593E287A76AA001CB91E /* LaunchScreen.storyboard in Resources */,
 				B19159B2287E1E3A001CB91E /* ios_clf_data7S04.csv in Resources */,
 				B19159C5287E1E3A001CB91E /* ios_clf_dataA09.csv in Resources */,
+				B14B8E15287F660600BE0E6E /* ios_clf_data4E03.csv in Resources */,
 				B19159D9287E1E3A001CB91E /* ios_clf_dataR03.csv in Resources */,
+				B14B8E19287F660600BE0E6E /* ios_clf_data4S09.csv in Resources */,
+				B14B8E01287F660600BE0E6E /* ios_clf_data4R06.csv in Resources */,
+				B14B8E06287F660600BE0E6E /* ios_clf_data4R01.csv in Resources */,
 				B19159BB287E1E3A001CB91E /* ios_clf_dataS08.csv in Resources */,
 				B19159B7287E1E3A001CB91E /* ios_clf_dataE05.csv in Resources */,
 				B19159CD287E1E3A001CB91E /* ios_clf_data7S01.csv in Resources */,
 				B19159E0287E1E3A001CB91E /* ios_clf_dataS09.csv in Resources */,
 				B19159C1287E1E3A001CB91E /* ios_clf_data7A03.csv in Resources */,
 				B19159E2287E1E3A001CB91E /* ios_clf_dataA07.csv in Resources */,
+				B14B8E1C287F660600BE0E6E /* ios_clf_data4S05.csv in Resources */,
 				B19159A9287E1E3A001CB91E /* ios_clf_data7E03.csv in Resources */,
+				B14B8E0F287F660600BE0E6E /* ios_clf_data4S07.csv in Resources */,
 				B19159B5287E1E3A001CB91E /* ios_clf_dataA08.csv in Resources */,
 				B19159DA287E1E3A001CB91E /* ios_clf_dataR05.csv in Resources */,
 				B19159BE287E1E3A001CB91E /* ios_clf_data7H02.csv in Resources */,
 				B19159BC287E1E3A001CB91E /* ios_clf_data7R04.csv in Resources */,
 				B19159BF287E1E3A001CB91E /* ios_clf_data7S06.csv in Resources */,
 				B19159B3287E1E3A001CB91E /* ios_clf_dataA11.csv in Resources */,
+				B14B8E09287F660600BE0E6E /* ios_clf_data4R04.csv in Resources */,
+				B14B8E0C287F660600BE0E6E /* ios_clf_data4A04.csv in Resources */,
 				B19159DD287E1E3A001CB91E /* ios_clf_data7A11.csv in Resources */,
 				B19159AD287E1E3A001CB91E /* ios_clf_dataH01.csv in Resources */,
 				B19159A8287E1E3A001CB91E /* ios_clf_data7A01.csv in Resources */,
+				B14B8E11287F660600BE0E6E /* ios_clf_data4A06.csv in Resources */,
+				B14B8E0B287F660600BE0E6E /* ios_clf_data4S02.csv in Resources */,
+				B14B8DFC287F660600BE0E6E /* ios_clf_data4H01.csv in Resources */,
 				B19159BD287E1E3A001CB91E /* ios_clf_data7A08.csv in Resources */,
+				B14B8DFF287F660600BE0E6E /* ios_clf_data4A01.csv in Resources */,
+				B14B8E1A287F660600BE0E6E /* ios_clf_data4E01.csv in Resources */,
 				B19159D8287E1E3A001CB91E /* ios_clf_dataA06.csv in Resources */,
 				B19159DC287E1E3A001CB91E /* ios_clf_dataS07.csv in Resources */,
+				B14B8E0A287F660600BE0E6E /* ios_clf_data4E02.csv in Resources */,
 				B19159C3287E1E3A001CB91E /* ios_clf_data7S05.csv in Resources */,
 				B19159D1287E1E3A001CB91E /* ios_clf_dataR01.csv in Resources */,
 				B191594D287A7AFE001CB91E /* GoogleService-Info.plist in Resources */,
 				B19159B9287E1E3A001CB91E /* ios_clf_data7S08.csv in Resources */,
 				B19159C7287E1E3A001CB91E /* ios_clf_data7R06.csv in Resources */,
+				B14B8DFE287F660600BE0E6E /* ios_clf_data4E05.csv in Resources */,
 				B19159B8287E1E3A001CB91E /* ios_clf_data7A09.csv in Resources */,
+				B14B8E04287F660600BE0E6E /* ios_clf_data4R03.csv in Resources */,
 				B19159DE287E1E3A001CB91E /* ios_clf_dataE04.csv in Resources */,
 				B19159E1287E1E3A001CB91E /* ios_clf_dataU01.csv in Resources */,
 				B19159D4287E1E3A001CB91E /* ios_clf_dataR06.csv in Resources */,
+				B14B8E05287F660600BE0E6E /* ios_clf_data4A08.csv in Resources */,
 				B19159E9287E1E3A001CB91E /* ios_clf_data7S03.csv in Resources */,
 				B19159C6287E1E3A001CB91E /* ios_clf_data7S02.csv in Resources */,
 				B19159EB287E1E3A001CB91E /* ios_clf_data7A07.csv in Resources */,
 				B19159F0287F345A001CB91E /* LabelTableViewCell.xib in Resources */,
+				B14B8DFD287F660600BE0E6E /* ios_clf_data4A10.csv in Resources */,
+				B14B8E13287F660600BE0E6E /* ios_clf_data4S08.csv in Resources */,
+				B14B8E02287F660600BE0E6E /* ios_clf_data4A02.csv in Resources */,
 				B19159AA287E1E3A001CB91E /* ios_clf_dataR02.csv in Resources */,
 				B19159C2287E1E3A001CB91E /* ios_clf_dataE01.csv in Resources */,
 				B19159EA287E1E3A001CB91E /* ios_clf_dataR04.csv in Resources */,
 				B19159CE287E1E3A001CB91E /* ios_clf_dataA02.csv in Resources */,
 				B19159CF287E1E3A001CB91E /* ios_clf_dataH02.csv in Resources */,
 				B19159D5287E1E3A001CB91E /* ios_clf_data7S07.csv in Resources */,
+				B14B8E14287F660600BE0E6E /* ios_clf_data4A09.csv in Resources */,
 				B191593B287A76AA001CB91E /* Assets.xcassets in Resources */,
 				B19159E7287E1E3A001CB91E /* ios_clf_dataE03.csv in Resources */,
 				B1915939287A76AA001CB91E /* Main.storyboard in Resources */,
+				B14B8E17287F660600BE0E6E /* ios_clf_data4S01.csv in Resources */,
+				B14B8E10287F660600BE0E6E /* ios_clf_data4R02.csv in Resources */,
 				B19159C4287E1E3A001CB91E /* ios_clf_data7A10.csv in Resources */,
 				B19159B4287E1E3A001CB91E /* ios_clf_dataE02.csv in Resources */,
+				B14B8E0E287F660600BE0E6E /* ios_clf_data4S04.csv in Resources */,
+				B14B8E07287F660600BE0E6E /* ios_clf_data4A07.csv in Resources */,
 				B19159C8287E1E3A001CB91E /* ios_clf_dataA04.csv in Resources */,
 				B19159CC287E1E3A001CB91E /* ios_clf_data7U01.csv in Resources */,
+				B14B8E1B287F660600BE0E6E /* ios_clf_data4R05.csv in Resources */,
+				B14B8E0D287F660600BE0E6E /* ios_clf_data4A03.csv in Resources */,
 				B19159AF287E1E3A001CB91E /* ios_clf_dataA05.csv in Resources */,
 				B19159DB287E1E3A001CB91E /* ios_clf_dataS04.csv in Resources */,
+				B14B8E03287F660600BE0E6E /* ios_clf_data4A11.csv in Resources */,
 				B19159B6287E1E3A001CB91E /* ios_clf_data7A06.csv in Resources */,
 				B19159D7287E1E3A001CB91E /* ios_clf_dataS02.csv in Resources */,
 				B19159D6287E1E3A001CB91E /* ios_clf_dataS03.csv in Resources */,
