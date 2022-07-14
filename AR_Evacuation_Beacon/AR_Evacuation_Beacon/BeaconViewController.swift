@@ -13,10 +13,10 @@ import FirebaseMLModelDownloader
 import TensorFlowLite
 import CoreMotion
 
-var modelName: String = "ios_model_beacon4"
-var beaconNum: Int = 4
-var fileName: String = "ios_clf_dataE01"
-var debugMode: Bool = false
+var modelName: String = "ios_model_beacon7"
+var beaconNum: Int = 7
+var fileName: String = "ios_clf_data7R01"
+var debugMode: Bool = true
 
 class BeaconViewController: UITableViewController, CLLocationManagerDelegate, UNUserNotificationCenterDelegate {
     
@@ -56,8 +56,8 @@ class BeaconViewController: UITableViewController, CLLocationManagerDelegate, UN
                     guard let location = self.rssiInterpreter.classifyLocationOfUser(with: csv) else {
                         return
                     }
-                    print("처음나온거: ", location)
-                    print("한번더 맵핑: ", classificationDic[location] ?? "unknown")
+                    print("정답: ", location)
+//                    print("한번더 맵핑: ", classificationDic[location] ?? "unknown")
                 }
             }
         }
@@ -187,8 +187,8 @@ extension BeaconViewController {
                     guard let location = rssiInterpreter.classifyLocationOfUser(with: csv) else {
                         return
                     }
-                    print("처음나온거: ", location)
-                    print("한번더 맵핑: ", classificationDic[location] ?? "unknown")
+                    print("정답: ", location)
+//                    print("한번더 맵핑: ", classificationDic[location] ?? "unknown")
                 }
             } else {
                 let csv =  makeBeaconInfoCSV(prev: previousBeaconInfoArr, current: beaconInfoArr)

@@ -66,11 +66,11 @@ class RssiInterpreter {
         do {
             let output = try interpreter.output(at: 0)
             let probabilities =
-                    UnsafeMutableBufferPointer<Float32>.allocate(capacity: 34)
+                    UnsafeMutableBufferPointer<Float32>.allocate(capacity: 31)
             
             output.data.copyBytes(to: probabilities)
             
-            var labels = ["S01", "S02", "S03", "S04", "S05", "S06", "S07", "S08", "S09", "E01", "E02","E03","E04","E05", "R01", "R02","R03","R04","R05","R06","H01", "H02", "A01", "A02", "A03", "A04", "A05", "A06", "A07", "A08", "A09", "A10", "A11", "U01"]
+            var labels = ["A01", "A10", "A11", "A02", "A03", "A04", "A05", "A06", "A07", "A08", "A09","E01", "E02", "E03","H01","H02","R01","R02", "R03", "R04", "R05", "S01", "S02", "S03", "S04", "S05", "S06", "S07", "S08", "S09", "U01"]
             
             let maxPro = probabilities.firstIndex(of: probabilities.max() ?? 0.0) ?? 1
             return labels[maxPro]
