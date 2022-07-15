@@ -47,32 +47,32 @@ AR-Evacuation With Beacons is the Evacuation support Application with Beacons. A
 
 ```
 
-# 개발 이슈
+# Issues
 
 #### 📎  0000
 
 <details>
-<summary>펼쳐보기</summary>
+<summary>show Details</summary>
 <div markdown="1">
 
-#### **▶︎  문제점**
+#### **▶︎  Problem**
   
 
-#### **▶︎  결론**
+#### **▶︎  Solution**
 
 </details>
 
 #### 📎  
 
 <details>
-<summary>펼쳐보기</summary>
+<summary>show Details</summary>
 <div markdown="1">
 </br>
 
-#### **▶︎  문제점**
+#### **▶︎  Problems**
 
 
-#### **▶︎  결론**
+#### **▶︎  Solutions**
 
 </div>
 </details>
