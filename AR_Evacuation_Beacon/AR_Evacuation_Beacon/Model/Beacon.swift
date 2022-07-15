@@ -30,33 +30,32 @@ class Beacon {
     var uuid: UUID
     var timestamp: Date
     var proximity: CLProximity
+    var unknown: Float = -200
+    
+    var beaconID: String {
+        get {
+            if Int(exactly: self.minor)! < 10 {
+                return "\(self.major)0\(self.minor)"
+            }
+            return "\(self.major)\(self.minor)"
+        }
+    }
     
     var filteredRssi: Float {
         get {
-            //필터 불러오기
+            //upload filter
             if rssi != 0 {
-                filter = BeaconManager.shared.beaconKalman["\(getBeaconID())"] ?? KalmanFilter(R: 0.001, Q: 2)
-                BeaconManager.shared.beaconKalman.updateValue(filter, forKey: "\(getBeaconID())")
+                filter = BeaconManager.shared.beaconKalman["\(beaconID)"] ?? KalmanFilter(R: 0.001, Q: 2)
+                BeaconManager.shared.beaconKalman.updateValue(filter, forKey: "\(beaconID)")
                 return filter.filter(signal: Float(rssi))
             } 
-            return -200.0
+            return unknown
         }
     }
     
     func reinitFilter() {
         filter = KalmanFilter(R: 0.001, Q: 2)
-        BeaconManager.shared.beaconKalman.updateValue(filter, forKey: "\(getBeaconID())")
+        BeaconManager.shared.beaconKalman.updateValue(filter, forKey: "\(beaconID)")
     }
-    
-    func getBeaconID() -> String {
-        if Int(exactly: self.minor)! < 10 {
-            return "\(self.major)0\(self.minor)"
-        }
-        return "\(self.major)\(self.minor)"
-    }
-    
-    func address(of object: UnsafeRawPointer) -> String{
-        let address = Int(bitPattern: object)
-        return String(format: "%p", address)
-    }
+
 }
