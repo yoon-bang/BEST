@@ -10,7 +10,6 @@ import ARKit
 import CoreLocation
 
 
-
 class ARNavigationViewController: UIViewController, ARSCNViewDelegate {
 
     @IBOutlet weak var sceneView: ARSCNView!

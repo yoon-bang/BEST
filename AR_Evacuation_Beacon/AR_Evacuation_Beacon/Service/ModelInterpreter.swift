@@ -9,7 +9,9 @@ import Foundation
 import FirebaseMLModelDownloader
 import TensorFlowLite
 
-class RssiInterpreter {
+// MARK: - Get Model From Firebase and Interpret with TensorflowLite
+
+class ModelInterpreter {
     
     let conditions = ModelDownloadConditions(allowsCellularAccess: false)
     var interpreter: Interpreter?
@@ -70,7 +72,7 @@ class RssiInterpreter {
             
             output.data.copyBytes(to: probabilities)
             
-            var labels = ["A01", "A10", "A11", "A02", "A03", "A04", "A05", "A06", "A07", "A08", "A09","E01", "E02", "E03","H01","H02","R01","R02", "R03", "R04", "R05", "S01", "S02", "S03", "S04", "S05", "S06", "S07", "S08", "S09", "U01"]
+            let labels = ["A01", "A10", "A11", "A02", "A03", "A04", "A05", "A06", "A07", "A08", "A09","E01", "E02", "E03","H01","H02","R01","R02", "R03", "R04", "R05", "S01", "S02", "S03", "S04", "S05", "S06", "S07", "S08", "S09", "U01"]
             
             let maxPro = probabilities.firstIndex(of: probabilities.max() ?? 0.0) ?? 1
             return labels[maxPro]

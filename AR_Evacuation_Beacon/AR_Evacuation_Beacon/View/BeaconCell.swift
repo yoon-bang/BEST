@@ -9,6 +9,8 @@ import UIKit
 
 class BeaconCell: UITableViewCell {
     
+    static let identifier = "BeaconCell"
+    
     @IBOutlet weak var idLabel: UILabel!
     @IBOutlet weak var majorLabel: UILabel!
     @IBOutlet weak var minorLabel: UILabel!
@@ -22,8 +24,6 @@ class BeaconCell: UITableViewCell {
 
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
-
-        // Configure the view for the selected state
     }
 
 }

@@ -8,7 +8,10 @@
 import UIKit
 import SocketIO
 
+// MARK: -Socket connection Manager
+
 class SocketIOManager: NSObject {
+    
     static let shared = SocketIOManager()
 //    var manager = SocketManager(socketURL: URL(string: "http://146.148.59.28:12000")!, config: [.log(true), .compress])
     var manager = SocketManager(socketURL: URL(string: "http://192.168.2.183:5001")!, config: [.log(true), .compress])
