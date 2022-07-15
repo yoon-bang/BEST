@@ -15,12 +15,17 @@ import CoreMotion
 
 var modelName: String = "ios_model_beacon7"
 var beaconNum: Int = 7
-var fileName: String = "ios_clf_data7R01"
+var fileName: String = "ios_clf_data7S05"
 var debugMode: Bool = true
 
 class BeaconViewController: UITableViewController, CLLocationManagerDelegate, UNUserNotificationCenterDelegate {
     
-    let locationManager = CLLocationManager()
+    let locationManager: CLLocationManager = {
+        $0.requestWhenInUseAuthorization()
+        $0.startUpdatingHeading()
+        return $0
+    }(CLLocationManager())
+    
     private let sections: [String] = ["Location Estimation", "Beacons"]
     private let beaconManager = BeaconManager.shared
     private var rssiInterpreter = RssiInterpreter()
@@ -57,7 +62,6 @@ class BeaconViewController: UITableViewController, CLLocationManagerDelegate, UN
                         return
                     }
                     print("정답: ", location)
-//                    print("한번더 맵핑: ", classificationDic[location] ?? "unknown")
                 }
             }
         }
@@ -182,35 +186,25 @@ extension BeaconViewController {
         if previousBeaconInfoArr.count == 0{
             previousBeaconInfoArr = beaconInfoArr
         } else {
-            if debugMode {
-                for csv in csvlist {
-                    guard let location = rssiInterpreter.classifyLocationOfUser(with: csv) else {
-                        return
-                    }
-                    print("정답: ", location)
-//                    print("한번더 맵핑: ", classificationDic[location] ?? "unknown")
-                }
-            } else {
+            if !debugMode {
                 let csv =  makeBeaconInfoCSV(prev: previousBeaconInfoArr, current: beaconInfoArr)
                 if locationList.count != 5 {
                     guard let location = rssiInterpreter.classifyLocationOfUser(with: csv) else {
                         locationList.append("unknown")
                         return
                     }
-                    let locationLabel = classificationDic[location] ?? "unknown"
-                    SocketIOManager.shared.sendLocation(location: locationLabel)
-                    print(locationLabel)
-                    locationlistForCSV.append(locationLabel)
-                    locationList.append(locationLabel)
+                    SocketIOManager.shared.sendLocation(location: location)
+                    print(location)
+                    locationlistForCSV.append(location)
+                    locationList.append(location)
                 }
-                
                 previousBeaconInfoArr.removeAll()
                 
                 if locationList.count == 3 {
                     //칼만필터 초기화
-//                    beaconInfoArr.forEach {
-//                        $0.reinitFilter()
-//                    }
+                    //                    beaconInfoArr.forEach {
+                    //                        $0.reinitFilter()
+                    //                    }
                 } else if locationList.count == 5 {
                     print("5개 최빈값", mode(array: locationList))
                     locationList.removeAll()
@@ -268,7 +262,6 @@ extension BeaconViewController {
                         "011","012","013","014","015","016","017","018","019","020",
                         "021", "022"]
         
-        var result = ""
         var dct = [String:Float]()
         
         let prevCSV = makeBeaconInfoCSV(beacon: prev)

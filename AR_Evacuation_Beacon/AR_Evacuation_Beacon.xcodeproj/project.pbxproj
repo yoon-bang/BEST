@@ -131,6 +131,7 @@
 		B14B8FB92880857900BE0E6E /* ios_clf_data7A01.csv in Resources */ = {isa = PBXBuildFile; fileRef = B14B8F9A2880857900BE0E6E /* ios_clf_data7A01.csv */; };
 		B14B8FBA2880857900BE0E6E /* ios_clf_data7S03.csv in Resources */ = {isa = PBXBuildFile; fileRef = B14B8F9B2880857900BE0E6E /* ios_clf_data7S03.csv */; };
 		B14B8FBB2880857900BE0E6E /* ios_clf_data7R03.csv in Resources */ = {isa = PBXBuildFile; fileRef = B14B8F9C2880857900BE0E6E /* ios_clf_data7R03.csv */; };
+		B14B8FBD2880B23700BE0E6E /* Heading.swift in Sources */ = {isa = PBXBuildFile; fileRef = B14B8FBC2880B23700BE0E6E /* Heading.swift */; };
 		B1915932287A76AA001CB91E /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1915931287A76AA001CB91E /* AppDelegate.swift */; };
 		B1915934287A76AA001CB91E /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1915933287A76AA001CB91E /* SceneDelegate.swift */; };
 		B1915939287A76AA001CB91E /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B1915937287A76AA001CB91E /* Main.storyboard */; };
@@ -282,6 +283,7 @@
 		B14B8F9A2880857900BE0E6E /* ios_clf_data7A01.csv */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = ios_clf_data7A01.csv; path = ../../../iOS_clf_dataset/ios_clf_data_7/ios_clf_data7A01.csv; sourceTree = "<group>"; };
 		B14B8F9B2880857900BE0E6E /* ios_clf_data7S03.csv */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = ios_clf_data7S03.csv; path = ../../../iOS_clf_dataset/ios_clf_data_7/ios_clf_data7S03.csv; sourceTree = "<group>"; };
 		B14B8F9C2880857900BE0E6E /* ios_clf_data7R03.csv */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = ios_clf_data7R03.csv; path = ../../../iOS_clf_dataset/ios_clf_data_7/ios_clf_data7R03.csv; sourceTree = "<group>"; };
+		B14B8FBC2880B23700BE0E6E /* Heading.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Heading.swift; sourceTree = "<group>"; };
 		B191592E287A76AA001CB91E /* AR_Evacuation_Beacon.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = AR_Evacuation_Beacon.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B1915931287A76AA001CB91E /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		B1915933287A76AA001CB91E /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -511,6 +513,7 @@
 				B1915962287DDDCF001CB91E /* SocketIOManager.swift */,
 				B19159ED287F345A001CB91E /* LabelTableViewCell.swift */,
 				B19159EE287F345A001CB91E /* LabelTableViewCell.xib */,
+				B14B8FBC2880B23700BE0E6E /* Heading.swift */,
 			);
 			path = AR_Evacuation_Beacon;
 			sourceTree = "<group>";
@@ -759,6 +762,7 @@
 				B1915934287A76AA001CB91E /* SceneDelegate.swift in Sources */,
 				B19159EF287F345A001CB91E /* LabelTableViewCell.swift in Sources */,
 				B1915959287A7EA7001CB91E /* CSVService.swift in Sources */,
+				B14B8FBD2880B23700BE0E6E /* Heading.swift in Sources */,
 				B1915953287A7E0F001CB91E /* Beacon.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
