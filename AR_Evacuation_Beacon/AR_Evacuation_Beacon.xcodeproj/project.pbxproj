@@ -139,7 +139,6 @@
 		B191593E287A76AA001CB91E /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B191593C287A76AA001CB91E /* LaunchScreen.storyboard */; };
 		B1915947287A77A1001CB91E /* FirebaseMLModelDownloader in Frameworks */ = {isa = PBXBuildFile; productRef = B1915946287A77A1001CB91E /* FirebaseMLModelDownloader */; };
 		B1915949287A77A1001CB91E /* FirebaseMessaging in Frameworks */ = {isa = PBXBuildFile; productRef = B1915948287A77A1001CB91E /* FirebaseMessaging */; };
-		B191594B287A781E001CB91E /* SocketStreamManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B191594A287A781E001CB91E /* SocketStreamManager.swift */; };
 		B191594D287A7AFE001CB91E /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = B191594C287A7AFE001CB91E /* GoogleService-Info.plist */; };
 		B191594F287A7B4C001CB91E /* BeaconViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B191594E287A7B4C001CB91E /* BeaconViewController.swift */; };
 		B1915951287A7BDA001CB91E /* ModelInterpreter.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1915950287A7BDA001CB91E /* ModelInterpreter.swift */; };
@@ -291,7 +290,6 @@
 		B191593A287A76AA001CB91E /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		B191593D287A76AA001CB91E /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		B191593F287A76AA001CB91E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		B191594A287A781E001CB91E /* SocketStreamManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SocketStreamManager.swift; sourceTree = "<group>"; };
 		B191594C287A7AFE001CB91E /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		B191594E287A7B4C001CB91E /* BeaconViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BeaconViewController.swift; sourceTree = "<group>"; };
 		B1915950287A7BDA001CB91E /* ModelInterpreter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModelInterpreter.swift; sourceTree = "<group>"; };
@@ -501,7 +499,6 @@
 				B191593A287A76AA001CB91E /* Assets.xcassets */,
 				B191593C287A76AA001CB91E /* LaunchScreen.storyboard */,
 				B191593F287A76AA001CB91E /* Info.plist */,
-				B191594A287A781E001CB91E /* SocketStreamManager.swift */,
 				B191594E287A7B4C001CB91E /* BeaconViewController.swift */,
 				B1915950287A7BDA001CB91E /* ModelInterpreter.swift */,
 				B1915952287A7E0F001CB91E /* Beacon.swift */,
@@ -756,7 +753,6 @@
 				B191594F287A7B4C001CB91E /* BeaconViewController.swift in Sources */,
 				B1915963287DDDCF001CB91E /* SocketIOManager.swift in Sources */,
 				B1915932287A76AA001CB91E /* AppDelegate.swift in Sources */,
-				B191594B287A781E001CB91E /* SocketStreamManager.swift in Sources */,
 				B191595E287AA69F001CB91E /* ARNavigationViewController.swift in Sources */,
 				B1915951287A7BDA001CB91E /* ModelInterpreter.swift in Sources */,
 				B1915934287A76AA001CB91E /* SceneDelegate.swift in Sources */,

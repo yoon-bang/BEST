@@ -13,10 +13,10 @@ import FirebaseMLModelDownloader
 import TensorFlowLite
 import CoreMotion
 
-var modelName: String = "ios_model_beacon7"
-var beaconNum: Int = 7
+var modelName: String = "ios_model_beacon5"
+var beaconNum: Int = 5
 var fileName: String = "ios_clf_data7S05"
-var debugMode: Bool = true
+var debugMode: Bool = false
 
 class BeaconViewController: UITableViewController, CLLocationManagerDelegate, UNUserNotificationCenterDelegate {
     
@@ -32,7 +32,7 @@ class BeaconViewController: UITableViewController, CLLocationManagerDelegate, UN
     private var beaconRegion: CLBeaconRegion!
     private var beaconRegionConstraint: CLBeaconIdentityConstraint!
     private var foundBeacons = [CLBeacon]()
-    private var beaconInfoArr = [Beacon]()
+    private var currentBeaconInfoArr = [Beacon]()
     private var tableviewBeacon = [Beacon]()
     private var previousBeaconInfoArr = [Beacon]()
     private var isRanging = false
@@ -174,41 +174,32 @@ extension BeaconViewController {
         
         // foundBeacons -> 찾은 비콘
         foundBeacons = beacons
-        beaconInfoArr = foundBeacons.map { beacon in
+        currentBeaconInfoArr = foundBeacons.map { beacon in
             return Beacon(beacon: beacon)
         }
         
-        tableviewBeacon = beaconInfoArr.filter({
+        savePreviousBeacons(prev: currentBeaconInfoArr, current: [])
+        
+        tableviewBeacon = currentBeaconInfoArr.filter({
             return $0.rssi != 0
         })
         
         // MARK: - 2번으로 해결하기
         if previousBeaconInfoArr.count == 0{
-            previousBeaconInfoArr = beaconInfoArr
+            previousBeaconInfoArr = currentBeaconInfoArr
         } else {
             if !debugMode {
-                let csv =  makeBeaconInfoCSV(prev: previousBeaconInfoArr, current: beaconInfoArr)
-                if locationList.count != 5 {
-                    guard let location = rssiInterpreter.classifyLocationOfUser(with: csv) else {
-                        locationList.append("unknown")
-                        return
-                    }
-                    SocketIOManager.shared.sendLocation(location: location)
-                    print(location)
-                    locationlistForCSV.append(location)
-                    locationList.append(location)
+                let csv =  beaconsRSSIconfigure(prev: previousBeaconInfoArr, current: currentBeaconInfoArr)
+                print(csv)
+                guard let location = rssiInterpreter.classifyLocationOfUser(with: csv) else {
+                    locationList.append("unknown")
+                    return
                 }
+//                SocketIOManager.shared.sendLocation(location: location)
+                print(location)
+                locationlistForCSV.append(location)
+                locationList.append(location)
                 previousBeaconInfoArr.removeAll()
-                
-                if locationList.count == 3 {
-                    //칼만필터 초기화
-                    //                    beaconInfoArr.forEach {
-                    //                        $0.reinitFilter()
-                    //                    }
-                } else if locationList.count == 5 {
-                    print("5개 최빈값", mode(array: locationList))
-                    locationList.removeAll()
-                }
             }
         }
         tableView.reloadData()
@@ -256,7 +247,22 @@ extension BeaconViewController {
         CSVService.createLocationCSV(with: locationList)
     }
     
-    private func makeBeaconInfoCSV(prev: [Beacon], current: [Beacon]) -> String {
+    private func savePreviousBeacons(prev: [Beacon], current: [Beacon]) {
+        
+        var newbeaconArr = prev
+        
+        newbeaconArr.sort { $0.filteredRssi > $1.filteredRssi}
+        newbeaconArr = Array(newbeaconArr[0..<beaconNum])
+        
+        for beacon in newbeaconArr {
+            beaconManager.beaconDic.updateValue(beacon, forKey: beacon.getBeaconID())
+        }
+        
+        beaconManager.updateKalmanFilter()
+        
+    }
+    
+    private func beaconsRSSIconfigure(prev: [Beacon], current: [Beacon]) -> String {
         
         let features = ["001","002","003","004","005","006","007","008","009","010",
                         "011","012","013","014","015","016","017","018","019","020",
@@ -306,4 +312,11 @@ extension BeaconViewController {
         return CSVService.createDic(from: dct)
     }
     
+}
+
+func max(_ left: Beacon, _ right: Beacon) -> Beacon {
+    if left.rssi > right.rssi {
+        return left
+    }
+    return right
 }
