@@ -10,7 +10,7 @@ import androidx.core.app.ActivityCompat.requestPermissions
 import androidx.core.app.ActivityCompat.shouldShowRequestPermissionRationale
 import androidx.core.content.ContextCompat.checkSelfPermission
 
-class Permission(activity: MainActivity, context: Context) {
+class Permission(activity: LocalizationActivity, context: Context) {
    var neverAskAgainPermissions = ArrayList<String>()
    var activity = activity
    var context = context
@@ -48,7 +48,7 @@ class Permission(activity: MainActivity, context: Context) {
                setMessage(permissionRationale)
                setPositiveButton(R.string.ok, null)
                setOnDismissListener {
-                  requestPermissions(activity, permissions, MainActivity.PERMISSION_REQUEST_FINE_LOCATION)
+                  requestPermissions(activity, permissions, LocalizationActivity.PERMISSION_REQUEST_FINE_LOCATION)
                }
             }
 
@@ -75,7 +75,7 @@ class Permission(activity: MainActivity, context: Context) {
                      setMessage("Please grant location access.")
                      setPositiveButton(R.string.ok, null)
                      setOnDismissListener {
-                        requestPermissions(activity, arrayOf(Manifest.permission.ACCESS_BACKGROUND_LOCATION), MainActivity.PERMISSION_REQUEST_BACKGROUND_LOCATION)
+                        requestPermissions(activity, arrayOf(Manifest.permission.ACCESS_BACKGROUND_LOCATION), LocalizationActivity.PERMISSION_REQUEST_BACKGROUND_LOCATION)
                      }
                   }.create().show()
                } else {
@@ -96,7 +96,7 @@ class Permission(activity: MainActivity, context: Context) {
                   setMessage("Please grant scan permission so this app can detect beacons.")
                   setPositiveButton(R.string.ok, null)
                   setOnDismissListener {
-                     requestPermissions(activity, arrayOf(Manifest.permission.BLUETOOTH_SCAN), MainActivity.PERMISSION_REQUEST_BLUETOOTH_SCAN)
+                     requestPermissions(activity, arrayOf(Manifest.permission.BLUETOOTH_SCAN), LocalizationActivity.PERMISSION_REQUEST_BLUETOOTH_SCAN)
                   }
                }.create().show()
             } else {
@@ -118,7 +118,7 @@ class Permission(activity: MainActivity, context: Context) {
                         setMessage("Please grant location access so this app can detect beacons in the background.")
                         setPositiveButton(R.string.ok, null)
                         setOnDismissListener {
-                           requestPermissions(activity, arrayOf(Manifest.permission.ACCESS_BACKGROUND_LOCATION), MainActivity.PERMISSION_REQUEST_BACKGROUND_LOCATION)
+                           requestPermissions(activity, arrayOf(Manifest.permission.ACCESS_BACKGROUND_LOCATION), LocalizationActivity.PERMISSION_REQUEST_BACKGROUND_LOCATION)
                         }
                      }.create().show()
                   } else {

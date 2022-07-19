@@ -4,7 +4,12 @@
     <option name="filePathToZoomLevelMap">
       <map>
         <entry key="..\:/Users/senta/AndroidStudioProjects/AOS_AR_Evacuation_Beacon/app/src/main/res/layout/activity_main.xml" value="0.15989583333333332" />
-        <entry key="..\:/Users/senta/OneDrive/바탕 화면/Jiwon/Kwangwoon University/2022-1/Purdue/Project/Android/AOS_AR_Evacuation_Beacon/app/src/main/res/layout/activity_main.xml" value="0.24230072463768115" />
+        <entry key="..\:/Users/senta/AppData/Local/Android/Sdk/platforms/android-32/data/res/layout/auto_complete_list.xml" value="0.1" />
+        <entry key="..\:/Users/senta/OneDrive/바탕 화면/Jiwon/Kwangwoon University/2022-1/Purdue/Project/Android/AOS_AR_Evacuation_Beacon/app/src/main/res/layout/activity_ar.xml" value="0.1118659420289855" />
+        <entry key="..\:/Users/senta/OneDrive/바탕 화면/Jiwon/Kwangwoon University/2022-1/Purdue/Project/Android/AOS_AR_Evacuation_Beacon/app/src/main/res/layout/activity_localization.xml" value="0.103125" />
+        <entry key="..\:/Users/senta/OneDrive/바탕 화면/Jiwon/Kwangwoon University/2022-1/Purdue/Project/Android/AOS_AR_Evacuation_Beacon/app/src/main/res/layout/activity_main.xml" value="0.22" />
+        <entry key="..\:/Users/senta/OneDrive/바탕 화면/Jiwon/Kwangwoon University/2022-1/Purdue/Project/Android/AOS_AR_Evacuation_Beacon/app/src/main/res/layout/fragment_localization.xml" value="0.1" />
+        <entry key="..\:/Users/senta/OneDrive/바탕 화면/Jiwon/Kwangwoon University/2022-1/Purdue/Project/Android/AOS_AR_Evacuation_Beacon/app/src/main/res/layout/localization_fragment.xml" value="0.1" />
         <entry key="..\:/Users/senta/OneDrive/바탕 화면/Jiwon/Kwangwoon University/2022-1/Purdue/Project/Android/AOS_AR_Evacuation_Beacon/app/src/main/res/menu/bottom_navigation_menu.xml" value="0.2675213675213675" />
       </map>
     </option>

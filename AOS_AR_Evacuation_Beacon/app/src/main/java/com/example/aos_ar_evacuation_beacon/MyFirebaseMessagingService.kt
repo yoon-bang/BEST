@@ -40,7 +40,7 @@ class MyFirebaseMessagingService : FirebaseMessagingService() {
 
    private fun sendNotification(title: String, body: String) {
       val notifyId = (System.currentTimeMillis() / 7).toInt()
-      val intent = Intent(this, MainActivity::class.java)
+      val intent = Intent(this, LocalizationActivity::class.java)
       intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
 
       val pendingIntent = PendingIntent.getActivity(this, notifyId, intent, PendingIntent.FLAG_ONE_SHOT)

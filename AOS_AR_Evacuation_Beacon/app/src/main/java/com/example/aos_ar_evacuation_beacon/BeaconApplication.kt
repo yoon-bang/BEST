@@ -46,7 +46,7 @@ class BeaconApplication : Application() {
       val builder = Notification.Builder(this, "AOS_AR_Evacuation_App")
       builder.setSmallIcon(R.drawable.ic_launcher_background)
       builder.setContentTitle("Scanning for Beacons")
-      val intent = Intent(this, MainActivity::class.java)
+      val intent = Intent(this, LocalizationActivity::class.java)
       val pendingIntent = PendingIntent.getActivity(
          this, 0, intent, PendingIntent.FLAG_UPDATE_CURRENT + PendingIntent.FLAG_IMMUTABLE
                                                    )
@@ -71,7 +71,7 @@ class BeaconApplication : Application() {
    }
 
    private val centralRangingObserver = Observer<Collection<Beacon>> { beacons ->
-      Log.d(MainActivity.TAG, "Ranged: ${beacons.count()} beacons")
+      Log.d(LocalizationActivity.TAG, "Ranged: ${beacons.count()} beacons")
       for (beacon: Beacon in beacons) {
          Log.d(TAG, "$beacon RSSI: ${beacon.rssi} ")
       }
@@ -84,7 +84,7 @@ class BeaconApplication : Application() {
             .setContentText("A beacon is nearby.")
             .setSmallIcon(R.drawable.ic_launcher_background)
       val stackBuilder = TaskStackBuilder.create(this)
-      stackBuilder.addNextIntent(Intent(this, MainActivity::class.java))
+      stackBuilder.addNextIntent(Intent(this, LocalizationActivity::class.java))
       val resultPendingIntent = stackBuilder.getPendingIntent(
          0, PendingIntent.FLAG_UPDATE_CURRENT + PendingIntent.FLAG_IMMUTABLE
                                                              )
