@@ -3,6 +3,7 @@ plugins {
     id 'kotlin-android'
     id 'org.jetbrains.kotlin.android'
     id 'com.google.gms.google-services'
+    id 'kotlin-kapt'
 }
 
 android {
@@ -91,4 +92,7 @@ dependencies {
 
     implementation 'io.socket:socket.io-client:2.0.0'
 
+    // navigation
+    implementation "androidx.navigation:navigation-fragment-ktx:2.4.0"
+    implementation "androidx.navigation:navigation-ui-ktx:2.4.0"
 }

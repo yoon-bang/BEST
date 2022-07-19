@@ -1,5 +1,6 @@
 package com.example.aos_ar_evacuation_beacon
 
+import android.Manifest
 import android.R
 import android.app.AlertDialog
 import android.content.Context
@@ -10,6 +11,7 @@ import android.hardware.SensorEvent
 import android.hardware.SensorEventListener
 import android.hardware.SensorManager
 import android.net.wifi.WifiManager
+import android.os.Build
 import android.os.Bundle
 import android.os.CountDownTimer
 import android.os.Environment
@@ -46,11 +48,13 @@ import java.nio.ByteOrder
 import java.time.LocalDateTime
 import java.time.format.DateTimeFormatter
 import java.util.*
+import kotlin.math.abs
 import kotlin.properties.Delegates
 
 class MainActivity : AppCompatActivity(), SensorEventListener {
    private lateinit var binding: ActivityMainBinding
    private lateinit var beaconApplication: BeaconApplication
+   var neverAskAgainPermissions = ArrayList<String>()
    var alertDialog: AlertDialog? = null
    lateinit var permission: Permission
 
@@ -131,7 +135,7 @@ class MainActivity : AppCompatActivity(), SensorEventListener {
    override fun onResume() {
       Log.d(TAG, "onResume")
       super.onResume()
-      permission.checkPermissions(MainActivity.this, applicationContext)
+      checkPermissions()
    }
 
    private fun socketSetup() {
@@ -174,7 +178,6 @@ class MainActivity : AppCompatActivity(), SensorEventListener {
       kalman = KalmanFilter(R = 0.001f, Q = 2f)
       wifiManager = applicationContext.getSystemService(Context.WIFI_SERVICE) as WifiManager
       locationQueue = arrayListOf()
-      permission = Permission()
    }
 
    private fun setupTimer() {
@@ -262,7 +265,7 @@ class MainActivity : AppCompatActivity(), SensorEventListener {
             filteredBeaconCell.add("0")
          }
 
-         val rawBeaconFloatCell = ArrayList<Float>()
+         val rawBeaconFloatCell = mutableListOf<Float>()
          for (i in 0 until 20) {
             rawBeaconFloatCell.add(-200F)
          }
@@ -282,126 +285,116 @@ class MainActivity : AppCompatActivity(), SensorEventListener {
             var filteredRssi = beaconManager.beaconInfo[beacon.bID]?.filter(signal = beacon._rssi.toFloat())
             beaconManager.filteredRSSIDict[beacon.bID] = filteredRssi!!
 
-
             //Log.i("$$$ Detected Beacons $$$", "minor: ${beacon.bID}, RSSI: ${it.rssi}, Filtered: $filteredRssi")
 
             filteredBeaconCell[beacon.minor] = filteredRssi.toString()
             filteredBeaconCell[23] = azimuth.toString()
             filteredBeaconCell[24] = classifyOrientation(azimuth)
-
-
-            /*
-            filteredBeaconCell[23] = accelerationList[0]
-            filteredBeaconCell[24] = accelerationList[1]
-            filteredBeaconCell[25] = accelerationList[2]
-
-            filteredBeaconCell[26] = BigDecimal(gyroscopeList[0]).toPlainString()
-            filteredBeaconCell[27] = BigDecimal(gyroscopeList[1]).toPlainString()
-            filteredBeaconCell[28] = BigDecimal(gyroscopeList[2]).toPlainString()
-
-            filteredBeaconCell[29] = magneticFieldList[0]
-            filteredBeaconCell[30] = magneticFieldList[1]
-            filteredBeaconCell[31] = magneticFieldList[2]
-             */
          }
 
 
          // from here
-         /*
-         val filteredBeaconFloatCell = mutableListOf<Float>()
-         filteredBeaconCell.subList(1, 23).forEach { value -> filteredBeaconFloatCell.add(value.toFloat()) }
-         currentBeaconArray = filteredBeaconFloatCell
+         // 1~23 자르고 float 으로 변환
+         val filteredBeaconFloatList = mutableListOf<Float>()
+         filteredBeaconCell.subList(1, 23).forEach { value -> filteredBeaconFloatList.add(value.toFloat()) }
+         selectBeacon(rawBeaconFloatCell, filteredBeaconFloatList, 7)
 
-         // Kalman 초기화
-         // 상위 7개만 뽑기
-         val dict1 = mutableMapOf<String, Float>()
-         val dict2 = mutableMapOf<String, Float>()
-
-         filteredBeaconFloatCell.forEachIndexed { index, value -> dict1 += ("$index" to value) }
-         rawBeaconFloatCell.forEachIndexed { index, value -> dict2 += ("$index" to value) }
-
-         val filteredList = dict1.toList().sortedByDescending { (_, value) -> value }.subList(0, 7)
-         val rawList = dict2.toList().sortedByDescending { (_, value) -> value }.subList(0, 7)
-
-         val newFilteredList = mutableListOf<Float>()
-         val newRawList = mutableListOf<Float>()
-         var st1 = "[ "
-         var st2 = "[ "
-
-         filteredBeaconFloatCell.forEach { newFilteredList.add(-200F) }
-         filteredList.forEach { (index, value) ->
-            newFilteredList[index.toInt()] = value
-
-         }
-
-         rawBeaconFloatCell.forEach { newRawList.add(-200F) }
-         rawList.forEach { (index, value) -> newRawList[index.toInt()] = value }
-
-         var errorNum = 0
-
-         // 에러 >= 10 이면 칼만 초기화
-         for (i in 0 until filteredBeaconFloatCell.size) {
-            if (newFilteredList[i] != -200F && newRawList[i] != -200F) {
-               Log.w("fff 1 : ", newFilteredList[i].toString())
-               Log.w("fff 2 : ", newRawList[i].toString())
-
-               val error = abs(abs(newFilteredList[i]) - abs(newRawList[i]))
-               Log.i("RSSI Error ", error.toString())
-               if (error > threshold) {
-                  errorNum += 1
-               }
-            }
-         }
-
-         if (errorNum >= 1) {
-            beaconManager.beaconInfo.forEach { (s, _) ->
-               beaconManager.beaconInfo["$s"] = KalmanFilter(R = 0.001f, Q = 2f)
-            }
-         }
-
-         if (previousBeaconArray.size == 0) {
-            previousBeaconArray = filteredBeaconFloatCell
-         } else {
-            val filteredBeaconList = mutableListOf<Float>()
-            var previousString = "[ "
-            var currentString = "[ "
-            var filteredString = "[ "
-
-            for (i in 0 until previousBeaconArray.size) {
-               if (previousBeaconArray[i] < currentBeaconArray[i]) {
-                  filteredBeaconList.add(currentBeaconArray[i])
-               } else {
-                  filteredBeaconList.add(previousBeaconArray[i])
-               }
-               previousString += "${previousBeaconArray[i]},"
-               currentString += "${currentBeaconArray[i]}," // 둘 중에 큰 값으로 저장
-               filteredString += "${filteredBeaconList[i]},"
-            }
-
-            Log.i("Previous String ", previousString)
-            Log.i("Current String ", currentString)
-            Log.i("$$$ Filtered String 111 $$$", filteredString)
-
-            var filteredString2 = "[ "
-            val dict = mutableMapOf<String, Float>()
-            filteredBeaconList.forEachIndexed { index, value -> dict += ("$index" to value) }
-            val list = dict.toList().sortedByDescending { (key, value) -> value }.subList(0, 7)
-
-            filteredBeaconList.forEachIndexed { index, fl -> filteredBeaconList[index] = -200F }
-            list.forEach { (index, value) -> filteredBeaconList[index.toInt()] = value }
-            filteredBeaconList.forEachIndexed { index, fl -> filteredString2 += "${filteredBeaconList[index]}," }
-
-            // 상위 7개만 뽑아서 저장
-            Log.i("$$$ Filtered 7 Beacon $$$", "$filteredString2 ]")
-
-
-            //getModelOutput(filteredBeaconList)
-            //previousBeaconArray.clear()
-         }
-         */
-
-         addtoCSV(filteredBeaconCell.toTypedArray())
+         addToCSV(filteredBeaconCell.toTypedArray())
          binding.beaconList.adapter = ArrayAdapter(this, R.layout.simple_list_item_1, beacons.map { "Major ${it.id2}          Minor: ${it.id3}\nRaw rssi: ${it.rssi}\n" }.toTypedArray())
+      }
+   }
+
+   private fun selectBeacon(rawBeacon: MutableList<Float>, filteredBeacon: MutableList<Float>, beaconNum: Int) {
+      var errorNum = 0
+      currentBeaconArray = filteredBeacon
+
+      // 상위 7개만 뽑기
+      val rawDict = mutableMapOf<String, Float>()
+      val filteredDict = mutableMapOf<String, Float>()
+
+      filteredBeacon.forEachIndexed { index, value -> rawDict += ("$index" to value) }
+      rawBeacon.forEachIndexed { index, value -> filteredDict += ("$index" to value) }
+
+      // 상위 n개로 정렬
+      val filteredList = rawDict.toList().sortedByDescending { (_, value) -> value }.subList(0, beaconNum)
+      val rawList = filteredDict.toList().sortedByDescending { (_, value) -> value }.subList(0, beaconNum)
+
+      val newFilteredList = mutableListOf<Float>()
+      val newRawList = mutableListOf<Float>()
+      var st1 = "[ "
+      var st2 = "[ "
+
+      // 상위 n개 값 저장
+      filteredBeacon.forEach { _ -> newFilteredList.add(-200F) }
+      filteredList.forEach { (index, value) -> newFilteredList[index.toInt()] = value }
+
+      rawBeacon.forEach { _ -> newRawList.add(-200F) }
+      rawList.forEach { (index, value) -> newRawList[index.toInt()] = value }
+
+      // 에러 >= 20 이면 칼만 초기화
+      for (i in 0 until filteredBeacon.size) {
+         if (newFilteredList[i] != -200F && newRawList[i] != -200F) {
+            Log.w("NewFilteredList : ", newFilteredList[i].toString())
+            Log.w("NewRawList : ", newRawList[i].toString())
+
+            val error = abs(abs(newFilteredList[i]) - abs(newRawList[i]))
+            Log.i("RSSI Error ", error.toString())
+            if (error > threshold) {
+               errorNum += 1
+            }
+         }
+      }
+
+      if (errorNum >= 1) {
+         beaconManager.beaconInfo.forEach { (s, _) ->
+            beaconManager.beaconInfo["$s"] = KalmanFilter(R = 0.001f, Q = 2f)
+         }
+      }
+
+      combineBeaconCells(filteredBeacon, beaconNum)
+   }
+
+   private fun combineBeaconCells(filteredBeacon: MutableList<Float>, beaconNum: Int) {
+      if (previousBeaconArray.size == 0) {
+         previousBeaconArray = filteredBeacon
+      } else {
+         val combinedBeaconList = mutableListOf<Float>()
+         var previousString = "[ "
+         var currentString = "[ "
+         var combinedString = "[ "
+
+         // 둘 중에 큰 값으로 저장
+         for (i in 0 until previousBeaconArray.size) {
+            if (previousBeaconArray[i] < currentBeaconArray[i]) {
+               combinedBeaconList.add(currentBeaconArray[i])
+            } else {
+               combinedBeaconList.add(previousBeaconArray[i])
+            }
+            previousString += "${previousBeaconArray[i]},"
+            currentString += "${currentBeaconArray[i]},"
+            combinedString += "${combinedBeaconList[i]},"
+         }
+
+         Log.i("Previous String ", previousString)
+         Log.i("Current String ", currentString)
+         // 두 개를 하나로 합친 결과
+         Log.i("$$$ Combined String $$$", combinedString)
+
+         var sortedString = "[ "
+         val combinedBeaconDict = mutableMapOf<String, Float>()
+         combinedBeaconList.forEachIndexed { index, value -> combinedBeaconDict += ("$index" to value) }
+         val sortedList = combinedBeaconDict.toList().sortedByDescending { (_, value) -> value }.subList(0, beaconNum)
+
+         // -200 으로 초기화
+         combinedBeaconList.forEachIndexed { index, _ -> combinedBeaconList[index] = -200F }
+         // 상위 n 개만 value 저장
+         sortedList.forEach { (index, value) -> combinedBeaconList[index.toInt()] = value }
+         combinedBeaconList.forEachIndexed { index, _ -> sortedString += "${combinedBeaconList[index]}," }
+
+         // 상위 n개만 뽑아서 저장
+         Log.i("$$$ Filtered $beaconNum Beacon $$$", "$sortedString ]")
+         getModelOutput(combinedBeaconList)
+         previousBeaconArray.clear()
       }
    }
 
@@ -419,7 +412,7 @@ class MainActivity : AppCompatActivity(), SensorEventListener {
       }
    }
 
-   private fun addtoCSV(cell: Array<String>) {
+   private fun addToCSV(cell: Array<String>) {
       beaconCSV.add(cell)
    }
 
@@ -434,7 +427,6 @@ class MainActivity : AppCompatActivity(), SensorEventListener {
       val bufferSize = labelNum * java.lang.Float.SIZE / java.lang.Byte.SIZE
       val modelOutput = ByteBuffer.allocateDirect(bufferSize).order(ByteOrder.nativeOrder())
       interpreter?.run(input, modelOutput)
-
       modelOutput.rewind()
 
       val probabilities = modelOutput.asFloatBuffer()
@@ -462,7 +454,7 @@ class MainActivity : AppCompatActivity(), SensorEventListener {
          binding.locationQueue.text = locationString
 
          estimatedLocationList.add(mappedLabel)
-         addtoCSV(arrayOf(mappedLabel))
+         // addToCSV(arrayOf(mappedLabel))
       } catch (e: IOException) {
          Log.e("$$$ Output Error $$$", e.toString())
       }
@@ -494,8 +486,9 @@ class MainActivity : AppCompatActivity(), SensorEventListener {
       for (i in 1 until permissions.size) {
          Log.d(TAG, "onRequestPermissionResult for " + permissions[i] + ":" + grantResults[i])
          if (grantResults[i] != PackageManager.PERMISSION_GRANTED) {
+            //check if user select "never ask again" when denying any permission
             if (!shouldShowRequestPermissionRationale(permissions[i])) {
-               permission.neverAskAgainPermissions.add(permissions[i])
+               neverAskAgainPermissions.add(permissions[i])
             }
          }
       }
@@ -526,8 +519,8 @@ class MainActivity : AppCompatActivity(), SensorEventListener {
          "020",
          "021",
          "022",
-         "OrientationValue",
-         "OrientationString",
+         "CompassValue",
+         "CompassString",
                            ))
    }
 
@@ -651,6 +644,111 @@ class MainActivity : AppCompatActivity(), SensorEventListener {
                 "U01")
    }
 
+
+   private fun checkPermissions() {
+      var permissions = arrayOf(Manifest.permission.ACCESS_FINE_LOCATION)
+      var permissionRationale = "This app needs fine location permission to detect beacons.  Please grant this now."
+      if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
+         permissions = arrayOf(Manifest.permission.ACCESS_FINE_LOCATION, Manifest.permission.BLUETOOTH_SCAN)
+         permissionRationale = "This app needs fine location permission, and bluetooth scan permission to detect beacons.  Please grant all of these now."
+      } else if (android.os.Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
+         if ((checkSelfPermission(Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED)) {
+            permissions = arrayOf(Manifest.permission.ACCESS_FINE_LOCATION)
+            permissionRationale = "This app needs fine location permission to detect beacons.  Please grant this now."
+         } else {
+            permissions = arrayOf(Manifest.permission.ACCESS_BACKGROUND_LOCATION)
+            permissionRationale = "This app needs background location permission to detect beacons in the background.  Please grant this now."
+         }
+      } else if (android.os.Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
+         permissions = arrayOf(Manifest.permission.ACCESS_FINE_LOCATION, Manifest.permission.ACCESS_BACKGROUND_LOCATION)
+         permissionRationale = "This app needs both fine location permission and background location permission to detect beacons in the background.  Please grant both now."
+      }
+      var allGranted = true
+      for (permission in permissions) {
+         if (checkSelfPermission(permission) != PackageManager.PERMISSION_GRANTED) allGranted = false;
+      }
+      if (!allGranted) {
+         if (neverAskAgainPermissions.count() == 0) {
+            val builder = AlertDialog.Builder(this)
+            builder.setTitle("This app needs permissions to detect beacons")
+            builder.setMessage(permissionRationale)
+            builder.setPositiveButton(android.R.string.ok, null)
+            builder.setOnDismissListener {
+               requestPermissions(permissions, PERMISSION_REQUEST_FINE_LOCATION)
+            }
+            builder.show()
+         } else {
+            val builder = AlertDialog.Builder(this)
+            builder.setTitle("Functionality limited")
+            builder.setMessage("Since location and device permissions have not been granted, this app will not be able to discover beacons.  Please go to Settings -> Applications -> Permissions and grant location and device discovery permissions to this app.")
+            builder.setPositiveButton(android.R.string.ok, null)
+            builder.setOnDismissListener { }
+            builder.show()
+         }
+      } else {
+         if (android.os.Build.VERSION.SDK_INT > Build.VERSION_CODES.P) {
+            if (checkSelfPermission(Manifest.permission.ACCESS_BACKGROUND_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+               if (shouldShowRequestPermissionRationale(Manifest.permission.ACCESS_BACKGROUND_LOCATION)) {
+                  val builder = AlertDialog.Builder(this)
+                  builder.setTitle("This app needs background location access")
+                  builder.setMessage("Please grant location access so this app can detect beacons in the background.")
+                  builder.setPositiveButton(android.R.string.ok, null)
+                  builder.setOnDismissListener {
+                     requestPermissions(arrayOf(Manifest.permission.ACCESS_BACKGROUND_LOCATION), PERMISSION_REQUEST_BACKGROUND_LOCATION)
+                  }
+                  builder.show()
+               } else {
+                  val builder = AlertDialog.Builder(this)
+                  builder.setTitle("Functionality limited")
+                  builder.setMessage("Since background location access has not been granted, this app will not be able to discover beacons in the background.  Please go to Settings -> Applications -> Permissions and grant background location access to this app.")
+                  builder.setPositiveButton(android.R.string.ok, null)
+                  builder.setOnDismissListener { }
+                  builder.show()
+               }
+            }
+         } else if (android.os.Build.VERSION.SDK_INT > Build.VERSION_CODES.S && (checkSelfPermission(Manifest.permission.BLUETOOTH_SCAN) != PackageManager.PERMISSION_GRANTED)) {
+            if (shouldShowRequestPermissionRationale(Manifest.permission.BLUETOOTH_SCAN)) {
+               val builder = AlertDialog.Builder(this)
+               builder.setTitle("This app needs bluetooth scan permission")
+               builder.setMessage("Please grant scan permission so this app can detect beacons.")
+               builder.setPositiveButton(android.R.string.ok, null)
+               builder.setOnDismissListener {
+                  requestPermissions(arrayOf(Manifest.permission.BLUETOOTH_SCAN), PERMISSION_REQUEST_BLUETOOTH_SCAN)
+               }
+               builder.show()
+            } else {
+               val builder = AlertDialog.Builder(this)
+               builder.setTitle("Functionality limited")
+               builder.setMessage("Since bluetooth scan permission has not been granted, this app will not be able to discover beacons  Please go to Settings -> Applications -> Permissions and grant bluetooth scan permission to this app.")
+               builder.setPositiveButton(android.R.string.ok, null)
+               builder.setOnDismissListener { }
+               builder.show()
+            }
+         } else {
+            if (android.os.Build.VERSION.SDK_INT > Build.VERSION_CODES.P) {
+               if (checkSelfPermission(Manifest.permission.ACCESS_BACKGROUND_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+                  if (shouldShowRequestPermissionRationale(Manifest.permission.ACCESS_BACKGROUND_LOCATION)) {
+                     val builder = AlertDialog.Builder(this)
+                     builder.setTitle("This app needs background location access")
+                     builder.setMessage("Please grant location access so this app can detect beacons in the background.")
+                     builder.setPositiveButton(android.R.string.ok, null)
+                     builder.setOnDismissListener {
+                        requestPermissions(arrayOf(Manifest.permission.ACCESS_BACKGROUND_LOCATION), PERMISSION_REQUEST_BACKGROUND_LOCATION)
+                     }
+                     builder.show()
+                  } else {
+                     val builder = AlertDialog.Builder(this)
+                     builder.setTitle("Functionality limited")
+                     builder.setMessage("Since background location access has not been granted, this app will not be able to discover beacons in the background.  Please go to Settings -> Applications -> Permissions and grant background location access to this app.")
+                     builder.setPositiveButton(android.R.string.ok, null)
+                     builder.setOnDismissListener { }
+                     builder.show()
+                  }
+               }
+            }
+         }
+      }
+   }
 
    companion object {
       const val TAG = "MainActivity"

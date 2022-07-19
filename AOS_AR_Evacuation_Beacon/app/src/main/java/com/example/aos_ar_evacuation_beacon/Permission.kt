@@ -10,17 +10,17 @@ import androidx.core.app.ActivityCompat.requestPermissions
 import androidx.core.app.ActivityCompat.shouldShowRequestPermissionRationale
 import androidx.core.content.ContextCompat.checkSelfPermission
 
-class Permission {
+class Permission(activity: MainActivity, context: Context) {
    var neverAskAgainPermissions = ArrayList<String>()
+   var activity = activity
+   var context = context
 
-   fun checkPermissions(activity: MainActivity, context: Context) {
+   fun checkPermissions() {
       var permissions = arrayOf(Manifest.permission.ACCESS_FINE_LOCATION)
       var permissionRationale = "Fine location permission is needed."
 
       if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
-         permissions = arrayOf(
-            Manifest.permission.ACCESS_FINE_LOCATION, Manifest.permission.BLUETOOTH_SCAN
-                              )
+         permissions = arrayOf(Manifest.permission.ACCESS_FINE_LOCATION, Manifest.permission.BLUETOOTH_SCAN)
          permissionRationale = "Fine location permission & bluetooth scan permission are needed."
       } else if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
          if ((checkSelfPermission(context, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED)) {
@@ -31,9 +31,7 @@ class Permission {
             permissionRationale = "Background location permission is needed."
          }
       } else if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
-         permissions = arrayOf(
-            Manifest.permission.ACCESS_FINE_LOCATION, Manifest.permission.ACCESS_BACKGROUND_LOCATION
-                              )
+         permissions = arrayOf(Manifest.permission.ACCESS_FINE_LOCATION, Manifest.permission.ACCESS_BACKGROUND_LOCATION)
          permissionRationale = "Fine location permission & background location permission are needed."
       }
 
@@ -52,7 +50,11 @@ class Permission {
                setOnDismissListener {
                   requestPermissions(activity, permissions, MainActivity.PERMISSION_REQUEST_FINE_LOCATION)
                }
-            }.create().show()
+            }
+
+            if (!activity.isFinishing) {
+               builder.create().show()
+            }
 
          } else {
             val builder = AlertDialog.Builder(context)
@@ -73,9 +75,7 @@ class Permission {
                      setMessage("Please grant location access.")
                      setPositiveButton(R.string.ok, null)
                      setOnDismissListener {
-                        requestPermissions(
-                           activity, arrayOf(Manifest.permission.ACCESS_BACKGROUND_LOCATION), MainActivity.PERMISSION_REQUEST_BACKGROUND_LOCATION
-                                          )
+                        requestPermissions(activity, arrayOf(Manifest.permission.ACCESS_BACKGROUND_LOCATION), MainActivity.PERMISSION_REQUEST_BACKGROUND_LOCATION)
                      }
                   }.create().show()
                } else {
@@ -96,9 +96,7 @@ class Permission {
                   setMessage("Please grant scan permission so this app can detect beacons.")
                   setPositiveButton(R.string.ok, null)
                   setOnDismissListener {
-                     requestPermissions(
-                        activity, arrayOf(Manifest.permission.BLUETOOTH_SCAN), MainActivity.PERMISSION_REQUEST_BLUETOOTH_SCAN
-                                       )
+                     requestPermissions(activity, arrayOf(Manifest.permission.BLUETOOTH_SCAN), MainActivity.PERMISSION_REQUEST_BLUETOOTH_SCAN)
                   }
                }.create().show()
             } else {
@@ -120,9 +118,7 @@ class Permission {
                         setMessage("Please grant location access so this app can detect beacons in the background.")
                         setPositiveButton(R.string.ok, null)
                         setOnDismissListener {
-                           requestPermissions(
-                              activity, arrayOf(Manifest.permission.ACCESS_BACKGROUND_LOCATION), MainActivity.PERMISSION_REQUEST_BACKGROUND_LOCATION
-                                             )
+                           requestPermissions(activity, arrayOf(Manifest.permission.ACCESS_BACKGROUND_LOCATION), MainActivity.PERMISSION_REQUEST_BACKGROUND_LOCATION)
                         }
                      }.create().show()
                   } else {
