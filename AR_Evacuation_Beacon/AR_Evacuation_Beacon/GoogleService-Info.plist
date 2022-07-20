@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>CLIENT_ID</key>
+	<string>654559994186-q10qoum6qepil5pjq66lt7fb2823ivp1.apps.googleusercontent.com</string>
+	<key>REVERSED_CLIENT_ID</key>
+	<string>com.googleusercontent.apps.654559994186-q10qoum6qepil5pjq66lt7fb2823ivp1</string>
+	<key>ANDROID_CLIENT_ID</key>
+	<string>654559994186-apu2oukij0iqi1p81vcsqe8b407j4s5p.apps.googleusercontent.com</string>
+	<key>API_KEY</key>
+	<string>AIzaSyBejv5pa7rWMzHQ8ubfrdjCaARdY2LRrqc</string>
+	<key>GCM_SENDER_ID</key>
+	<string>654559994186</string>
+	<key>PLIST_VERSION</key>
+	<string>1</string>
+	<key>BUNDLE_ID</key>
+	<string>com.baconbeacon.AR-Evacuation-Beacon</string>
+	<key>PROJECT_ID</key>
+	<string>bacon-beacon-353516</string>
+	<key>STORAGE_BUCKET</key>
+	<string>bacon-beacon-353516.appspot.com</string>
+	<key>IS_ADS_ENABLED</key>
+	<false></false>
+	<key>IS_ANALYTICS_ENABLED</key>
+	<false></false>
+	<key>IS_APPINVITE_ENABLED</key>
+	<true></true>
+	<key>IS_GCM_ENABLED</key>
+	<true></true>
+	<key>IS_SIGNIN_ENABLED</key>
+	<true></true>
+	<key>GOOGLE_APP_ID</key>
+	<string>1:654559994186:ios:69e8c87060bdbd4dba61b3</string>
+</dict>
+</plist>
