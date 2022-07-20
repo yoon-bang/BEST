@@ -50,7 +50,6 @@ import java.time.LocalDateTime
 import java.time.format.DateTimeFormatter
 import java.util.*
 import kotlin.math.abs
-import kotlin.properties.Delegates
 
 class LocalizationActivity : AppCompatActivity(), SensorEventListener {
    private lateinit var binding: ActivityLocalizationBinding
@@ -118,11 +117,11 @@ class LocalizationActivity : AppCompatActivity(), SensorEventListener {
       binding.beaconList.adapter = ArrayAdapter(this, R.layout.simple_list_item_1, arrayOf("--"))
 
       setting()
-      //makeColumnName()
-      makeEstimatedLocationColumn()
+      makeColumnName()
+      //makeEstimatedLocationColumn()
       setupTimer()
       setSensor()
-      loadMLModel()
+      //loadMLModel()
       //socketSetup()
       setBottomNavigation()
    }
@@ -138,13 +137,11 @@ class LocalizationActivity : AppCompatActivity(), SensorEventListener {
       checkPermissions()
    }
 
-
    private fun setBottomNavigation() {
       binding.bottomNavigation.selectedItemId = com.example.aos_ar_evacuation_beacon.R.id.localizationItem
       binding.bottomNavigation.setOnItemSelectedListener {
          when (it.itemId) {
             com.example.aos_ar_evacuation_beacon.R.id.navigationItem -> {
-               Log.i("NNNNNN", "ar selected")
                val intent = Intent(this, ARActivity::class.java)
                startActivity(intent)
                overridePendingTransition(0, 0)
@@ -310,7 +307,7 @@ class LocalizationActivity : AppCompatActivity(), SensorEventListener {
             filteredBeaconList[24] = classifyOrientation(azimuth)
          }
 
-
+         /*
          // 1~23 자르고 float 으로 변환
          val filteredBeaconFloatList = mutableListOf<Float>()
          filteredBeaconList.subList(1, 23).forEach { value -> filteredBeaconFloatList.add(value.toFloat()) }
@@ -318,7 +315,9 @@ class LocalizationActivity : AppCompatActivity(), SensorEventListener {
             Log.i("filteredBeaconFloatList $index: ", fl.toString())
          }
          selectBeacon(rawBeaconFloatList, filteredBeaconFloatList, 22)
-         //addToCSV(filteredBeaconList.toTypedArray())
+         */
+
+         addToCSV(filteredBeaconList.toTypedArray())
          binding.beaconList.adapter = ArrayAdapter(this, R.layout.simple_list_item_1, beacons.map { "Major ${it.id2}          Minor: ${it.id3}\nRaw rssi: ${it.rssi}\n" }.toTypedArray())
       }
    }
@@ -584,6 +583,7 @@ class LocalizationActivity : AppCompatActivity(), SensorEventListener {
       }
 
       Log.i("mmmmmmm azimuth: ", azimuth.toString())
+      binding.locationQueue.text = azimuth.toString()
       Log.i("mmmmmmm pitch: ", pitch.toString())
       Log.i("mmmmmmm roll: ", roll.toString())
    }
@@ -743,6 +743,6 @@ class LocalizationActivity : AppCompatActivity(), SensorEventListener {
       val PERMISSION_REQUEST_BLUETOOTH_SCAN = 1
       val PERMISSION_REQUEST_BLUETOOTH_CONNECT = 2
       val PERMISSION_REQUEST_FINE_LOCATION = 3
-      const val timerTime = 60000L
+      const val timerTime = 480000L
    }
 }

@@ -27,8 +27,8 @@ class BeaconApplication : Application() {
       //setupForegroundService()
       //beaconManager.setEnableScheduledScanJobs(false);
       //beaconManager.setBackgroundBetweenScanPeriod(0);
-      beaconManager.backgroundScanPeriod = 2000;
-      beaconManager.foregroundScanPeriod = 2000;
+      beaconManager.backgroundScanPeriod = 1100;
+      beaconManager.foregroundScanPeriod = 1100;
 
 
       // UUID 설정

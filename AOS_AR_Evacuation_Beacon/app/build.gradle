@@ -4,14 +4,16 @@ plugins {
     id 'org.jetbrains.kotlin.android'
     id 'com.google.gms.google-services'
     id 'kotlin-kapt'
+    id 'kotlin-android-extensions'
+//    id 'com.google.ar.sceneform.plugin'
 }
 
 android {
-    compileSdk 32
+    compileSdk 31
 
     defaultConfig {
         applicationId "com.example.aos_ar_evacuation_beacon"
-        minSdk 26
+        minSdk 24
         targetSdk 32
         versionCode 1
         versionName "1.0"
@@ -40,10 +42,6 @@ android {
     aaptOptions {
         noCompress "tflite"
     }
-
-    buildFeatures {
-        mlModelBinding true
-    }
 }
 
 dependencies {
@@ -66,8 +64,6 @@ dependencies {
 
     //coroutine scopes
     implementation "androidx.lifecycle:lifecycle-runtime-ktx:2.2.0"
-    implementation 'org.tensorflow:tensorflow-lite-support:0.1.0'
-    implementation 'org.tensorflow:tensorflow-lite-metadata:0.1.0'
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'androidx.test.ext:junit:1.1.1'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'
@@ -89,10 +85,20 @@ dependencies {
     implementation 'org.tensorflow:tensorflow-lite:+'
     implementation 'org.tensorflow:tensorflow-lite-select-tf-ops:+'
     implementation 'org.tensorflow:tensorflow-lite-select-tf-ops:0.0.0-nightly'
+    implementation 'org.tensorflow:tensorflow-lite-support:0.1.0'
+    implementation 'org.tensorflow:tensorflow-lite-metadata:0.1.0'
 
+    // socket
     implementation 'io.socket:socket.io-client:2.0.0'
 
     // navigation
     implementation "androidx.navigation:navigation-fragment-ktx:2.4.0"
     implementation "androidx.navigation:navigation-ui-ktx:2.4.0"
+
+    // AR
+//    implementation 'com.google.ar.sceneform.ux:sceneform-ux:1.15.0'
+//    implementation 'com.google.ar.sceneform:assets:1.15.0'
+//    implementation 'com.google.ar:core:1.15.0'
+
+    implementation 'androidx.lifecycle:lifecycle-livedata-ktx:2.4.1'
 }
