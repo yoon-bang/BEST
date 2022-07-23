@@ -14,13 +14,17 @@ import TensorFlowLite
 import CoreMotion
 
 // Build setting
-let modelName: String = "ios_model_beacon7"
-let beaconNum: Int = 7
-let fileName: String = "ios_clf_data7S05"
+let modelName: String = "ios_beacon4"
+let modelNames: [String] = ["ios_beacon4", "ios_beacon7concat", "ios_beacon5concat", "ios_beacon22concat"]
+let direction: Bool = false
+let beaconNumlist: [Int] = [4,5,7,22]
+let beaconNum: Int = 4
+let fileName: String = "ios_clf_data4A03"
 let features = ["001","002","003","004","005","006","007","008","009","010",
                 "011","012","013","014","015","016","017","018","019","020",
                 "021", "022"]
-let debugMode: Bool = false
+let debugMode: Bool = true
+
 
 class BeaconViewController: UITableViewController, CLLocationManagerDelegate, UNUserNotificationCenterDelegate {
     
@@ -33,51 +37,64 @@ class BeaconViewController: UITableViewController, CLLocationManagerDelegate, UN
     
     
     // MARK: - Private properties
-    
-    private let sections: [String] = ["Location Estimation", "Beacons"]
-    
     private let beaconManager = BeaconManager.shared
-    private var classificationModel = ModelInterpreter()
+    private let indoorLocationManager = IndoorLocationManager(mode: .collection)
         
-    private var beaconRegion: CLBeaconRegion!
-    private var beaconRegionConstraint: CLBeaconIdentityConstraint!
-    private var foundBeacons = [CLBeacon]()
     private var currentBeaconInfoArr = [Beacon]()
     private var tableviewBeacon = [Beacon]()
     private var previousBeaconInfoArr = [Beacon]()
     
+    private let sections: [String] = ["Location Estimation", "Beacons"]
     private var locationList: [String] = []
     private var csvlist = [String]()
     private var locationlistForCSV: [String] = []
     
+    
     override func viewDidLoad() {
+        
         super.viewDidLoad()
-        locationManager.delegate = self
-        beaconConfiguration()
         tableView.register(UINib(nibName: LabelTableViewCell.nibName, bundle: nil), forCellReuseIdentifier: LabelTableViewCell.identifier)
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(currentBeacons(_:)), name: .beacons, object: nil)
+        
+        if indoorLocationManager.mode == .real {
+            NotificationCenter.default.addObserver(self, selector: #selector(currentLocation(_:)), name: .movePosition, object: nil)
+        } else {
+            NotificationCenter.default.addObserver(self, selector: #selector(currentLocations(_:)), name: .movePosition, object: nil)
+
+        }
+                
         // MARK: - Debugmode - ViewDidLoad
         if debugMode {
-            loadLocationsFromCSV()
+            csvlist = CSVService.loadLocationsFromCSV()
         }
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        // MARK: - Debugmode - ViewWillAppear
-        if debugMode {
-            DispatchQueue.main.asyncAfter(deadline: .now() + 3) {
-                for csv in self.csvlist {
-                    guard let location = self.classificationModel.classifyLocationOfUser(with: csv) else {
-                        return
-                    }
-                    print("answer: ", location)
-                }
-            }
-        }
     }
     
+    @objc private func currentBeacons(_ noti: Notification) {
+        guard let beacons = noti.object as? [Beacon] else {return}
+        tableviewBeacon = beacons
+    }
+    
+    // TODO: 4개 받아올때, 1개 받아올때 나눠서 비동기 코드 작성하기
+    
+    @objc private func currentLocations(_ noti: Notification) {
+        guard let locations = noti.object as? [String] else {return}
+        // TODO: 4개일때, locations을 4개로 나눠서 저장하고, tableview에 어떻게 나타낼것인가?
+    }
+    
+    @objc private func currentLocation(_ noti: Notification) {
+        guard let location = noti.object as? String else {return}
+        // TODO: 1개일때, 어떻게진행할것인지?
+        // TODO: 5개를 모아서 할지?
+    }
+    
+    
+    
     // MARK: - TableViewDelegate & TableViewDatasource
-    // Use for show detected beacons
     
     override func numberOfSections(in tableView: UITableView) -> Int {
         return sections.count
@@ -128,225 +145,23 @@ class BeaconViewController: UITableViewController, CLLocationManagerDelegate, UN
     
 }
 
-// MARK: - localization
-@available(iOS 13.0, *)
-extension BeaconViewController {
-    
-    // Authorize location tracking
-    func locationManager(_ manager: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus) {
-        
-        switch status {
-        case .authorizedAlways:
-            if !locationManager.monitoredRegions.contains(beaconRegion) {
-                locationManager.startMonitoring(for: beaconRegion)
-            }
-        case .authorizedWhenInUse:
-            if !locationManager.monitoredRegions.contains(beaconRegion) {
-                locationManager.startMonitoring(for: beaconRegion)
-            }
-        default:
-            print("authorisation not granted")
-        }
-    }
-    
-    // determine the location of user with beacon area
-    func locationManager(_ manager: CLLocationManager, didDetermineState state: CLRegionState, for region: CLRegion) {
-        print("Did determine state for region \(region)")
-        if state == .inside {
-            locationManager.startRangingBeacons(satisfying: beaconRegionConstraint)
-            print("inside")
-        } else {
-            print("outside")
-        }
-        
-        tableView.reloadData()
-    }
-    
-    // start monitoring beacons
-    func locationManager(_ manager: CLLocationManager, didStartMonitoringFor region: CLRegion) {
-        print("Did start monitoring region: \(region)\n")
-        tableView.reloadData()
-    }
-    
-    // call when the user enter the beacon area
-    func locationManager(_ manager: CLLocationManager, didEnterRegion region: CLRegion) {
-        locationManager.startRangingBeacons(satisfying: beaconRegionConstraint)
-        print("didEnter")
-        tableView.reloadData()
-    }
-    
-    // call when the user exit the beacon area
-    func locationManager(_ manager: CLLocationManager, didExitRegion region: CLRegion) {
-        locationManager.stopRangingBeacons(satisfying: beaconRegionConstraint)
-        print("didExit")
-        foundBeacons = []
-        tableView.reloadData()
-    }
-    
-    // detect the beacons
-    func locationManager(_ manager: CLLocationManager, didRange beacons: [CLBeacon], satisfying beaconConstraint: CLBeaconIdentityConstraint) {
-        
-        foundBeacons = beacons
-        
-        currentBeaconInfoArr = foundBeacons.map { beacon in
-            return Beacon(beacon: beacon)
-        }
-        
-        rearrangeKalmanFilter(prev: currentBeaconInfoArr, current: [])
-        
-        tableviewBeacon = currentBeaconInfoArr.filter({
-            return $0.rssi != 0
-        })
-        
-        // MARK: - 2번으로 해결하기
-        if previousBeaconInfoArr.count == 0 {
-            
-            previousBeaconInfoArr = currentBeaconInfoArr
-             
-        } else {
-            if !debugMode {
-                
-                let csv =  createCSVWithPrevAndCurrentBeacons(prev: previousBeaconInfoArr, current: currentBeaconInfoArr)
-                guard let location = classificationModel.classifyLocationOfUser(with: csv) else {
-                    locationList.append("unknown")
-                    return
-                }
-                
-                // Send location label to Server
-                SocketIOManager.shared.sendLocation(location: location)
-                
-                locationlistForCSV.append(location)
-                previousBeaconInfoArr.removeAll()
-                
-                //For Debug
-                locationList.append(location)
-            }
-        }
-        tableView.reloadData()
-    }
-    
-}
-
 // MARK: - Private function
 @available(iOS 13.0, *)
 extension BeaconViewController {
-    
-    // MARK: - Beacon related private function
-    private func beaconConfiguration() {
-        
-        let uuid = UUID(uuidString: "020012AC-4202-649D-EC11-B6CBC8814AD7")!
-        beaconRegionConstraint = CLBeaconIdentityConstraint(uuid: uuid)
-        beaconRegion = CLBeaconRegion(uuid: uuid, identifier: uuid.uuidString)
-        
-        if CLLocationManager.authorizationStatus() != .authorizedAlways {
-            locationManager.requestAlwaysAuthorization()
-        } else {
-            locationManager.startMonitoring(for: beaconRegion)
-        }
-        
-    }
-    
-    // MARK: - Kalman Filter related private function
-    private func rearrangeKalmanFilter(prev: [Beacon], current: [Beacon]) {
-        
-        var newbeaconArr = prev
-        
-        newbeaconArr.sort { $0.filteredRssi > $1.filteredRssi}
-        newbeaconArr = Array(newbeaconArr[0..<beaconNum])
-        
-        for beacon in newbeaconArr {
-            beaconManager.beaconDictionary.updateValue(beacon, forKey: beacon.beaconID)
-        }
-        
-        beaconManager.updateKalmanFilter()
-        
-    }
-    
+
     // MARK: - IBAction
     @IBAction private func saveCSV(_ sender: UIBarButtonItem) {
         
         let alert = UIAlertController(title: "finish, CSV has been saved", message: nil, preferredStyle: .alert)
         alert.addAction(UIAlertAction(title: "yes", style: .default, handler: { _ in
             self.locationlistForCSV.removeFirst()
-            self.makeLocationInfoCSV(locationList: self.locationlistForCSV)
+            CSVService.saveLocationCSV(with: self.locationlistForCSV)
             self.locationlistForCSV.removeAll()
         }))
         
         self.present(alert, animated: true)
     }
     
-    // MARK: - private function related to CSV
-    
-    private func loadLocationsFromCSV() {
-        
-        let path = Bundle.main.path(forResource: fileName, ofType: "csv")!
-        var arrlist = CSVService.parseCSVAt(url: URL(fileURLWithPath: path))
-        arrlist.removeLast()
-        
-        for i in arrlist.indices {
-            if i == 0 { continue }
-            csvlist.append(CSVService.arrToCSV(arr: arrlist[i]))
-        }
-    }
-    
-    private func makeLocationInfoCSV(locationList: [String]) {
-        
-        CSVService.createLocationCSV(with: locationList)
-        
-    }
-    
-    private func createCSVWithPrevAndCurrentBeacons(prev: [Beacon], current: [Beacon]) -> String {
-        
-        var tempDictionary = [String:Float]()
-        var resultDictionary = [String:Float]()
-        
-        let prevCSV = makeBeaconInfoCSV(beacon: prev)
-        let currentCSV = makeBeaconInfoCSV(beacon: current)
-        
-        // choose max between prev and current Beacons
-        for i in currentCSV.split(separator: ",").indices {
-            tempDictionary.updateValue(Float(max(prevCSV.split(separator: ",")[i], currentCSV.split(separator: ",")[i])) ?? -1717.0, forKey: features[i])
-        }
-        
-        let arr = tempDictionary.sorted { $0.value > $1.value}
-        
-        for i in 0..<beaconNum {
-            resultDictionary.updateValue(arr[i].value, forKey: arr[i].key)
-        }
-        
-        return CSVService.createCSVFromBeaconDictionary(from: resultDictionary)
-    }
-    
-    private func makeBeaconInfoCSV(beacon: [Beacon]) -> String {
-        var dct = [String:Float]()
-        for beacon in beacon {
-            if beacon.filteredRssi < -90 {
-                dct.updateValue(-200 as Float, forKey: "\(beacon.beaconID)")
-            } else {
-                dct.updateValue(beacon.filteredRssi as Float, forKey: "\(beacon.beaconID)")
-            }
-        }
-        return CSVService.createCSVFromBeaconDictionary(from: dct)
-    }
-    
-}
+   
 
-// MARK: - Extension For All
-
-func max(_ left: Beacon, _ right: Beacon) -> Beacon {
-    return left.rssi > right.rssi ? left : right
-}
-
-func mode(array: [String]) -> String {
-    var dictionary = [String: Int]()
-    
-    for index in array.indices {
-        if let count = dictionary[array[index]] {
-            dictionary[array[index]] = count+1
-        } else {
-            dictionary[array[index]] = 1
-        }
-    }
-    
-    return dictionary.max { $0.value < $1.value }!.key
 }

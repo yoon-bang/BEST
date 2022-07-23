@@ -69,37 +69,6 @@
 		B14B8F3D2880856500BE0E6E /* ios_clf_data4H01.csv in Resources */ = {isa = PBXBuildFile; fileRef = B14B8F1E2880856500BE0E6E /* ios_clf_data4H01.csv */; };
 		B14B8F3E2880856500BE0E6E /* ios_clf_data4S01.csv in Resources */ = {isa = PBXBuildFile; fileRef = B14B8F1F2880856500BE0E6E /* ios_clf_data4S01.csv */; };
 		B14B8F3F2880856500BE0E6E /* ios_clf_data4S04.csv in Resources */ = {isa = PBXBuildFile; fileRef = B14B8F202880856500BE0E6E /* ios_clf_data4S04.csv */; };
-		B14B8F5F2880857000BE0E6E /* S05.csv in Resources */ = {isa = PBXBuildFile; fileRef = B14B8F402880856F00BE0E6E /* S05.csv */; };
-		B14B8F602880857000BE0E6E /* S09.csv in Resources */ = {isa = PBXBuildFile; fileRef = B14B8F412880856F00BE0E6E /* S09.csv */; };
-		B14B8F612880857000BE0E6E /* A01.csv in Resources */ = {isa = PBXBuildFile; fileRef = B14B8F422880856F00BE0E6E /* A01.csv */; };
-		B14B8F622880857000BE0E6E /* A09.csv in Resources */ = {isa = PBXBuildFile; fileRef = B14B8F432880856F00BE0E6E /* A09.csv */; };
-		B14B8F632880857000BE0E6E /* S08.csv in Resources */ = {isa = PBXBuildFile; fileRef = B14B8F442880856F00BE0E6E /* S08.csv */; };
-		B14B8F642880857000BE0E6E /* S04.csv in Resources */ = {isa = PBXBuildFile; fileRef = B14B8F452880856F00BE0E6E /* S04.csv */; };
-		B14B8F652880857000BE0E6E /* R03.csv in Resources */ = {isa = PBXBuildFile; fileRef = B14B8F462880856F00BE0E6E /* R03.csv */; };
-		B14B8F662880857000BE0E6E /* A06.csv in Resources */ = {isa = PBXBuildFile; fileRef = B14B8F472880856F00BE0E6E /* A06.csv */; };
-		B14B8F672880857000BE0E6E /* R01.csv in Resources */ = {isa = PBXBuildFile; fileRef = B14B8F482880856F00BE0E6E /* R01.csv */; };
-		B14B8F682880857000BE0E6E /* A10.csv in Resources */ = {isa = PBXBuildFile; fileRef = B14B8F492880856F00BE0E6E /* A10.csv */; };
-		B14B8F692880857000BE0E6E /* E01.csv in Resources */ = {isa = PBXBuildFile; fileRef = B14B8F4A2880856F00BE0E6E /* E01.csv */; };
-		B14B8F6A2880857000BE0E6E /* A05.csv in Resources */ = {isa = PBXBuildFile; fileRef = B14B8F4B2880856F00BE0E6E /* A05.csv */; };
-		B14B8F6B2880857000BE0E6E /* S02.csv in Resources */ = {isa = PBXBuildFile; fileRef = B14B8F4C2880856F00BE0E6E /* S02.csv */; };
-		B14B8F6C2880857000BE0E6E /* R02.csv in Resources */ = {isa = PBXBuildFile; fileRef = B14B8F4D2880856F00BE0E6E /* R02.csv */; };
-		B14B8F6D2880857000BE0E6E /* E03.csv in Resources */ = {isa = PBXBuildFile; fileRef = B14B8F4E2880856F00BE0E6E /* E03.csv */; };
-		B14B8F6E2880857000BE0E6E /* H02.csv in Resources */ = {isa = PBXBuildFile; fileRef = B14B8F4F2880856F00BE0E6E /* H02.csv */; };
-		B14B8F6F2880857000BE0E6E /* E02.csv in Resources */ = {isa = PBXBuildFile; fileRef = B14B8F502880856F00BE0E6E /* E02.csv */; };
-		B14B8F702880857000BE0E6E /* H01.csv in Resources */ = {isa = PBXBuildFile; fileRef = B14B8F512880856F00BE0E6E /* H01.csv */; };
-		B14B8F712880857000BE0E6E /* R05.csv in Resources */ = {isa = PBXBuildFile; fileRef = B14B8F522880856F00BE0E6E /* R05.csv */; };
-		B14B8F722880857000BE0E6E /* A08.csv in Resources */ = {isa = PBXBuildFile; fileRef = B14B8F532880856F00BE0E6E /* A08.csv */; };
-		B14B8F732880857000BE0E6E /* A07.csv in Resources */ = {isa = PBXBuildFile; fileRef = B14B8F542880856F00BE0E6E /* A07.csv */; };
-		B14B8F742880857000BE0E6E /* A03.csv in Resources */ = {isa = PBXBuildFile; fileRef = B14B8F552880856F00BE0E6E /* A03.csv */; };
-		B14B8F752880857000BE0E6E /* U01.csv in Resources */ = {isa = PBXBuildFile; fileRef = B14B8F562880856F00BE0E6E /* U01.csv */; };
-		B14B8F762880857000BE0E6E /* A02.csv in Resources */ = {isa = PBXBuildFile; fileRef = B14B8F572880856F00BE0E6E /* A02.csv */; };
-		B14B8F772880857000BE0E6E /* S06.csv in Resources */ = {isa = PBXBuildFile; fileRef = B14B8F582880856F00BE0E6E /* S06.csv */; };
-		B14B8F782880857000BE0E6E /* A04.csv in Resources */ = {isa = PBXBuildFile; fileRef = B14B8F592880856F00BE0E6E /* A04.csv */; };
-		B14B8F792880857000BE0E6E /* S07.csv in Resources */ = {isa = PBXBuildFile; fileRef = B14B8F5A2880856F00BE0E6E /* S07.csv */; };
-		B14B8F7A2880857000BE0E6E /* S03.csv in Resources */ = {isa = PBXBuildFile; fileRef = B14B8F5B2880856F00BE0E6E /* S03.csv */; };
-		B14B8F7B2880857000BE0E6E /* A11.csv in Resources */ = {isa = PBXBuildFile; fileRef = B14B8F5C2880856F00BE0E6E /* A11.csv */; };
-		B14B8F7C2880857000BE0E6E /* S01.csv in Resources */ = {isa = PBXBuildFile; fileRef = B14B8F5D2880856F00BE0E6E /* S01.csv */; };
-		B14B8F7D2880857000BE0E6E /* R04.csv in Resources */ = {isa = PBXBuildFile; fileRef = B14B8F5E2880857000BE0E6E /* R04.csv */; };
 		B14B8F9D2880857900BE0E6E /* ios_clf_data7S07.csv in Resources */ = {isa = PBXBuildFile; fileRef = B14B8F7E2880857800BE0E6E /* ios_clf_data7S07.csv */; };
 		B14B8F9E2880857900BE0E6E /* ios_clf_data7S04.csv in Resources */ = {isa = PBXBuildFile; fileRef = B14B8F7F2880857800BE0E6E /* ios_clf_data7S04.csv */; };
 		B14B8F9F2880857900BE0E6E /* ios_clf_data7R05.csv in Resources */ = {isa = PBXBuildFile; fileRef = B14B8F802880857800BE0E6E /* ios_clf_data7R05.csv */; };
@@ -151,6 +120,84 @@
 		B1915963287DDDCF001CB91E /* SocketIOManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1915962287DDDCF001CB91E /* SocketIOManager.swift */; };
 		B19159EF287F345A001CB91E /* LabelTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B19159ED287F345A001CB91E /* LabelTableViewCell.swift */; };
 		B19159F0287F345A001CB91E /* LabelTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = B19159EE287F345A001CB91E /* LabelTableViewCell.xib */; };
+		B1A4F66C2886E9270000ECC9 /* ios_clf_data_allA05.csv in Resources */ = {isa = PBXBuildFile; fileRef = B1A4F64D2886E9260000ECC9 /* ios_clf_data_allA05.csv */; };
+		B1A4F66D2886E9270000ECC9 /* ios_clf_data_allR02.csv in Resources */ = {isa = PBXBuildFile; fileRef = B1A4F64E2886E9260000ECC9 /* ios_clf_data_allR02.csv */; };
+		B1A4F66E2886E9270000ECC9 /* ios_clf_data_allA10.csv in Resources */ = {isa = PBXBuildFile; fileRef = B1A4F64F2886E9260000ECC9 /* ios_clf_data_allA10.csv */; };
+		B1A4F66F2886E9270000ECC9 /* ios_clf_data_allR01.csv in Resources */ = {isa = PBXBuildFile; fileRef = B1A4F6502886E9260000ECC9 /* ios_clf_data_allR01.csv */; };
+		B1A4F6702886E9270000ECC9 /* ios_clf_data_allS06.csv in Resources */ = {isa = PBXBuildFile; fileRef = B1A4F6512886E9260000ECC9 /* ios_clf_data_allS06.csv */; };
+		B1A4F6712886E9270000ECC9 /* ios_clf_data_allU01.csv in Resources */ = {isa = PBXBuildFile; fileRef = B1A4F6522886E9260000ECC9 /* ios_clf_data_allU01.csv */; };
+		B1A4F6722886E9270000ECC9 /* ios_clf_data_allA08.csv in Resources */ = {isa = PBXBuildFile; fileRef = B1A4F6532886E9260000ECC9 /* ios_clf_data_allA08.csv */; };
+		B1A4F6732886E9270000ECC9 /* ios_clf_data_allS04.csv in Resources */ = {isa = PBXBuildFile; fileRef = B1A4F6542886E9260000ECC9 /* ios_clf_data_allS04.csv */; };
+		B1A4F6742886E9270000ECC9 /* ios_clf_data_allA01.csv in Resources */ = {isa = PBXBuildFile; fileRef = B1A4F6552886E9260000ECC9 /* ios_clf_data_allA01.csv */; };
+		B1A4F6752886E9270000ECC9 /* ios_clf_data_allE01.csv in Resources */ = {isa = PBXBuildFile; fileRef = B1A4F6562886E9260000ECC9 /* ios_clf_data_allE01.csv */; };
+		B1A4F6762886E9270000ECC9 /* ios_clf_data_allA09.csv in Resources */ = {isa = PBXBuildFile; fileRef = B1A4F6572886E9260000ECC9 /* ios_clf_data_allA09.csv */; };
+		B1A4F6772886E9270000ECC9 /* ios_clf_data_allA04.csv in Resources */ = {isa = PBXBuildFile; fileRef = B1A4F6582886E9260000ECC9 /* ios_clf_data_allA04.csv */; };
+		B1A4F6782886E9270000ECC9 /* ios_clf_data_allR04.csv in Resources */ = {isa = PBXBuildFile; fileRef = B1A4F6592886E9260000ECC9 /* ios_clf_data_allR04.csv */; };
+		B1A4F6792886E9270000ECC9 /* ios_clf_data_allS07.csv in Resources */ = {isa = PBXBuildFile; fileRef = B1A4F65A2886E9260000ECC9 /* ios_clf_data_allS07.csv */; };
+		B1A4F67A2886E9270000ECC9 /* ios_clf_data_allA03.csv in Resources */ = {isa = PBXBuildFile; fileRef = B1A4F65B2886E9260000ECC9 /* ios_clf_data_allA03.csv */; };
+		B1A4F67B2886E9270000ECC9 /* ios_clf_data_allE02.csv in Resources */ = {isa = PBXBuildFile; fileRef = B1A4F65C2886E9260000ECC9 /* ios_clf_data_allE02.csv */; };
+		B1A4F67C2886E9270000ECC9 /* ios_clf_data_allA06.csv in Resources */ = {isa = PBXBuildFile; fileRef = B1A4F65D2886E9270000ECC9 /* ios_clf_data_allA06.csv */; };
+		B1A4F67D2886E9270000ECC9 /* ios_clf_data_allS01.csv in Resources */ = {isa = PBXBuildFile; fileRef = B1A4F65E2886E9270000ECC9 /* ios_clf_data_allS01.csv */; };
+		B1A4F67E2886E9270000ECC9 /* ios_clf_data_allS03.csv in Resources */ = {isa = PBXBuildFile; fileRef = B1A4F65F2886E9270000ECC9 /* ios_clf_data_allS03.csv */; };
+		B1A4F67F2886E9270000ECC9 /* ios_clf_data_allR03.csv in Resources */ = {isa = PBXBuildFile; fileRef = B1A4F6602886E9270000ECC9 /* ios_clf_data_allR03.csv */; };
+		B1A4F6802886E9270000ECC9 /* ios_clf_data_allR05.csv in Resources */ = {isa = PBXBuildFile; fileRef = B1A4F6612886E9270000ECC9 /* ios_clf_data_allR05.csv */; };
+		B1A4F6812886E9270000ECC9 /* ios_clf_data_allS02.csv in Resources */ = {isa = PBXBuildFile; fileRef = B1A4F6622886E9270000ECC9 /* ios_clf_data_allS02.csv */; };
+		B1A4F6822886E9270000ECC9 /* ios_clf_data_allE03.csv in Resources */ = {isa = PBXBuildFile; fileRef = B1A4F6632886E9270000ECC9 /* ios_clf_data_allE03.csv */; };
+		B1A4F6832886E9270000ECC9 /* ios_clf_data_allH01.csv in Resources */ = {isa = PBXBuildFile; fileRef = B1A4F6642886E9270000ECC9 /* ios_clf_data_allH01.csv */; };
+		B1A4F6842886E9270000ECC9 /* ios_clf_data_allA02.csv in Resources */ = {isa = PBXBuildFile; fileRef = B1A4F6652886E9270000ECC9 /* ios_clf_data_allA02.csv */; };
+		B1A4F6852886E9270000ECC9 /* ios_clf_data_allH02.csv in Resources */ = {isa = PBXBuildFile; fileRef = B1A4F6662886E9270000ECC9 /* ios_clf_data_allH02.csv */; };
+		B1A4F6862886E9270000ECC9 /* ios_clf_data_allS05.csv in Resources */ = {isa = PBXBuildFile; fileRef = B1A4F6672886E9270000ECC9 /* ios_clf_data_allS05.csv */; };
+		B1A4F6872886E9270000ECC9 /* ios_clf_data_allS09.csv in Resources */ = {isa = PBXBuildFile; fileRef = B1A4F6682886E9270000ECC9 /* ios_clf_data_allS09.csv */; };
+		B1A4F6882886E9270000ECC9 /* ios_clf_data_allA11.csv in Resources */ = {isa = PBXBuildFile; fileRef = B1A4F6692886E9270000ECC9 /* ios_clf_data_allA11.csv */; };
+		B1A4F6892886E9270000ECC9 /* ios_clf_data_allA07.csv in Resources */ = {isa = PBXBuildFile; fileRef = B1A4F66A2886E9270000ECC9 /* ios_clf_data_allA07.csv */; };
+		B1A4F68A2886E9270000ECC9 /* ios_clf_data_allS08.csv in Resources */ = {isa = PBXBuildFile; fileRef = B1A4F66B2886E9270000ECC9 /* ios_clf_data_allS08.csv */; };
+		B1A4F68D28872F200000ECC9 /* map_U01.csv in Resources */ = {isa = PBXBuildFile; fileRef = B1A4F68C28872F200000ECC9 /* map_U01.csv */; };
+		B1A4F69128875AEC0000ECC9 /* map_U01_2.csv in Resources */ = {isa = PBXBuildFile; fileRef = B1A4F69028875AEC0000ECC9 /* map_U01_2.csv */; };
+		B1A4F693288760310000ECC9 /* map_U01_3.csv in Resources */ = {isa = PBXBuildFile; fileRef = B1A4F692288760310000ECC9 /* map_U01_3.csv */; };
+		B1A4F695288768570000ECC9 /* source.csv in Resources */ = {isa = PBXBuildFile; fileRef = B1A4F694288768570000ECC9 /* source.csv */; };
+		B1A4F69728876CC80000ECC9 /* final_U01.csv in Resources */ = {isa = PBXBuildFile; fileRef = B1A4F69628876CC70000ECC9 /* final_U01.csv */; };
+		B1A4F69928876F350000ECC9 /* final_U01 2.csv in Resources */ = {isa = PBXBuildFile; fileRef = B1A4F69828876F350000ECC9 /* final_U01 2.csv */; };
+		B1A4F6A128888AC70000ECC9 /* Map2DViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1A4F6A028888AC70000ECC9 /* Map2DViewController.swift */; };
+		B1A4F6AB288893260000ECC9 /* KSW_0.png in Resources */ = {isa = PBXBuildFile; fileRef = B1A4F6A8288893260000ECC9 /* KSW_0.png */; };
+		B1A4F6AC288893260000ECC9 /* KSW_1.png in Resources */ = {isa = PBXBuildFile; fileRef = B1A4F6A9288893260000ECC9 /* KSW_1.png */; };
+		B1A4F6AD288893260000ECC9 /* KSW_2.png in Resources */ = {isa = PBXBuildFile; fileRef = B1A4F6AA288893260000ECC9 /* KSW_2.png */; };
+		B1A4F6CF288983520000ECC9 /* ios_clf_data_7_directionA08.csv in Resources */ = {isa = PBXBuildFile; fileRef = B1A4F6B0288983500000ECC9 /* ios_clf_data_7_directionA08.csv */; };
+		B1A4F6D0288983520000ECC9 /* ios_clf_data_7_directionS06.csv in Resources */ = {isa = PBXBuildFile; fileRef = B1A4F6B1288983500000ECC9 /* ios_clf_data_7_directionS06.csv */; };
+		B1A4F6D1288983520000ECC9 /* ios_clf_data_7_directionS02.csv in Resources */ = {isa = PBXBuildFile; fileRef = B1A4F6B2288983500000ECC9 /* ios_clf_data_7_directionS02.csv */; };
+		B1A4F6D2288983520000ECC9 /* ios_clf_data_7_directionS09.csv in Resources */ = {isa = PBXBuildFile; fileRef = B1A4F6B3288983500000ECC9 /* ios_clf_data_7_directionS09.csv */; };
+		B1A4F6D3288983520000ECC9 /* ios_clf_data_7_directionE02.csv in Resources */ = {isa = PBXBuildFile; fileRef = B1A4F6B4288983500000ECC9 /* ios_clf_data_7_directionE02.csv */; };
+		B1A4F6D4288983520000ECC9 /* ios_clf_data_7_directionR05.csv in Resources */ = {isa = PBXBuildFile; fileRef = B1A4F6B5288983500000ECC9 /* ios_clf_data_7_directionR05.csv */; };
+		B1A4F6D5288983520000ECC9 /* ios_clf_data_7_directionA10.csv in Resources */ = {isa = PBXBuildFile; fileRef = B1A4F6B6288983500000ECC9 /* ios_clf_data_7_directionA10.csv */; };
+		B1A4F6D6288983520000ECC9 /* ios_clf_data_7_directionA09.csv in Resources */ = {isa = PBXBuildFile; fileRef = B1A4F6B7288983500000ECC9 /* ios_clf_data_7_directionA09.csv */; };
+		B1A4F6D7288983520000ECC9 /* ios_clf_data_7_directionR03.csv in Resources */ = {isa = PBXBuildFile; fileRef = B1A4F6B8288983500000ECC9 /* ios_clf_data_7_directionR03.csv */; };
+		B1A4F6D8288983520000ECC9 /* ios_clf_data_7_directionS08.csv in Resources */ = {isa = PBXBuildFile; fileRef = B1A4F6B9288983500000ECC9 /* ios_clf_data_7_directionS08.csv */; };
+		B1A4F6D9288983520000ECC9 /* ios_clf_data_7_directionE03.csv in Resources */ = {isa = PBXBuildFile; fileRef = B1A4F6BA288983500000ECC9 /* ios_clf_data_7_directionE03.csv */; };
+		B1A4F6DA288983520000ECC9 /* ios_clf_data_7_directionA04.csv in Resources */ = {isa = PBXBuildFile; fileRef = B1A4F6BB288983500000ECC9 /* ios_clf_data_7_directionA04.csv */; };
+		B1A4F6DB288983520000ECC9 /* ios_clf_data_7_directionR04.csv in Resources */ = {isa = PBXBuildFile; fileRef = B1A4F6BC288983500000ECC9 /* ios_clf_data_7_directionR04.csv */; };
+		B1A4F6DC288983520000ECC9 /* ios_clf_data_7_directionS07.csv in Resources */ = {isa = PBXBuildFile; fileRef = B1A4F6BD288983500000ECC9 /* ios_clf_data_7_directionS07.csv */; };
+		B1A4F6DD288983520000ECC9 /* ios_clf_data_7_directionS05.csv in Resources */ = {isa = PBXBuildFile; fileRef = B1A4F6BE288983500000ECC9 /* ios_clf_data_7_directionS05.csv */; };
+		B1A4F6DE288983520000ECC9 /* ios_clf_data_7_directionE01.csv in Resources */ = {isa = PBXBuildFile; fileRef = B1A4F6BF288983500000ECC9 /* ios_clf_data_7_directionE01.csv */; };
+		B1A4F6DF288983520000ECC9 /* ios_clf_data_7_directionA05.csv in Resources */ = {isa = PBXBuildFile; fileRef = B1A4F6C0288983500000ECC9 /* ios_clf_data_7_directionA05.csv */; };
+		B1A4F6E0288983520000ECC9 /* ios_clf_data_7_directionA06.csv in Resources */ = {isa = PBXBuildFile; fileRef = B1A4F6C1288983500000ECC9 /* ios_clf_data_7_directionA06.csv */; };
+		B1A4F6E1288983520000ECC9 /* ios_clf_data_7_directionA03.csv in Resources */ = {isa = PBXBuildFile; fileRef = B1A4F6C2288983510000ECC9 /* ios_clf_data_7_directionA03.csv */; };
+		B1A4F6E2288983520000ECC9 /* ios_clf_data_7_directionR02.csv in Resources */ = {isa = PBXBuildFile; fileRef = B1A4F6C3288983510000ECC9 /* ios_clf_data_7_directionR02.csv */; };
+		B1A4F6E3288983520000ECC9 /* ios_clf_data_7_directionA11.csv in Resources */ = {isa = PBXBuildFile; fileRef = B1A4F6C4288983510000ECC9 /* ios_clf_data_7_directionA11.csv */; };
+		B1A4F6E4288983520000ECC9 /* ios_clf_data_7_directionS04.csv in Resources */ = {isa = PBXBuildFile; fileRef = B1A4F6C5288983510000ECC9 /* ios_clf_data_7_directionS04.csv */; };
+		B1A4F6E5288983520000ECC9 /* ios_clf_data_7_directionH02.csv in Resources */ = {isa = PBXBuildFile; fileRef = B1A4F6C6288983510000ECC9 /* ios_clf_data_7_directionH02.csv */; };
+		B1A4F6E6288983520000ECC9 /* ios_clf_data_7_directionA07.csv in Resources */ = {isa = PBXBuildFile; fileRef = B1A4F6C7288983510000ECC9 /* ios_clf_data_7_directionA07.csv */; };
+		B1A4F6E7288983520000ECC9 /* ios_clf_data_7_directionS03.csv in Resources */ = {isa = PBXBuildFile; fileRef = B1A4F6C8288983510000ECC9 /* ios_clf_data_7_directionS03.csv */; };
+		B1A4F6E8288983520000ECC9 /* ios_clf_data_7_directionS01.csv in Resources */ = {isa = PBXBuildFile; fileRef = B1A4F6C9288983510000ECC9 /* ios_clf_data_7_directionS01.csv */; };
+		B1A4F6E9288983520000ECC9 /* ios_clf_data_7_directionH01.csv in Resources */ = {isa = PBXBuildFile; fileRef = B1A4F6CA288983510000ECC9 /* ios_clf_data_7_directionH01.csv */; };
+		B1A4F6EA288983520000ECC9 /* ios_clf_data_7_directionU01.csv in Resources */ = {isa = PBXBuildFile; fileRef = B1A4F6CB288983510000ECC9 /* ios_clf_data_7_directionU01.csv */; };
+		B1A4F6EB288983520000ECC9 /* ios_clf_data_7_directionA01.csv in Resources */ = {isa = PBXBuildFile; fileRef = B1A4F6CC288983510000ECC9 /* ios_clf_data_7_directionA01.csv */; };
+		B1A4F6EC288983520000ECC9 /* ios_clf_data_7_directionA02.csv in Resources */ = {isa = PBXBuildFile; fileRef = B1A4F6CD288983510000ECC9 /* ios_clf_data_7_directionA02.csv */; };
+		B1A4F6ED288983520000ECC9 /* ios_clf_data_7_directionR01.csv in Resources */ = {isa = PBXBuildFile; fileRef = B1A4F6CE288983510000ECC9 /* ios_clf_data_7_directionR01.csv */; };
+		B1A4F6EF2889CA600000ECC9 /* DirectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1A4F6EE2889CA600000ECC9 /* DirectionView.swift */; };
+		B1A4F6F12889CA810000ECC9 /* AnnotationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1A4F6F02889CA810000ECC9 /* AnnotationView.swift */; };
+		B1A4F6F32889CAC50000ECC9 /* BeizerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1A4F6F22889CAC50000ECC9 /* BeizerView.swift */; };
+		B1A4F6F52889D9FA0000ECC9 /* Notifiationcenter+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1A4F6F42889D9F90000ECC9 /* Notifiationcenter+Extension.swift */; };
+		B1A4F6F7288B36FF0000ECC9 /* IndoorLocationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1A4F6F6288B36FF0000ECC9 /* IndoorLocationManager.swift */; };
+		B1A4F6F9288B3E0A0000ECC9 /* Operator+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1A4F6F8288B3E0A0000ECC9 /* Operator+Extension.swift */; };
 		CB578D0A86EC2FEA06A1ADE0 /* Pods_AR_Evacuation_Beacon.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ED6DF6F1FA424AB8DEB00784 /* Pods_AR_Evacuation_Beacon.framework */; };
 /* End PBXBuildFile section */
 
@@ -219,37 +266,6 @@
 		B14B8F1E2880856500BE0E6E /* ios_clf_data4H01.csv */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = ios_clf_data4H01.csv; path = ../../../iOS_clf_dataset/ios_clf_data_4/ios_clf_data4H01.csv; sourceTree = "<group>"; };
 		B14B8F1F2880856500BE0E6E /* ios_clf_data4S01.csv */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = ios_clf_data4S01.csv; path = ../../../iOS_clf_dataset/ios_clf_data_4/ios_clf_data4S01.csv; sourceTree = "<group>"; };
 		B14B8F202880856500BE0E6E /* ios_clf_data4S04.csv */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = ios_clf_data4S04.csv; path = ../../../iOS_clf_dataset/ios_clf_data_4/ios_clf_data4S04.csv; sourceTree = "<group>"; };
-		B14B8F402880856F00BE0E6E /* S05.csv */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = S05.csv; path = ../../../iOS_clf_dataset/ios_clf_data_all/S05.csv; sourceTree = "<group>"; };
-		B14B8F412880856F00BE0E6E /* S09.csv */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = S09.csv; path = ../../../iOS_clf_dataset/ios_clf_data_all/S09.csv; sourceTree = "<group>"; };
-		B14B8F422880856F00BE0E6E /* A01.csv */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = A01.csv; path = ../../../iOS_clf_dataset/ios_clf_data_all/A01.csv; sourceTree = "<group>"; };
-		B14B8F432880856F00BE0E6E /* A09.csv */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = A09.csv; path = ../../../iOS_clf_dataset/ios_clf_data_all/A09.csv; sourceTree = "<group>"; };
-		B14B8F442880856F00BE0E6E /* S08.csv */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = S08.csv; path = ../../../iOS_clf_dataset/ios_clf_data_all/S08.csv; sourceTree = "<group>"; };
-		B14B8F452880856F00BE0E6E /* S04.csv */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = S04.csv; path = ../../../iOS_clf_dataset/ios_clf_data_all/S04.csv; sourceTree = "<group>"; };
-		B14B8F462880856F00BE0E6E /* R03.csv */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = R03.csv; path = ../../../iOS_clf_dataset/ios_clf_data_all/R03.csv; sourceTree = "<group>"; };
-		B14B8F472880856F00BE0E6E /* A06.csv */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = A06.csv; path = ../../../iOS_clf_dataset/ios_clf_data_all/A06.csv; sourceTree = "<group>"; };
-		B14B8F482880856F00BE0E6E /* R01.csv */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = R01.csv; path = ../../../iOS_clf_dataset/ios_clf_data_all/R01.csv; sourceTree = "<group>"; };
-		B14B8F492880856F00BE0E6E /* A10.csv */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = A10.csv; path = ../../../iOS_clf_dataset/ios_clf_data_all/A10.csv; sourceTree = "<group>"; };
-		B14B8F4A2880856F00BE0E6E /* E01.csv */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = E01.csv; path = ../../../iOS_clf_dataset/ios_clf_data_all/E01.csv; sourceTree = "<group>"; };
-		B14B8F4B2880856F00BE0E6E /* A05.csv */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = A05.csv; path = ../../../iOS_clf_dataset/ios_clf_data_all/A05.csv; sourceTree = "<group>"; };
-		B14B8F4C2880856F00BE0E6E /* S02.csv */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = S02.csv; path = ../../../iOS_clf_dataset/ios_clf_data_all/S02.csv; sourceTree = "<group>"; };
-		B14B8F4D2880856F00BE0E6E /* R02.csv */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = R02.csv; path = ../../../iOS_clf_dataset/ios_clf_data_all/R02.csv; sourceTree = "<group>"; };
-		B14B8F4E2880856F00BE0E6E /* E03.csv */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = E03.csv; path = ../../../iOS_clf_dataset/ios_clf_data_all/E03.csv; sourceTree = "<group>"; };
-		B14B8F4F2880856F00BE0E6E /* H02.csv */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = H02.csv; path = ../../../iOS_clf_dataset/ios_clf_data_all/H02.csv; sourceTree = "<group>"; };
-		B14B8F502880856F00BE0E6E /* E02.csv */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = E02.csv; path = ../../../iOS_clf_dataset/ios_clf_data_all/E02.csv; sourceTree = "<group>"; };
-		B14B8F512880856F00BE0E6E /* H01.csv */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = H01.csv; path = ../../../iOS_clf_dataset/ios_clf_data_all/H01.csv; sourceTree = "<group>"; };
-		B14B8F522880856F00BE0E6E /* R05.csv */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = R05.csv; path = ../../../iOS_clf_dataset/ios_clf_data_all/R05.csv; sourceTree = "<group>"; };
-		B14B8F532880856F00BE0E6E /* A08.csv */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = A08.csv; path = ../../../iOS_clf_dataset/ios_clf_data_all/A08.csv; sourceTree = "<group>"; };
-		B14B8F542880856F00BE0E6E /* A07.csv */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = A07.csv; path = ../../../iOS_clf_dataset/ios_clf_data_all/A07.csv; sourceTree = "<group>"; };
-		B14B8F552880856F00BE0E6E /* A03.csv */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = A03.csv; path = ../../../iOS_clf_dataset/ios_clf_data_all/A03.csv; sourceTree = "<group>"; };
-		B14B8F562880856F00BE0E6E /* U01.csv */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = U01.csv; path = ../../../iOS_clf_dataset/ios_clf_data_all/U01.csv; sourceTree = "<group>"; };
-		B14B8F572880856F00BE0E6E /* A02.csv */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = A02.csv; path = ../../../iOS_clf_dataset/ios_clf_data_all/A02.csv; sourceTree = "<group>"; };
-		B14B8F582880856F00BE0E6E /* S06.csv */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = S06.csv; path = ../../../iOS_clf_dataset/ios_clf_data_all/S06.csv; sourceTree = "<group>"; };
-		B14B8F592880856F00BE0E6E /* A04.csv */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = A04.csv; path = ../../../iOS_clf_dataset/ios_clf_data_all/A04.csv; sourceTree = "<group>"; };
-		B14B8F5A2880856F00BE0E6E /* S07.csv */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = S07.csv; path = ../../../iOS_clf_dataset/ios_clf_data_all/S07.csv; sourceTree = "<group>"; };
-		B14B8F5B2880856F00BE0E6E /* S03.csv */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = S03.csv; path = ../../../iOS_clf_dataset/ios_clf_data_all/S03.csv; sourceTree = "<group>"; };
-		B14B8F5C2880856F00BE0E6E /* A11.csv */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = A11.csv; path = ../../../iOS_clf_dataset/ios_clf_data_all/A11.csv; sourceTree = "<group>"; };
-		B14B8F5D2880856F00BE0E6E /* S01.csv */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = S01.csv; path = ../../../iOS_clf_dataset/ios_clf_data_all/S01.csv; sourceTree = "<group>"; };
-		B14B8F5E2880857000BE0E6E /* R04.csv */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = R04.csv; path = ../../../iOS_clf_dataset/ios_clf_data_all/R04.csv; sourceTree = "<group>"; };
 		B14B8F7E2880857800BE0E6E /* ios_clf_data7S07.csv */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = ios_clf_data7S07.csv; path = ../../../iOS_clf_dataset/ios_clf_data_7/ios_clf_data7S07.csv; sourceTree = "<group>"; };
 		B14B8F7F2880857800BE0E6E /* ios_clf_data7S04.csv */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = ios_clf_data7S04.csv; path = ../../../iOS_clf_dataset/ios_clf_data_7/ios_clf_data7S04.csv; sourceTree = "<group>"; };
 		B14B8F802880857800BE0E6E /* ios_clf_data7R05.csv */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = ios_clf_data7R05.csv; path = ../../../iOS_clf_dataset/ios_clf_data_7/ios_clf_data7R05.csv; sourceTree = "<group>"; };
@@ -301,6 +317,84 @@
 		B1915962287DDDCF001CB91E /* SocketIOManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SocketIOManager.swift; sourceTree = "<group>"; };
 		B19159ED287F345A001CB91E /* LabelTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LabelTableViewCell.swift; sourceTree = "<group>"; };
 		B19159EE287F345A001CB91E /* LabelTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = LabelTableViewCell.xib; sourceTree = "<group>"; };
+		B1A4F64D2886E9260000ECC9 /* ios_clf_data_allA05.csv */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = ios_clf_data_allA05.csv; sourceTree = "<group>"; };
+		B1A4F64E2886E9260000ECC9 /* ios_clf_data_allR02.csv */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = ios_clf_data_allR02.csv; sourceTree = "<group>"; };
+		B1A4F64F2886E9260000ECC9 /* ios_clf_data_allA10.csv */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = ios_clf_data_allA10.csv; sourceTree = "<group>"; };
+		B1A4F6502886E9260000ECC9 /* ios_clf_data_allR01.csv */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = ios_clf_data_allR01.csv; sourceTree = "<group>"; };
+		B1A4F6512886E9260000ECC9 /* ios_clf_data_allS06.csv */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = ios_clf_data_allS06.csv; sourceTree = "<group>"; };
+		B1A4F6522886E9260000ECC9 /* ios_clf_data_allU01.csv */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = ios_clf_data_allU01.csv; sourceTree = "<group>"; };
+		B1A4F6532886E9260000ECC9 /* ios_clf_data_allA08.csv */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = ios_clf_data_allA08.csv; sourceTree = "<group>"; };
+		B1A4F6542886E9260000ECC9 /* ios_clf_data_allS04.csv */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = ios_clf_data_allS04.csv; sourceTree = "<group>"; };
+		B1A4F6552886E9260000ECC9 /* ios_clf_data_allA01.csv */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = ios_clf_data_allA01.csv; sourceTree = "<group>"; };
+		B1A4F6562886E9260000ECC9 /* ios_clf_data_allE01.csv */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = ios_clf_data_allE01.csv; sourceTree = "<group>"; };
+		B1A4F6572886E9260000ECC9 /* ios_clf_data_allA09.csv */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = ios_clf_data_allA09.csv; sourceTree = "<group>"; };
+		B1A4F6582886E9260000ECC9 /* ios_clf_data_allA04.csv */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = ios_clf_data_allA04.csv; sourceTree = "<group>"; };
+		B1A4F6592886E9260000ECC9 /* ios_clf_data_allR04.csv */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = ios_clf_data_allR04.csv; sourceTree = "<group>"; };
+		B1A4F65A2886E9260000ECC9 /* ios_clf_data_allS07.csv */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = ios_clf_data_allS07.csv; sourceTree = "<group>"; };
+		B1A4F65B2886E9260000ECC9 /* ios_clf_data_allA03.csv */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = ios_clf_data_allA03.csv; sourceTree = "<group>"; };
+		B1A4F65C2886E9260000ECC9 /* ios_clf_data_allE02.csv */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = ios_clf_data_allE02.csv; sourceTree = "<group>"; };
+		B1A4F65D2886E9270000ECC9 /* ios_clf_data_allA06.csv */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = ios_clf_data_allA06.csv; sourceTree = "<group>"; };
+		B1A4F65E2886E9270000ECC9 /* ios_clf_data_allS01.csv */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = ios_clf_data_allS01.csv; sourceTree = "<group>"; };
+		B1A4F65F2886E9270000ECC9 /* ios_clf_data_allS03.csv */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = ios_clf_data_allS03.csv; sourceTree = "<group>"; };
+		B1A4F6602886E9270000ECC9 /* ios_clf_data_allR03.csv */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = ios_clf_data_allR03.csv; sourceTree = "<group>"; };
+		B1A4F6612886E9270000ECC9 /* ios_clf_data_allR05.csv */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = ios_clf_data_allR05.csv; sourceTree = "<group>"; };
+		B1A4F6622886E9270000ECC9 /* ios_clf_data_allS02.csv */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = ios_clf_data_allS02.csv; sourceTree = "<group>"; };
+		B1A4F6632886E9270000ECC9 /* ios_clf_data_allE03.csv */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = ios_clf_data_allE03.csv; sourceTree = "<group>"; };
+		B1A4F6642886E9270000ECC9 /* ios_clf_data_allH01.csv */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = ios_clf_data_allH01.csv; sourceTree = "<group>"; };
+		B1A4F6652886E9270000ECC9 /* ios_clf_data_allA02.csv */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = ios_clf_data_allA02.csv; sourceTree = "<group>"; };
+		B1A4F6662886E9270000ECC9 /* ios_clf_data_allH02.csv */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = ios_clf_data_allH02.csv; sourceTree = "<group>"; };
+		B1A4F6672886E9270000ECC9 /* ios_clf_data_allS05.csv */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = ios_clf_data_allS05.csv; sourceTree = "<group>"; };
+		B1A4F6682886E9270000ECC9 /* ios_clf_data_allS09.csv */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = ios_clf_data_allS09.csv; sourceTree = "<group>"; };
+		B1A4F6692886E9270000ECC9 /* ios_clf_data_allA11.csv */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = ios_clf_data_allA11.csv; sourceTree = "<group>"; };
+		B1A4F66A2886E9270000ECC9 /* ios_clf_data_allA07.csv */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = ios_clf_data_allA07.csv; sourceTree = "<group>"; };
+		B1A4F66B2886E9270000ECC9 /* ios_clf_data_allS08.csv */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = ios_clf_data_allS08.csv; sourceTree = "<group>"; };
+		B1A4F68C28872F200000ECC9 /* map_U01.csv */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = map_U01.csv; sourceTree = "<group>"; };
+		B1A4F69028875AEC0000ECC9 /* map_U01_2.csv */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = map_U01_2.csv; sourceTree = "<group>"; };
+		B1A4F692288760310000ECC9 /* map_U01_3.csv */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = map_U01_3.csv; sourceTree = "<group>"; };
+		B1A4F694288768570000ECC9 /* source.csv */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = source.csv; sourceTree = "<group>"; };
+		B1A4F69628876CC70000ECC9 /* final_U01.csv */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = final_U01.csv; sourceTree = "<group>"; };
+		B1A4F69828876F350000ECC9 /* final_U01 2.csv */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "final_U01 2.csv"; sourceTree = "<group>"; };
+		B1A4F6A028888AC70000ECC9 /* Map2DViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Map2DViewController.swift; sourceTree = "<group>"; };
+		B1A4F6A8288893260000ECC9 /* KSW_0.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = KSW_0.png; sourceTree = "<group>"; };
+		B1A4F6A9288893260000ECC9 /* KSW_1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = KSW_1.png; sourceTree = "<group>"; };
+		B1A4F6AA288893260000ECC9 /* KSW_2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = KSW_2.png; sourceTree = "<group>"; };
+		B1A4F6B0288983500000ECC9 /* ios_clf_data_7_directionA08.csv */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = ios_clf_data_7_directionA08.csv; sourceTree = "<group>"; };
+		B1A4F6B1288983500000ECC9 /* ios_clf_data_7_directionS06.csv */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = ios_clf_data_7_directionS06.csv; sourceTree = "<group>"; };
+		B1A4F6B2288983500000ECC9 /* ios_clf_data_7_directionS02.csv */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = ios_clf_data_7_directionS02.csv; sourceTree = "<group>"; };
+		B1A4F6B3288983500000ECC9 /* ios_clf_data_7_directionS09.csv */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = ios_clf_data_7_directionS09.csv; sourceTree = "<group>"; };
+		B1A4F6B4288983500000ECC9 /* ios_clf_data_7_directionE02.csv */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = ios_clf_data_7_directionE02.csv; sourceTree = "<group>"; };
+		B1A4F6B5288983500000ECC9 /* ios_clf_data_7_directionR05.csv */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = ios_clf_data_7_directionR05.csv; sourceTree = "<group>"; };
+		B1A4F6B6288983500000ECC9 /* ios_clf_data_7_directionA10.csv */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = ios_clf_data_7_directionA10.csv; sourceTree = "<group>"; };
+		B1A4F6B7288983500000ECC9 /* ios_clf_data_7_directionA09.csv */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = ios_clf_data_7_directionA09.csv; sourceTree = "<group>"; };
+		B1A4F6B8288983500000ECC9 /* ios_clf_data_7_directionR03.csv */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = ios_clf_data_7_directionR03.csv; sourceTree = "<group>"; };
+		B1A4F6B9288983500000ECC9 /* ios_clf_data_7_directionS08.csv */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = ios_clf_data_7_directionS08.csv; sourceTree = "<group>"; };
+		B1A4F6BA288983500000ECC9 /* ios_clf_data_7_directionE03.csv */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = ios_clf_data_7_directionE03.csv; sourceTree = "<group>"; };
+		B1A4F6BB288983500000ECC9 /* ios_clf_data_7_directionA04.csv */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = ios_clf_data_7_directionA04.csv; sourceTree = "<group>"; };
+		B1A4F6BC288983500000ECC9 /* ios_clf_data_7_directionR04.csv */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = ios_clf_data_7_directionR04.csv; sourceTree = "<group>"; };
+		B1A4F6BD288983500000ECC9 /* ios_clf_data_7_directionS07.csv */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = ios_clf_data_7_directionS07.csv; sourceTree = "<group>"; };
+		B1A4F6BE288983500000ECC9 /* ios_clf_data_7_directionS05.csv */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = ios_clf_data_7_directionS05.csv; sourceTree = "<group>"; };
+		B1A4F6BF288983500000ECC9 /* ios_clf_data_7_directionE01.csv */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = ios_clf_data_7_directionE01.csv; sourceTree = "<group>"; };
+		B1A4F6C0288983500000ECC9 /* ios_clf_data_7_directionA05.csv */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = ios_clf_data_7_directionA05.csv; sourceTree = "<group>"; };
+		B1A4F6C1288983500000ECC9 /* ios_clf_data_7_directionA06.csv */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = ios_clf_data_7_directionA06.csv; sourceTree = "<group>"; };
+		B1A4F6C2288983510000ECC9 /* ios_clf_data_7_directionA03.csv */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = ios_clf_data_7_directionA03.csv; sourceTree = "<group>"; };
+		B1A4F6C3288983510000ECC9 /* ios_clf_data_7_directionR02.csv */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = ios_clf_data_7_directionR02.csv; sourceTree = "<group>"; };
+		B1A4F6C4288983510000ECC9 /* ios_clf_data_7_directionA11.csv */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = ios_clf_data_7_directionA11.csv; sourceTree = "<group>"; };
+		B1A4F6C5288983510000ECC9 /* ios_clf_data_7_directionS04.csv */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = ios_clf_data_7_directionS04.csv; sourceTree = "<group>"; };
+		B1A4F6C6288983510000ECC9 /* ios_clf_data_7_directionH02.csv */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = ios_clf_data_7_directionH02.csv; sourceTree = "<group>"; };
+		B1A4F6C7288983510000ECC9 /* ios_clf_data_7_directionA07.csv */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = ios_clf_data_7_directionA07.csv; sourceTree = "<group>"; };
+		B1A4F6C8288983510000ECC9 /* ios_clf_data_7_directionS03.csv */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = ios_clf_data_7_directionS03.csv; sourceTree = "<group>"; };
+		B1A4F6C9288983510000ECC9 /* ios_clf_data_7_directionS01.csv */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = ios_clf_data_7_directionS01.csv; sourceTree = "<group>"; };
+		B1A4F6CA288983510000ECC9 /* ios_clf_data_7_directionH01.csv */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = ios_clf_data_7_directionH01.csv; sourceTree = "<group>"; };
+		B1A4F6CB288983510000ECC9 /* ios_clf_data_7_directionU01.csv */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = ios_clf_data_7_directionU01.csv; sourceTree = "<group>"; };
+		B1A4F6CC288983510000ECC9 /* ios_clf_data_7_directionA01.csv */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = ios_clf_data_7_directionA01.csv; sourceTree = "<group>"; };
+		B1A4F6CD288983510000ECC9 /* ios_clf_data_7_directionA02.csv */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = ios_clf_data_7_directionA02.csv; sourceTree = "<group>"; };
+		B1A4F6CE288983510000ECC9 /* ios_clf_data_7_directionR01.csv */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = ios_clf_data_7_directionR01.csv; sourceTree = "<group>"; };
+		B1A4F6EE2889CA600000ECC9 /* DirectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DirectionView.swift; sourceTree = "<group>"; };
+		B1A4F6F02889CA810000ECC9 /* AnnotationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnnotationView.swift; sourceTree = "<group>"; };
+		B1A4F6F22889CAC50000ECC9 /* BeizerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BeizerView.swift; sourceTree = "<group>"; };
+		B1A4F6F42889D9F90000ECC9 /* Notifiationcenter+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Notifiationcenter+Extension.swift"; sourceTree = "<group>"; };
+		B1A4F6F6288B36FF0000ECC9 /* IndoorLocationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IndoorLocationManager.swift; sourceTree = "<group>"; };
+		B1A4F6F8288B3E0A0000ECC9 /* Operator+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Operator+Extension.swift"; sourceTree = "<group>"; };
 		ED6DF6F1FA424AB8DEB00784 /* Pods_AR_Evacuation_Beacon.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_AR_Evacuation_Beacon.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -339,6 +433,37 @@
 		B14B8E3F288083D000BE0E6E /* data */ = {
 			isa = PBXGroup;
 			children = (
+				B1A4F6CC288983510000ECC9 /* ios_clf_data_7_directionA01.csv */,
+				B1A4F6CD288983510000ECC9 /* ios_clf_data_7_directionA02.csv */,
+				B1A4F6C2288983510000ECC9 /* ios_clf_data_7_directionA03.csv */,
+				B1A4F6BB288983500000ECC9 /* ios_clf_data_7_directionA04.csv */,
+				B1A4F6C0288983500000ECC9 /* ios_clf_data_7_directionA05.csv */,
+				B1A4F6C1288983500000ECC9 /* ios_clf_data_7_directionA06.csv */,
+				B1A4F6C7288983510000ECC9 /* ios_clf_data_7_directionA07.csv */,
+				B1A4F6B0288983500000ECC9 /* ios_clf_data_7_directionA08.csv */,
+				B1A4F6B7288983500000ECC9 /* ios_clf_data_7_directionA09.csv */,
+				B1A4F6B6288983500000ECC9 /* ios_clf_data_7_directionA10.csv */,
+				B1A4F6C4288983510000ECC9 /* ios_clf_data_7_directionA11.csv */,
+				B1A4F6BF288983500000ECC9 /* ios_clf_data_7_directionE01.csv */,
+				B1A4F6B4288983500000ECC9 /* ios_clf_data_7_directionE02.csv */,
+				B1A4F6BA288983500000ECC9 /* ios_clf_data_7_directionE03.csv */,
+				B1A4F6CA288983510000ECC9 /* ios_clf_data_7_directionH01.csv */,
+				B1A4F6C6288983510000ECC9 /* ios_clf_data_7_directionH02.csv */,
+				B1A4F6CE288983510000ECC9 /* ios_clf_data_7_directionR01.csv */,
+				B1A4F6C3288983510000ECC9 /* ios_clf_data_7_directionR02.csv */,
+				B1A4F6B8288983500000ECC9 /* ios_clf_data_7_directionR03.csv */,
+				B1A4F6BC288983500000ECC9 /* ios_clf_data_7_directionR04.csv */,
+				B1A4F6B5288983500000ECC9 /* ios_clf_data_7_directionR05.csv */,
+				B1A4F6C9288983510000ECC9 /* ios_clf_data_7_directionS01.csv */,
+				B1A4F6B2288983500000ECC9 /* ios_clf_data_7_directionS02.csv */,
+				B1A4F6C8288983510000ECC9 /* ios_clf_data_7_directionS03.csv */,
+				B1A4F6C5288983510000ECC9 /* ios_clf_data_7_directionS04.csv */,
+				B1A4F6BE288983500000ECC9 /* ios_clf_data_7_directionS05.csv */,
+				B1A4F6B1288983500000ECC9 /* ios_clf_data_7_directionS06.csv */,
+				B1A4F6BD288983500000ECC9 /* ios_clf_data_7_directionS07.csv */,
+				B1A4F6B9288983500000ECC9 /* ios_clf_data_7_directionS08.csv */,
+				B1A4F6B3288983500000ECC9 /* ios_clf_data_7_directionS09.csv */,
+				B1A4F6CB288983510000ECC9 /* ios_clf_data_7_directionU01.csv */,
 				B14B8F9A2880857900BE0E6E /* ios_clf_data7A01.csv */,
 				B14B8F872880857800BE0E6E /* ios_clf_data7A02.csv */,
 				B14B8F8E2880857800BE0E6E /* ios_clf_data7A03.csv */,
@@ -355,6 +480,37 @@
 				B14B8F8F2880857800BE0E6E /* ios_clf_data7E03.csv */,
 				B14B8F972880857900BE0E6E /* ios_clf_data7H01.csv */,
 				B14B8F812880857800BE0E6E /* ios_clf_data7H02.csv */,
+				B1A4F6552886E9260000ECC9 /* ios_clf_data_allA01.csv */,
+				B1A4F6652886E9270000ECC9 /* ios_clf_data_allA02.csv */,
+				B1A4F65B2886E9260000ECC9 /* ios_clf_data_allA03.csv */,
+				B1A4F6582886E9260000ECC9 /* ios_clf_data_allA04.csv */,
+				B1A4F64D2886E9260000ECC9 /* ios_clf_data_allA05.csv */,
+				B1A4F65D2886E9270000ECC9 /* ios_clf_data_allA06.csv */,
+				B1A4F66A2886E9270000ECC9 /* ios_clf_data_allA07.csv */,
+				B1A4F6532886E9260000ECC9 /* ios_clf_data_allA08.csv */,
+				B1A4F6572886E9260000ECC9 /* ios_clf_data_allA09.csv */,
+				B1A4F64F2886E9260000ECC9 /* ios_clf_data_allA10.csv */,
+				B1A4F6692886E9270000ECC9 /* ios_clf_data_allA11.csv */,
+				B1A4F6562886E9260000ECC9 /* ios_clf_data_allE01.csv */,
+				B1A4F65C2886E9260000ECC9 /* ios_clf_data_allE02.csv */,
+				B1A4F6632886E9270000ECC9 /* ios_clf_data_allE03.csv */,
+				B1A4F6642886E9270000ECC9 /* ios_clf_data_allH01.csv */,
+				B1A4F6662886E9270000ECC9 /* ios_clf_data_allH02.csv */,
+				B1A4F6502886E9260000ECC9 /* ios_clf_data_allR01.csv */,
+				B1A4F64E2886E9260000ECC9 /* ios_clf_data_allR02.csv */,
+				B1A4F6602886E9270000ECC9 /* ios_clf_data_allR03.csv */,
+				B1A4F6592886E9260000ECC9 /* ios_clf_data_allR04.csv */,
+				B1A4F6612886E9270000ECC9 /* ios_clf_data_allR05.csv */,
+				B1A4F65E2886E9270000ECC9 /* ios_clf_data_allS01.csv */,
+				B1A4F6622886E9270000ECC9 /* ios_clf_data_allS02.csv */,
+				B1A4F65F2886E9270000ECC9 /* ios_clf_data_allS03.csv */,
+				B1A4F6542886E9260000ECC9 /* ios_clf_data_allS04.csv */,
+				B1A4F6672886E9270000ECC9 /* ios_clf_data_allS05.csv */,
+				B1A4F6512886E9260000ECC9 /* ios_clf_data_allS06.csv */,
+				B1A4F65A2886E9260000ECC9 /* ios_clf_data_allS07.csv */,
+				B1A4F66B2886E9270000ECC9 /* ios_clf_data_allS08.csv */,
+				B1A4F6682886E9270000ECC9 /* ios_clf_data_allS09.csv */,
+				B1A4F6522886E9260000ECC9 /* ios_clf_data_allU01.csv */,
 				B14B8F932880857800BE0E6E /* ios_clf_data7R01.csv */,
 				B14B8F922880857800BE0E6E /* ios_clf_data7R02.csv */,
 				B14B8F9C2880857900BE0E6E /* ios_clf_data7R03.csv */,
@@ -370,37 +526,6 @@
 				B14B8F962880857800BE0E6E /* ios_clf_data7S08.csv */,
 				B14B8F8C2880857800BE0E6E /* ios_clf_data7S09.csv */,
 				B14B8F852880857800BE0E6E /* ios_clf_data7U01.csv */,
-				B14B8F422880856F00BE0E6E /* A01.csv */,
-				B14B8F572880856F00BE0E6E /* A02.csv */,
-				B14B8F552880856F00BE0E6E /* A03.csv */,
-				B14B8F592880856F00BE0E6E /* A04.csv */,
-				B14B8F4B2880856F00BE0E6E /* A05.csv */,
-				B14B8F472880856F00BE0E6E /* A06.csv */,
-				B14B8F542880856F00BE0E6E /* A07.csv */,
-				B14B8F532880856F00BE0E6E /* A08.csv */,
-				B14B8F432880856F00BE0E6E /* A09.csv */,
-				B14B8F492880856F00BE0E6E /* A10.csv */,
-				B14B8F5C2880856F00BE0E6E /* A11.csv */,
-				B14B8F4A2880856F00BE0E6E /* E01.csv */,
-				B14B8F502880856F00BE0E6E /* E02.csv */,
-				B14B8F4E2880856F00BE0E6E /* E03.csv */,
-				B14B8F512880856F00BE0E6E /* H01.csv */,
-				B14B8F4F2880856F00BE0E6E /* H02.csv */,
-				B14B8F482880856F00BE0E6E /* R01.csv */,
-				B14B8F4D2880856F00BE0E6E /* R02.csv */,
-				B14B8F462880856F00BE0E6E /* R03.csv */,
-				B14B8F5E2880857000BE0E6E /* R04.csv */,
-				B14B8F522880856F00BE0E6E /* R05.csv */,
-				B14B8F5D2880856F00BE0E6E /* S01.csv */,
-				B14B8F4C2880856F00BE0E6E /* S02.csv */,
-				B14B8F5B2880856F00BE0E6E /* S03.csv */,
-				B14B8F452880856F00BE0E6E /* S04.csv */,
-				B14B8F402880856F00BE0E6E /* S05.csv */,
-				B14B8F582880856F00BE0E6E /* S06.csv */,
-				B14B8F5A2880856F00BE0E6E /* S07.csv */,
-				B14B8F442880856F00BE0E6E /* S08.csv */,
-				B14B8F412880856F00BE0E6E /* S09.csv */,
-				B14B8F562880856F00BE0E6E /* U01.csv */,
 				B14B8F182880856500BE0E6E /* ios_clf_data4A01.csv */,
 				B14B8F062880856400BE0E6E /* ios_clf_data4A02.csv */,
 				B14B8F1C2880856500BE0E6E /* ios_clf_data4A03.csv */,
@@ -488,6 +613,7 @@
 		B1915930287A76AA001CB91E /* AR_Evacuation_Beacon */ = {
 			isa = PBXGroup;
 			children = (
+				B1A4F68B28872F0A0000ECC9 /* map */,
 				B14B8E3F288083D000BE0E6E /* data */,
 				B191595C287AA58D001CB91E /* AR_Evacuation_Beacon.entitlements */,
 				B191594C287A7AFE001CB91E /* GoogleService-Info.plist */,
@@ -501,6 +627,22 @@
 			path = AR_Evacuation_Beacon;
 			sourceTree = "<group>";
 		};
+		B1A4F68B28872F0A0000ECC9 /* map */ = {
+			isa = PBXGroup;
+			children = (
+				B1A4F694288768570000ECC9 /* source.csv */,
+				B1A4F69628876CC70000ECC9 /* final_U01.csv */,
+				B1A4F69828876F350000ECC9 /* final_U01 2.csv */,
+				B1A4F68C28872F200000ECC9 /* map_U01.csv */,
+				B1A4F69028875AEC0000ECC9 /* map_U01_2.csv */,
+				B1A4F692288760310000ECC9 /* map_U01_3.csv */,
+				B1A4F6A8288893260000ECC9 /* KSW_0.png */,
+				B1A4F6A9288893260000ECC9 /* KSW_1.png */,
+				B1A4F6AA288893260000ECC9 /* KSW_2.png */,
+			);
+			path = map;
+			sourceTree = "<group>";
+		};
 		B1CB00EC288205C800CD4452 /* View */ = {
 			isa = PBXGroup;
 			children = (
@@ -511,6 +653,10 @@
 				B191595D287AA69F001CB91E /* ARNavigationViewController.swift */,
 				B19159ED287F345A001CB91E /* LabelTableViewCell.swift */,
 				B19159EE287F345A001CB91E /* LabelTableViewCell.xib */,
+				B1A4F6A028888AC70000ECC9 /* Map2DViewController.swift */,
+				B1A4F6EE2889CA600000ECC9 /* DirectionView.swift */,
+				B1A4F6F02889CA810000ECC9 /* AnnotationView.swift */,
+				B1A4F6F22889CAC50000ECC9 /* BeizerView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -523,6 +669,9 @@
 				B1915956287A7E71001CB91E /* BeaconManager.swift */,
 				B1915958287A7EA7001CB91E /* CSVService.swift */,
 				B1915962287DDDCF001CB91E /* SocketIOManager.swift */,
+				B1A4F6F42889D9F90000ECC9 /* Notifiationcenter+Extension.swift */,
+				B1A4F6F6288B36FF0000ECC9 /* IndoorLocationManager.swift */,
+				B1A4F6F8288B3E0A0000ECC9 /* Operator+Extension.swift */,
 			);
 			path = Service;
 			sourceTree = "<group>";
@@ -612,133 +761,173 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				B14B8F712880857000BE0E6E /* R05.csv in Resources */,
-				B14B8F6A2880857000BE0E6E /* A05.csv in Resources */,
+				B1A4F6AB288893260000ECC9 /* KSW_0.png in Resources */,
 				B14B8EEF2880855600BE0E6E /* ios_clf_data5A04.csv in Resources */,
-				B14B8F7D2880857000BE0E6E /* R04.csv in Resources */,
-				B14B8F752880857000BE0E6E /* U01.csv in Resources */,
 				B14B8EE32880855600BE0E6E /* ios_clf_data5A06.csv in Resources */,
+				B1A4F6EB288983520000ECC9 /* ios_clf_data_7_directionA01.csv in Resources */,
+				B1A4F67F2886E9270000ECC9 /* ios_clf_data_allR03.csv in Resources */,
+				B1A4F6722886E9270000ECC9 /* ios_clf_data_allA08.csv in Resources */,
 				B14B8EFD2880855600BE0E6E /* ios_clf_data5E02.csv in Resources */,
+				B1A4F6D1288983520000ECC9 /* ios_clf_data_7_directionS02.csv in Resources */,
 				B14B8FAA2880857900BE0E6E /* ios_clf_data7A09.csv in Resources */,
-				B14B8F662880857000BE0E6E /* A06.csv in Resources */,
 				B14B8FB52880857900BE0E6E /* ios_clf_data7S08.csv in Resources */,
 				B14B8FB42880857900BE0E6E /* ios_clf_data7A07.csv in Resources */,
 				B14B8FB72880857900BE0E6E /* ios_clf_data7A08.csv in Resources */,
+				B1A4F67B2886E9270000ECC9 /* ios_clf_data_allE02.csv in Resources */,
+				B1A4F6712886E9270000ECC9 /* ios_clf_data_allU01.csv in Resources */,
+				B1A4F6E6288983520000ECC9 /* ios_clf_data_7_directionA07.csv in Resources */,
+				B1A4F6DE288983520000ECC9 /* ios_clf_data_7_directionE01.csv in Resources */,
 				B14B8FA62880857900BE0E6E /* ios_clf_data7A02.csv in Resources */,
-				B14B8F722880857000BE0E6E /* A08.csv in Resources */,
 				B14B8F3F2880856500BE0E6E /* ios_clf_data4S04.csv in Resources */,
-				B14B8F6C2880857000BE0E6E /* R02.csv in Resources */,
-				B14B8F6D2880857000BE0E6E /* E03.csv in Resources */,
 				B14B8F3C2880856500BE0E6E /* ios_clf_data4A08.csv in Resources */,
-				B14B8F5F2880857000BE0E6E /* S05.csv in Resources */,
 				B14B8EF42880855600BE0E6E /* ios_clf_data5R04.csv in Resources */,
 				B14B8FAE2880857900BE0E6E /* ios_clf_data7E03.csv in Resources */,
+				B1A4F693288760310000ECC9 /* map_U01_3.csv in Resources */,
 				B14B8FA02880857900BE0E6E /* ios_clf_data7H02.csv in Resources */,
 				B14B8F2F2880856500BE0E6E /* ios_clf_data4S03.csv in Resources */,
+				B1A4F6882886E9270000ECC9 /* ios_clf_data_allA11.csv in Resources */,
+				B1A4F6772886E9270000ECC9 /* ios_clf_data_allA04.csv in Resources */,
 				B14B8EF22880855600BE0E6E /* ios_clf_data5S09.csv in Resources */,
-				B14B8F6E2880857000BE0E6E /* H02.csv in Resources */,
+				B1A4F6762886E9270000ECC9 /* ios_clf_data_allA09.csv in Resources */,
 				B14B8F3A2880856500BE0E6E /* ios_clf_data4A09.csv in Resources */,
+				B1A4F6D9288983520000ECC9 /* ios_clf_data_7_directionE03.csv in Resources */,
+				B1A4F6812886E9270000ECC9 /* ios_clf_data_allS02.csv in Resources */,
 				B14B8FB32880857900BE0E6E /* ios_clf_data7E01.csv in Resources */,
-				B14B8F622880857000BE0E6E /* A09.csv in Resources */,
-				B14B8F7C2880857000BE0E6E /* S01.csv in Resources */,
+				B1A4F6782886E9270000ECC9 /* ios_clf_data_allR04.csv in Resources */,
 				B191593E287A76AA001CB91E /* LaunchScreen.storyboard in Resources */,
+				B1A4F6E3288983520000ECC9 /* ios_clf_data_7_directionA11.csv in Resources */,
 				B14B8EF32880855600BE0E6E /* ios_clf_data5A02.csv in Resources */,
+				B1A4F6852886E9270000ECC9 /* ios_clf_data_allH02.csv in Resources */,
 				B14B8F352880856500BE0E6E /* ios_clf_data4A06.csv in Resources */,
 				B14B8FA12880857900BE0E6E /* ios_clf_data7S02.csv in Resources */,
+				B1A4F695288768570000ECC9 /* source.csv in Resources */,
+				B1A4F6842886E9270000ECC9 /* ios_clf_data_allA02.csv in Resources */,
 				B14B8EE82880855600BE0E6E /* ios_clf_data5A03.csv in Resources */,
 				B14B8F012880855600BE0E6E /* ios_clf_data5R03.csv in Resources */,
+				B1A4F6DF288983520000ECC9 /* ios_clf_data_7_directionA05.csv in Resources */,
 				B14B8FB62880857900BE0E6E /* ios_clf_data7H01.csv in Resources */,
 				B14B8EED2880855600BE0E6E /* ios_clf_data5E03.csv in Resources */,
 				B14B8F9D2880857900BE0E6E /* ios_clf_data7S07.csv in Resources */,
 				B14B8FA82880857900BE0E6E /* ios_clf_data7S05.csv in Resources */,
+				B1A4F6E8288983520000ECC9 /* ios_clf_data_7_directionS01.csv in Resources */,
 				B14B8F332880856500BE0E6E /* ios_clf_data4A11.csv in Resources */,
+				B1A4F6E0288983520000ECC9 /* ios_clf_data_7_directionA06.csv in Resources */,
+				B1A4F67C2886E9270000ECC9 /* ios_clf_data_allA06.csv in Resources */,
 				B14B8F3B2880856500BE0E6E /* ios_clf_data4A03.csv in Resources */,
+				B1A4F6892886E9270000ECC9 /* ios_clf_data_allA07.csv in Resources */,
 				B14B8F9F2880857900BE0E6E /* ios_clf_data7R05.csv in Resources */,
+				B1A4F69128875AEC0000ECC9 /* map_U01_2.csv in Resources */,
 				B14B8F232880856500BE0E6E /* ios_clf_data4S08.csv in Resources */,
 				B14B8F362880856500BE0E6E /* ios_clf_data4U01.csv in Resources */,
+				B1A4F66C2886E9270000ECC9 /* ios_clf_data_allA05.csv in Resources */,
 				B14B8EF52880855600BE0E6E /* ios_clf_data5S02.csv in Resources */,
 				B14B8F3D2880856500BE0E6E /* ios_clf_data4H01.csv in Resources */,
+				B1A4F6D6288983520000ECC9 /* ios_clf_data_7_directionA09.csv in Resources */,
 				B14B8F2E2880856500BE0E6E /* ios_clf_data4S07.csv in Resources */,
 				B14B8F212880856500BE0E6E /* ios_clf_data4R05.csv in Resources */,
+				B1A4F6AD288893260000ECC9 /* KSW_2.png in Resources */,
 				B14B8F9E2880857900BE0E6E /* ios_clf_data7S04.csv in Resources */,
 				B191594D287A7AFE001CB91E /* GoogleService-Info.plist in Resources */,
 				B19159F0287F345A001CB91E /* LabelTableViewCell.xib in Resources */,
 				B14B8EFA2880855600BE0E6E /* ios_clf_data5A10.csv in Resources */,
 				B14B8FB12880857900BE0E6E /* ios_clf_data7R02.csv in Resources */,
-				B14B8F7B2880857000BE0E6E /* A11.csv in Resources */,
-				B14B8F652880857000BE0E6E /* R03.csv in Resources */,
+				B1A4F6E7288983520000ECC9 /* ios_clf_data_7_directionS03.csv in Resources */,
 				B14B8F392880856500BE0E6E /* ios_clf_data4S05.csv in Resources */,
-				B14B8F762880857000BE0E6E /* A02.csv in Resources */,
-				B14B8F782880857000BE0E6E /* A04.csv in Resources */,
 				B14B8EFC2880855600BE0E6E /* ios_clf_data5R05.csv in Resources */,
-				B14B8F792880857000BE0E6E /* S07.csv in Resources */,
-				B14B8F6F2880857000BE0E6E /* E02.csv in Resources */,
 				B14B8F272880856500BE0E6E /* ios_clf_data4S06.csv in Resources */,
+				B1A4F6752886E9270000ECC9 /* ios_clf_data_allE01.csv in Resources */,
 				B14B8F3E2880856500BE0E6E /* ios_clf_data4S01.csv in Resources */,
 				B14B8EFE2880855600BE0E6E /* ios_clf_data5S07.csv in Resources */,
 				B14B8EF12880855600BE0E6E /* ios_clf_data5S05.csv in Resources */,
 				B14B8EEA2880855600BE0E6E /* ios_clf_data5U01.csv in Resources */,
-				B14B8F772880857000BE0E6E /* S06.csv in Resources */,
+				B1A4F6E9288983520000ECC9 /* ios_clf_data_7_directionH01.csv in Resources */,
+				B1A4F69728876CC80000ECC9 /* final_U01.csv in Resources */,
+				B1A4F6ED288983520000ECC9 /* ios_clf_data_7_directionR01.csv in Resources */,
 				B14B8F382880856500BE0E6E /* ios_clf_data4A07.csv in Resources */,
+				B1A4F6AC288893260000ECC9 /* KSW_1.png in Resources */,
+				B1A4F67E2886E9270000ECC9 /* ios_clf_data_allS03.csv in Resources */,
 				B14B8FA72880857900BE0E6E /* ios_clf_data7A11.csv in Resources */,
-				B14B8F632880857000BE0E6E /* S08.csv in Resources */,
 				B14B8EEC2880855600BE0E6E /* ios_clf_data5A01.csv in Resources */,
 				B14B8F292880856500BE0E6E /* ios_clf_data4R02.csv in Resources */,
 				B14B8F2A2880856500BE0E6E /* ios_clf_data4S02.csv in Resources */,
+				B1A4F6872886E9270000ECC9 /* ios_clf_data_allS09.csv in Resources */,
 				B14B8EE42880855600BE0E6E /* ios_clf_data5E01.csv in Resources */,
 				B14B8EEE2880855600BE0E6E /* ios_clf_data5H01.csv in Resources */,
 				B14B8FB02880857900BE0E6E /* ios_clf_data7A10.csv in Resources */,
 				B14B8EFB2880855600BE0E6E /* ios_clf_data5S03.csv in Resources */,
 				B14B8F2B2880856500BE0E6E /* ios_clf_data4R04.csv in Resources */,
+				B1A4F6D3288983520000ECC9 /* ios_clf_data_7_directionE02.csv in Resources */,
+				B1A4F6E1288983520000ECC9 /* ios_clf_data_7_directionA03.csv in Resources */,
 				B14B8FAF2880857900BE0E6E /* ios_clf_data7A06.csv in Resources */,
-				B14B8F742880857000BE0E6E /* A03.csv in Resources */,
+				B1A4F6742886E9270000ECC9 /* ios_clf_data_allA01.csv in Resources */,
+				B1A4F6DD288983520000ECC9 /* ios_clf_data_7_directionS05.csv in Resources */,
 				B14B8FA42880857900BE0E6E /* ios_clf_data7U01.csv in Resources */,
 				B14B8EE52880855600BE0E6E /* ios_clf_data5H02.csv in Resources */,
+				B1A4F68A2886E9270000ECC9 /* ios_clf_data_allS08.csv in Resources */,
 				B14B8F302880856500BE0E6E /* ios_clf_data4R03.csv in Resources */,
+				B1A4F6E5288983520000ECC9 /* ios_clf_data_7_directionH02.csv in Resources */,
+				B1A4F6D2288983520000ECC9 /* ios_clf_data_7_directionS09.csv in Resources */,
 				B14B8FBA2880857900BE0E6E /* ios_clf_data7S03.csv in Resources */,
-				B14B8F672880857000BE0E6E /* R01.csv in Resources */,
-				B14B8F642880857000BE0E6E /* S04.csv in Resources */,
 				B14B8FA32880857900BE0E6E /* ios_clf_data7A04.csv in Resources */,
 				B14B8EF62880855600BE0E6E /* ios_clf_data5S01.csv in Resources */,
 				B14B8EF82880855600BE0E6E /* ios_clf_data5A07.csv in Resources */,
+				B1A4F6DC288983520000ECC9 /* ios_clf_data_7_directionS07.csv in Resources */,
 				B14B8EFF2880855600BE0E6E /* ios_clf_data5R01.csv in Resources */,
+				B1A4F6792886E9270000ECC9 /* ios_clf_data_allS07.csv in Resources */,
+				B1A4F6CF288983520000ECC9 /* ios_clf_data_7_directionA08.csv in Resources */,
 				B14B8F342880856500BE0E6E /* ios_clf_data4A10.csv in Resources */,
 				B14B8F372880856500BE0E6E /* ios_clf_data4A01.csv in Resources */,
+				B1A4F6732886E9270000ECC9 /* ios_clf_data_allS04.csv in Resources */,
 				B14B8FB92880857900BE0E6E /* ios_clf_data7A01.csv in Resources */,
-				B14B8F702880857000BE0E6E /* H01.csv in Resources */,
 				B14B8FBB2880857900BE0E6E /* ios_clf_data7R03.csv in Resources */,
 				B14B8EE72880855600BE0E6E /* ios_clf_data5A11.csv in Resources */,
+				B1A4F6702886E9270000ECC9 /* ios_clf_data_allS06.csv in Resources */,
 				B14B8FA52880857900BE0E6E /* ios_clf_data7S01.csv in Resources */,
-				B14B8F682880857000BE0E6E /* A10.csv in Resources */,
 				B14B8F002880855600BE0E6E /* ios_clf_data5A08.csv in Resources */,
 				B14B8F2C2880856500BE0E6E /* ios_clf_data4E03.csv in Resources */,
 				B14B8F252880856500BE0E6E /* ios_clf_data4A02.csv in Resources */,
-				B14B8F612880857000BE0E6E /* A01.csv in Resources */,
+				B1A4F66D2886E9270000ECC9 /* ios_clf_data_allR02.csv in Resources */,
+				B1A4F6D4288983520000ECC9 /* ios_clf_data_7_directionR05.csv in Resources */,
+				B1A4F6EA288983520000ECC9 /* ios_clf_data_7_directionU01.csv in Resources */,
 				B14B8EF02880855600BE0E6E /* ios_clf_data5S06.csv in Resources */,
 				B14B8F242880856500BE0E6E /* ios_clf_data4A04.csv in Resources */,
-				B14B8F692880857000BE0E6E /* E01.csv in Resources */,
 				B14B8F312880856500BE0E6E /* ios_clf_data4S09.csv in Resources */,
-				B14B8F732880857000BE0E6E /* A07.csv in Resources */,
+				B1A4F6DA288983520000ECC9 /* ios_clf_data_7_directionA04.csv in Resources */,
+				B1A4F6802886E9270000ECC9 /* ios_clf_data_allR05.csv in Resources */,
+				B1A4F6862886E9270000ECC9 /* ios_clf_data_allS05.csv in Resources */,
+				B1A4F6E4288983520000ECC9 /* ios_clf_data_7_directionS04.csv in Resources */,
+				B1A4F67A2886E9270000ECC9 /* ios_clf_data_allA03.csv in Resources */,
 				B14B8EF92880855600BE0E6E /* ios_clf_data5A05.csv in Resources */,
-				B14B8F602880857000BE0E6E /* S09.csv in Resources */,
 				B14B8FA92880857900BE0E6E /* ios_clf_data7S06.csv in Resources */,
 				B14B8EEB2880855600BE0E6E /* ios_clf_data5A09.csv in Resources */,
+				B1A4F67D2886E9270000ECC9 /* ios_clf_data_allS01.csv in Resources */,
+				B1A4F66F2886E9270000ECC9 /* ios_clf_data_allR01.csv in Resources */,
 				B14B8F282880856500BE0E6E /* ios_clf_data4H02.csv in Resources */,
-				B14B8F6B2880857000BE0E6E /* S02.csv in Resources */,
 				B14B8FAD2880857900BE0E6E /* ios_clf_data7A03.csv in Resources */,
 				B191593B287A76AA001CB91E /* Assets.xcassets in Resources */,
+				B1A4F6D5288983520000ECC9 /* ios_clf_data_7_directionA10.csv in Resources */,
 				B1915939287A76AA001CB91E /* Main.storyboard in Resources */,
 				B14B8F262880856500BE0E6E /* ios_clf_data4E02.csv in Resources */,
 				B14B8EE62880855600BE0E6E /* ios_clf_data5S08.csv in Resources */,
+				B1A4F66E2886E9270000ECC9 /* ios_clf_data_allA10.csv in Resources */,
+				B1A4F69928876F350000ECC9 /* final_U01 2.csv in Resources */,
 				B14B8FAB2880857900BE0E6E /* ios_clf_data7S09.csv in Resources */,
-				B14B8F7A2880857000BE0E6E /* S03.csv in Resources */,
+				B1A4F6E2288983520000ECC9 /* ios_clf_data_7_directionR02.csv in Resources */,
+				B1A4F68D28872F200000ECC9 /* map_U01.csv in Resources */,
+				B1A4F6D8288983520000ECC9 /* ios_clf_data_7_directionS08.csv in Resources */,
+				B1A4F6D0288983520000ECC9 /* ios_clf_data_7_directionS06.csv in Resources */,
 				B14B8FB22880857900BE0E6E /* ios_clf_data7R01.csv in Resources */,
+				B1A4F6DB288983520000ECC9 /* ios_clf_data_7_directionR04.csv in Resources */,
 				B14B8FB82880857900BE0E6E /* ios_clf_data7E02.csv in Resources */,
 				B14B8F222880856500BE0E6E /* ios_clf_data4R01.csv in Resources */,
+				B1A4F6832886E9270000ECC9 /* ios_clf_data_allH01.csv in Resources */,
 				B14B8FA22880857900BE0E6E /* ios_clf_data7R04.csv in Resources */,
+				B1A4F6822886E9270000ECC9 /* ios_clf_data_allE03.csv in Resources */,
 				B14B8F322880856500BE0E6E /* ios_clf_data4A05.csv in Resources */,
+				B1A4F6EC288983520000ECC9 /* ios_clf_data_7_directionA02.csv in Resources */,
 				B14B8EF72880855600BE0E6E /* ios_clf_data5S04.csv in Resources */,
 				B14B8F2D2880856500BE0E6E /* ios_clf_data4E01.csv in Resources */,
+				B1A4F6D7288983520000ECC9 /* ios_clf_data_7_directionR03.csv in Resources */,
 				B14B8EE92880855600BE0E6E /* ios_clf_data5R02.csv in Resources */,
 				B14B8FAC2880857900BE0E6E /* ios_clf_data7A05.csv in Resources */,
 			);
@@ -778,14 +967,21 @@
 			files = (
 				B1915955287A7E28001CB91E /* KalmanFilter.swift in Sources */,
 				B191595B287A8681001CB91E /* BeaconCell.swift in Sources */,
+				B1A4F6EF2889CA600000ECC9 /* DirectionView.swift in Sources */,
 				B1915957287A7E71001CB91E /* BeaconManager.swift in Sources */,
 				B191594F287A7B4C001CB91E /* BeaconViewController.swift in Sources */,
 				B1915963287DDDCF001CB91E /* SocketIOManager.swift in Sources */,
 				B1915932287A76AA001CB91E /* AppDelegate.swift in Sources */,
+				B1A4F6F32889CAC50000ECC9 /* BeizerView.swift in Sources */,
+				B1A4F6F12889CA810000ECC9 /* AnnotationView.swift in Sources */,
 				B191595E287AA69F001CB91E /* ARNavigationViewController.swift in Sources */,
+				B1A4F6A128888AC70000ECC9 /* Map2DViewController.swift in Sources */,
 				B1915951287A7BDA001CB91E /* ModelInterpreter.swift in Sources */,
 				B1915934287A76AA001CB91E /* SceneDelegate.swift in Sources */,
 				B19159EF287F345A001CB91E /* LabelTableViewCell.swift in Sources */,
+				B1A4F6F52889D9FA0000ECC9 /* Notifiationcenter+Extension.swift in Sources */,
+				B1A4F6F9288B3E0A0000ECC9 /* Operator+Extension.swift in Sources */,
+				B1A4F6F7288B36FF0000ECC9 /* IndoorLocationManager.swift in Sources */,
 				B1915959287A7EA7001CB91E /* CSVService.swift in Sources */,
 				B1915953287A7E0F001CB91E /* Beacon.swift in Sources */,
 			);
@@ -867,6 +1063,7 @@
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
+				OTHER_LDFLAGS = "";
 				SDKROOT = iphoneos;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
@@ -920,6 +1117,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
+				OTHER_LDFLAGS = "";
 				SDKROOT = iphoneos;
 				SWIFT_COMPILATION_MODE = wholemodule;
 				SWIFT_OPTIMIZATION_LEVEL = "-O";
