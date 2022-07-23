@@ -14,16 +14,14 @@ import TensorFlowLite
 import CoreMotion
 
 // Build setting
-let modelName: String = "ios_beacon4"
-let modelNames: [String] = ["ios_beacon4", "ios_beacon7concat", "ios_beacon5concat", "ios_beacon22concat"]
-let direction: Bool = false
+let modelNames: [String] = ["ios_beacon4", "ios_beacon_5concat", "ios_beacon7concat", "ios_beacon22"]
 let beaconNumlist: [Int] = [4,5,7,22]
 let beaconNum: Int = 4
 let fileName: String = "ios_clf_data4A03"
 let features = ["001","002","003","004","005","006","007","008","009","010",
                 "011","012","013","014","015","016","017","018","019","020",
                 "021", "022"]
-let debugMode: Bool = true
+let direction = false
 
 
 class BeaconViewController: UITableViewController, CLLocationManagerDelegate, UNUserNotificationCenterDelegate {
@@ -45,10 +43,8 @@ class BeaconViewController: UITableViewController, CLLocationManagerDelegate, UN
     private var previousBeaconInfoArr = [Beacon]()
     
     private let sections: [String] = ["Location Estimation", "Beacons"]
-    private var locationList: [String] = []
     private var csvlist = [String]()
-    private var locationlistForCSV: [String] = []
-    
+    private var estimatedLocations: [String: [String]] = ["4":[], "5":[], "7": [], "22": []]
     
     override func viewDidLoad() {
         
@@ -63,11 +59,6 @@ class BeaconViewController: UITableViewController, CLLocationManagerDelegate, UN
             NotificationCenter.default.addObserver(self, selector: #selector(currentLocations(_:)), name: .movePosition, object: nil)
 
         }
-                
-        // MARK: - Debugmode - ViewDidLoad
-        if debugMode {
-            csvlist = CSVService.loadLocationsFromCSV()
-        }
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -77,13 +68,20 @@ class BeaconViewController: UITableViewController, CLLocationManagerDelegate, UN
     @objc private func currentBeacons(_ noti: Notification) {
         guard let beacons = noti.object as? [Beacon] else {return}
         tableviewBeacon = beacons
+        tableView.reloadData()
     }
     
     // TODO: 4개 받아올때, 1개 받아올때 나눠서 비동기 코드 작성하기
     
     @objc private func currentLocations(_ noti: Notification) {
         guard let locations = noti.object as? [String] else {return}
-        // TODO: 4개일때, locations을 4개로 나눠서 저장하고, tableview에 어떻게 나타낼것인가?
+        
+        locations.indices.forEach { (index) in
+            var locationlist = estimatedLocations["\(beaconNumlist[index])"] ?? []
+            locationlist.append(locations[index])
+            estimatedLocations.updateValue(locationlist, forKey: "\(beaconNumlist[index])")
+        }
+        tableView.reloadData()
     }
     
     @objc private func currentLocation(_ noti: Notification) {
@@ -102,7 +100,7 @@ class BeaconViewController: UITableViewController, CLLocationManagerDelegate, UN
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if section == 0 {
-            return 1
+            return estimatedLocations.keys.count
         } else {
             return tableviewBeacon.count
         }
@@ -121,15 +119,17 @@ class BeaconViewController: UITableViewController, CLLocationManagerDelegate, UN
         // section1 shows the detected beacons
         if indexPath.section == 0 {
             var result = ""
-            if locationlistForCSV.count < 8 {
-                locationlistForCSV.forEach { result += "\($0) " }
+            guard let locations = estimatedLocations["\(beaconNumlist[indexPath.row])"] else { return cell }
+            if locations.count < 8 {
+                locations.forEach { result += "\($0) " }
                 estimationCell.estimationLabel.text = result
             } else {
-                locationlistForCSV[locationlistForCSV.count-8 ..< locationlistForCSV.count]
+                locations[locations.count - 8 ..< locations.count]
                     .map { $0 }
                     .forEach { result += "\($0) "}
                 estimationCell.estimationLabel.text = result
             }
+
             return estimationCell
         } else {
             let beacon = tableviewBeacon[indexPath.row]
@@ -154,9 +154,14 @@ extension BeaconViewController {
         
         let alert = UIAlertController(title: "finish, CSV has been saved", message: nil, preferredStyle: .alert)
         alert.addAction(UIAlertAction(title: "yes", style: .default, handler: { _ in
-            self.locationlistForCSV.removeFirst()
-            CSVService.saveLocationCSV(with: self.locationlistForCSV)
-            self.locationlistForCSV.removeAll()
+            
+            var tempArr = self.estimatedLocations.sorted { $0.key < $1.key }
+            tempArr.indices.forEach {
+                tempArr[$0].value.removeFirst()
+                CSVService.saveLocationCSV(key: tempArr[$0].key, value: tempArr[$0].value)
+            }
+            
+            self.estimatedLocations.removeAll()
         }))
         
         self.present(alert, animated: true)

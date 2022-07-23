@@ -50,15 +50,15 @@ class CSVService {
 
     }
     
-    static func saveLocationCSV(with locations: [String]) {
+    static func saveLocationCSV(key: String, value: [String]) {
         
         var csvString = "\("estimated")\n"
-        locations.forEach { csvString = csvString.appending("\($0)\n") }
+        value.forEach { csvString = csvString.appending("\($0)\n") }
         
         let fileManager = FileManager.default
         do {
             let path = try fileManager.url(for: .documentDirectory, in: .allDomainsMask, appropriateFor: nil, create: false)
-            let fileURL = path.appendingPathComponent("estimating Location_\(Date()).csv")
+            let fileURL = path.appendingPathComponent("estimating Location_beacon\(key)\(Date()).csv")
             try csvString.write(to: fileURL, atomically: true, encoding: .utf8)
         } catch {
             print("error creating file")
