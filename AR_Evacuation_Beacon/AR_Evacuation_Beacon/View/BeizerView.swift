@@ -47,8 +47,17 @@ class BeizerView: UIView {
         var y: CGFloat = 10
         
         for point in path {
-            guard let location = mapDic[point] else {continue}
-            drawCell(point: location)
+            
+            if let location1 = mapDic[point] {
+                drawCell(point: location1)
+            }
+            if let location2 = micDic2[point] {
+                drawCell(point: location2)
+            }
+            if let location3 = micDic0[point] {
+                drawCell(point: location3)
+            }
+
         }
         
         

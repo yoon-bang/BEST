@@ -66,9 +66,13 @@ class IndoorAnnotationView: UIView, CLLocationManagerDelegate {
     }
    
     
-    func move(to cellname: String) {
-        UIView.animate(withDuration: 1.0, delay: 0) {
+    func move(to cellname: String, completion: @escaping() -> Void) {
+        UIView.animate(withDuration: 1.0, delay: 0, options: .curveEaseIn) {
             self.move(to: self.transformCellToCGPoint(cellname: cellname))
+        } completion: { success in
+            if success {
+                completion()
+            }
         }
     }
     
@@ -78,10 +82,23 @@ class IndoorAnnotationView: UIView, CLLocationManagerDelegate {
     }
     
     private func transformCellToCGPoint(cellname: String) -> CGPoint {
-        guard let cellpoints = mapDic[cellname] else { return CGPoint(x: 0, y: 0)}
-        let start = cellpoints[0]
-        let end = cellpoints[2]
         
+        var start: (CGFloat, CGFloat) = (0, 0)
+        var end: (CGFloat, CGFloat) = (0, 0)
+        
+        if let firstFloorCellpoints = mapDic[cellname] {
+            start = firstFloorCellpoints[0]
+            end = firstFloorCellpoints[1]
+        } else if let secondFloorCellpoints = micDic2[cellname] {
+            start = secondFloorCellpoints[0]
+            end = secondFloorCellpoints[1]
+        } else if let baseFloorCellPoints = micDic0[cellname] {
+            start = baseFloorCellPoints[0]
+            end = baseFloorCellPoints[1]
+        } else {
+            return CGPoint(x: 0, y: 0)
+        }
+    
         let width = abs(start.0 - end.0) / 2
         let height = abs(start.1 - end.1) / 2
         

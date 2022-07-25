@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		B139C508288CA0DB00A9DE48 /* Position.swift in Sources */ = {isa = PBXBuildFile; fileRef = B139C507288CA0DB00A9DE48 /* Position.swift */; };
 		B14B8EE32880855600BE0E6E /* ios_clf_data5A06.csv in Resources */ = {isa = PBXBuildFile; fileRef = B14B8EC42880855600BE0E6E /* ios_clf_data5A06.csv */; };
 		B14B8EE42880855600BE0E6E /* ios_clf_data5E01.csv in Resources */ = {isa = PBXBuildFile; fileRef = B14B8EC52880855600BE0E6E /* ios_clf_data5E01.csv */; };
 		B14B8EE52880855600BE0E6E /* ios_clf_data5H02.csv in Resources */ = {isa = PBXBuildFile; fileRef = B14B8EC62880855600BE0E6E /* ios_clf_data5H02.csv */; };
@@ -100,6 +101,7 @@
 		B14B8FB92880857900BE0E6E /* ios_clf_data7A01.csv in Resources */ = {isa = PBXBuildFile; fileRef = B14B8F9A2880857900BE0E6E /* ios_clf_data7A01.csv */; };
 		B14B8FBA2880857900BE0E6E /* ios_clf_data7S03.csv in Resources */ = {isa = PBXBuildFile; fileRef = B14B8F9B2880857900BE0E6E /* ios_clf_data7S03.csv */; };
 		B14B8FBB2880857900BE0E6E /* ios_clf_data7R03.csv in Resources */ = {isa = PBXBuildFile; fileRef = B14B8F9C2880857900BE0E6E /* ios_clf_data7R03.csv */; };
+		B182BB8F288DFD9D0028A3F5 /* navigation.scnassets in Resources */ = {isa = PBXBuildFile; fileRef = B182BB8E288DFD9D0028A3F5 /* navigation.scnassets */; };
 		B1915932287A76AA001CB91E /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1915931287A76AA001CB91E /* AppDelegate.swift */; };
 		B1915934287A76AA001CB91E /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1915933287A76AA001CB91E /* SceneDelegate.swift */; };
 		B1915939287A76AA001CB91E /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B1915937287A76AA001CB91E /* Main.storyboard */; };
@@ -204,6 +206,7 @@
 /* Begin PBXFileReference section */
 		0AAA225C72513DDADD22C250 /* Pods-AR_Evacuation_Beacon.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-AR_Evacuation_Beacon.release.xcconfig"; path = "Target Support Files/Pods-AR_Evacuation_Beacon/Pods-AR_Evacuation_Beacon.release.xcconfig"; sourceTree = "<group>"; };
 		51691426705F53637B5D5A41 /* Pods-AR_Evacuation_Beacon.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-AR_Evacuation_Beacon.debug.xcconfig"; path = "Target Support Files/Pods-AR_Evacuation_Beacon/Pods-AR_Evacuation_Beacon.debug.xcconfig"; sourceTree = "<group>"; };
+		B139C507288CA0DB00A9DE48 /* Position.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Position.swift; sourceTree = "<group>"; };
 		B14B8EC42880855600BE0E6E /* ios_clf_data5A06.csv */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = ios_clf_data5A06.csv; path = ../../../iOS_clf_dataset/ios_clf_data_5/ios_clf_data5A06.csv; sourceTree = "<group>"; };
 		B14B8EC52880855600BE0E6E /* ios_clf_data5E01.csv */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = ios_clf_data5E01.csv; path = ../../../iOS_clf_dataset/ios_clf_data_5/ios_clf_data5E01.csv; sourceTree = "<group>"; };
 		B14B8EC62880855600BE0E6E /* ios_clf_data5H02.csv */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = ios_clf_data5H02.csv; path = ../../../iOS_clf_dataset/ios_clf_data_5/ios_clf_data5H02.csv; sourceTree = "<group>"; };
@@ -297,6 +300,7 @@
 		B14B8F9A2880857900BE0E6E /* ios_clf_data7A01.csv */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = ios_clf_data7A01.csv; path = ../../../iOS_clf_dataset/ios_clf_data_7/ios_clf_data7A01.csv; sourceTree = "<group>"; };
 		B14B8F9B2880857900BE0E6E /* ios_clf_data7S03.csv */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = ios_clf_data7S03.csv; path = ../../../iOS_clf_dataset/ios_clf_data_7/ios_clf_data7S03.csv; sourceTree = "<group>"; };
 		B14B8F9C2880857900BE0E6E /* ios_clf_data7R03.csv */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = ios_clf_data7R03.csv; path = ../../../iOS_clf_dataset/ios_clf_data_7/ios_clf_data7R03.csv; sourceTree = "<group>"; };
+		B182BB8E288DFD9D0028A3F5 /* navigation.scnassets */ = {isa = PBXFileReference; lastKnownFileType = wrapper.scnassets; path = navigation.scnassets; sourceTree = "<group>"; };
 		B191592E287A76AA001CB91E /* AR_Evacuation_Beacon.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = AR_Evacuation_Beacon.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B1915931287A76AA001CB91E /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		B1915933287A76AA001CB91E /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -623,6 +627,7 @@
 				B1CB00EC288205C800CD4452 /* View */,
 				B1CB00ED288205D600CD4452 /* Service */,
 				B1CB00EE288205DF00CD4452 /* Model */,
+				B182BB8E288DFD9D0028A3F5 /* navigation.scnassets */,
 			);
 			path = AR_Evacuation_Beacon;
 			sourceTree = "<group>";
@@ -672,6 +677,7 @@
 				B1A4F6F42889D9F90000ECC9 /* Notifiationcenter+Extension.swift */,
 				B1A4F6F6288B36FF0000ECC9 /* IndoorLocationManager.swift */,
 				B1A4F6F8288B3E0A0000ECC9 /* Operator+Extension.swift */,
+				B139C507288CA0DB00A9DE48 /* Position.swift */,
 			);
 			path = Service;
 			sourceTree = "<group>";
@@ -852,6 +858,7 @@
 				B14B8F2A2880856500BE0E6E /* ios_clf_data4S02.csv in Resources */,
 				B1A4F6872886E9270000ECC9 /* ios_clf_data_allS09.csv in Resources */,
 				B14B8EE42880855600BE0E6E /* ios_clf_data5E01.csv in Resources */,
+				B182BB8F288DFD9D0028A3F5 /* navigation.scnassets in Resources */,
 				B14B8EEE2880855600BE0E6E /* ios_clf_data5H01.csv in Resources */,
 				B14B8FB02880857900BE0E6E /* ios_clf_data7A10.csv in Resources */,
 				B14B8EFB2880855600BE0E6E /* ios_clf_data5S03.csv in Resources */,
@@ -983,6 +990,7 @@
 				B1A4F6F9288B3E0A0000ECC9 /* Operator+Extension.swift in Sources */,
 				B1A4F6F7288B36FF0000ECC9 /* IndoorLocationManager.swift in Sources */,
 				B1915959287A7EA7001CB91E /* CSVService.swift in Sources */,
+				B139C508288CA0DB00A9DE48 /* Position.swift in Sources */,
 				B1915953287A7E0F001CB91E /* Beacon.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

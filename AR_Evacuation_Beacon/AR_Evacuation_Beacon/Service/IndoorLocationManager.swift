@@ -23,6 +23,13 @@ enum Mode {
     case real
 }
 
+enum Direction: Int {
+    case South
+    case East
+    case North
+    case West
+}
+
 class IndoorLocationManager: NSObject, CLLocationManagerDelegate {
     
     // MARK: - Properties
@@ -53,6 +60,8 @@ class IndoorLocationManager: NSObject, CLLocationManagerDelegate {
         modelNames.forEach {
             self.classificationModels.append(self.makeClassificationModel(modelName: $0))
         }
+//        getPath()
+//        testMoveUserLocation()
     }
     
 }
@@ -94,8 +103,63 @@ extension IndoorLocationManager {
             }
         } else if mode == .collection {
             NotificationCenter.default.post(name: .movePosition, object: locations)
+        } else {
+            NotificationCenter.default.post(name: .movePosition, object: locations[0])
         }
         
+    }
+    
+    func getPath() {
+        DispatchQueue.main.asyncAfter(deadline: .now() + 5) {
+            NotificationCenter.default.post(name: .path, object: ["H01", "S04", "S03", "S02", "E01", "A01","A02","A03","A04","A05","A06","A07","H02","S07","E02"])
+        }
+    }
+    
+    func testMoveUserLocation() {
+        DispatchQueue.main.asyncAfter(deadline: .now() + 5) {
+            var userlocations = ["H01", "S04", "S03", "S02", "E01", "A01","A02","A03","A04","A05","A06","A07","H02","S07","E02"]
+            Timer.scheduledTimer(withTimeInterval: 1.0, repeats: true) { timer in
+                
+                if userlocations.isEmpty {
+                    timer.invalidate()
+                    return
+                }
+                
+                NotificationCenter.default.post(name: .movePosition, object: userlocations.removeFirst())
+                
+            }
+        }
+    }
+    
+    private func filterWithHeading(heading: Double, previousLocation: Position, currentLocation: Position) -> Position {
+        
+        // Is the user moving?
+        if beaconManager.isFilterReinit {
+            
+            let adjacentCells = previousLocation.adjacentCell.flatMap { (ele: [Position]) -> [Position] in
+                return ele
+            }
+            
+            // is CurrentLocation is Adjacent with previousLocation
+            if adjacentCells.contains(currentLocation) {
+                
+                // if the confusing cell? heading first
+                if [Position.A02, Position.A03, Position.A04, Position.A08].contains(previousLocation) {
+                    
+                    if previousLocation.adjacentCell[headingToDirection(heading: heading).rawValue].contains(currentLocation) {
+                        return currentLocation
+                    }
+                    return previousLocation
+                }
+                return currentLocation
+                
+            } else {
+                
+            }
+        }
+        
+        beaconManager.isFilterReinit = false
+        return currentLocation
     }
     
     private func sendLocationToServerWithSocket(location: String) {
@@ -246,7 +310,20 @@ extension IndoorLocationManager {
     func locationManager(_ manager: CLLocationManager, didUpdateHeading newHeading: CLHeading) {
         self.heading = newHeading.trueHeading
     }
+
+    private func headingToDirection(heading: Double) -> Direction {
+        if ((315.0 <= heading) && (heading < 360.0)) || ((0.0 <= heading) && (heading < 45)) {
+            return Direction.North
+        } else if ((45.0 <= heading) && (heading < 135.0)) {
+            return Direction.East
+        } else if ((135.0 <= heading) && (heading < 225.0)) {
+            return Direction.South
+        } else {
+            return Direction.West
+        }
+    }
     
+    @available(*, deprecated, renamed: "headingToDirection")
     private func headingToFloat(heading: Double) -> Float {
         
         if ((315.0 <= heading) && (heading < 360.0)) || ((0.0 <= heading) && (heading < 45)) {

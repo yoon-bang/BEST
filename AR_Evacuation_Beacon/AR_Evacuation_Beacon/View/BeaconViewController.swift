@@ -14,8 +14,8 @@ import TensorFlowLite
 import CoreMotion
 
 // Build setting
-let modelNames: [String] = ["ios_beacon4", "ios_beacon_5concat", "ios_beacon7concat", "ios_beacon22"]
-let beaconNumlist: [Int] = [4,5,7,22]
+let modelNames: [String] = ["ios_beacon4", "ios_beacon_5concat", "ios_beacon7concat"]
+let beaconNumlist: [Int] = [4,5,7]
 let beaconNum: Int = 4
 let fileName: String = "ios_clf_data4A03"
 let features = ["001","002","003","004","005","006","007","008","009","010",
@@ -36,7 +36,7 @@ class BeaconViewController: UITableViewController, CLLocationManagerDelegate, UN
     
     // MARK: - Private properties
     private let beaconManager = BeaconManager.shared
-    private let indoorLocationManager = IndoorLocationManager(mode: .collection)
+    private let indoorLocationManager = IndoorLocationManager(mode: .real)
         
     private var currentBeaconInfoArr = [Beacon]()
     private var tableviewBeacon = [Beacon]()
@@ -86,6 +86,12 @@ class BeaconViewController: UITableViewController, CLLocationManagerDelegate, UN
     
     @objc private func currentLocation(_ noti: Notification) {
         guard let location = noti.object as? String else {return}
+        
+        var locationlist = estimatedLocations["\(beaconNumlist[0])"] ?? []
+        locationlist.append(location)
+        estimatedLocations.updateValue(locationlist, forKey: "\(beaconNumlist[0])")
+        
+        tableView.reloadData()
         // TODO: 1개일때, 어떻게진행할것인지?
         // TODO: 5개를 모아서 할지?
     }
@@ -100,7 +106,7 @@ class BeaconViewController: UITableViewController, CLLocationManagerDelegate, UN
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if section == 0 {
-            return estimatedLocations.keys.count
+            return beaconNumlist.count
         } else {
             return tableviewBeacon.count
         }
