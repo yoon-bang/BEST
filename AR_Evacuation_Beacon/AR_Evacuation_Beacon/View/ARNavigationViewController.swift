@@ -14,6 +14,7 @@ final class ARNavigationViewController: UIViewController, ARSCNViewDelegate, CLL
     var map = [[Int]](repeating: [1,1,1,1,1], count: 5)
     
     @IBOutlet weak var sceneView: ARSCNView!
+    
     private var map2Dview: UIView = UIView()
     private var map2DViewController = Map2DViewController()
     private let mapContentScrollView: UIScrollView = {
@@ -42,7 +43,12 @@ final class ARNavigationViewController: UIViewController, ARSCNViewDelegate, CLL
         set2DNavigationView()
         locationManager.delegate = self
         arrow = generateArrowNode()
+        NotificationCenter.default.addObserver(self, selector: #selector(movenotification(_:)), name: .movePosition, object: nil)
         self.sceneView.scene.rootNode.addChildNode(arrow)
+    }
+    
+    @objc func movenotification(_ noti: Notification) {
+        mapContentScrollView.scroll(to: map2DViewController.annotationView.currentPoint)
     }
     
     private func set2DNavigationView() {
@@ -51,7 +57,6 @@ final class ARNavigationViewController: UIViewController, ARSCNViewDelegate, CLL
         mapContentScrollView.trailingAnchor.constraint(equalTo: view.trailingAnchor).isActive = true
         mapContentScrollView.bottomAnchor.constraint(equalTo: view.bottomAnchor).isActive = true
         mapContentScrollView.heightAnchor.constraint(equalToConstant: view.frame.height / 2.5).isActive = true
-        
         setMap2dViewController()
     }
     
@@ -62,9 +67,8 @@ final class ARNavigationViewController: UIViewController, ARSCNViewDelegate, CLL
         mapContentScrollView.addSubview(self.map2Dview)
         
         // constraint
-        // 2D map 의 높이
         self.map2Dview.widthAnchor.constraint(equalTo: view.widthAnchor).isActive = true
-        self.map2Dview.heightAnchor.constraint(equalTo: view.heightAnchor).isActive = true
+//        self.map2Dview.heightAnchor.constraint(equalTo: view.heightAnchor).isActive = true
         
         self.map2Dview.leadingAnchor.constraint(equalTo: mapContentScrollView.leadingAnchor).isActive = true
         self.map2Dview.trailingAnchor.constraint(equalTo: mapContentScrollView.trailingAnchor).isActive = true
@@ -245,6 +249,7 @@ extension Int {
 
 extension UIScrollView {
     func scroll(to point: CGPoint) {
-        self.setContentOffset(point, animated: true)
+        let y = point.y - (self.frame.height / 2) < 0 ? 0 : point.y - (self.frame.height / 2)
+        self.setContentOffset(CGPoint(x: 0, y: y), animated: true)
     }
 }

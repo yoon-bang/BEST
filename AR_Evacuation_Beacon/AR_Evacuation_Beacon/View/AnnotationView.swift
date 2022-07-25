@@ -17,6 +17,7 @@ class IndoorAnnotationView: UIView, CLLocationManagerDelegate {
     }(CLLocationManager())
 
     private var heading: Double = 360.0
+    var currentPoint: CGPoint = CGPoint(x: 0, y: 0)
 
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -102,6 +103,7 @@ class IndoorAnnotationView: UIView, CLLocationManagerDelegate {
         let width = abs(start.0 - end.0) / 2
         let height = abs(start.1 - end.1) / 2
         
+        currentPoint = CGPoint(x: (start.0 + width) * 10, y: (start.1 + height) * 10)
         return CGPoint(x: (start.0 + width) * 10, y: (start.1 + height) * 10)
     }
     
