@@ -241,15 +241,13 @@ extension ARNavigationViewController {
             let end = transformCellToCGPoint(cellname:path[index+1])
             let vector = vectorBetween2Points(from: start, to: end)
             
-            // 각도 계산하기
+            // get angle
             directionDegree = vector.angle
-            // 다음꺼의 거리를 찾기
+            // get dist
             let dist = vector.dist
             
-            // 다음라운드에 구 그리기
-            // 1칸에 36cm
-            // 7칸에 2.5m
-            //
+            // generate sphere to next cell
+            // 1 cell = 36cm
             let newnode = generateSphereNode()
             sceneView.scene.rootNode.addChildNode(newnode)
             newnode.position = SCNVector3(x: arrow.position.x, y: arrow.position.y, z: arrow.position.z - (Float(dist) / 10 * 0.36) + 1.0)
@@ -282,7 +280,7 @@ extension ARNavigationViewController {
         return CGPoint(x: (start.x + width) * 10, y: (start.y + height) * 10)
     }
     
-    private func vectorBetween2Points(from: CGPoint, to: CGPoint) -> (angle: Float ,dist: Double) {
+    private func vectorBetween2Points(from: CGPoint, to: CGPoint) -> (angle: Float, dist: Double) {
         var degree: Float = 0.0
         let tan = atan2(from.x - to.x, from.y - to.y) * 180 / .pi
         if tan < 0 {

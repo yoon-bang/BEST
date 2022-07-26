@@ -127,8 +127,9 @@ extension IndoorLocationManager {
                     timer.invalidate()
                     return
                 }
-                
-                NotificationCenter.default.post(name: .movePosition, object: userlocations.removeFirst())
+                let location = userlocations.removeFirst()
+                NotificationCenter.default.post(name: .movePosition, object: location)
+                SocketIOManager.shared.sendLocation(location: location)
                 
             }
         }
@@ -303,8 +304,6 @@ extension IndoorLocationManager {
     }
     
 }
-
-
 
 // MARK: - function for if direction features will be used
 
