@@ -14,7 +14,7 @@ import TensorFlowLite
 import CoreMotion
 
 // Build setting
-let modelNames: [String] = ["ios_beacon4", "ios_beacon_5concat", "ios_beacon7concat"]
+let modelNames: [String] = ["ios_beacon4concat", "ios_beacon5concat", "ios_beacon7concat"]
 let beaconNumlist: [Int] = [4,5,7]
 let beaconNum: Int = 4
 let fileName: String = "ios_clf_data4A03"
@@ -71,8 +71,6 @@ class BeaconViewController: UITableViewController, CLLocationManagerDelegate, UN
         tableView.reloadData()
     }
     
-    // TODO: 4개 받아올때, 1개 받아올때 나눠서 비동기 코드 작성하기
-    
     @objc private func currentLocations(_ noti: Notification) {
         guard let locations = noti.object as? [String] else {return}
         
@@ -92,8 +90,6 @@ class BeaconViewController: UITableViewController, CLLocationManagerDelegate, UN
         estimatedLocations.updateValue(locationlist, forKey: "\(beaconNumlist[0])")
         
         tableView.reloadData()
-        // TODO: 1개일때, 어떻게진행할것인지?
-        // TODO: 5개를 모아서 할지?
     }
     
     

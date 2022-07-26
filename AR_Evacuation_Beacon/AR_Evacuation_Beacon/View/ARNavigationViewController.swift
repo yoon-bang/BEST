@@ -21,6 +21,7 @@ final class ARNavigationViewController: UIViewController, ARSCNViewDelegate, CLL
         let scrollView = UIScrollView()
         scrollView.translatesAutoresizingMaskIntoConstraints = false
         scrollView.backgroundColor = .clear
+        scrollView.bounces = false
         scrollView.showsVerticalScrollIndicator = true
         scrollView.showsHorizontalScrollIndicator = true
         return scrollView
@@ -68,7 +69,7 @@ final class ARNavigationViewController: UIViewController, ARSCNViewDelegate, CLL
         
         // constraint
         self.map2Dview.widthAnchor.constraint(equalTo: view.widthAnchor).isActive = true
-//        self.map2Dview.heightAnchor.constraint(equalTo: view.heightAnchor).isActive = true
+        self.map2Dview.heightAnchor.constraint(equalTo: view.heightAnchor).isActive = true
         
         self.map2Dview.leadingAnchor.constraint(equalTo: mapContentScrollView.leadingAnchor).isActive = true
         self.map2Dview.trailingAnchor.constraint(equalTo: mapContentScrollView.trailingAnchor).isActive = true
@@ -77,14 +78,59 @@ final class ARNavigationViewController: UIViewController, ARSCNViewDelegate, CLL
     }
     
     private func generateArrowNode() -> SCNNode {
-        let arrow = SCNNode(geometry: SCNCone(topRadius: 0, bottomRadius: 0.1, height: 0.1))
-        arrow.eulerAngles = SCNVector3(x: Float(90.degreesToRadians), y: 0, z: 0)
-        arrow.name = "arrow"
-        let rotateAction = rotateWithHeading()
-        arrow.runAction(rotateAction)
-        arrow.geometry?.firstMaterial?.diffuse.contents = UIColor.systemBlue
         
-        return arrow
+        let vertcount = 48;
+        let verts: [Float] = [ -1.4923, 1.1824, 2.5000, -6.4923, 0.000, 0.000, -1.4923, -1.1824, 2.5000, 4.6077, -0.5812, 1.6800, 4.6077, -0.5812, -1.6800, 4.6077, 0.5812, -1.6800, 4.6077, 0.5812, 1.6800, -1.4923, -1.1824, -2.5000, -1.4923, 1.1824, -2.5000, -1.4923, 0.4974, -0.9969, -1.4923, 0.4974, 0.9969, -1.4923, -0.4974, 0.9969, -1.4923, -0.4974, -0.9969 ];
+        
+        let facecount = 13;
+        let faces: [CInt] = [  3, 4, 3, 3, 3, 4, 4, 4, 4, 4, 4, 4, 4, 0, 1, 2, 3, 4, 5, 6, 7, 1, 8, 8, 1, 0, 2, 1, 7, 9, 8, 0, 10, 10, 0, 2, 11, 11, 2, 7, 12, 12, 7, 8, 9, 9, 5, 4, 12, 10, 6, 5, 9, 11, 3, 6, 10, 12, 4, 3, 11 ];
+        
+        let vertsData  = NSData(
+            bytes: verts,
+            length: MemoryLayout<Float>.size * vertcount
+        )
+        
+        let vertexSource = SCNGeometrySource(data: vertsData as Data,
+                                             semantic: .vertex,
+                                             vectorCount: vertcount,
+                                             usesFloatComponents: true,
+                                             componentsPerVector: 3,
+                                             bytesPerComponent: MemoryLayout<Float>.size,
+                                             dataOffset: 0,
+                                             dataStride: MemoryLayout<Float>.size * 3)
+        
+        let polyIndexCount = 61;
+        let indexPolyData  = NSData( bytes: faces, length: MemoryLayout<CInt>.size * polyIndexCount )
+        
+        let element1 = SCNGeometryElement(data: indexPolyData as Data,
+                                          primitiveType: .polygon,
+                                          primitiveCount: facecount,
+                                          bytesPerIndex: MemoryLayout<CInt>.size)
+        
+        let geometry1 = SCNGeometry(sources: [vertexSource], elements: [element1])
+        
+        let material1 = geometry1.firstMaterial!
+        
+        material1.diffuse.contents = UIColor(red: 0.14, green: 0.82, blue: 0.95, alpha: 1.0)
+        material1.lightingModel = .lambert
+        material1.transparency = 1.00
+        material1.transparencyMode = .dualLayer
+        material1.fresnelExponent = 1.00
+        material1.reflective.contents = UIColor(white:0.00, alpha:1.0)
+        material1.specular.contents = UIColor(white:0.00, alpha:1.0)
+        material1.shininess = 1.00
+        
+        //Assign the SCNGeometry to a SCNNode, for example:
+        let aNode = SCNNode()
+        aNode.geometry = geometry1
+        aNode.scale = SCNVector3(0.05, 0.05, 0.05)
+        aNode.eulerAngles = SCNVector3(x: 0, y: Float(90.degreesToRadians), z: 0)
+        aNode.name = "arrow"
+        let rotateAction = rotateWithHeading()
+        aNode.runAction(rotateAction)
+        aNode.geometry?.firstMaterial?.diffuse.contents = UIColor.systemBlue
+        
+        return aNode
     }
     
     
@@ -136,17 +182,12 @@ extension ARNavigationViewController {
     func renderer(_ renderer: SCNSceneRenderer, updateAtTime time: TimeInterval) {
         
         guard let pointOfView = sceneView.pointOfView else {return}
-
         let transform = pointOfView.transform
-        
         let orientation = SCNVector3(-transform.m31, -transform.m32, -transform.m33)
-        
         let location = SCNVector3(transform.m41, transform.m42, transform.m43)
-        
         let currentPositionOfCamera = location + orientation
-        
         DispatchQueue.main.async { [self] in
-            self.arrow.position = currentPositionOfCamera
+            self.arrow.position = SCNVector3(x: currentPositionOfCamera.x, y: currentPositionOfCamera.y + 0.1, z: currentPositionOfCamera.z)
         }
         
     }
@@ -163,7 +204,7 @@ extension ARNavigationViewController {
         let rotation = SCNAction.rotateBy(x: 0, y: CGFloat(Float(heading).degreesToRadians), z: 0, duration: 0)
         return rotation
     }
-
+    
 }
 
 

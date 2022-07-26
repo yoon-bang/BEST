@@ -103,8 +103,8 @@ class IndoorAnnotationView: UIView, CLLocationManagerDelegate {
         let width = abs(start.0 - end.0) / 2
         let height = abs(start.1 - end.1) / 2
         
-        currentPoint = CGPoint(x: (start.0 + width) * 10, y: (start.1 + height) * 10)
-        return CGPoint(x: (start.0 + width) * 10, y: (start.1 + height) * 10)
+        currentPoint = CGPoint(x: (start.0 + width) * 10, y: (start.1 + height + 5) * 10)
+        return CGPoint(x: (start.0 + width) * 10, y: (start.1 + height + 5) * 10)
     }
     
     func locationManager(_ manager: CLLocationManager, didUpdateHeading newHeading: CLHeading) {

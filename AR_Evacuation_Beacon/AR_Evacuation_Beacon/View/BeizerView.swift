@@ -28,11 +28,11 @@ class BeizerView: UIView {
         var firstMove: CGPoint = CGPoint(x: 0.0, y: 0.0)
         for i in point.indices {
             if i == 0 {
-                firstMove = CGPoint(x: point[i].0 * 10, y: point[i].1 * 10)
+                firstMove = CGPoint(x: point[i].0 * 10, y: (point[i].1 + 2.5) * 10)
                 path.move(to: firstMove)
             }
             if i < point.count - 1 {
-                path.addLine(to: CGPoint(x: point[i+1].0 * 10, y: point[i+1].1 * 10))
+                path.addLine(to: CGPoint(x: point[i+1].0 * 10, y: (point[i+1].1 + 2.5) * 10))
             }
         }
         path.addLine(to: firstMove)
@@ -47,7 +47,7 @@ class BeizerView: UIView {
         var y: CGFloat = 10
         
         for point in path {
-            
+
             if let location1 = mapDic[point] {
                 drawCell(point: location1)
             }

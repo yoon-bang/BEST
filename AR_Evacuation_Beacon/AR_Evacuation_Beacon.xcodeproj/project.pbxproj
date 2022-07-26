@@ -102,6 +102,10 @@
 		B14B8FBA2880857900BE0E6E /* ios_clf_data7S03.csv in Resources */ = {isa = PBXBuildFile; fileRef = B14B8F9B2880857900BE0E6E /* ios_clf_data7S03.csv */; };
 		B14B8FBB2880857900BE0E6E /* ios_clf_data7R03.csv in Resources */ = {isa = PBXBuildFile; fileRef = B14B8F9C2880857900BE0E6E /* ios_clf_data7R03.csv */; };
 		B182BB8F288DFD9D0028A3F5 /* navigation.scnassets in Resources */ = {isa = PBXBuildFile; fileRef = B182BB8E288DFD9D0028A3F5 /* navigation.scnassets */; };
+		B182BB95288F56540028A3F5 /* iPhone_arrow.obj in Resources */ = {isa = PBXBuildFile; fileRef = B182BB94288F56540028A3F5 /* iPhone_arrow.obj */; };
+		B182BB99288F69E20028A3F5 /* KSW_2.png in Resources */ = {isa = PBXBuildFile; fileRef = B182BB96288F69E20028A3F5 /* KSW_2.png */; };
+		B182BB9A288F69E20028A3F5 /* KSW_0.png in Resources */ = {isa = PBXBuildFile; fileRef = B182BB97288F69E20028A3F5 /* KSW_0.png */; };
+		B182BB9B288F69E20028A3F5 /* KSW_1.png in Resources */ = {isa = PBXBuildFile; fileRef = B182BB98288F69E20028A3F5 /* KSW_1.png */; };
 		B1915932287A76AA001CB91E /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1915931287A76AA001CB91E /* AppDelegate.swift */; };
 		B1915934287A76AA001CB91E /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1915933287A76AA001CB91E /* SceneDelegate.swift */; };
 		B1915939287A76AA001CB91E /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B1915937287A76AA001CB91E /* Main.storyboard */; };
@@ -160,9 +164,6 @@
 		B1A4F69728876CC80000ECC9 /* final_U01.csv in Resources */ = {isa = PBXBuildFile; fileRef = B1A4F69628876CC70000ECC9 /* final_U01.csv */; };
 		B1A4F69928876F350000ECC9 /* final_U01 2.csv in Resources */ = {isa = PBXBuildFile; fileRef = B1A4F69828876F350000ECC9 /* final_U01 2.csv */; };
 		B1A4F6A128888AC70000ECC9 /* Map2DViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1A4F6A028888AC70000ECC9 /* Map2DViewController.swift */; };
-		B1A4F6AB288893260000ECC9 /* KSW_0.png in Resources */ = {isa = PBXBuildFile; fileRef = B1A4F6A8288893260000ECC9 /* KSW_0.png */; };
-		B1A4F6AC288893260000ECC9 /* KSW_1.png in Resources */ = {isa = PBXBuildFile; fileRef = B1A4F6A9288893260000ECC9 /* KSW_1.png */; };
-		B1A4F6AD288893260000ECC9 /* KSW_2.png in Resources */ = {isa = PBXBuildFile; fileRef = B1A4F6AA288893260000ECC9 /* KSW_2.png */; };
 		B1A4F6CF288983520000ECC9 /* ios_clf_data_7_directionA08.csv in Resources */ = {isa = PBXBuildFile; fileRef = B1A4F6B0288983500000ECC9 /* ios_clf_data_7_directionA08.csv */; };
 		B1A4F6D0288983520000ECC9 /* ios_clf_data_7_directionS06.csv in Resources */ = {isa = PBXBuildFile; fileRef = B1A4F6B1288983500000ECC9 /* ios_clf_data_7_directionS06.csv */; };
 		B1A4F6D1288983520000ECC9 /* ios_clf_data_7_directionS02.csv in Resources */ = {isa = PBXBuildFile; fileRef = B1A4F6B2288983500000ECC9 /* ios_clf_data_7_directionS02.csv */; };
@@ -301,6 +302,10 @@
 		B14B8F9B2880857900BE0E6E /* ios_clf_data7S03.csv */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = ios_clf_data7S03.csv; path = ../../../iOS_clf_dataset/ios_clf_data_7/ios_clf_data7S03.csv; sourceTree = "<group>"; };
 		B14B8F9C2880857900BE0E6E /* ios_clf_data7R03.csv */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = ios_clf_data7R03.csv; path = ../../../iOS_clf_dataset/ios_clf_data_7/ios_clf_data7R03.csv; sourceTree = "<group>"; };
 		B182BB8E288DFD9D0028A3F5 /* navigation.scnassets */ = {isa = PBXFileReference; lastKnownFileType = wrapper.scnassets; path = navigation.scnassets; sourceTree = "<group>"; };
+		B182BB94288F56540028A3F5 /* iPhone_arrow.obj */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = iPhone_arrow.obj; sourceTree = "<group>"; };
+		B182BB96288F69E20028A3F5 /* KSW_2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = KSW_2.png; sourceTree = "<group>"; };
+		B182BB97288F69E20028A3F5 /* KSW_0.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = KSW_0.png; sourceTree = "<group>"; };
+		B182BB98288F69E20028A3F5 /* KSW_1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = KSW_1.png; sourceTree = "<group>"; };
 		B191592E287A76AA001CB91E /* AR_Evacuation_Beacon.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = AR_Evacuation_Beacon.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B1915931287A76AA001CB91E /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		B1915933287A76AA001CB91E /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -359,9 +364,6 @@
 		B1A4F69628876CC70000ECC9 /* final_U01.csv */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = final_U01.csv; sourceTree = "<group>"; };
 		B1A4F69828876F350000ECC9 /* final_U01 2.csv */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "final_U01 2.csv"; sourceTree = "<group>"; };
 		B1A4F6A028888AC70000ECC9 /* Map2DViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Map2DViewController.swift; sourceTree = "<group>"; };
-		B1A4F6A8288893260000ECC9 /* KSW_0.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = KSW_0.png; sourceTree = "<group>"; };
-		B1A4F6A9288893260000ECC9 /* KSW_1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = KSW_1.png; sourceTree = "<group>"; };
-		B1A4F6AA288893260000ECC9 /* KSW_2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = KSW_2.png; sourceTree = "<group>"; };
 		B1A4F6B0288983500000ECC9 /* ios_clf_data_7_directionA08.csv */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = ios_clf_data_7_directionA08.csv; sourceTree = "<group>"; };
 		B1A4F6B1288983500000ECC9 /* ios_clf_data_7_directionS06.csv */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = ios_clf_data_7_directionS06.csv; sourceTree = "<group>"; };
 		B1A4F6B2288983500000ECC9 /* ios_clf_data_7_directionS02.csv */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = ios_clf_data_7_directionS02.csv; sourceTree = "<group>"; };
@@ -641,9 +643,9 @@
 				B1A4F68C28872F200000ECC9 /* map_U01.csv */,
 				B1A4F69028875AEC0000ECC9 /* map_U01_2.csv */,
 				B1A4F692288760310000ECC9 /* map_U01_3.csv */,
-				B1A4F6A8288893260000ECC9 /* KSW_0.png */,
-				B1A4F6A9288893260000ECC9 /* KSW_1.png */,
-				B1A4F6AA288893260000ECC9 /* KSW_2.png */,
+				B182BB98288F69E20028A3F5 /* KSW_1.png */,
+				B182BB96288F69E20028A3F5 /* KSW_2.png */,
+				B182BB97288F69E20028A3F5 /* KSW_0.png */,
 			);
 			path = map;
 			sourceTree = "<group>";
@@ -685,6 +687,7 @@
 		B1CB00EE288205DF00CD4452 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				B182BB94288F56540028A3F5 /* iPhone_arrow.obj */,
 				B1915952287A7E0F001CB91E /* Beacon.swift */,
 			);
 			path = Model;
@@ -767,7 +770,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				B1A4F6AB288893260000ECC9 /* KSW_0.png in Resources */,
 				B14B8EEF2880855600BE0E6E /* ios_clf_data5A04.csv in Resources */,
 				B14B8EE32880855600BE0E6E /* ios_clf_data5A06.csv in Resources */,
 				B1A4F6EB288983520000ECC9 /* ios_clf_data_7_directionA01.csv in Resources */,
@@ -831,7 +833,6 @@
 				B1A4F6D6288983520000ECC9 /* ios_clf_data_7_directionA09.csv in Resources */,
 				B14B8F2E2880856500BE0E6E /* ios_clf_data4S07.csv in Resources */,
 				B14B8F212880856500BE0E6E /* ios_clf_data4R05.csv in Resources */,
-				B1A4F6AD288893260000ECC9 /* KSW_2.png in Resources */,
 				B14B8F9E2880857900BE0E6E /* ios_clf_data7S04.csv in Resources */,
 				B191594D287A7AFE001CB91E /* GoogleService-Info.plist in Resources */,
 				B19159F0287F345A001CB91E /* LabelTableViewCell.xib in Resources */,
@@ -849,8 +850,8 @@
 				B1A4F6E9288983520000ECC9 /* ios_clf_data_7_directionH01.csv in Resources */,
 				B1A4F69728876CC80000ECC9 /* final_U01.csv in Resources */,
 				B1A4F6ED288983520000ECC9 /* ios_clf_data_7_directionR01.csv in Resources */,
+				B182BB95288F56540028A3F5 /* iPhone_arrow.obj in Resources */,
 				B14B8F382880856500BE0E6E /* ios_clf_data4A07.csv in Resources */,
-				B1A4F6AC288893260000ECC9 /* KSW_1.png in Resources */,
 				B1A4F67E2886E9270000ECC9 /* ios_clf_data_allS03.csv in Resources */,
 				B14B8FA72880857900BE0E6E /* ios_clf_data7A11.csv in Resources */,
 				B14B8EEC2880855600BE0E6E /* ios_clf_data5A01.csv in Resources */,
@@ -866,6 +867,7 @@
 				B1A4F6D3288983520000ECC9 /* ios_clf_data_7_directionE02.csv in Resources */,
 				B1A4F6E1288983520000ECC9 /* ios_clf_data_7_directionA03.csv in Resources */,
 				B14B8FAF2880857900BE0E6E /* ios_clf_data7A06.csv in Resources */,
+				B182BB9A288F69E20028A3F5 /* KSW_0.png in Resources */,
 				B1A4F6742886E9270000ECC9 /* ios_clf_data_allA01.csv in Resources */,
 				B1A4F6DD288983520000ECC9 /* ios_clf_data_7_directionS05.csv in Resources */,
 				B14B8FA42880857900BE0E6E /* ios_clf_data7U01.csv in Resources */,
@@ -892,6 +894,7 @@
 				B14B8FA52880857900BE0E6E /* ios_clf_data7S01.csv in Resources */,
 				B14B8F002880855600BE0E6E /* ios_clf_data5A08.csv in Resources */,
 				B14B8F2C2880856500BE0E6E /* ios_clf_data4E03.csv in Resources */,
+				B182BB99288F69E20028A3F5 /* KSW_2.png in Resources */,
 				B14B8F252880856500BE0E6E /* ios_clf_data4A02.csv in Resources */,
 				B1A4F66D2886E9270000ECC9 /* ios_clf_data_allR02.csv in Resources */,
 				B1A4F6D4288983520000ECC9 /* ios_clf_data_7_directionR05.csv in Resources */,
@@ -929,6 +932,7 @@
 				B14B8F222880856500BE0E6E /* ios_clf_data4R01.csv in Resources */,
 				B1A4F6832886E9270000ECC9 /* ios_clf_data_allH01.csv in Resources */,
 				B14B8FA22880857900BE0E6E /* ios_clf_data7R04.csv in Resources */,
+				B182BB9B288F69E20028A3F5 /* KSW_1.png in Resources */,
 				B1A4F6822886E9270000ECC9 /* ios_clf_data_allE03.csv in Resources */,
 				B14B8F322880856500BE0E6E /* ios_clf_data4A05.csv in Resources */,
 				B1A4F6EC288983520000ECC9 /* ios_clf_data_7_directionA02.csv in Resources */,

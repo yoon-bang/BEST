@@ -88,9 +88,10 @@ class Map2DViewController: UIViewController {
         view.backgroundColor = .clear
         view.addSubview(mapImagView)
         mapImagView.alpha = 0.5
+        mapImagView.contentMode = .scaleAspectFill // fill
         mapImagView.translatesAutoresizingMaskIntoConstraints = false
-        mapImagView.heightAnchor.constraint(equalTo: view.heightAnchor).isActive = true
-        mapImagView.widthAnchor.constraint(equalTo: view.widthAnchor).isActive = true
+//        mapImagView.heightAnchor.constraint(equalTo: view.heightAnchor).isActive = true
+//        mapImagView.widthAnchor.constraint(equalTo: view.widthAnchor).isActive = true
         mapImagView.leadingAnchor.constraint(equalTo: view.leadingAnchor).isActive = true
         mapImagView.trailingAnchor.constraint(equalTo: view.trailingAnchor).isActive = true
         mapImagView.topAnchor.constraint(equalTo: view.topAnchor).isActive = true
@@ -278,7 +279,6 @@ class Map2DViewController: UIViewController {
         }
         mapImagView.image = UIImage(named: imageName)!
     }
-    
     
     // if path change -> Should remove the pathviews and start again
     private func didPathChanged() {

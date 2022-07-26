@@ -11,16 +11,19 @@ func max(_ left: Beacon, _ right: Beacon) -> Beacon {
     return left.rssi > right.rssi ? left : right
 }
 
-func mode(array: [String]) -> String {
-    var dictionary = [String: Int]()
-    
-    for index in array.indices {
-        if let count = dictionary[array[index]] {
-            dictionary[array[index]] = count+1
-        } else {
-            dictionary[array[index]] = 1
+extension Array {
+    func mode<T: Hashable>() -> T {
+        var dictionary = [T: Int]()
+        for index in 0..<self.count {
+            let a = self[index] as! T
+            if let count = dictionary[a] {
+                dictionary[self[index] as! T] = count+1
+            } else {
+                dictionary[self[index] as! T] = 1
+            }
         }
+        
+        return dictionary.max { $0.value < $1.value }!.key
     }
-    
-    return dictionary.max { $0.value < $1.value }!.key
 }
+

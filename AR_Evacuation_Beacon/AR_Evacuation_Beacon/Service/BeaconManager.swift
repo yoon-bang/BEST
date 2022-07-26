@@ -35,18 +35,9 @@ class BeaconManager {
         
         let sorted = beaconDictionary.sorted{ $0.value.filteredRssi > $1.value.filteredRssi }
         if beaconNum != 22 {
-//            for beacon in sorted[0..<beaconNum] {
-//                if beacon.value.filteredRssi > -200 && beacon.value.rssi != 0 && abs(beacon.value.filteredRssi - Float(beacon.value.rssi)) > threshold {
-//
-//                    beaconDictionary.forEach { id, beacon in beacon.reinitFilter() }
-//                    print("update kalmanfiltered")
-//                    isFilterReinit = true
-//                    break
-//                }
-//            }
-            for beacon in sorted {
+            for beacon in sorted[0..<beaconNum] {
                 if beacon.value.filteredRssi > -200 && beacon.value.rssi != 0 && abs(beacon.value.filteredRssi - Float(beacon.value.rssi)) > threshold {
-                    
+
                     beaconDictionary.forEach { id, beacon in beacon.reinitFilter() }
                     print("update kalmanfiltered")
                     isFilterReinit = true

@@ -16,6 +16,7 @@
 
 import Foundation
 import CoreLocation
+import SocketIO
 
 enum Mode {
     case debug
@@ -40,6 +41,8 @@ class IndoorLocationManager: NSObject, CLLocationManagerDelegate {
     private var classificationModels: [ModelInterpreter] = []
     private var previousBeacons = [Beacon]()
     private var heading: Double = 0.0
+    private var firstposition = ""
+    private var positionList: [String] = []
     
     private var currentBeacons = [Beacon]() {
         didSet {
@@ -60,7 +63,7 @@ class IndoorLocationManager: NSObject, CLLocationManagerDelegate {
         modelNames.forEach {
             self.classificationModels.append(self.makeClassificationModel(modelName: $0))
         }
-//        getPath()
+        getPath()
 //        testMoveUserLocation()
     }
     
@@ -94,12 +97,13 @@ extension IndoorLocationManager {
         
         // if cannot find the overlapped one, get the location from the Model with 4 beacons
         if mode == .real {
-            if let location = dic.sorted(by: { $0.value > $1.value }).first?.key {
-                sendLocationToServerWithSocket(location: location)
-                NotificationCenter.default.post(name: .movePosition, object: location)
-            } else {
+            if firstposition != "" {
                 sendLocationToServerWithSocket(location: locations[0])
                 NotificationCenter.default.post(name: .movePosition, object: locations[0])
+            } else {
+                if positionList.count > 4 {
+                    firstposition = positionList.mode()
+                }
             }
         } else if mode == .collection {
             NotificationCenter.default.post(name: .movePosition, object: locations)
@@ -111,13 +115,13 @@ extension IndoorLocationManager {
     
     func getPath() {
         DispatchQueue.main.asyncAfter(deadline: .now() + 5) {
-            NotificationCenter.default.post(name: .path, object: ["H01", "S04", "S03", "S02", "E01", "A01","A02","A03","A04","A05","A06","A07","H02","S07","E02"])
+            NotificationCenter.default.post(name: .path, object: ["A01","A02","A03","A04","A05","A06","A07"])
         }
     }
     
     func testMoveUserLocation() {
         DispatchQueue.main.asyncAfter(deadline: .now() + 5) {
-            var userlocations = ["H01", "S04", "S03", "S02", "E01", "A01","A02","A03","A04","A05","A06","A07","H02","S07","E02"]
+            var userlocations = ["A07"]
             Timer.scheduledTimer(withTimeInterval: 1.0, repeats: true) { timer in
                 
                 if userlocations.isEmpty {
@@ -234,7 +238,7 @@ extension IndoorLocationManager {
             if direction {
                 let csv = createCSVWithPrevAndCurrentBeacons(prev: previousBeacons, current: currentBeacons, heading: heading)
             } else {
-                userLocation(prevBeaconInfo: previousBeacons, currentBeaconInfo: currentBeacons)
+//                userLocation(prevBeaconInfo: previousBeacons, currentBeaconInfo: currentBeacons)
                 previousBeacons.removeAll()
             }
         }
