@@ -135,20 +135,20 @@ extension ARNavigationViewController {
     
     private func generateArrowNode() -> SCNNode {
         
-        let vertcount = 48;
-        let verts: [Float] = [ -1.4923, 1.1824, 2.5000, -6.4923, 0.000, 0.000, -1.4923, -1.1824, 2.5000, 4.6077, -0.5812, 1.6800, 4.6077, -0.5812, -1.6800, 4.6077, 0.5812, -1.6800, 4.6077, 0.5812, 1.6800, -1.4923, -1.1824, -2.5000, -1.4923, 1.1824, -2.5000, -1.4923, 0.4974, -0.9969, -1.4923, 0.4974, 0.9969, -1.4923, -0.4974, 0.9969, -1.4923, -0.4974, -0.9969 ];
+        let vertexCount = 48;
+        let vertexs: [Float] = [ -1.4923, 1.1824, 2.5000, -6.4923, 0.000, 0.000, -1.4923, -1.1824, 2.5000, 4.6077, -0.5812, 1.6800, 4.6077, -0.5812, -1.6800, 4.6077, 0.5812, -1.6800, 4.6077, 0.5812, 1.6800, -1.4923, -1.1824, -2.5000, -1.4923, 1.1824, -2.5000, -1.4923, 0.4974, -0.9969, -1.4923, 0.4974, 0.9969, -1.4923, -0.4974, 0.9969, -1.4923, -0.4974, -0.9969 ];
         
         let facecount = 13;
         let faces: [CInt] = [  3, 4, 3, 3, 3, 4, 4, 4, 4, 4, 4, 4, 4, 0, 1, 2, 3, 4, 5, 6, 7, 1, 8, 8, 1, 0, 2, 1, 7, 9, 8, 0, 10, 10, 0, 2, 11, 11, 2, 7, 12, 12, 7, 8, 9, 9, 5, 4, 12, 10, 6, 5, 9, 11, 3, 6, 10, 12, 4, 3, 11 ];
         
-        let vertsData  = NSData(
-            bytes: verts,
-            length: MemoryLayout<Float>.size * vertcount
+        let vertexData  = NSData(
+            bytes: vertexs,
+            length: MemoryLayout<Float>.size * vertexCount
         )
         
-        let vertexSource = SCNGeometrySource(data: vertsData as Data,
+        let vertexSource = SCNGeometrySource(data: vertexData as Data,
                                              semantic: .vertex,
-                                             vectorCount: vertcount,
+                                             vectorCount: vertexCount,
                                              usesFloatComponents: true,
                                              componentsPerVector: 3,
                                              bytesPerComponent: MemoryLayout<Float>.size,
@@ -158,33 +158,33 @@ extension ARNavigationViewController {
         let polyIndexCount = 61;
         let indexPolyData  = NSData( bytes: faces, length: MemoryLayout<CInt>.size * polyIndexCount )
         
-        let element1 = SCNGeometryElement(data: indexPolyData as Data,
+        let element = SCNGeometryElement(data: indexPolyData as Data,
                                           primitiveType: .polygon,
                                           primitiveCount: facecount,
                                           bytesPerIndex: MemoryLayout<CInt>.size)
         
-        let geometry1 = SCNGeometry(sources: [vertexSource], elements: [element1])
+        let geometry = SCNGeometry(sources: [vertexSource], elements: [element])
         
-        let material1 = geometry1.firstMaterial!
+        let material = geometry.firstMaterial!
         
-        material1.diffuse.contents = UIColor(red: 0.14, green: 0.82, blue: 0.95, alpha: 1.0)
-        material1.lightingModel = .lambert
-        material1.transparency = 1.00
-        material1.transparencyMode = .dualLayer
-        material1.fresnelExponent = 1.00
-        material1.reflective.contents = UIColor(white:0.00, alpha:1.0)
-        material1.specular.contents = UIColor(white:0.00, alpha:1.0)
-        material1.shininess = 1.00
+        material.diffuse.contents = UIColor(red: 0.14, green: 0.82, blue: 0.95, alpha: 1.0)
+        material.lightingModel = .lambert
+        material.transparency = 1.00
+        material.transparencyMode = .dualLayer
+        material.fresnelExponent = 1.00
+        material.reflective.contents = UIColor(white:0.00, alpha:1.0)
+        material.specular.contents = UIColor(white:0.00, alpha:1.0)
+        material.shininess = 1.00
         
         //Assign the SCNGeometry to a SCNNode, for example:
-        let aNode = SCNNode()
-        aNode.geometry = geometry1
-        aNode.scale = SCNVector3(0.05, 0.05, 0.05)
-        aNode.eulerAngles = SCNVector3(x: 0, y: Float(Float(heading - 90).degreesToRadians), z: 0)
-        aNode.name = "arrow"
-        aNode.geometry?.firstMaterial?.diffuse.contents = UIColor.systemBlue
+        let arrow = SCNNode()
+        arrow.geometry = geometry
+        arrow.scale = SCNVector3(0.05, 0.05, 0.05)
+        arrow.eulerAngles = SCNVector3(x: 0, y: Float(Float(heading - 90).degreesToRadians), z: 0)
+        arrow.name = "arrow"
+        arrow.geometry?.firstMaterial?.diffuse.contents = UIColor.systemBlue
         
-        return aNode
+        return arrow
     }
     
     
