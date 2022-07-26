@@ -28,6 +28,8 @@ final class ARNavigationViewController: UIViewController, ARSCNViewDelegate, CLL
     }()
     private var arrow = SCNNode()
     private var heading: Double = 360
+    private var directionDegree: Float = 0
+    private var path: [String] = []
     
     let locationManager: CLLocationManager = {
         $0.requestWhenInUseAuthorization()
@@ -41,41 +43,95 @@ final class ARNavigationViewController: UIViewController, ARSCNViewDelegate, CLL
         super.viewDidLoad()
         self.initScene()
         self.initARSession()
-        set2DNavigationView()
+        self.set2DNavigationView()
         locationManager.delegate = self
         arrow = generateArrowNode()
-        NotificationCenter.default.addObserver(self, selector: #selector(movenotification(_:)), name: .movePosition, object: nil)
         self.sceneView.scene.rootNode.addChildNode(arrow)
-    }
-    
-    @objc func movenotification(_ noti: Notification) {
-        mapContentScrollView.scroll(to: map2DViewController.annotationView.currentPoint)
-    }
-    
-    private func set2DNavigationView() {
-        view.addSubview(mapContentScrollView)
-        mapContentScrollView.leadingAnchor.constraint(equalTo: view.leadingAnchor).isActive = true
-        mapContentScrollView.trailingAnchor.constraint(equalTo: view.trailingAnchor).isActive = true
-        mapContentScrollView.bottomAnchor.constraint(equalTo: view.bottomAnchor).isActive = true
-        mapContentScrollView.heightAnchor.constraint(equalToConstant: view.frame.height / 2.5).isActive = true
-        setMap2dViewController()
-    }
-    
-    private func setMap2dViewController() {
-        guard let map2dView = map2DViewController.view else {return}
-        map2dView.translatesAutoresizingMaskIntoConstraints = false
-        self.map2Dview = map2dView
-        mapContentScrollView.addSubview(self.map2Dview)
         
-        // constraint
-        self.map2Dview.widthAnchor.constraint(equalTo: view.widthAnchor).isActive = true
-        self.map2Dview.heightAnchor.constraint(equalTo: view.heightAnchor).isActive = true
-        
-        self.map2Dview.leadingAnchor.constraint(equalTo: mapContentScrollView.leadingAnchor).isActive = true
-        self.map2Dview.trailingAnchor.constraint(equalTo: mapContentScrollView.trailingAnchor).isActive = true
-        self.map2Dview.topAnchor.constraint(equalTo: mapContentScrollView.topAnchor).isActive = true
-        self.map2Dview.bottomAnchor.constraint(equalTo: mapContentScrollView.bottomAnchor).isActive = true
+        // Add Observer
+        NotificationCenter.default.addObserver(self, selector: #selector(movenotification(_:)), name: .movePosition, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(getPath(_:)), name: .path, object: nil)
     }
+    
+    @objc private func getPath(_ noti: Notification) {
+        guard let path = noti.object as? [String] else {return}
+        self.path = path
+    }
+
+}
+
+
+// MARK: - AR Session Management (ARSCNViewDelegate)
+
+extension ARNavigationViewController {
+    
+    func initARSession() {
+        configuration.worldAlignment = .gravityAndHeading
+        self.sceneView.session.run(configuration)
+    }
+    
+    func resetARSession() {
+        let config = sceneView.session.configuration as! ARWorldTrackingConfiguration
+        sceneView.session.run(config, options: [.resetTracking, .removeExistingAnchors])
+    }
+    
+    func locationManager(_ manager: CLLocationManager, didUpdateHeading newHeading: CLHeading) {
+        self.heading = newHeading.trueHeading
+    }
+    
+}
+
+// MARK: - Scene Management
+
+extension ARNavigationViewController {
+    
+    func initScene() {
+        self.sceneView.delegate = self
+        //sceneView.showsStatistics = true
+        sceneView.debugOptions = [
+            ARSCNDebugOptions.showFeaturePoints,
+            ARSCNDebugOptions.showWorldOrigin
+        ]
+        
+    }
+    
+    func renderer(_ renderer: SCNSceneRenderer, updateAtTime time: TimeInterval) {
+        
+        guard let pointOfView = sceneView.pointOfView else {return}
+        let transform = pointOfView.transform
+        let orientation = SCNVector3(-transform.m31, -transform.m32, -transform.m33)
+        let location = SCNVector3(transform.m41, transform.m42, transform.m43)
+        let currentPositionOfCamera = location + orientation
+        
+        DispatchQueue.main.async { [self] in
+            self.arrow.position = SCNVector3(x: currentPositionOfCamera.x, y: currentPositionOfCamera.y + 0.1, z: currentPositionOfCamera.z)
+            self.arrow.eulerAngles = SCNVector3(x: 0, y:changeDirection(degree: directionDegree), z: 0)
+        }
+        
+    }
+    
+}
+
+// MARK: - Private Function
+
+extension ARNavigationViewController {
+    
+    private func changeDirection(degree: Float) -> Float {
+        return Float(Float(270 - degree).degreesToRadians)
+    }
+    
+    private func directionChange(degree: Float) {
+        SCNTransaction.begin()
+        SCNTransaction.animationDuration = 1
+        let quaternion = simd_quatf(angle: GLKMathDegreesToRadians(degree), axis: simd_float3(0,0,1))
+        arrow.simdOrientation = quaternion * arrow.simdOrientation
+        SCNTransaction.commit()
+    }
+    
+}
+
+// MARK: - Create SCNNode
+extension ARNavigationViewController {
     
     private func generateArrowNode() -> SCNNode {
         
@@ -124,10 +180,8 @@ final class ARNavigationViewController: UIViewController, ARSCNViewDelegate, CLL
         let aNode = SCNNode()
         aNode.geometry = geometry1
         aNode.scale = SCNVector3(0.05, 0.05, 0.05)
-        aNode.eulerAngles = SCNVector3(x: 0, y: Float(90.degreesToRadians), z: 0)
+        aNode.eulerAngles = SCNVector3(x: 0, y: Float(Float(heading - 90).degreesToRadians), z: 0)
         aNode.name = "arrow"
-        let rotateAction = rotateWithHeading()
-        aNode.runAction(rotateAction)
         aNode.geometry?.firstMaterial?.diffuse.contents = UIColor.systemBlue
         
         return aNode
@@ -144,71 +198,107 @@ final class ARNavigationViewController: UIViewController, ARSCNViewDelegate, CLL
     
 }
 
-
-// MARK: - AR Session Management (ARSCNViewDelegate)
-
-extension ARNavigationViewController {
-    
-    func initARSession() {
-        configuration.worldAlignment = .gravityAndHeading
-        self.sceneView.session.run(configuration)
-    }
-    
-    func resetARSession() {
-        let config = sceneView.session.configuration as! ARWorldTrackingConfiguration
-        sceneView.session.run(config, options: [.resetTracking, .removeExistingAnchors])
-    }
-    
-    func locationManager(_ manager: CLLocationManager, didUpdateHeading newHeading: CLHeading) {
-        self.heading = newHeading.trueHeading
-    }
-    
-}
-
-// MARK: - Scene Management
+// MARK: - UI configuration
 
 extension ARNavigationViewController {
     
-    func initScene() {
-        self.sceneView.delegate = self
-        //sceneView.showsStatistics = true
-        sceneView.debugOptions = [
-            ARSCNDebugOptions.showFeaturePoints,
-            ARSCNDebugOptions.showWorldOrigin
-        ]
-        
+    private func set2DNavigationView() {
+        view.addSubview(mapContentScrollView)
+        mapContentScrollView.leadingAnchor.constraint(equalTo: view.leadingAnchor).isActive = true
+        mapContentScrollView.trailingAnchor.constraint(equalTo: view.trailingAnchor).isActive = true
+        mapContentScrollView.bottomAnchor.constraint(equalTo: view.bottomAnchor).isActive = true
+        mapContentScrollView.heightAnchor.constraint(equalToConstant: view.frame.height / 2.5).isActive = true
+        setMap2dViewController()
     }
     
-    func renderer(_ renderer: SCNSceneRenderer, updateAtTime time: TimeInterval) {
+    private func setMap2dViewController() {
+        guard let map2dView = map2DViewController.view else {return}
+        map2dView.translatesAutoresizingMaskIntoConstraints = false
+        self.map2Dview = map2dView
+        mapContentScrollView.addSubview(self.map2Dview)
         
-        guard let pointOfView = sceneView.pointOfView else {return}
-        let transform = pointOfView.transform
-        let orientation = SCNVector3(-transform.m31, -transform.m32, -transform.m33)
-        let location = SCNVector3(transform.m41, transform.m42, transform.m43)
-        let currentPositionOfCamera = location + orientation
-        DispatchQueue.main.async { [self] in
-            self.arrow.position = SCNVector3(x: currentPositionOfCamera.x, y: currentPositionOfCamera.y + 0.1, z: currentPositionOfCamera.z)
+        // constraint
+        self.map2Dview.widthAnchor.constraint(equalTo: view.widthAnchor).isActive = true
+        self.map2Dview.heightAnchor.constraint(equalTo: view.heightAnchor).isActive = true
+        
+        self.map2Dview.leadingAnchor.constraint(equalTo: mapContentScrollView.leadingAnchor).isActive = true
+        self.map2Dview.trailingAnchor.constraint(equalTo: mapContentScrollView.trailingAnchor).isActive = true
+        self.map2Dview.topAnchor.constraint(equalTo: mapContentScrollView.topAnchor).isActive = true
+        self.map2Dview.bottomAnchor.constraint(equalTo: mapContentScrollView.bottomAnchor).isActive = true
+    }
+    
+    @objc private func movenotification(_ noti: Notification) {
+        guard let userLocation = noti.object as? String else {return}
+        mapContentScrollView.scroll(to: map2DViewController.annotationView.currentPoint)
+        
+        // 1.path가 들어왔다.
+        guard !path.isEmpty else {return}
+        // 2.현재위치를 파악한다.
+        guard let index = path.firstIndex(of: userLocation) else {return}
+        if index < path.count - 1 {
+            // 다음꺼의 거리를 찾기
+            let start = transformCellToCGPoint(cellname: path[index])
+            let end = transformCellToCGPoint(cellname:path[index+1])
+            let vector = vectorBetween2Points(from: start, to: end)
+            
+            // 각도 계산하기
+            directionDegree = vector.angle
+            // 다음꺼의 거리를 찾기
+            let dist = vector.dist
+            
+            // 다음라운드에 구 그리기
+            // 1칸에 36cm
+            // 7칸에 2.5m
+            //
+            let newnode = generateSphereNode()
+            sceneView.scene.rootNode.addChildNode(newnode)
+            newnode.position = SCNVector3(x: arrow.position.x, y: arrow.position.y, z: arrow.position.z - (Float(dist) / 10 * 0.36) + 1.0)
+            
         }
         
     }
     
-    func directionChange(degree: Float) {
-        SCNTransaction.begin()
-        SCNTransaction.animationDuration = 1
-        let quaternion = simd_quatf(angle: GLKMathDegreesToRadians(degree), axis: simd_float3(0,0,1))
-        arrow.simdOrientation = quaternion * arrow.simdOrientation
-        SCNTransaction.commit()
+    private func transformCellToCGPoint(cellname: String) -> CGPoint {
+        
+        var start: (x: CGFloat, y: CGFloat) = (0, 0)
+        var end: (x: CGFloat, y: CGFloat) = (0, 0)
+        
+        if let firstFloorCellpoints = mapDic[cellname] {
+            start = firstFloorCellpoints[0]
+            end = firstFloorCellpoints[2]
+        } else if let secondFloorCellpoints = micDic2[cellname] {
+            start = secondFloorCellpoints[0]
+            end = secondFloorCellpoints[2]
+        } else if let baseFloorCellPoints = micDic0[cellname] {
+            start = baseFloorCellPoints[0]
+            end = baseFloorCellPoints[2]
+        } else {
+            return CGPoint(x: 0, y: 0)
+        }
+    
+        let width = abs(start.x - end.x) / 2
+        let height = abs(start.y - end.y) / 2
+        
+        return CGPoint(x: (start.x + width) * 10, y: (start.y + height) * 10)
     }
     
-    func rotateWithHeading() -> SCNAction {
-        let rotation = SCNAction.rotateBy(x: 0, y: CGFloat(Float(heading).degreesToRadians), z: 0, duration: 0)
-        return rotation
+    private func vectorBetween2Points(from: CGPoint, to: CGPoint) -> (angle: Float ,dist: Double) {
+        var degree: Float = 0.0
+        let tan = atan2(from.x - to.x, from.y - to.y) * 180 / .pi
+        if tan < 0 {
+            degree = Float(-tan) + 180.0
+        } else {
+            degree = 180.0 - Float(tan)
+        }
+        return (angle: degree, dist: sqrt(pow(from.x - to.x, 2) + pow(from.y - to.y, 2)))
+        
     }
-    
+
 }
 
 
 // MARK: - Coordinate System
+
 extension ARNavigationViewController {
     
     private func setMap() -> [SCNVector3] {

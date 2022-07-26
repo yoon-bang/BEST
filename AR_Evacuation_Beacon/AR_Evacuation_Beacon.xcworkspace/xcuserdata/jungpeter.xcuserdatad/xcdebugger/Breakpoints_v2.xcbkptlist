@@ -126,8 +126,8 @@
             filePath = "AR_Evacuation_Beacon/Service/IndoorLocationManager.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "118"
-            endingLineNumber = "118"
+            startingLineNumber = "117"
+            endingLineNumber = "117"
             landmarkName = "getPath()"
             landmarkType = "7">
          </BreakpointContent>
@@ -376,7 +376,7 @@
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
             uuid = "2E7AB714-ECD1-4715-A1FE-69BB49AD8D4E"
-            shouldBeEnabled = "Yes"
+            shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "AR_Evacuation_Beacon/View/Map2DViewController.swift"
@@ -503,16 +503,16 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "DBB96D55-102C-4F54-B56F-8641A426DFF5"
+            uuid = "C13DD899-A168-455E-A17A-CB7A5564A816"
             shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "AR_Evacuation_Beacon/View/ARNavigationViewController.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "76"
-            endingLineNumber = "76"
-            landmarkName = "setMap2dViewController()"
+            startingLineNumber = "90"
+            endingLineNumber = "90"
+            landmarkName = "initScene()"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>

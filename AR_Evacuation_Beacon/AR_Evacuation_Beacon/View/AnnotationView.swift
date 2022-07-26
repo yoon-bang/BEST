@@ -82,34 +82,34 @@ class IndoorAnnotationView: UIView, CLLocationManagerDelegate {
         self.frame.origin.y = to.y
     }
     
+    func locationManager(_ manager: CLLocationManager, didUpdateHeading newHeading: CLHeading) {
+        self.heading = newHeading.trueHeading
+        rotate()
+    }
+    
     private func transformCellToCGPoint(cellname: String) -> CGPoint {
         
-        var start: (CGFloat, CGFloat) = (0, 0)
-        var end: (CGFloat, CGFloat) = (0, 0)
+        var start: (x: CGFloat, y: CGFloat) = (0, 0)
+        var end: (x: CGFloat, y: CGFloat) = (0, 0)
         
         if let firstFloorCellpoints = mapDic[cellname] {
             start = firstFloorCellpoints[0]
-            end = firstFloorCellpoints[1]
+            end = firstFloorCellpoints[2]
         } else if let secondFloorCellpoints = micDic2[cellname] {
             start = secondFloorCellpoints[0]
-            end = secondFloorCellpoints[1]
+            end = secondFloorCellpoints[2]
         } else if let baseFloorCellPoints = micDic0[cellname] {
             start = baseFloorCellPoints[0]
-            end = baseFloorCellPoints[1]
+            end = baseFloorCellPoints[2]
         } else {
             return CGPoint(x: 0, y: 0)
         }
     
-        let width = abs(start.0 - end.0) / 2
-        let height = abs(start.1 - end.1) / 2
+        let width = abs(start.x - end.x) / 2
+        let height = abs(start.y - end.y) / 2
         
-        currentPoint = CGPoint(x: (start.0 + width) * 10, y: (start.1 + height + 5) * 10)
-        return CGPoint(x: (start.0 + width) * 10, y: (start.1 + height + 5) * 10)
-    }
-    
-    func locationManager(_ manager: CLLocationManager, didUpdateHeading newHeading: CLHeading) {
-        self.heading = newHeading.trueHeading
-        rotate()
+        currentPoint = CGPoint(x: (start.x + width) * 10, y: (start.y + height) * 10)
+        return CGPoint(x: (start.x + width) * 10, y: (start.y + height) * 10)
     }
     
 }

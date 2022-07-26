@@ -41,7 +41,7 @@ enum Position {
     case H02
     case unknown
     
-    // 남동북서
+    // 남동북서 [180, 90, 0, 270]
     var adjacentCell: [[Position]] {
         switch self {
         case .A01:

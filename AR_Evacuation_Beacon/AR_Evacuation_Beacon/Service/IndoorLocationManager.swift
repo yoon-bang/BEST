@@ -50,7 +50,6 @@ class IndoorLocationManager: NSObject, CLLocationManagerDelegate {
         }
     }
     
-    
     var mode: Mode = .collection
     
     private var userLocation = "A01"
@@ -64,7 +63,7 @@ class IndoorLocationManager: NSObject, CLLocationManagerDelegate {
             self.classificationModels.append(self.makeClassificationModel(modelName: $0))
         }
         getPath()
-//        testMoveUserLocation()
+        testMoveUserLocation()
     }
     
 }
@@ -98,8 +97,8 @@ extension IndoorLocationManager {
         // if cannot find the overlapped one, get the location from the Model with 4 beacons
         if mode == .real {
             if firstposition != "" {
-                sendLocationToServerWithSocket(location: locations[0])
-                NotificationCenter.default.post(name: .movePosition, object: locations[0])
+//                sendLocationToServerWithSocket(location: locations[0])
+//                NotificationCenter.default.post(name: .movePosition, object: locations[0])
             } else {
                 if positionList.count > 4 {
                     firstposition = positionList.mode()
@@ -115,14 +114,14 @@ extension IndoorLocationManager {
     
     func getPath() {
         DispatchQueue.main.asyncAfter(deadline: .now() + 5) {
-            NotificationCenter.default.post(name: .path, object: ["A01","A02","A03","A04","A05","A06","A07"])
+            NotificationCenter.default.post(name: .path, object: ["R02", "A01", "A02", "A03", "A04", "A05", "A06"])
         }
     }
     
     func testMoveUserLocation() {
         DispatchQueue.main.asyncAfter(deadline: .now() + 5) {
-            var userlocations = ["A07"]
-            Timer.scheduledTimer(withTimeInterval: 1.0, repeats: true) { timer in
+            var userlocations = ["R02", "A01", "A02", "A03", "A04", "A05", "A06"]
+            Timer.scheduledTimer(withTimeInterval: 2.0, repeats: true) { timer in
                 
                 if userlocations.isEmpty {
                     timer.invalidate()
