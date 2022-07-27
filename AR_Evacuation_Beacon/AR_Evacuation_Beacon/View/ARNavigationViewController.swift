@@ -95,7 +95,6 @@ extension ARNavigationViewController {
     
     func initScene() {
         self.sceneView.delegate = self
-        //sceneView.showsStatistics = true
         sceneView.debugOptions = [
 //            ARSCNDebugOptions.showFeaturePoints,
 //            ARSCNDebugOptions.showWorldOrigin
@@ -114,40 +113,10 @@ extension ARNavigationViewController {
         DispatchQueue.main.async { [self] in
             //TODO: if path is not ready {return}
             self.arrow.position = SCNVector3(x: currentPositionOfCamera.x, y: currentPositionOfCamera.y + 0.1, z: currentPositionOfCamera.z)
-            self.arrow.eulerAngles = SCNVector3(x: 0, y:changeDirection(degree: directionDegree), z: 0)
-            changeBannerText(degree: changeDirection(degree: directionDegree), heading: heading)
+            self.arrow.eulerAngles = SCNVector3(x: 0, y:VectorService.changeDirection(degree: directionDegree), z: 0)
+            changeBannerText(degree: VectorService.changeDirection(degree: directionDegree), heading: heading)
         }
         
-    }
-    
-}
-
-// MARK: - Private Function
-
-extension ARNavigationViewController {
-    
-    private func changeDirection(degree: Float) -> Float {
-        return Float(Float(270 - degree).degreesToRadians)
-    }
-    
-    private func headingToDirection(degree: Float) -> Direction {
-        if ((315.0 <= degree) && (degree < 360.0)) || ((0.0 <= degree) && (degree < 45)) {
-            return Direction.North
-        } else if ((45.0 <= degree) && (degree < 135.0)) {
-            return Direction.East
-        } else if ((135.0 <= degree) && (degree < 225.0)) {
-            return Direction.South
-        } else {
-            return Direction.West
-        }
-    }
-    
-    private func directionChange(degree: Float) {
-        SCNTransaction.begin()
-        SCNTransaction.animationDuration = 1
-        let quaternion = simd_quatf(angle: GLKMathDegreesToRadians(degree), axis: simd_float3(0,0,1))
-        arrow.simdOrientation = quaternion * arrow.simdOrientation
-        SCNTransaction.commit()
     }
     
 }
@@ -279,9 +248,9 @@ extension ARNavigationViewController {
         guard let index = path.firstIndex(of: userLocation) else {return}
         if index < path.count - 1 {
             // 다음꺼의 거리를 찾기
-            let start = transformCellToCGPoint(cellname: path[index])
-            let end = transformCellToCGPoint(cellname:path[index+1])
-            let vector = vectorBetween2Points(from: start, to: end)
+            let start = VectorService.transformCellToCGPoint(cellname: path[index])
+            let end = VectorService.transformCellToCGPoint(cellname:path[index+1])
+            let vector = VectorService.vectorBetween2Points(from: start, to: end)
             
             // get angle
             directionDegree = vector.angle
@@ -301,8 +270,8 @@ extension ARNavigationViewController {
     
     private func changeBannerText(degree: Float, heading: Double) {
         
-        let pointDirection = headingToDirection(degree: degree)
-        let headingDirection = headingToDirection(degree: Float(heading))
+        let pointDirection = VectorService.headingToDirection(degree: degree)
+        let headingDirection = VectorService.headingToDirection(degree: Float(heading))
         // 남동북서 0123 음수면 오른쪽으로 양수면
         // 현재 동쪽을 가리킬때,
         let direction = pointDirection.rawValue - headingDirection.rawValue
@@ -317,111 +286,7 @@ extension ARNavigationViewController {
         }
         
     }
-    
-    private func transformCellToCGPoint(cellname: Position) -> CGPoint {
-        
-        var start: (x: CGFloat, y: CGFloat) = (0, 0)
-        var end: (x: CGFloat, y: CGFloat) = (0, 0)
-        
-        if let firstFloorCellpoints = mapDic[cellname] {
-            start = firstFloorCellpoints[0]
-            end = firstFloorCellpoints[2]
-        } else if let secondFloorCellpoints = micDic2[cellname] {
-            start = secondFloorCellpoints[0]
-            end = secondFloorCellpoints[2]
-        } else if let baseFloorCellPoints = micDic0[cellname] {
-            start = baseFloorCellPoints[0]
-            end = baseFloorCellPoints[2]
-        } else {
-            return CGPoint(x: 0, y: 0)
-        }
-    
-        let width = abs(start.x - end.x) / 2
-        let height = abs(start.y - end.y) / 2
-        
-        return CGPoint(x: (start.x + width) * 10, y: (start.y + height) * 10)
-    }
-    
-    private func vectorBetween2Points(from: CGPoint, to: CGPoint) -> (angle: Float, dist: Double) {
-        var degree: Float = 0.0
-        let tan = atan2(from.x - to.x, from.y - to.y) * 180 / .pi
-        if tan < 0 {
-            degree = Float(-tan) + 180.0
-        } else {
-            degree = 180.0 - Float(tan)
-        }
-        return (angle: degree, dist: sqrt(pow(from.x - to.x, 2) + pow(from.y - to.y, 2)))
-        
-    }
 
-}
-
-
-// MARK: - Coordinate System
-
-extension ARNavigationViewController {
-    
-    private func setMap() -> [SCNVector3] {
-        let path = Bundle.main.path(forResource: "final_U01 2", ofType: "csv")!
-        let path2 = Bundle.main.path(forResource: "source", ofType: "csv")
-        var nodes = CSVService.parseCSVAt(url: URL(fileURLWithPath: path))
-        var sourceNodes = CSVService.parseCSVAt(url: URL(fileURLWithPath: path))
-        var positions: [SCNVector3] = []
-        for i in nodes.indices {
-            if nodes[i][2].contains("\r") {
-                nodes[i][2].removeLast()
-                nodes[i][2].removeLast()
-            }
-            let x = Float(nodes[i][0])!
-            let y = Float(nodes[i][1])!
-            let z = Float(nodes[i][2])!
-            let position = SCNVector3(x: x, y: y, z: z)
-            positions.append(position)
-        }
-        
-        return positions
-    }
-    
-    private func setCoordinateNode(start: (x: Int, y: Int), xlimit: Int, ylimit: Int) {
-        
-        var visited: [[Int]] = [[Int]](repeating: [Int](repeating: 0, count: xlimit), count: ylimit)
-        var queue = [start]
-        var index = 0
-        var dx = [0,0,1,-1] // 위(북쪽), 아래(남쪽), 오른쪽(동쪽), 왼쪽(서쪽)
-        var dy = [-1,1,0,0]
-        
-        while queue.count > index {
-            let node = queue[index]
-            for i in 0..<dx.count {
-                let nextX = node.x + dx[i]
-                let nextY = node.y + dy[i]
-                
-                if nextX < 0 || nextX >= xlimit || nextY < 0 || nextY >= ylimit {
-                    continue
-                }
-                else {
-                    if map[nextX][nextY] == 1 && (visited[nextX][nextY] == 0) {
-                        queue.append((nextX, nextY))
-                        visited[nextX][nextY] = 1
-                        
-                        let coordinateNode = generateSphereNode()
-                        coordinateNode.name = "\(nextX), \(nextY)"
-                        
-                        //                        coordinateNode.position = SCNVector3(startNode.position.x + Float(nextY) - Float(start.y), startNode.position.y, startNode.position.z + Float(nextX) - Float(start.x))
-                        print(coordinateNode.position)
-                        coordinateNode.geometry?.firstMaterial?.diffuse.contents = UIColor.red
-                        self.sceneView.scene.rootNode.addChildNode(coordinateNode)
-                        
-                        // 여기서 AR에 박기
-                        //                        answer[nextX][nextY] += answer[node.x][node.y] + 1
-                    }
-                }
-            }
-            
-            index += 1
-        }
-    }
-    
 }
 
 func +(left: SCNVector3, right: SCNVector3) -> SCNVector3 {

@@ -104,13 +104,13 @@ enum Position: String {
         case .A07:
             return [[.A06], [.unknown], [.H02], [.A10]]
         case .A08:
-            return [[.A02], [.A03, .A04], [.A09], [.unknown]]
+            return [[.A02, .A03], [.A03, .A04], [.A09], [.unknown]]
         case .A09:
-            return [[.A08], [.A04, .A05, .A06], [.A10, .A11], [.unknown]]
+            return [[.A08], [.A04, .A05, .A06, .A07], [.A10, .A11, .A07], [.unknown]]
         case .A10:
-            return [[.A09], [.A07], [.unknown], [.A11]]
+            return [[.A09], [.A07], [.E03], [.A11, .E03]]
         case .A11:
-            return [[.A09], [.A10], [.E03], [.unknown]]
+            return [[.A09], [.A10], [.E03], [.E03]]
         case .E01:
             return [[.unknown], [.S01, .S02], [.A01], [.R03]]
         case .E02:
@@ -118,15 +118,15 @@ enum Position: String {
         case .E03:
             return [[.A11], [.unknown], [.unknown], [.unknown]]
         case .R01:
-            return [[.unknown], [.unknown], [.unknown], [.A03]]
+            return [[.unknown], [.unknown], [.unknown], [.A03, .A04, .A02]]
         case .R02:
-            return [[.unknown], [.A01], [.unknown], [.unknown]]
+            return [[.unknown], [.A01, .A02], [.unknown], [.unknown]]
         case .R03:
             return [[.unknown], [.E01], [.unknown], [.unknown]]
         case .R04:
-            return [[.unknown], [.unknown], [.A01], [.unknown]]
-        case .R05:
-            return [[.unknown], [.unknown], [.A05], [.unknown]]
+            return [[.unknown], [.unknown], [.unknown], [.A01, .A02]]
+        case .R05: // 남동북서
+            return [[.A04, .A05], [.unknown], [.A05, .A06, .A07], [.A05, .A06, .A04]]
         case .S01: // 나가는것
             return [[.unknown], [.unknown], [.unknown], [.E01]]
         case .S02:

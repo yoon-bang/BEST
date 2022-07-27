@@ -103,7 +103,7 @@ class IndoorLocationManager: NSObject, CLLocationManagerDelegate {
         }
         
         // TEST
-        getPath()
+//        getPath()
 //        testMoveUserLocation()
     }
     
@@ -157,14 +157,14 @@ extension IndoorLocationManager {
     }
     
     func getPath() {
-        //        SocketIOManager.shared.receivePath { path in
-        //            NotificationCenter.default.post(name: .path, object: path)
-        //        }
+                SocketIOManager.shared.receivePath { path in
+                    NotificationCenter.default.post(name: .path, object: path)
+                }
         
         //TEST
-        DispatchQueue.main.asyncAfter(deadline: .now() + 5) {
-            NotificationCenter.default.post(name: .path, object: [Position.R02, Position.A01, Position.A02, Position.A03, Position.A04, Position.A05, Position.A06])
-        }
+//        DispatchQueue.main.asyncAfter(deadline: .now() + 5) {
+//            NotificationCenter.default.post(name: .path, object: [Position.R02, Position.A01, Position.A02, Position.A03, Position.A04, Position.A05, Position.A06])
+//        }
     }
     
     func testMoveUserLocation() {
@@ -211,9 +211,9 @@ extension IndoorLocationManager {
             }
         } else { // 인접셀이지 않을떄,
             // 2-1-a 빠르게 움직였다고 판단한다. 방향과 같다면, 움직였다고 생각하기 옆셀로 이동시키기
-            let currentPosPoint = transformCellToCGPoint(cellname: currentLocation)
-            let prevPosPoint = transformCellToCGPoint(cellname: previousLocation)
-            let direction = headingToDirection(heading: Double(vectorBetween2Points(from: prevPosPoint, to: currentPosPoint).angle))
+            let currentPosPoint = VectorService.transformCellToCGPoint(cellname: currentLocation)
+            let prevPosPoint = VectorService.transformCellToCGPoint(cellname: previousLocation)
+            let direction = headingToDirection(heading: Double(VectorService.vectorBetween2Points(from: prevPosPoint, to: currentPosPoint).angle))
             
             // 방향이 같을때, 인접셀중에 방향이 같은 셀로 움직인다.
             if direction == currentDirection {
@@ -225,46 +225,10 @@ extension IndoorLocationManager {
                 return candidateCells.first ?? previousLocation
             } else {
 //                print("인접셀X, 방향 다름, 변경")
-                return currentLocation
+                return previousLocation
             }
             
         }
-    }
-    
-    private func vectorBetween2Points(from: CGPoint, to: CGPoint) -> (angle: Float, dist: Double) {
-        var degree: Float = 0.0
-        let tan = atan2(from.x - to.x, from.y - to.y) * 180 / .pi
-        if tan < 0 {
-            degree = Float(-tan) + 180.0
-        } else {
-            degree = 180.0 - Float(tan)
-        }
-        return (angle: degree, dist: sqrt(pow(from.x - to.x, 2) + pow(from.y - to.y, 2)))
-        
-    }
-    
-    private func transformCellToCGPoint(cellname: Position) -> CGPoint {
-        
-        var start: (x: CGFloat, y: CGFloat) = (0, 0)
-        var end: (x: CGFloat, y: CGFloat) = (0, 0)
-        
-        if let firstFloorCellpoints = mapDic[cellname] {
-            start = firstFloorCellpoints[0]
-            end = firstFloorCellpoints[2]
-        } else if let secondFloorCellpoints = micDic2[cellname] {
-            start = secondFloorCellpoints[0]
-            end = secondFloorCellpoints[2]
-        } else if let baseFloorCellPoints = micDic0[cellname] {
-            start = baseFloorCellPoints[0]
-            end = baseFloorCellPoints[2]
-        } else {
-            return CGPoint(x: 0, y: 0)
-        }
-        
-        let width = abs(start.x - end.x) / 2
-        let height = abs(start.y - end.y) / 2
-        
-        return CGPoint(x: (start.x + width) * 10, y: (start.y + height) * 10)
     }
     
     private func sendLocationToServerWithSocket(location: String) {
