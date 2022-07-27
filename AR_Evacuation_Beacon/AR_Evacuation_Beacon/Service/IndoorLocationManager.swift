@@ -62,6 +62,8 @@ class IndoorLocationManager: NSObject, CLLocationManagerDelegate {
         modelNames.forEach {
             self.classificationModels.append(self.makeClassificationModel(modelName: $0))
         }
+        
+        // TEST
         getPath()
         testMoveUserLocation()
     }
@@ -96,14 +98,10 @@ extension IndoorLocationManager {
         
         // if cannot find the overlapped one, get the location from the Model with 4 beacons
         if mode == .real {
-            if firstposition != "" {
-//                sendLocationToServerWithSocket(location: locations[0])
-//                NotificationCenter.default.post(name: .movePosition, object: locations[0])
-            } else {
-                if positionList.count > 4 {
-                    firstposition = positionList.mode()
-                }
-            }
+//            sendLocationToServerWithSocket(location: locations[0])
+//            NotificationCenter.default.post(name: .movePosition, object: Position(rawValue: locations[0])!)
+//            SocketIOManager.shared.receivePath { path in
+//                NotificationCenter.default.post(name: .path, object: path) }
         } else if mode == .collection {
             NotificationCenter.default.post(name: .movePosition, object: locations)
         } else {
@@ -113,14 +111,19 @@ extension IndoorLocationManager {
     }
     
     func getPath() {
+//        SocketIOManager.shared.receivePath { path in
+//            NotificationCenter.default.post(name: .path, object: path)
+//        }
+        
+        //TEST
         DispatchQueue.main.asyncAfter(deadline: .now() + 5) {
-            NotificationCenter.default.post(name: .path, object: ["R02", "A01", "A02", "A03", "A04", "A05", "A06"])
+            NotificationCenter.default.post(name: .path, object: [Position.R02, Position.A01, Position.A02, Position.A03, Position.A04, Position.A05, Position.A06])
         }
     }
     
     func testMoveUserLocation() {
         DispatchQueue.main.asyncAfter(deadline: .now() + 5) {
-            var userlocations = ["R02", "A01", "A02", "A03", "A04", "A05", "A06"]
+            var userlocations: [Position] = [.R02, .A01, .A02, .A03, .A04, .A05, .A06]
             Timer.scheduledTimer(withTimeInterval: 2.0, repeats: true) { timer in
                 
                 if userlocations.isEmpty {
@@ -129,7 +132,7 @@ extension IndoorLocationManager {
                 }
                 let location = userlocations.removeFirst()
                 NotificationCenter.default.post(name: .movePosition, object: location)
-                SocketIOManager.shared.sendLocation(location: location)
+                SocketIOManager.shared.sendLocation(location: location.rawValue)
                 
             }
         }
@@ -238,7 +241,7 @@ extension IndoorLocationManager {
             if direction {
                 let csv = createCSVWithPrevAndCurrentBeacons(prev: previousBeacons, current: currentBeacons, heading: heading)
             } else {
-//                userLocation(prevBeaconInfo: previousBeacons, currentBeaconInfo: currentBeacons)
+                userLocation(prevBeaconInfo: previousBeacons, currentBeaconInfo: currentBeacons)
                 previousBeacons.removeAll()
             }
         }

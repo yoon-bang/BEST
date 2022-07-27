@@ -9,7 +9,7 @@ import UIKit
 
 class BeizerView: UIView {
     
-    var path: [String] = [] {
+    var path: [Position] = [] {
         didSet {
             self.draw(self.frame)
         }
@@ -59,27 +59,5 @@ class BeizerView: UIView {
             }
 
         }
-
-//        while x < self.frame.maxX {
-//            let path = UIBezierPath()
-//            path.move(to: CGPoint(x: x,y: 0))
-//            path.addLine(to: CGPoint(x: x, y: self.frame.maxY))
-//            path.close()
-//            UIColor.systemYellow.setStroke()
-//            path.lineWidth = 1
-//            path.stroke()
-//            x += 10
-//        }
-//
-//        while y < self.frame.maxY {
-//            let path = UIBezierPath()
-//            path.move(to: CGPoint(x: 0,y: y))
-//            path.addLine(to: CGPoint(x: self.frame.maxX, y: y))
-//            path.close()
-//            UIColor.systemYellow.setStroke()
-//            path.lineWidth = 1
-//            path.stroke()
-//            y += 10
-//        }
     }
 }

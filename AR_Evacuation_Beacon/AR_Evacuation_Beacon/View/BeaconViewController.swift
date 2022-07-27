@@ -14,8 +14,8 @@ import TensorFlowLite
 import CoreMotion
 
 // Build setting
-let modelNames: [String] = ["ios_beacon4concat", "ios_beacon5concat", "ios_beacon7concat"]
-let beaconNumlist: [Int] = [4,5,7]
+let modelNames: [String] = ["beacon4_ios"]
+let beaconNumlist: [Int] = [4]
 let beaconNum: Int = 4
 let fileName: String = "ios_clf_data4A03"
 let features = ["001","002","003","004","005","006","007","008","009","010",

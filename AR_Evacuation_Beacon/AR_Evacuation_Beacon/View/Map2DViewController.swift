@@ -7,52 +7,7 @@
 
 import UIKit
 import MapKit
-
-let mapDic: [String: [(CGFloat, CGFloat)]] = [
-    "S03": [(0.6, 0.6), (5,0.6), (5,6.4), (0.6,6.4)],
-    "S02": [(5,0.6),(13, 0.6),(13, 6.4), (5, 6.4)],
-    "S01": [(5, 6.4), (13, 6.4), (13,12), (5, 12)],
-    "E01": [(13, 0.6), (25, 0.6), (25, 12), (13, 12)],
-    "R03": [(25,0.6), (38.5,0.6), (38.5,11), (25,11)],
-    "R02": [(25,11), (38.5,11), (38.5, 20.5), (25, 20.5)],
-    "R04": [(0.6, 12), (16.7,12), (16.7, 24), (0.6, 24)],
-    "A01": [(16.7, 12), (25, 12), (25, 21.6), (16.7, 21.6)],
-    "A02": [(16.7, 21.6), (24.4, 21.6), (24.4, 30.5), (16.7, 30.5)],
-    "R01": [(0.6, 24), (16.7, 24), (16.7, 51.2), (0.6, 51.2)],
-    "A08": [(24.4, 21.6), (38.5, 21.6), (38.5, 43.8), (24.4, 43.8)],
-    "A03": [(16.7, 30.5), (24.4, 30.5), (24.4,39.2), (16.7, 39.2)],
-    "A04": [(16.7, 39.2), (24.4,39.2), (24.4, 48.2), (16.7, 48.2)],
-    "A05": [(16.7, 48.2),(24.4, 48.2), (24.4, 57), (16.7, 57)],
-    "A06": [(16.7, 57), (24.4, 57), (24.4, 66), (16.7, 66)],
-    "A07": [(16.7, 66), (24.4, 66),(24.4, 75), (16.7, 75)],
-    "A09": [(24.4, 43.8),(38.5, 43.8), (38.5, 66), (24.4, 66)],
-    "A10": [(24.4, 66), (31.5, 66), (31.5, 76), (24.4, 76)],
-    "A11": [(31.5, 66), (38.5, 66), (38.5, 76), (31.3, 76)],
-    "E03": [(34, 76), (38.5, 76), (38.5, 84), (34, 84)],
-    "R05": [(0.6, 51.2), (16.7, 51.2), (16.7,61), (0.6, 61)],
-    "H02": [(15, 75), (24.5, 75), (24.5, 84), (18.2, 84), (18.2, 79), (15, 79)],
-    "S07": [(5, 73.3), (15, 73.3), (15, 79), (5, 79)],
-    "S06": [(5, 79), (18.2, 79), (18.2, 84), (5, 84)],
-    "E02": [(0.6, 73.3), (5, 73.3), (5, 84), (0.6, 84)]
-]
-
-let micDic2: [String: [(CGFloat, CGFloat)]] = [
-                                                "S03" : [(0, 0), (5, 0), (5, 11.7), (0, 11.7)],
-                                                "S02" : [(5, 0), (14, 0), (14, 6) ,(5, 6) ],
-                                                "S04" : [(5, 6), (14, 6), (14, 11.7), (5, 11.7) ],
-                                                "H01" : [(14, 0), (28.5, 0), (28.5, 11.7), (14, 11.7)],
-                                                "S05" : [(0, 68), (5, 68), (5, 84), (0, 84)],
-                                                "S06" : [(0, 79), (15.7, 79), (15.7, 84), (0, 84)]
-                                                ]
-
-
-let micDic0: [String: [(CGFloat, CGFloat)]] = ["E02":[(0.6, 73.2), (5, 73.2), (5, 84), (0.6, 84)],
-                                               "S08":[(5, 79), (11.6, 79), (11.6, 84), (5, 84)],
-                                               "S09":[(11.6, 74), (16, 74), (16, 84), (11.6, 84)],
-                                               "U01":[(7.7, 65), (16,65), (16, 74), (11.6, 74), (11.6, 79), (7.7, 79)]
-                                                ]
-
-// 큰방에서는 measure 점을 찍지 않는다.
+import SocketIO
 
 class Map2DViewController: UIViewController {
     
@@ -62,10 +17,11 @@ class Map2DViewController: UIViewController {
     var baseFloorPathView: BeizerView = BeizerView()
     var annotationView = IndoorAnnotationView()
     
-    var path = [String]()
+    var path = [Position]()
     
-    var userlocation = ""
-    var previousUserLocation: [String] = [] {
+    var userlocation: Position = .unknown
+    var prevLocation: Position = .unknown
+    var previousUserLocation: [Position] = [] {
         didSet {
             if previousUserLocation.count > 4 {
                 previousUserLocation.removeFirst()
@@ -105,9 +61,21 @@ class Map2DViewController: UIViewController {
     }
     
     @objc func movenotification(_ noti: Notification) {
-        guard let location = noti.object as? String else {return}
+        guard let location = noti.object as? Position else {return}
+        
         userlocation = location
         print("from beaconVC", userlocation)
+        
+        // rotate
+        if annotationView.currentPoint == CGPoint(x: 0, y: 0) {
+            
+        } else {
+            annotationView.showDirectionView()
+            annotationView.rotate(from: prevLocation, to: userlocation)
+        }
+        
+        
+        //move
         annotationView.move(to: userlocation) { [weak self] in
             
             guard let self = self else {return}
@@ -122,6 +90,7 @@ class Map2DViewController: UIViewController {
                 self.changeMapView()
             }
             self.previousUserLocation.append(location)
+            self.prevLocation = location
         }
         
         // if map image is not the one?
@@ -131,7 +100,7 @@ class Map2DViewController: UIViewController {
     }
     
     @objc func getPath(_ noti: Notification) {
-        guard let path = noti.object as? [String] else {return}
+        guard let path = noti.object as? [Position] else {return}
         self.path = path
         // 여기서 path 받으면 beizerview 3개 만들고 갈아껴야할듯
         if self.path.count == 0 {
@@ -217,33 +186,33 @@ class Map2DViewController: UIViewController {
     }
     
     private func checkPathForImageChange2To1BackDoor() -> Bool {
-        return userlocation == "S06" && previousUserLocation.contains("S05")
+        return userlocation == .S06 && previousUserLocation.contains(.S05)
     }
     
     private func checkPathForImageChange2To1() -> Bool {
-        return (userlocation == "S03") && (previousUserLocation.contains("S04") || previousUserLocation.contains("H01"))
+        return (userlocation == .S03) && (previousUserLocation.contains(.S04) || previousUserLocation.contains(.H01))
     }
     
     private func checkPathForImageChange1To2() -> Bool {
-        return (userlocation == "S03" || userlocation == "S04" || userlocation == "H01") && (previousUserLocation.contains("S02") || previousUserLocation.contains("E01"))
+        return (userlocation == .S03 || userlocation == .S04 || userlocation == .H01) && (previousUserLocation.contains(.S02) || previousUserLocation.contains(.E01))
     }
     
     private func checkPathForImageChange1To0() -> Bool {
-        return (userlocation == "E02" || userlocation == "S08") && (previousUserLocation.contains("S07") || previousUserLocation.contains("H02"))
+        return (userlocation == .E02 || userlocation == .S08) && (previousUserLocation.contains(.S07) || previousUserLocation.contains(.H02))
     }
     
     private func checkPathForImageChange0To1() -> Bool {
-        return (userlocation == "E02" || userlocation == "S07") && (previousUserLocation.contains("S08") || previousUserLocation.contains("S09"))
+        return (userlocation == .E02 || userlocation == .S07) && (previousUserLocation.contains(.S08) || previousUserLocation.contains(.S09))
     }
     
     private func checkPathForImageChange1To2BackDoor() -> Bool {
-        return userlocation == "S06" && (previousUserLocation.contains("H02") || previousUserLocation.contains("A07"))
+        return userlocation == .S06 && (previousUserLocation.contains(.H02) || previousUserLocation.contains(.A07))
     }
     
     private func injectPathToViews() {
-        var firstMapPath: [String] = []
-        var secondMapPath: [String] = []
-        var baseMapPath: [String] = []
+        var firstMapPath: [Position] = []
+        var secondMapPath: [Position] = []
+        var baseMapPath: [Position] = []
         
         path.forEach { point in
             if mapDic.keys.contains(point) {
@@ -306,13 +275,13 @@ class Map2DViewController: UIViewController {
         firstFloorPathView.backgroundColor = .clear
         mapImagView.addSubview(firstFloorPathView)
         
-//        secondFloorPathView.frame = self.view.frame
-//        secondFloorPathView.backgroundColor = .clear
-//        mapImagView.addSubview(secondFloorPathView)
-//
-//        baseFloorPathView.frame = self.view.frame
-//        baseFloorPathView.backgroundColor = .clear
-//        mapImagView.addSubview(baseFloorPathView)
+        secondFloorPathView.frame = self.view.frame
+        secondFloorPathView.backgroundColor = .clear
+        mapImagView.addSubview(secondFloorPathView)
+
+        baseFloorPathView.frame = self.view.frame
+        baseFloorPathView.backgroundColor = .clear
+        mapImagView.addSubview(baseFloorPathView)
     }
     
     private func loadAnnotationView() -> IndoorAnnotationView {

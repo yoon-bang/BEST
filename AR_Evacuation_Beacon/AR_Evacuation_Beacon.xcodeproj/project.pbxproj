@@ -106,6 +106,7 @@
 		B182BB99288F69E20028A3F5 /* KSW_2.png in Resources */ = {isa = PBXBuildFile; fileRef = B182BB96288F69E20028A3F5 /* KSW_2.png */; };
 		B182BB9A288F69E20028A3F5 /* KSW_0.png in Resources */ = {isa = PBXBuildFile; fileRef = B182BB97288F69E20028A3F5 /* KSW_0.png */; };
 		B182BB9B288F69E20028A3F5 /* KSW_1.png in Resources */ = {isa = PBXBuildFile; fileRef = B182BB98288F69E20028A3F5 /* KSW_1.png */; };
+		B182BB9D289095510028A3F5 /* Path.swift in Sources */ = {isa = PBXBuildFile; fileRef = B182BB9C289095510028A3F5 /* Path.swift */; };
 		B1915932287A76AA001CB91E /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1915931287A76AA001CB91E /* AppDelegate.swift */; };
 		B1915934287A76AA001CB91E /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1915933287A76AA001CB91E /* SceneDelegate.swift */; };
 		B1915939287A76AA001CB91E /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B1915937287A76AA001CB91E /* Main.storyboard */; };
@@ -306,6 +307,7 @@
 		B182BB96288F69E20028A3F5 /* KSW_2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = KSW_2.png; sourceTree = "<group>"; };
 		B182BB97288F69E20028A3F5 /* KSW_0.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = KSW_0.png; sourceTree = "<group>"; };
 		B182BB98288F69E20028A3F5 /* KSW_1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = KSW_1.png; sourceTree = "<group>"; };
+		B182BB9C289095510028A3F5 /* Path.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Path.swift; sourceTree = "<group>"; };
 		B191592E287A76AA001CB91E /* AR_Evacuation_Beacon.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = AR_Evacuation_Beacon.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B1915931287A76AA001CB91E /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		B1915933287A76AA001CB91E /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -689,6 +691,7 @@
 			children = (
 				B182BB94288F56540028A3F5 /* iPhone_arrow.obj */,
 				B1915952287A7E0F001CB91E /* Beacon.swift */,
+				B182BB9C289095510028A3F5 /* Path.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -977,6 +980,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				B1915955287A7E28001CB91E /* KalmanFilter.swift in Sources */,
+				B182BB9D289095510028A3F5 /* Path.swift in Sources */,
 				B191595B287A8681001CB91E /* BeaconCell.swift in Sources */,
 				B1A4F6EF2889CA600000ECC9 /* DirectionView.swift in Sources */,
 				B1915957287A7E71001CB91E /* BeaconManager.swift in Sources */,

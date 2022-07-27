@@ -29,7 +29,7 @@ final class ARNavigationViewController: UIViewController, ARSCNViewDelegate, CLL
     private var arrow = SCNNode()
     private var heading: Double = 360
     private var directionDegree: Float = 0
-    private var path: [String] = []
+    private var path: [Position] = []
     
     let locationManager: CLLocationManager = {
         $0.requestWhenInUseAuthorization()
@@ -54,7 +54,7 @@ final class ARNavigationViewController: UIViewController, ARSCNViewDelegate, CLL
     }
     
     @objc private func getPath(_ noti: Notification) {
-        guard let path = noti.object as? [String] else {return}
+        guard let path = noti.object as? [Position] else {return}
         self.path = path
     }
 
@@ -228,7 +228,7 @@ extension ARNavigationViewController {
     }
     
     @objc private func movenotification(_ noti: Notification) {
-        guard let userLocation = noti.object as? String else {return}
+        guard let userLocation = noti.object as? Position else {return}
         mapContentScrollView.scroll(to: map2DViewController.annotationView.currentPoint)
         
         // 1.path가 들어왔다.
@@ -256,7 +256,7 @@ extension ARNavigationViewController {
         
     }
     
-    private func transformCellToCGPoint(cellname: String) -> CGPoint {
+    private func transformCellToCGPoint(cellname: Position) -> CGPoint {
         
         var start: (x: CGFloat, y: CGFloat) = (0, 0)
         var end: (x: CGFloat, y: CGFloat) = (0, 0)

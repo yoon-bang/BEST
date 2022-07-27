@@ -13,7 +13,7 @@ import TensorFlowLite
 
 class ModelInterpreter {
     
-    let conditions = ModelDownloadConditions(allowsCellularAccess: false)
+    let conditions = ModelDownloadConditions(allowsCellularAccess: true)
     var interpreter: Interpreter?
     
     init(modelName: String) {

@@ -8,21 +8,15 @@
 import UIKit
 import CoreLocation
 
-class IndoorAnnotationView: UIView, CLLocationManagerDelegate {
+class IndoorAnnotationView: UIView {
     
-    let locationManager: CLLocationManager = {
-        $0.requestWhenInUseAuthorization()
-        $0.startUpdatingHeading()
-        return $0
-    }(CLLocationManager())
-
-    private var heading: Double = 360.0
     var currentPoint: CGPoint = CGPoint(x: 0, y: 0)
-
+    private var circleView = UIView()
+    private var directionView = DirectionView()
+    
     override init(frame: CGRect) {
         super.init(frame: frame)
         loadView()
-        locationManager.delegate = self
     }
     
     required init?(coder: NSCoder) {
@@ -30,7 +24,7 @@ class IndoorAnnotationView: UIView, CLLocationManagerDelegate {
     }
     
     private func loadView() {
-        let circleView = makeCircleView()
+        circleView = makeCircleView()
         circleView.frame = CGRect(x: 0, y: 10, width: 20, height: 20)
         circleView.layer.backgroundColor = UIColor.systemBlue.cgColor
         circleView.layer.cornerRadius = circleView.frame.height / 2
@@ -38,7 +32,7 @@ class IndoorAnnotationView: UIView, CLLocationManagerDelegate {
         circleView.layer.shadowRadius = 7
         addSubview(circleView)
         
-        let directionView = makeDirectionView()
+        directionView = makeDirectionView()
         directionView.frame = CGRect(x: 0, y: 0, width: circleView.frame.width * 0.7, height: circleView.frame.height * 0.5)
         directionView.translatesAutoresizingMaskIntoConstraints = false
         addSubview(directionView)
@@ -47,6 +41,7 @@ class IndoorAnnotationView: UIView, CLLocationManagerDelegate {
         directionView.widthAnchor.constraint(equalTo: circleView.widthAnchor, multiplier: 0.7).isActive = true
         directionView.heightAnchor.constraint(equalTo: circleView.heightAnchor, multiplier: 0.5).isActive = true
         directionView.bottomAnchor.constraint(equalTo: circleView.topAnchor).isActive = true
+        directionView.isHidden = true
     }
     
     private func makeCircleView() -> UIView {
@@ -55,20 +50,44 @@ class IndoorAnnotationView: UIView, CLLocationManagerDelegate {
         return view
     }
     
-    private func makeDirectionView() -> UIView {
+    private func makeDirectionView() -> DirectionView {
         return DirectionView()
     }
     
+    func showDirectionView() {
+        directionView.isHidden = false
+    }
     
-    func rotate() {
+    func hideDirectionView() {
+        directionView.isHidden = true
+    }
+    
+    func rotate(from point1: Position, to point2: Position) {
+        
+        let start = transformCellToCGPoint(cellname: point1)
+        let end = transformCellToCGPoint(cellname: point2)
+        
+        let degree = angleBetween2Points(from: start, to: end)
+        
         UIView.animate(withDuration: 0.4, delay:0) {
-            self.transform = CGAffineTransform.init(rotationAngle: (.pi / 360 * (self.heading + 170)) * 2)
+            self.transform = CGAffineTransform.init(rotationAngle: (.pi / 180 * CGFloat((170 + degree))))
         }
+    }
+    
+    private func angleBetween2Points(from: CGPoint, to: CGPoint) -> Float {
+        var degree: Float = 0.0
+        let tan = atan2(from.x - to.x, from.y - to.y) * 180 / .pi
+        if tan < 0 {
+            degree = Float(-tan) + 180.0
+        } else {
+            degree = 180.0 - Float(tan)
+        }
+        return degree
     }
    
     
-    func move(to cellname: String, completion: @escaping() -> Void) {
-        UIView.animate(withDuration: 1.0, delay: 0, options: .curveEaseIn) {
+    func move(to cellname: Position, completion: @escaping() -> Void) {
+        UIView.animate(withDuration: 0.7, delay: 0, options: .curveEaseIn) {
             self.move(to: self.transformCellToCGPoint(cellname: cellname))
         } completion: { success in
             if success {
@@ -82,12 +101,7 @@ class IndoorAnnotationView: UIView, CLLocationManagerDelegate {
         self.frame.origin.y = to.y
     }
     
-    func locationManager(_ manager: CLLocationManager, didUpdateHeading newHeading: CLHeading) {
-        self.heading = newHeading.trueHeading
-        rotate()
-    }
-    
-    private func transformCellToCGPoint(cellname: String) -> CGPoint {
+    private func transformCellToCGPoint(cellname: Position) -> CGPoint {
         
         var start: (x: CGFloat, y: CGFloat) = (0, 0)
         var end: (x: CGFloat, y: CGFloat) = (0, 0)
