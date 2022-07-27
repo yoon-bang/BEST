@@ -115,7 +115,7 @@ extension ARNavigationViewController {
             //TODO: if path is not ready {return}
             self.arrow.position = SCNVector3(x: currentPositionOfCamera.x, y: currentPositionOfCamera.y + 0.1, z: currentPositionOfCamera.z)
             self.arrow.eulerAngles = SCNVector3(x: 0, y:changeDirection(degree: directionDegree), z: 0)
-//            changeBannerText(degree: changeDirection(degree: directionDegree), heading: heading)
+            changeBannerText(degree: changeDirection(degree: directionDegree), heading: heading)
         }
         
     }

@@ -70,7 +70,11 @@ class IndoorLocationManager: NSObject, CLLocationManagerDelegate {
     // MARK: - Properties
     private var beaconRegion: CLBeaconRegion!
     private var beaconRegionConstraint: CLBeaconIdentityConstraint!
-    private var locationManager = CLLocationManager()
+    private let locationManager: CLLocationManager = {
+        $0.requestWhenInUseAuthorization()
+        $0.startUpdatingHeading()
+        return $0
+    }(CLLocationManager())
     private var beaconManager = BeaconManager.shared
     private var classificationModels: [ModelInterpreter] = []
     private var previousBeacons = [Beacon]()
@@ -87,6 +91,7 @@ class IndoorLocationManager: NSObject, CLLocationManagerDelegate {
     var mode: Mode = .collection
     
     private var userLocation = "A01"
+    private var previousUserLocation: Position = .unknown
     
     init(mode: Mode) {
         super.init()
@@ -99,7 +104,7 @@ class IndoorLocationManager: NSObject, CLLocationManagerDelegate {
         
         // TEST
         getPath()
-        testMoveUserLocation()
+//        testMoveUserLocation()
     }
     
 }
@@ -132,10 +137,17 @@ extension IndoorLocationManager {
         
         // if cannot find the overlapped one, get the location from the Model with 4 beacons
         if mode == .real {
-//            sendLocationToServerWithSocket(location: locations[0])
-//            NotificationCenter.default.post(name: .movePosition, object: Position(rawValue: locations[0])!)
-//            SocketIOManager.shared.receivePath { path in
-//                NotificationCenter.default.post(name: .path, object: path) }
+            if previousUserLocation == .unknown {
+                previousUserLocation = Position(rawValue: locations[0]) ?? .unknown
+            } else {
+                let location = filterErrorWithHeading(previousLocation: previousUserLocation, currentLocation: Position(rawValue: locations[0]) ?? .unknown)
+                print("filtered", location)
+                sendLocationToServerWithSocket(location: location.rawValue)
+                NotificationCenter.default.post(name: .movePosition, object: location)
+                SocketIOManager.shared.receivePath { path in
+                    NotificationCenter.default.post(name: .path, object: path) }
+                previousUserLocation = location
+            }
         } else if mode == .collection {
             NotificationCenter.default.post(name: .movePosition, object: locations)
         } else {
@@ -145,9 +157,9 @@ extension IndoorLocationManager {
     }
     
     func getPath() {
-//        SocketIOManager.shared.receivePath { path in
-//            NotificationCenter.default.post(name: .path, object: path)
-//        }
+        //        SocketIOManager.shared.receivePath { path in
+        //            NotificationCenter.default.post(name: .path, object: path)
+        //        }
         
         //TEST
         DispatchQueue.main.asyncAfter(deadline: .now() + 5) {
@@ -172,35 +184,87 @@ extension IndoorLocationManager {
         }
     }
     
-    private func filterWithHeading(heading: Double, previousLocation: Position, currentLocation: Position) -> Position {
+    private func filterErrorWithHeading(previousLocation: Position, currentLocation: Position) -> Position {
         
-        // Is the user moving?
-        if beaconManager.isFilterReinit {
-            
-            let adjacentCells = previousLocation.adjacentCell.flatMap { (ele: [Position]) -> [Position] in
-                return ele
-            }
-            
-            // is CurrentLocation is Adjacent with previousLocation
-            if adjacentCells.contains(currentLocation) {
-                
-                // if the confusing cell? heading first
-                if [Position.A02, Position.A03, Position.A04, Position.A08].contains(previousLocation) {
-                    
-                    if previousLocation.adjacentCell[headingToDirection(heading: heading).rawValue].contains(currentLocation) {
-                        return currentLocation
-                    }
-                    return previousLocation
-                }
-                return currentLocation
-                
-            } else {
-                
-            }
+        if previousLocation == .unknown || currentLocation == .unknown {return .unknown}
+        
+        let adjacentCells = previousLocation.adjacentCell.flatMap { (ele: [Position]) -> [Position] in
+            return ele
         }
         
-        beaconManager.isFilterReinit = false
-        return currentLocation
+        // is CurrentLocation is Adjacent with previousLocation?
+        let currentDirection = headingToDirection(heading: self.heading)
+        if adjacentCells.contains(currentLocation) {
+
+            var candidateCells = previousLocation.adjacentCell[currentDirection.rawValue]
+            candidateCells.removeAll { $0 == .unknown }
+            // 인접셀이고, 방향과 맞는데, 그것을 빼줬다면, 맞는것이다.
+            if candidateCells.contains(currentLocation) {
+//                print("인접셀, 뱡향, 모델")
+                return currentLocation
+            } else {
+                // 인접셀이고, 방향과 맞지 않는데, 그것을 빼줬다면?
+                // 1. 움직였다고 해서 방향과 맞는 인접셀을 빼준다.
+                // 2. 움직이지 않았다고 생각한다.
+//                print("인접셀, 방향X, 그대로있기")
+                return previousLocation // 일단은 2번
+            }
+        } else { // 인접셀이지 않을떄,
+            // 2-1-a 빠르게 움직였다고 판단한다. 방향과 같다면, 움직였다고 생각하기 옆셀로 이동시키기
+            let currentPosPoint = transformCellToCGPoint(cellname: currentLocation)
+            let prevPosPoint = transformCellToCGPoint(cellname: previousLocation)
+            let direction = headingToDirection(heading: Double(vectorBetween2Points(from: prevPosPoint, to: currentPosPoint).angle))
+            
+            // 방향이 같을때, 인접셀중에 방향이 같은 셀로 움직인다.
+            if direction == currentDirection {
+//                print("인접셀X, 방향 같음, 변경")
+                var candidateCells = previousLocation.adjacentCell[direction.rawValue]
+                // 방향이 같은데, 혹시 unknown이 있다면 일단 다지운다.
+                candidateCells.removeAll { $0 == .unknown }
+                // 그리고 첫번째꺼를 빼고, 그렇지 않은 경우에는 제자리에 있게한다.
+                return candidateCells.first ?? previousLocation
+            } else {
+//                print("인접셀X, 방향 다름, 변경")
+                return currentLocation
+            }
+            
+        }
+    }
+    
+    private func vectorBetween2Points(from: CGPoint, to: CGPoint) -> (angle: Float, dist: Double) {
+        var degree: Float = 0.0
+        let tan = atan2(from.x - to.x, from.y - to.y) * 180 / .pi
+        if tan < 0 {
+            degree = Float(-tan) + 180.0
+        } else {
+            degree = 180.0 - Float(tan)
+        }
+        return (angle: degree, dist: sqrt(pow(from.x - to.x, 2) + pow(from.y - to.y, 2)))
+        
+    }
+    
+    private func transformCellToCGPoint(cellname: Position) -> CGPoint {
+        
+        var start: (x: CGFloat, y: CGFloat) = (0, 0)
+        var end: (x: CGFloat, y: CGFloat) = (0, 0)
+        
+        if let firstFloorCellpoints = mapDic[cellname] {
+            start = firstFloorCellpoints[0]
+            end = firstFloorCellpoints[2]
+        } else if let secondFloorCellpoints = micDic2[cellname] {
+            start = secondFloorCellpoints[0]
+            end = secondFloorCellpoints[2]
+        } else if let baseFloorCellPoints = micDic0[cellname] {
+            start = baseFloorCellPoints[0]
+            end = baseFloorCellPoints[2]
+        } else {
+            return CGPoint(x: 0, y: 0)
+        }
+        
+        let width = abs(start.x - end.x) / 2
+        let height = abs(start.y - end.y) / 2
+        
+        return CGPoint(x: (start.x + width) * 10, y: (start.y + height) * 10)
     }
     
     private func sendLocationToServerWithSocket(location: String) {
@@ -349,7 +413,7 @@ extension IndoorLocationManager {
     func locationManager(_ manager: CLLocationManager, didUpdateHeading newHeading: CLHeading) {
         self.heading = newHeading.trueHeading
     }
-
+    
     private func headingToDirection(heading: Double) -> Direction {
         if ((315.0 <= heading) && (heading < 360.0)) || ((0.0 <= heading) && (heading < 45)) {
             return Direction.North
