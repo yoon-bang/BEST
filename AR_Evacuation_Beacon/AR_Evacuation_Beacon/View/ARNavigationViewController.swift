@@ -16,6 +16,8 @@ final class ARNavigationViewController: UIViewController, ARSCNViewDelegate, CLL
     @IBOutlet weak var sceneView: ARSCNView!
     
     private var map2Dview: UIView = UIView()
+    private var bannerView: UIView = UIView()
+    private var bannerLabel: UILabel = UILabel()
     private var map2DViewController = Map2DViewController()
     private let mapContentScrollView: UIScrollView = {
         let scrollView = UIScrollView()
@@ -30,6 +32,11 @@ final class ARNavigationViewController: UIViewController, ARSCNViewDelegate, CLL
     private var heading: Double = 360
     private var directionDegree: Float = 0
     private var path: [Position] = []
+    private var bannerText: String = NavigationDirection.forward.description {
+        didSet {
+            self.bannerLabel.text = bannerText
+        }
+    }
     
     let locationManager: CLLocationManager = {
         $0.requestWhenInUseAuthorization()
@@ -44,6 +51,7 @@ final class ARNavigationViewController: UIViewController, ARSCNViewDelegate, CLL
         self.initScene()
         self.initARSession()
         self.set2DNavigationView()
+        self.setBannerView()
         locationManager.delegate = self
         arrow = generateArrowNode()
         self.sceneView.scene.rootNode.addChildNode(arrow)
@@ -89,8 +97,8 @@ extension ARNavigationViewController {
         self.sceneView.delegate = self
         //sceneView.showsStatistics = true
         sceneView.debugOptions = [
-            ARSCNDebugOptions.showFeaturePoints,
-            ARSCNDebugOptions.showWorldOrigin
+//            ARSCNDebugOptions.showFeaturePoints,
+//            ARSCNDebugOptions.showWorldOrigin
         ]
         
     }
@@ -104,8 +112,10 @@ extension ARNavigationViewController {
         let currentPositionOfCamera = location + orientation
         
         DispatchQueue.main.async { [self] in
+            //TODO: if path is not ready {return}
             self.arrow.position = SCNVector3(x: currentPositionOfCamera.x, y: currentPositionOfCamera.y + 0.1, z: currentPositionOfCamera.z)
             self.arrow.eulerAngles = SCNVector3(x: 0, y:changeDirection(degree: directionDegree), z: 0)
+//            changeBannerText(degree: changeDirection(degree: directionDegree), heading: heading)
         }
         
     }
@@ -118,6 +128,18 @@ extension ARNavigationViewController {
     
     private func changeDirection(degree: Float) -> Float {
         return Float(Float(270 - degree).degreesToRadians)
+    }
+    
+    private func headingToDirection(degree: Float) -> Direction {
+        if ((315.0 <= degree) && (degree < 360.0)) || ((0.0 <= degree) && (degree < 45)) {
+            return Direction.North
+        } else if ((45.0 <= degree) && (degree < 135.0)) {
+            return Direction.East
+        } else if ((135.0 <= degree) && (degree < 225.0)) {
+            return Direction.South
+        } else {
+            return Direction.West
+        }
     }
     
     private func directionChange(degree: Float) {
@@ -189,7 +211,7 @@ extension ARNavigationViewController {
     
     
     private func generateSphereNode() -> SCNNode {
-        let sphere = SCNSphere(radius: 0.05)
+        let sphere = SCNSphere(radius: 0.1)
         let sphereNode = SCNNode()
         sphereNode.position.y += Float(sphere.radius)
         sphereNode.geometry = sphere
@@ -201,6 +223,26 @@ extension ARNavigationViewController {
 // MARK: - UI configuration
 
 extension ARNavigationViewController {
+    
+    private func setBannerView() {
+        bannerView.translatesAutoresizingMaskIntoConstraints = false
+        view.addSubview(bannerView)
+        bannerView.leadingAnchor.constraint(equalTo: view.leadingAnchor).isActive = true
+        bannerView.trailingAnchor.constraint(equalTo: view.trailingAnchor).isActive = true
+        bannerView.topAnchor.constraint(equalTo: view.topAnchor, constant: 40).isActive = true
+        bannerView.heightAnchor.constraint(equalToConstant: 80).isActive = true
+        bannerView.backgroundColor = .lightGray.withAlphaComponent(0.7)
+        
+        bannerLabel.translatesAutoresizingMaskIntoConstraints = false
+        bannerView.addSubview(bannerLabel)
+        bannerLabel.centerXAnchor.constraint(equalTo: bannerView.centerXAnchor).isActive = true
+        bannerLabel.centerYAnchor.constraint(equalTo: bannerView.centerYAnchor).isActive = true
+        bannerLabel.text = "WAIT"
+        bannerLabel.font = .systemFont(ofSize: 50, weight: .bold)
+        bannerLabel.textColor = .green
+        
+        
+    }
     
     private func set2DNavigationView() {
         view.addSubview(mapContentScrollView)
@@ -243,6 +285,7 @@ extension ARNavigationViewController {
             
             // get angle
             directionDegree = vector.angle
+            
             // get dist
             let dist = vector.dist
             
@@ -252,6 +295,25 @@ extension ARNavigationViewController {
             sceneView.scene.rootNode.addChildNode(newnode)
             newnode.position = SCNVector3(x: arrow.position.x, y: arrow.position.y, z: arrow.position.z - (Float(dist) / 10 * 0.36) + 1.0)
             
+        }
+        
+    }
+    
+    private func changeBannerText(degree: Float, heading: Double) {
+        
+        let pointDirection = headingToDirection(degree: degree)
+        let headingDirection = headingToDirection(degree: Float(heading))
+        // 남동북서 0123 음수면 오른쪽으로 양수면
+        // 현재 동쪽을 가리킬때,
+        let direction = pointDirection.rawValue - headingDirection.rawValue
+        if direction == 0 {
+            self.bannerText = NavigationDirection.forward.description
+        } else if direction == -1 {
+            self.bannerText = NavigationDirection.right.description
+        } else if direction == 1 {
+            self.bannerText = NavigationDirection.left.description
+        } else {
+            self.bannerText = NavigationDirection.backward.description
         }
         
     }

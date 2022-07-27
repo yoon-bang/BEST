@@ -72,6 +72,7 @@ class Map2DViewController: UIViewController {
         } else {
             annotationView.showDirectionView()
             annotationView.rotate(from: prevLocation, to: userlocation)
+            
         }
         
         

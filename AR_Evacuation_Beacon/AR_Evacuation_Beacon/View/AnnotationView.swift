@@ -87,7 +87,7 @@ class IndoorAnnotationView: UIView {
    
     
     func move(to cellname: Position, completion: @escaping() -> Void) {
-        UIView.animate(withDuration: 0.7, delay: 0, options: .curveEaseIn) {
+        UIView.animate(withDuration: 0.3, delay: 0, options: .curveEaseIn) {
             self.move(to: self.transformCellToCGPoint(cellname: cellname))
         } completion: { success in
             if success {

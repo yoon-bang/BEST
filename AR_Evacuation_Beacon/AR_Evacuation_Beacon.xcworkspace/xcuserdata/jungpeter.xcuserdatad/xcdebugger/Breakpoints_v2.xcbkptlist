@@ -62,8 +62,8 @@
             filePath = "AR_Evacuation_Beacon/View/Map2DViewController.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "79"
-            endingLineNumber = "79"
+            startingLineNumber = "80"
+            endingLineNumber = "80"
             landmarkName = "movenotification(_:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -126,8 +126,8 @@
             filePath = "AR_Evacuation_Beacon/View/Map2DViewController.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "279"
-            endingLineNumber = "279"
+            startingLineNumber = "280"
+            endingLineNumber = "280"
             landmarkName = "addPathView()"
             landmarkType = "7">
          </BreakpointContent>
@@ -142,8 +142,8 @@
             filePath = "AR_Evacuation_Beacon/View/Map2DViewController.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "240"
-            endingLineNumber = "240"
+            startingLineNumber = "241"
+            endingLineNumber = "241"
             landmarkName = "bringStartingPathView()"
             landmarkType = "7">
          </BreakpointContent>
@@ -152,22 +152,6 @@
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
             uuid = "803DE4C3-DBCC-4E69-BFD7-44A6D9D923B2"
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "AR_Evacuation_Beacon/View/Map2DViewController.swift"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "236"
-            endingLineNumber = "236"
-            landmarkName = "bringStartingPathView()"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            uuid = "CA9FAFD8-BC0A-41F3-82F6-60445BC1C0FE"
             shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
@@ -183,6 +167,22 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
+            uuid = "CA9FAFD8-BC0A-41F3-82F6-60445BC1C0FE"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "AR_Evacuation_Beacon/View/Map2DViewController.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "238"
+            endingLineNumber = "238"
+            landmarkName = "bringStartingPathView()"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
             uuid = "4972DF0A-4DCA-4551-92B4-3E4ACE0F7811"
             shouldBeEnabled = "No"
             ignoreCount = "0"
@@ -190,8 +190,8 @@
             filePath = "AR_Evacuation_Beacon/View/Map2DViewController.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "229"
-            endingLineNumber = "229"
+            startingLineNumber = "230"
+            endingLineNumber = "230"
             landmarkName = "injectPathToViews()"
             landmarkType = "7">
          </BreakpointContent>
@@ -206,8 +206,8 @@
             filePath = "AR_Evacuation_Beacon/View/Map2DViewController.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "175"
-            endingLineNumber = "175"
+            startingLineNumber = "176"
+            endingLineNumber = "176"
             landmarkName = "changeBeizerpathView(to:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -222,8 +222,8 @@
             filePath = "AR_Evacuation_Beacon/View/Map2DViewController.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "176"
-            endingLineNumber = "176"
+            startingLineNumber = "177"
+            endingLineNumber = "177"
             landmarkName = "changeBeizerpathView(to:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -254,8 +254,8 @@
             filePath = "AR_Evacuation_Beacon/View/Map2DViewController.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "243"
-            endingLineNumber = "243"
+            startingLineNumber = "244"
+            endingLineNumber = "244"
             landmarkName = "bringStartingPathView()"
             landmarkType = "7">
          </BreakpointContent>
@@ -270,8 +270,8 @@
             filePath = "AR_Evacuation_Beacon/View/Map2DViewController.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "246"
-            endingLineNumber = "246"
+            startingLineNumber = "247"
+            endingLineNumber = "247"
             landmarkName = "bringStartingPathView()"
             landmarkType = "7">
          </BreakpointContent>
@@ -280,6 +280,22 @@
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
             uuid = "2864E495-6F1F-4BCE-8404-20C4FDE36E38"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "AR_Evacuation_Beacon/View/Map2DViewController.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "136"
+            endingLineNumber = "136"
+            landmarkName = "changeMapView()"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "156D9DDB-7CA1-4468-AC61-675112E7D561"
             shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
@@ -295,22 +311,6 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "156D9DDB-7CA1-4468-AC61-675112E7D561"
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "AR_Evacuation_Beacon/View/Map2DViewController.swift"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "134"
-            endingLineNumber = "134"
-            landmarkName = "changeMapView()"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
             uuid = "B5A37AED-AD2E-414A-ABC2-4165E3A1E45F"
             shouldBeEnabled = "No"
             ignoreCount = "0"
@@ -318,8 +318,8 @@
             filePath = "AR_Evacuation_Beacon/View/Map2DViewController.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "140"
-            endingLineNumber = "140"
+            startingLineNumber = "141"
+            endingLineNumber = "141"
             landmarkName = "changeMapView()"
             landmarkType = "7">
          </BreakpointContent>
@@ -328,22 +328,6 @@
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
             uuid = "0309693C-4625-4AC1-BED8-3FA59447AE45"
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "AR_Evacuation_Beacon/View/Map2DViewController.swift"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "158"
-            endingLineNumber = "158"
-            landmarkName = "getRightMapView()"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            uuid = "4E32AE2D-6E0E-4F06-A581-D5A7A7C98F2C"
             shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
@@ -359,7 +343,7 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "2E7AB714-ECD1-4715-A1FE-69BB49AD8D4E"
+            uuid = "4E32AE2D-6E0E-4F06-A581-D5A7A7C98F2C"
             shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
@@ -375,6 +359,22 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
+            uuid = "2E7AB714-ECD1-4715-A1FE-69BB49AD8D4E"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "AR_Evacuation_Beacon/View/Map2DViewController.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "161"
+            endingLineNumber = "161"
+            landmarkName = "getRightMapView()"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
             uuid = "66386F9E-DD98-4545-B689-A23F77392772"
             shouldBeEnabled = "No"
             ignoreCount = "0"
@@ -382,8 +382,8 @@
             filePath = "AR_Evacuation_Beacon/View/Map2DViewController.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "117"
-            endingLineNumber = "117"
+            startingLineNumber = "118"
+            endingLineNumber = "118"
             landmarkName = "changeMapView()"
             landmarkType = "7">
          </BreakpointContent>
@@ -398,8 +398,8 @@
             filePath = "AR_Evacuation_Beacon/View/Map2DViewController.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "120"
-            endingLineNumber = "120"
+            startingLineNumber = "121"
+            endingLineNumber = "121"
             landmarkName = "changeMapView()"
             landmarkType = "7">
          </BreakpointContent>
@@ -414,8 +414,8 @@
             filePath = "AR_Evacuation_Beacon/View/Map2DViewController.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "119"
-            endingLineNumber = "119"
+            startingLineNumber = "120"
+            endingLineNumber = "120"
             landmarkName = "changeMapView()"
             landmarkType = "7">
          </BreakpointContent>
@@ -430,8 +430,8 @@
             filePath = "AR_Evacuation_Beacon/View/Map2DViewController.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "125"
-            endingLineNumber = "125"
+            startingLineNumber = "126"
+            endingLineNumber = "126"
             landmarkName = "changeMapView()"
             landmarkType = "7">
          </BreakpointContent>
@@ -446,8 +446,8 @@
             filePath = "AR_Evacuation_Beacon/View/Map2DViewController.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "130"
-            endingLineNumber = "130"
+            startingLineNumber = "131"
+            endingLineNumber = "131"
             landmarkName = "changeMapView()"
             landmarkType = "7">
          </BreakpointContent>
@@ -462,8 +462,8 @@
             filePath = "AR_Evacuation_Beacon/View/Map2DViewController.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "145"
-            endingLineNumber = "145"
+            startingLineNumber = "146"
+            endingLineNumber = "146"
             landmarkName = "changeMapView()"
             landmarkType = "7">
          </BreakpointContent>
@@ -478,8 +478,8 @@
             filePath = "AR_Evacuation_Beacon/View/Map2DViewController.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "126"
-            endingLineNumber = "126"
+            startingLineNumber = "127"
+            endingLineNumber = "127"
             landmarkName = "changeMapView()"
             landmarkType = "7">
          </BreakpointContent>
@@ -494,8 +494,8 @@
             filePath = "AR_Evacuation_Beacon/View/ARNavigationViewController.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "90"
-            endingLineNumber = "90"
+            startingLineNumber = "98"
+            endingLineNumber = "98"
             landmarkName = "initScene()"
             landmarkType = "7">
          </BreakpointContent>
@@ -510,8 +510,8 @@
             filePath = "AR_Evacuation_Beacon/Service/IndoorLocationManager.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "85"
-            endingLineNumber = "85"
+            startingLineNumber = "119"
+            endingLineNumber = "119"
             landmarkName = "userLocation(prevBeaconInfo:currentBeaconInfo:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -526,8 +526,8 @@
             filePath = "AR_Evacuation_Beacon/Service/IndoorLocationManager.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "101"
-            endingLineNumber = "101"
+            startingLineNumber = "135"
+            endingLineNumber = "135"
             landmarkName = "userLocation(prevBeaconInfo:currentBeaconInfo:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -542,8 +542,8 @@
             filePath = "AR_Evacuation_Beacon/Service/IndoorLocationManager.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "126"
-            endingLineNumber = "126"
+            startingLineNumber = "160"
+            endingLineNumber = "160"
             landmarkName = "testMoveUserLocation()"
             landmarkType = "7">
          </BreakpointContent>
@@ -558,8 +558,8 @@
             filePath = "AR_Evacuation_Beacon/Service/IndoorLocationManager.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "120"
-            endingLineNumber = "120"
+            startingLineNumber = "154"
+            endingLineNumber = "154"
             landmarkName = "getPath()"
             landmarkType = "7">
          </BreakpointContent>

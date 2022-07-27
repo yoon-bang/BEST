@@ -17,6 +17,7 @@
 import Foundation
 import CoreLocation
 import SocketIO
+import SwiftUI
 
 enum Mode {
     case debug
@@ -29,6 +30,39 @@ enum Direction: Int {
     case East
     case North
     case West
+}
+
+enum NavigationDirection: String, CustomStringConvertible {
+    var description: String {
+        switch self {
+        case .forward:
+            return "GO STRAIGHT"
+        case .backward:
+            return "GO BACK"
+        case .danger:
+            return "DANGER"
+        case .goUpstair:
+            return "GO UPSTAIR"
+        case .goDownstair:
+            return "GO DOWNSTAIR"
+        case .stair:
+            return "STAIRS, CAUTION"
+        case .left:
+            return "TURN LEFT"
+        case .right:
+            return "TURN RIGHT"
+        }
+    }
+    
+    case forward
+    case backward
+    case left
+    case right
+    case danger
+    case stair
+    case goUpstair
+    case goDownstair
+    
 }
 
 class IndoorLocationManager: NSObject, CLLocationManagerDelegate {
