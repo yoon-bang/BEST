@@ -2,31 +2,48 @@ package com.example.aos_ar_evacuation_beacon.constant
 
 object MapInfo {
 
-   val dict =
-      mapOf("S02" to arrayOf(Pair(5, 3), Pair(5, 8), Pair(13.3, 8), Pair(13.3, 3)),
-            "S01" to arrayOf(Pair(5, 8), Pair(13.3, 8), Pair(13.3, 13), Pair(5, 13)),
-            "E01" to arrayOf(Pair(13.3, 3), Pair(25, 3), Pair(25, 13), Pair(13.3, 13)),
-            "A01" to arrayOf(Pair(16, 13), Pair(24, 13), Pair(24, 20.5), Pair(16, 20.5)),
-            "R01" to arrayOf(Pair(1, 23.3), Pair(17, 23.3), Pair(17, 47), Pair(1, 47)),
-            "R03" to arrayOf(Pair(24, 3), Pair(38, 3), Pair(38, 12), Pair(24, 12)),
-            "R02" to arrayOf(Pair(25, 12.5), Pair(25, 20.3), Pair(38, 20.3), Pair(38, 12.5)),
-            "R04" to arrayOf(Pair(1, 13), Pair(17, 13), Pair(17, 23.5), Pair(1, 23.5)),
-            "A02" to arrayOf(Pair(16, 20.5), Pair(24, 20.5), Pair(24, 28), Pair(16, 28)),
-            "A03" to arrayOf(Pair(16, 27), Pair(24, 27), Pair(24, 35), Pair(16, 35)),
-            "A04" to arrayOf(Pair(16, 35), Pair(16, 42), Pair(24, 42), Pair(24, 35)),
-            "A05" to arrayOf(Pair(17, 44.5), Pair(24.6, 44.5), Pair(24.6, 52), Pair(17, 52)),
-            "A06" to arrayOf(Pair(17, 52.1), Pair(24.6, 52.1), Pair(24.6, 59.5), Pair(17, 59.5)),
-            "A07" to arrayOf(Pair(17, 59.5), Pair(24.6, 59.5), Pair(24.6, 67), Pair(17, 67)),
-            "A08" to arrayOf(Pair(24.6, 21.3), Pair(38, 21.3), Pair(38, 40.5), Pair(24.6, 40.5)),
-            "A09" to arrayOf(Pair(23.6, 38), Pair(38, 38), Pair(38, 56), Pair(23.6, 56)),
-            "A10" to arrayOf(Pair(23.6, 55.5), Pair(30.3, 55.5), Pair(30.3, 63), Pair(23.6, 63)),
-            "A11" to arrayOf(Pair(30.3, 56), Pair(38, 56), Pair(38, 63), Pair(30.3, 63)),
-            "E03" to arrayOf(Pair(32, 63), Pair(38, 63), Pair(38, 70), Pair(32, 70)),
-            "R05" to arrayOf(Pair(1, 47), Pair(17, 47), Pair(17, 56), Pair(1, 56)),
-            "H02" to arrayOf(Pair(15.5, 62), Pair(24.5, 62), Pair(24.5, 75.2), Pair(18.4, 75.2), Pair(18.4, 70.9), Pair(15.5, 70.9)),
-            "S06" to arrayOf(Pair(5, 66), Pair(17.5, 66), Pair(17.5, 70.9), Pair(5, 70.9)),
-            "S07" to arrayOf(Pair(5, 61), Pair(15, 61), Pair(15, 66), Pair(5, 66)),
-            "E02" to arrayOf(Pair(1, 61), Pair(5.2, 61), Pair(5.2, 75.2), Pair(1, 75.2)))
+   val dict1f =
+      mapOf(
+         "S02" to arrayOf(Pair(5, 3), Pair(5, 8.8), Pair(13, 8.8), Pair(13, 3)),
+         "S01" to arrayOf(Pair(5, 8.8), Pair(13, 8.8), Pair(13, 13.5), Pair(5, 13.5)),
+         "E01" to arrayOf(Pair(13, 3), Pair(24, 3), Pair(24, 13.5), Pair(13, 13.5)),
+         "A01" to arrayOf(Pair(16, 13.5), Pair(24, 13.5), Pair(24, 21.2), Pair(16, 21.2)),
+         "R01" to arrayOf(Pair(1, 23.3), Pair(17, 23.3), Pair(17, 47), Pair(1, 47)),
+         "R03" to arrayOf(Pair(24, 3), Pair(38, 3), Pair(38, 12), Pair(24, 12)),
+         "R02" to arrayOf(Pair(25, 12.5), Pair(25, 20.3), Pair(38, 20.3), Pair(38, 12.5)),
+         "R04" to arrayOf(Pair(1, 13), Pair(17, 13), Pair(17, 23.5), Pair(1, 23.5)),
+         "A02" to arrayOf(Pair(16, 21.2), Pair(23.5, 21.2), Pair(23.5, 28.9), Pair(16, 28.9)),
+         "A03" to arrayOf(Pair(16, 28.5), Pair(23.5, 28.5), Pair(23.5, 36), Pair(16, 36)),
+         "A04" to arrayOf(Pair(16, 36), Pair(23.5, 36), Pair(23.5, 43.5), Pair(16, 43.5)),
+         "A05" to arrayOf(Pair(16.5, 43.5), Pair(23.5, 43.5), Pair(23.5, 50.8), Pair(16.5, 50.8)),
+         "A06" to arrayOf(Pair(16.5, 50.8), Pair(23.5, 50.8), Pair(23.5, 57.7), Pair(16.5, 57.7)),
+         "A07" to arrayOf(Pair(16.5, 57.7), Pair(23.5, 57.7), Pair(23.5, 65), Pair(16.5, 65)),
+         "A08" to arrayOf(Pair(23.6, 21.3), Pair(38, 21.3), Pair(38, 39.5), Pair(23.6, 39.5)),
+         "A09" to arrayOf(Pair(23.6, 39.7), Pair(38, 39.7), Pair(38, 57.8), Pair(23.6, 57.8)),
+         "A10" to arrayOf(Pair(23.6, 57.9), Pair(30.3, 57.9), Pair(30.3, 66), Pair(23.6, 66)),
+         "A11" to arrayOf(Pair(30.3, 57.9), Pair(38, 57.9), Pair(38, 66), Pair(30.3, 66)),
+         "E03" to arrayOf(Pair(32.5, 66), Pair(37, 66), Pair(37, 73), Pair(32.5, 73)),
+         "R05" to arrayOf(Pair(1, 47), Pair(17, 47), Pair(17, 56), Pair(1, 56)),
+         "H02" to arrayOf(Pair(15, 65.5), Pair(23.5, 65.5), Pair(23.5, 75), Pair(17.8, 75), Pair(17.8, 68.5), Pair(15, 68.5)),
+         "S06" to arrayOf(Pair(5, 68.5), Pair(17.7, 68.5), Pair(17.7, 73), Pair(5, 73)),
+         "S07" to arrayOf(Pair(5, 64), Pair(14.9, 64), Pair(14.9, 68.5), Pair(5, 68.5)),
+         "E02" to arrayOf(Pair(1.5, 64), Pair(5, 64), Pair(5, 75.2), Pair(1.5, 75.2)),
+         "S03" to arrayOf(Pair(0.7, 2.5), Pair(5, 2.5), Pair(5, 13.5), Pair(0.7, 13.5)),
+           )
+
+   val dict2f =
+      mapOf("S03" to arrayOf(Pair(1.8, 4.7), Pair(6,4.7), Pair(6, 14), Pair(1.8, 14)),
+            "S02" to arrayOf(Pair(6, 4.5), Pair(14, 4.5), Pair(14, 9), Pair(6,9)),
+            "S04" to arrayOf(Pair(6, 9.1), Pair(14, 9.1), Pair(14, 14), Pair(6, 14)),
+            "H01" to arrayOf(Pair(14, 4.5), Pair(27.3, 4.5), Pair(27.3, 14), Pair(14, 14)),
+            "S05" to arrayOf(Pair(1.8, 61), Pair(5.7, 61), Pair(5.7, 69), Pair(1.8, 69)),
+            "S06" to arrayOf(Pair(1.8, 69.3), Pair(15.5, 69.3), Pair(15.5, 73.5), Pair(1.8, 73.5)))
+
+   val dictb1 =
+      mapOf("E02" to arrayOf(Pair(1.8, 65), Pair(5.5, 65), Pair(5.5, 75), Pair(1.8, 75)),
+            "S08" to arrayOf(Pair(5.5,69.2), Pair(11.6, 69.2), Pair(11.6, 75), Pair(5.5, 75)),
+            "S09" to arrayOf(Pair(11.6, 65), Pair(15.8, 65), Pair(15.8, 76.4), Pair(11.6, 76.4)),
+            "U01" to arrayOf(Pair(8.3, 58.3), Pair(15.8, 58.3), Pair(15.8, 65),Pair(11.6, 65), Pair(11.6, 69.2), Pair(8.3, 69.2)))
 
 //   val mapDic: [String: [(CGFloat, CGFloat)]] = [
 //   "S01": [(4, 5), (12.3, 5), (12.3,10), (4, 10)],

@@ -1,11 +1,12 @@
 package com.example.aos_ar_evacuation_beacon.constant
 
 object BeaconConstants {
-   const val IP_ADDRESS = "127.0.0.1"
-   const val port = 9000
-   const val beaconNumber = 22
-   const val modelName = "aos_beacon$beaconNumber"
-   const val saveCSVName = "AOS_location${beaconNumber}_"
+   const val IP_ADDRESS = "146.148.59.28"
+   const val port = 12000
+
+   const val beaconNum = 5
+   const val modelName = "aos_beacon${beaconNum}"
+   const val beaconCSVName = "AOS_estimated${beaconNum}_"
    const val readCSVName = "aos_clf_data7U01.csv"
 
    val labelList =
