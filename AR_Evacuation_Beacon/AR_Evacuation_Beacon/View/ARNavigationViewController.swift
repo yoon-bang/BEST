@@ -9,6 +9,15 @@ import UIKit
 import ARKit
 import CoreLocation
 
+let modelNames: [String] = ["beacon4_ios"]
+let beaconNumlist: [Int] = [4]
+let beaconNum: Int = 4
+let fileName: String = "ios_clf_data4A03"
+let features = ["001","002","003","004","005","006","007","008","009","010",
+                "011","012","013","014","015","016","017","018","019","020",
+                "021", "022"]
+let direction = false
+
 final class ARNavigationViewController: UIViewController, ARSCNViewDelegate, CLLocationManagerDelegate {
     
     var map = [[Int]](repeating: [1,1,1,1,1], count: 5)
@@ -85,6 +94,7 @@ extension ARNavigationViewController {
     
     func locationManager(_ manager: CLLocationManager, didUpdateHeading newHeading: CLHeading) {
         self.heading = newHeading.trueHeading
+        NotificationCenter.default.post(name: .changeArrowAngle, object: heading)
     }
     
 }
@@ -180,10 +190,11 @@ extension ARNavigationViewController {
     
     
     private func generateSphereNode() -> SCNNode {
-        let sphere = SCNSphere(radius: 0.1)
+        let sphere = SCNSphere(radius: 0.3)
         let sphereNode = SCNNode()
         sphereNode.position.y += Float(sphere.radius)
         sphereNode.geometry = sphere
+        sphereNode.geometry?.firstMaterial?.diffuse.contents = UIColor.red
         return sphereNode
     }
     
@@ -238,6 +249,7 @@ extension ARNavigationViewController {
         self.map2Dview.bottomAnchor.constraint(equalTo: mapContentScrollView.bottomAnchor).isActive = true
     }
     
+    //Observer
     @objc private func movenotification(_ noti: Notification) {
         guard let userLocation = noti.object as? Position else {return}
         mapContentScrollView.scroll(to: map2DViewController.annotationView.currentPoint)
@@ -246,8 +258,9 @@ extension ARNavigationViewController {
         guard !path.isEmpty else {return}
         // 2.현재위치를 파악한다.
         guard let index = path.firstIndex(of: userLocation) else {return}
+        // 마지막 path가 아니라면
         if index < path.count - 1 {
-            // 다음꺼의 거리를 찾기
+            // 다음꺼의 거리와 각도를 찾기
             let start = VectorService.transformCellToCGPoint(cellname: path[index])
             let end = VectorService.transformCellToCGPoint(cellname:path[index+1])
             let vector = VectorService.vectorBetween2Points(from: start, to: end)

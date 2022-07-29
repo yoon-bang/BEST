@@ -56,24 +56,17 @@ class Map2DViewController: UIViewController {
         
         mapImagView.image = UIImage(named: "KSW_1")!
         annotationView = loadAnnotationView()
+        annotationView.isHidden = true
         NotificationCenter.default.addObserver(self, selector: #selector(movenotification(_:)), name: .movePosition, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(getPath(_:)), name: .path, object: nil)
     }
     
     @objc func movenotification(_ noti: Notification) {
         guard let location = noti.object as? Position else {return}
-        
+        annotationView.isHidden = false
+        annotationView.showDirectionView()
         userlocation = location
         print("from beaconVC", userlocation)
-        
-        // rotate
-        if annotationView.currentPoint == CGPoint(x: 0, y: 0) {
-            
-        } else {
-            annotationView.showDirectionView()
-            annotationView.rotate(from: prevLocation, to: userlocation)
-            
-        }
         
         
         //move

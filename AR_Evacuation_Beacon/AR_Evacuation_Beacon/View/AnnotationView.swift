@@ -17,6 +17,7 @@ class IndoorAnnotationView: UIView {
     override init(frame: CGRect) {
         super.init(frame: frame)
         loadView()
+        NotificationCenter.default.addObserver(self, selector: #selector(rotateArrow(_:)), name: .changeArrowAngle, object: nil)
     }
     
     required init?(coder: NSCoder) {
@@ -62,17 +63,16 @@ class IndoorAnnotationView: UIView {
         directionView.isHidden = true
     }
     
-    func rotate(from point1: Position, to point2: Position) {
-        
-        let start = transformCellToCGPoint(cellname: point1)
-        let end = transformCellToCGPoint(cellname: point2)
-        
-        let degree = angleBetween2Points(from: start, to: end)
-        
-        UIView.animate(withDuration: 0.4, delay:0) {
-            self.transform = CGAffineTransform.init(rotationAngle: (.pi / 180 * CGFloat((170 + degree))))
-        }
-    }
+    @objc func rotateArrow(_ noti: Notification) {
+           guard let heading = noti.object as? Double else {return}
+           rotate(heading: heading)
+       }
+    
+    func rotate(heading: Double) {
+          UIView.animate(withDuration: 0.4, delay:0) {
+              self.transform = CGAffineTransform.init(rotationAngle: (.pi / 180 * CGFloat(180 + heading)))
+          }
+      }
     
     private func angleBetween2Points(from: CGPoint, to: CGPoint) -> Float {
         var degree: Float = 0.0

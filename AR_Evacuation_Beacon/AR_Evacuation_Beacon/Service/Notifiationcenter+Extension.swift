@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import UIKit
 
 extension Notification.Name {
     
@@ -14,4 +15,6 @@ extension Notification.Name {
     static let path = Notification.Name("path")
     
     static let beacons = Notification.Name("beacon")
+    
+    static let changeArrowAngle = Notification.Name("changeArrowAngle")
 }
