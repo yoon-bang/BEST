@@ -18,6 +18,8 @@ import android.os.CountDownTimer
 import android.os.Environment
 import android.util.Log
 import android.view.View
+import android.view.animation.Animation
+import android.view.animation.RotateAnimation
 import android.widget.ArrayAdapter
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
@@ -43,6 +45,7 @@ import org.tensorflow.lite.Interpreter
 import java.io.IOException
 import java.io.InputStream
 import java.io.InputStreamReader
+import java.lang.Math.toDegrees
 import java.net.NetworkInterface
 import java.nio.ByteBuffer
 import java.nio.ByteOrder
@@ -53,11 +56,13 @@ import kotlin.math.abs
 
 class LocalizationActivity : AppCompatActivity(), SensorEventListener {
    private lateinit var binding: ActivityLocalizationBinding
+
    private lateinit var beaconApplication: BeaconApplication
    var neverAskAgainPermissions = ArrayList<String>()
    var alertDialog: AlertDialog? = null
 
    var beaconCSV = arrayListOf<Array<String>>()
+
    lateinit var filePath: String
    private lateinit var csvHelper: CSVHelper
 
@@ -69,7 +74,7 @@ class LocalizationActivity : AppCompatActivity(), SensorEventListener {
    private lateinit var beaconManager: BeaconCustomManager
 
    // bid, rssi
-   private var threshold = 20
+   private var threshold = 10
 
    // Sensor
    private lateinit var sensorManager: SensorManager
@@ -89,13 +94,16 @@ class LocalizationActivity : AppCompatActivity(), SensorEventListener {
 
    private var currentBeaconArray = mutableListOf<Float>()
    private var previousBeaconArray = mutableListOf<Float>()
+
    private lateinit var locationQueue: ArrayList<String>
+
    private var estimatedLocationList = mutableListOf<String>()
 
    // 사용자 방향 저장
    private var azimuth = 0F
    private var pitch = 0F
    private var roll = 0F
+   var currentDegree = 0.0f
 
    lateinit var mSocket: Socket
 
@@ -117,11 +125,11 @@ class LocalizationActivity : AppCompatActivity(), SensorEventListener {
       binding.beaconList.adapter = ArrayAdapter(this, R.layout.simple_list_item_1, arrayOf("--"))
 
       setting()
-      makeColumnName()
-      //makeEstimatedLocationColumn()
+      //makeColumnName()
+      makeEstimatedLocationColumn()
       setupTimer()
       setSensor()
-      //loadMLModel()
+      loadMLModel()
       //socketSetup()
       setBottomNavigation()
    }
@@ -148,7 +156,6 @@ class LocalizationActivity : AppCompatActivity(), SensorEventListener {
             }
          }
          true
-
       }
    }
 
@@ -176,16 +183,18 @@ class LocalizationActivity : AppCompatActivity(), SensorEventListener {
 
    private fun loadMLModel() {
       conditions = CustomModelDownloadConditions.Builder().requireWifi().build()
+
       FirebaseModelDownloader.getInstance()
          .getModel(BeaconConstants.modelName, DownloadType.LOCAL_MODEL_UPDATE_IN_BACKGROUND, conditions)
-         .addOnFailureListener { Log.w("$$$ Model Download $$$", "Failure") }
-         .addOnCanceledListener { Log.w("$$$ Model Download $$$", "Cancel") }
+         .addOnFailureListener { Log.w("$$$ ${BeaconConstants.modelName} Download $$$", "Failure") }
+         .addOnCanceledListener { Log.w("$$$ ${BeaconConstants.modelName} Download $$$", "Cancel") }
          .addOnSuccessListener { model: CustomModel? ->
             val modelFile = model?.file
             interpreter = modelFile?.let { Interpreter(it) }!!
-            Log.w("$$$ Model Download $$$", "Success")
+            Log.w("$$$ ${BeaconConstants.modelName} Download $$$", "Success")
          }
    }
+
 
    private fun setting() {
       filePath = applicationContext.getExternalFilesDir(Environment.DIRECTORY_DOWNLOADS).toString()
@@ -208,7 +217,7 @@ class LocalizationActivity : AppCompatActivity(), SensorEventListener {
    }
 
    fun saveCSV() {
-      csvHelper.writeData("${BeaconConstants.saveCSVName}${
+      csvHelper.writeData("${BeaconConstants.beaconCSVName}${
          LocalDateTime.now().format(DateTimeFormatter.ISO_LOCAL_TIME)
       }.csv", beaconCSV)
    }
@@ -303,21 +312,19 @@ class LocalizationActivity : AppCompatActivity(), SensorEventListener {
             //Log.i("$$$ Detected Beacons $$$", "minor: ${beacon.bID}, RSSI: ${it.rssi}, Filtered: $filteredRssi")
 
             filteredBeaconList[beacon.minor] = filteredRssi.toString()
-            filteredBeaconList[23] = azimuth.toString()
-            filteredBeaconList[24] = classifyOrientation(azimuth)
+//            filteredBeaconList[23] = azimuth.toString()
+            val direction = classifyOrientation(azimuth)
+            //filteredBeaconList[23] = directionEncoder(direction).toString()
          }
 
-         /*
          // 1~23 자르고 float 으로 변환
          val filteredBeaconFloatList = mutableListOf<Float>()
          filteredBeaconList.subList(1, 23).forEach { value -> filteredBeaconFloatList.add(value.toFloat()) }
          filteredBeaconFloatList.forEachIndexed { index, fl ->
-            Log.i("filteredBeaconFloatList $index: ", fl.toString())
+            //Log.i("filteredBeaconFloatList $index: ", fl.toString())
          }
-         selectBeacon(rawBeaconFloatList, filteredBeaconFloatList, 22)
-         */
-
-         addToCSV(filteredBeaconList.toTypedArray())
+         selectBeacon(rawBeaconFloatList, filteredBeaconFloatList, BeaconConstants.beaconNum)
+         //addToCSV(filteredBeaconList.toTypedArray())
          binding.beaconList.adapter = ArrayAdapter(this, R.layout.simple_list_item_1, beacons.map { "Major ${it.id2}          Minor: ${it.id3}\nRaw rssi: ${it.rssi}\n" }.toTypedArray())
       }
    }
@@ -330,12 +337,12 @@ class LocalizationActivity : AppCompatActivity(), SensorEventListener {
       val rawDict = mutableMapOf<String, Float>()
       val filteredDict = mutableMapOf<String, Float>()
 
-      filteredBeacon.forEachIndexed { index, value -> rawDict += ("$index" to value) }
-      rawBeacon.forEachIndexed { index, value -> filteredDict += ("$index" to value) }
+      filteredBeacon.forEachIndexed { index, value -> filteredDict += ("$index" to value) }
+      rawBeacon.forEachIndexed { index, value -> rawDict += ("$index" to value) }
 
       // 상위 n개로 정렬
-      val filteredList = rawDict.toList().sortedByDescending { (_, value) -> value }.subList(0, beaconNum)
-      val rawList = filteredDict.toList().sortedByDescending { (_, value) -> value }.subList(0, beaconNum)
+      val filteredList = filteredDict.toList().sortedByDescending { (_, value) -> value }.subList(0, beaconNum)
+      val rawList = rawDict.toList().sortedByDescending { (_, value) -> value }.subList(0, beaconNum)
 
       val newFilteredList = mutableListOf<Float>()
       val newRawList = mutableListOf<Float>()
@@ -352,8 +359,8 @@ class LocalizationActivity : AppCompatActivity(), SensorEventListener {
       // 에러 >= 20 이면 칼만 초기화
       for (i in 0 until filteredBeacon.size) {
          if (newFilteredList[i] != -200F && newRawList[i] != -200F) {
-            Log.w("NewFilteredList : ", newFilteredList[i].toString())
-            Log.w("NewRawList : ", newRawList[i].toString())
+            st1 += "${newFilteredList[i]}, "
+            st2 += "${newRawList[i]}, "
 
             val error = abs(abs(newFilteredList[i]) - abs(newRawList[i]))
             Log.i("RSSI Error ", error.toString())
@@ -368,8 +375,8 @@ class LocalizationActivity : AppCompatActivity(), SensorEventListener {
             beaconManager.beaconInfo["$s"] = KalmanFilter(R = 0.001f, Q = 2f)
          }
       }
-
       combineBeaconCells(filteredBeacon, beaconNum)
+//      filteredBeacon.add(direction)
    }
 
    private fun combineBeaconCells(filteredBeacon: MutableList<Float>, beaconNum: Int) {
@@ -408,7 +415,11 @@ class LocalizationActivity : AppCompatActivity(), SensorEventListener {
          // 상위 n 개만 value 저장
          sortedList.forEach { (index, value) -> combinedBeaconList[index.toInt()] = value }
          combinedBeaconList.forEachIndexed { index, _ -> sortedString += "${combinedBeaconList[index]}," }
+         //combinedBeaconList.add(currentBeaconArray.last())
 
+         combinedBeaconList.forEachIndexed { index, fl ->
+            Log.w("combined $index: ", "${fl}")
+         }
          // 상위 n개만 뽑아서 저장
          Log.i("$$$ Filtered $beaconNum Beacon $$$", "$sortedString ]")
          getModelOutput(combinedBeaconList)
@@ -430,6 +441,23 @@ class LocalizationActivity : AppCompatActivity(), SensorEventListener {
       }
    }
 
+   private fun directionEncoder(direction: String): Int {
+      return when (direction) {
+         "E" -> {
+            0
+         }
+         "N" -> {
+            1
+         }
+         "S" -> {
+            2
+         }
+         else -> {
+            3
+         }
+      }
+   }
+
    private fun addToCSV(cell: Array<String>) {
       beaconCSV.add(cell)
    }
@@ -441,13 +469,13 @@ class LocalizationActivity : AppCompatActivity(), SensorEventListener {
       for (i in 0 until rssiList.size) {
          input.putFloat(rssiList[i])
       }
-
       val bufferSize = labelNum * java.lang.Float.SIZE / java.lang.Byte.SIZE
       val modelOutput = ByteBuffer.allocateDirect(bufferSize).order(ByteOrder.nativeOrder())
+
       interpreter?.run(input, modelOutput)
       modelOutput.rewind()
-
       val probabilities = modelOutput.asFloatBuffer()
+
       try {
          var probabilityString = "[ "
          val probabilityArray = mutableListOf<Float>()
@@ -455,10 +483,7 @@ class LocalizationActivity : AppCompatActivity(), SensorEventListener {
          for (i in 0 until probabilities.capacity()) {
             val probability = probabilities.get(i)
             probabilityArray.add(probability)
-            probabilityString += "${probability}, "
          }
-         Log.i("$$$ Probability $$$ ", "$probabilityString ]")
-
          val maxProbability = probabilityArray.maxOrNull()
          val mappedLabel = BeaconConstants.labelList[probabilityArray.indexOf(maxProbability)]
 
@@ -470,8 +495,6 @@ class LocalizationActivity : AppCompatActivity(), SensorEventListener {
          var locationString = ""
          locationQueue.forEach { locationString += "$it " }
          binding.locationQueue.text = locationString
-
-         estimatedLocationList.add(mappedLabel)
          addToCSV(arrayOf(mappedLabel))
       } catch (e: IOException) {
          Log.e("$$$ Output Error $$$", e.toString())
@@ -513,7 +536,7 @@ class LocalizationActivity : AppCompatActivity(), SensorEventListener {
    }
 
    private fun makeEstimatedLocationColumn() {
-      beaconCSV.add(arrayOf("Location"))
+      beaconCSV.add(arrayOf("estimated"))
    }
 
    private fun makeColumnName() {
@@ -572,20 +595,23 @@ class LocalizationActivity : AppCompatActivity(), SensorEventListener {
       SensorManager.getOrientation(rArray, values)
 
       // 방위값 -> 각도 단위 변경
-      azimuth = Math.toDegrees(values[0].toDouble()).toFloat()
+      azimuth = toDegrees(values[0].toDouble()).toFloat()
       // 좌우 기울기 값
-      pitch = Math.toDegrees(values[1].toDouble()).toFloat()
+      pitch = toDegrees(values[1].toDouble()).toFloat()
       // 앞뒤 기울기 값
-      roll = Math.toDegrees(values[2].toDouble()).toFloat()
+      roll = toDegrees(values[2].toDouble()).toFloat()
+
+      var degree = toDegrees(values[0].toDouble() + 360).toFloat() % 360
+      val rotateAnimation = RotateAnimation(currentDegree, -degree, Animation.RELATIVE_TO_SELF, 0.5f, Animation.RELATIVE_TO_SELF, 0.5f)
+      rotateAnimation.duration = 1000
+      rotateAnimation.fillAfter = true
+
+      currentDegree = -degree
 
       if (azimuth < 0) {
          azimuth += 360
       }
-
-      Log.i("mmmmmmm azimuth: ", azimuth.toString())
-      binding.locationQueue.text = azimuth.toString()
-      Log.i("mmmmmmm pitch: ", pitch.toString())
-      Log.i("mmmmmmm roll: ", roll.toString())
+      //binding.azimuth.text = azimuth.toString()
    }
 
    override fun onAccuracyChanged(p0: Sensor?, p1: Int) {
@@ -743,6 +769,6 @@ class LocalizationActivity : AppCompatActivity(), SensorEventListener {
       val PERMISSION_REQUEST_BLUETOOTH_SCAN = 1
       val PERMISSION_REQUEST_BLUETOOTH_CONNECT = 2
       val PERMISSION_REQUEST_FINE_LOCATION = 3
-      const val timerTime = 480000L
+      const val timerTime = 30000L
    }
 }
