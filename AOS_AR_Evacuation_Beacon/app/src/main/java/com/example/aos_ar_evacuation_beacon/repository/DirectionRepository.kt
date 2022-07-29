@@ -45,7 +45,6 @@ class DirectionRepository private constructor() : BaseRepository() {
    }
 
    fun updateArrowDegree(degree: Float) {
-      Log.i("aaaaaaaaaaaaaaaaa1111", degree.toString())
       _arrowDegree.value = degree
    }
 
@@ -63,16 +62,21 @@ class DirectionRepository private constructor() : BaseRepository() {
 
    fun angleBetween2Points(previousX: Float, previousY: Float, currentX: Float, currentY: Float): Float {
       var degree: Float
-      val tan = atan2((previousX - currentX), previousY - currentY) * 180 / Math.PI
+      val tan = atan2(previousX - currentX, previousY - currentY) * 180 / Math.PI
+      Log.i("OriginalTan:", tan.toString())
       degree = if (tan < 0) {
          (-tan).toFloat() + 180f
       } else {
          180f - tan.toFloat()
       }
 
+      // degree가 170~180 일 때 user 를 바라보는 문제
+      if (degree in 170.0..180.0) {
+         degree -= 180f
+      }
+
       updateArrowDegree(degree)
       return degree
-
    }
 
 }
