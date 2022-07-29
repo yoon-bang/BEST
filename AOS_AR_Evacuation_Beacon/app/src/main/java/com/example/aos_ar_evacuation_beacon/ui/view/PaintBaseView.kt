@@ -9,7 +9,7 @@ import android.util.Log
 import android.view.View
 import com.example.aos_ar_evacuation_beacon.repository.LocationRepository
 
-class Paint1FView : View {
+class PaintBaseView : View {
    private lateinit var locationRepository: LocationRepository
 
    constructor(context: Context) : super(context) {
@@ -24,10 +24,7 @@ class Paint1FView : View {
       super.onDraw(canvas)
 
       if (canvas != null) {
-         locationRepository.pathList.value?.let { drawCell(it, canvas) }
-         locationRepository.pathList.value?.forEachIndexed { index, s ->
-            Log.i("pathList: $index ", s)
-         }
+         locationRepository.basePath.value?.let { drawCell(it, canvas) }
       }
    }
 
@@ -43,7 +40,7 @@ class Paint1FView : View {
 
          val path = Path()
 
-         val coordinateList = locationRepository.newMapDict1f[it]
+         val coordinateList = locationRepository.newMapDictBase[it]
          if (coordinateList != null) {
             path.moveTo(coordinateList[0].first * 30, coordinateList[0].second * 30)
          }
