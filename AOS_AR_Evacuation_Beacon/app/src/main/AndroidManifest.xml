@@ -54,15 +54,22 @@
         <!--        </activity>-->
 
         <activity
-            android:name=".LocalizationActivity"
+            android:name=".ui.LocalizationActivity"
+            android:exported="true">
+            <!--            <intent-filter>-->
+            <!--                <action android:name="android.intent.action.MAIN" />-->
+            <!--                <category android:name="android.intent.category.LAUNCHER" />-->
+            <!--            </intent-filter>-->
+        </activity>
+
+        <activity
+            android:name=".ui.ARActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
-        <activity android:name=".ARActivity" />
 
         <service
             android:name=".MyFirebaseMessagingService"
@@ -77,5 +84,7 @@
             android:value="required" />
 
     </application>
-
+    <queries>
+        <package android:name="com.google.ar.core" />
+    </queries>
 </manifest>
