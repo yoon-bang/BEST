@@ -9,6 +9,7 @@ import android.os.Build
 import androidx.core.app.ActivityCompat.requestPermissions
 import androidx.core.app.ActivityCompat.shouldShowRequestPermissionRationale
 import androidx.core.content.ContextCompat.checkSelfPermission
+import com.example.aos_ar_evacuation_beacon.ui.LocalizationActivity
 
 class Permission(activity: LocalizationActivity, context: Context) {
    var neverAskAgainPermissions = ArrayList<String>()

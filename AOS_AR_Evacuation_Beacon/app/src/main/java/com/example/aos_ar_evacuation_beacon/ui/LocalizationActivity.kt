@@ -1,4 +1,4 @@
-package com.example.aos_ar_evacuation_beacon
+package com.example.aos_ar_evacuation_beacon.ui
 
 import android.Manifest
 import android.R
@@ -21,20 +21,24 @@ import android.view.View
 import android.view.animation.Animation
 import android.view.animation.RotateAnimation
 import android.widget.ArrayAdapter
+import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
+import com.example.aos_ar_evacuation_beacon.BeaconApplication
 import com.example.aos_ar_evacuation_beacon.beacon.BeaconCustomManager
 import com.example.aos_ar_evacuation_beacon.beacon.BeaconInfo
 import com.example.aos_ar_evacuation_beacon.constant.BeaconConstants
 import com.example.aos_ar_evacuation_beacon.csv.CSVHelper
 import com.example.aos_ar_evacuation_beacon.databinding.ActivityLocalizationBinding
 import com.example.aos_ar_evacuation_beacon.kalman.KalmanFilter
-import com.example.aos_ar_evacuation_beacon.socket.SocketApplication
+import com.example.aos_ar_evacuation_beacon.repository.LocationRepository
+import com.example.aos_ar_evacuation_beacon.viewModel.MainViewModel
 import com.google.firebase.ml.modeldownloader.CustomModel
 import com.google.firebase.ml.modeldownloader.CustomModelDownloadConditions
 import com.google.firebase.ml.modeldownloader.DownloadType
 import com.google.firebase.ml.modeldownloader.FirebaseModelDownloader
 import com.opencsv.CSVReader
+import io.socket.client.IO
 import io.socket.client.Socket
 import io.socket.emitter.Emitter
 import org.altbeacon.beacon.Beacon
@@ -56,7 +60,9 @@ import kotlin.math.abs
 
 class LocalizationActivity : AppCompatActivity(), SensorEventListener {
    private lateinit var binding: ActivityLocalizationBinding
+   val mainViewModel: MainViewModel by viewModels()
 
+   val locationRepository = LocationRepository.instance
    private lateinit var beaconApplication: BeaconApplication
    var neverAskAgainPermissions = ArrayList<String>()
    var alertDialog: AlertDialog? = null
@@ -124,6 +130,7 @@ class LocalizationActivity : AppCompatActivity(), SensorEventListener {
       binding.beaconCount.text = "No beacons detected"
       binding.beaconList.adapter = ArrayAdapter(this, R.layout.simple_list_item_1, arrayOf("--"))
 
+      socketSetup()
       setting()
       //makeColumnName()
       makeEstimatedLocationColumn()
@@ -145,40 +152,59 @@ class LocalizationActivity : AppCompatActivity(), SensorEventListener {
       checkPermissions()
    }
 
-   private fun setBottomNavigation() {
-      binding.bottomNavigation.selectedItemId = com.example.aos_ar_evacuation_beacon.R.id.localizationItem
-      binding.bottomNavigation.setOnItemSelectedListener {
-         when (it.itemId) {
-            com.example.aos_ar_evacuation_beacon.R.id.navigationItem -> {
-               val intent = Intent(this, ARActivity::class.java)
-               startActivity(intent)
-               overridePendingTransition(0, 0)
-            }
-         }
-         true
-      }
-   }
-
-
    private fun socketSetup() {
-      mSocket = SocketApplication.get()
+//      mSocket = SocketApplication.get()
 
-      mSocket.on("event", onNewEvent)
-      mSocket.connect()
-      Log.d("$$$ Socket ID $$$$", mSocket.id())
-      mSocket.emit("AOS Socket Connection", "hello")
+      val options = IO.Options()
+      options.port = 12001
+      options.reconnection = false
+
+      try {
+         mSocket = IO.socket("http://146.148.59.28:12000")
+         mSocket.on("path", onNewEvent)
+         mSocket.connect()
+         //mSocket.emit("location", "A11")
+
+         //Log.w("===socket===", mSocket.connected().toString())
+      } catch (e: Exception) {
+         Log.e("===socket===", e.toString())
+      }
+
+//      if (mSocket != null) {
+//         Log.d("$$$ Socket ID $$$$", mSocket.isActive.toString())
+//      } else {
+//         Log.d("$$$ Socket ID $$$$", "empty")
+//      }
+//
+//      mSocket.on("path", onNewEvent)
+//      mSocket.emit("location", "A11")
    }
 
    private var onNewEvent: Emitter.Listener = Emitter.Listener { args ->
       runOnUiThread(Runnable {
          val data = args[0] as JSONObject
          try {
-            Log.w("$$$ Socket Data from Server", data.toString())
+            Log.w("SSSSSSSSSSSS", data.toString())
          } catch (e: Exception) {
             e.printStackTrace()
             return@Runnable
          }
       })
+   }
+
+   private fun setBottomNavigation() {
+      binding.bottomNavigation.selectedItemId = com.example.aos_ar_evacuation_beacon.R.id.localizationItem
+      binding.bottomNavigation.setOnItemSelectedListener {
+         when (it.itemId) {
+            com.example.aos_ar_evacuation_beacon.R.id.navigationItem -> {
+               val intent = Intent(this, ARActivity::class.java)
+               intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_SINGLE_TOP
+               startActivity(intent)
+               overridePendingTransition(0, 0)
+            }
+         }
+         true
+      }
    }
 
    private fun loadMLModel() {
@@ -363,7 +389,7 @@ class LocalizationActivity : AppCompatActivity(), SensorEventListener {
             st2 += "${newRawList[i]}, "
 
             val error = abs(abs(newFilteredList[i]) - abs(newRawList[i]))
-            Log.i("RSSI Error ", error.toString())
+            //Log.i("RSSI Error ", error.toString())
             if (error > threshold) {
                errorNum += 1
             }
@@ -495,6 +521,19 @@ class LocalizationActivity : AppCompatActivity(), SensorEventListener {
          var locationString = ""
          locationQueue.forEach { locationString += "$it " }
          binding.locationQueue.text = locationString
+
+         if (locationRepository.isStart.value == true) {
+            locationRepository.updateStartPoint(mappedLabel)
+            locationRepository.updateIsStart(false)
+         }
+
+         locationRepository.updateLocationString(mappedLabel)
+
+         mainViewModel.addQueue(mappedLabel)
+         mainViewModel.evacuationQueue.value?.forEachIndexed { index, s ->
+            Log.i("hhhhhhhhhh $index: ", s)
+         }
+
          addToCSV(arrayOf(mappedLabel))
       } catch (e: IOException) {
          Log.e("$$$ Output Error $$$", e.toString())
