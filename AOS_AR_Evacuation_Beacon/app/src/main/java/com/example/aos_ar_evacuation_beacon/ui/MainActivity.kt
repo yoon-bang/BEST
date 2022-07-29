@@ -1,4 +1,4 @@
-package com.example.aos_ar_evacuation_beacon
+package com.example.aos_ar_evacuation_beacon.ui
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
