@@ -1,0 +1,43 @@
+{
+  materials: [
+    {
+      name: '플라스틱 2',
+      parameters: [
+        {
+          baseColor: null,
+        },
+        {
+          baseColorTint: [
+            0.81568600000000002,
+            0.81568600000000002,
+            0.81568600000000002,
+            1,
+          ],
+        },
+        {
+          metallic: 0,
+        },
+        {
+          roughness: 1,
+        },
+        {
+          opacity: null,
+        },
+      ],
+      source: 'build/sceneform_sdk/default_materials/obj_material.sfm',
+    },
+  ],
+  model: {
+    attributes: [
+      'Position',
+      'TexCoord',
+      'Orientation',
+    ],
+    collision: {},
+    file: 'sampledata/models/Aos_arrow.obj',
+    name: 'Aos_arrow',
+    recenter: 'root',
+    scale: 0.03,
+  },
+  version: '0.54:2',
+}

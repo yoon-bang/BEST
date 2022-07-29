@@ -1,32 +1,45 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".ARActivity">
+    tools:context=".ui.ARActivity">
 
-    <!--    <fragment-->
-    <!--        android:id="@+id/arFragment"-->
-    <!--        android:name="com.google.ar.sceneform.ux.ArFragment"-->
-    <!--        android:layout_width="match_parent"-->
-    <!--        android:layout_height="match_parent" />-->
-
-    <FrameLayout
+    <fragment
+        android:id="@+id/fragment"
+        android:name="com.google.ar.sceneform.ux.ArFragment"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent" />
 
-        <ImageView
-            android:id="@+id/imageView"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:src="@drawable/ic_compass" />
 
-        <com.example.aos_ar_evacuation_beacon.PaintView
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="300dp"
+        android:layout_gravity="bottom">
+
+        <ScrollView
+            android:id="@+id/scrollView"
             android:layout_width="match_parent"
-            android:layout_height="match_parent" />
-    </FrameLayout>
+            android:layout_height="match_parent"
+            android:fillViewport="true">
+
+            <FrameLayout
+                android:id="@+id/containerFramelayout"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
+
+                <ImageView
+                    android:id="@+id/mapImage"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:alpha="0.5"
+                    android:scaleType="fitXY"
+                    android:src="@drawable/ksw_1f" />
+            </FrameLayout>
+        </ScrollView>
+    </LinearLayout>
 
 
     <!--    <com.google.android.material.bottomnavigation.BottomNavigationView-->
@@ -36,4 +49,4 @@
     <!--        android:layout_gravity="bottom"-->
     <!--        app:itemBackground="@color/white"-->
     <!--        app:menu="@menu/bottom_navigation_menu" />-->
-</LinearLayout>
+</FrameLayout>

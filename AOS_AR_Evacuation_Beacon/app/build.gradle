@@ -3,18 +3,24 @@ plugins {
     id 'kotlin-android'
     id 'org.jetbrains.kotlin.android'
     id 'com.google.gms.google-services'
-    id 'kotlin-kapt'
     id 'kotlin-android-extensions'
-//    id 'com.google.ar.sceneform.plugin'
+    id 'com.google.ar.sceneform.plugin'
 }
+
+sceneform.asset (
+        'sampledata/models/Aos_arrow.obj',
+        'default',
+        'sampledata/models/Aos_arrow.sfa',
+        'src/main/res/raw/aos_arrow'
+)
 
 android {
     compileSdk 31
 
     defaultConfig {
         applicationId "com.example.aos_ar_evacuation_beacon"
-        minSdk 24
-        targetSdk 32
+        minSdk 26
+        targetSdk 31
         versionCode 1
         versionName "1.0"
 
@@ -42,6 +48,10 @@ android {
     aaptOptions {
         noCompress "tflite"
     }
+
+    configurations.all {
+        exclude group: 'com.google.flatbuffers', module: 'flatbuffers-java'
+    }
 }
 
 dependencies {
@@ -61,6 +71,11 @@ dependencies {
     //coroutines
     implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-core:1.3.2'
     implementation "org.jetbrains.kotlinx:kotlinx-coroutines-android:1.3.2"
+
+
+    def lifecycle_version = "2.3.0"
+    implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:$lifecycle_version"
+    implementation "androidx.lifecycle:lifecycle-livedata-ktx:$lifecycle_version"
 
     //coroutine scopes
     implementation "androidx.lifecycle:lifecycle-runtime-ktx:2.2.0"
@@ -89,16 +104,18 @@ dependencies {
     implementation 'org.tensorflow:tensorflow-lite-metadata:0.1.0'
 
     // socket
-    implementation 'io.socket:socket.io-client:2.0.0'
+    implementation('io.socket:socket.io-client:2.0.0') {
+        exclude group: 'org.json', module: 'json'
+    }
 
     // navigation
     implementation "androidx.navigation:navigation-fragment-ktx:2.4.0"
     implementation "androidx.navigation:navigation-ui-ktx:2.4.0"
 
     // AR
-//    implementation 'com.google.ar.sceneform.ux:sceneform-ux:1.15.0'
-//    implementation 'com.google.ar.sceneform:assets:1.15.0'
-//    implementation 'com.google.ar:core:1.15.0'
-
-    implementation 'androidx.lifecycle:lifecycle-livedata-ktx:2.4.1'
+    implementation 'com.google.ar:core:1.15.0'
+    // 3d render
+    implementation 'com.google.ar.sceneform.ux:sceneform-ux:1.15.0'
+    implementation 'com.google.ar.sceneform:core:1.15.0'
+    implementation 'com.google.ar.sceneform:animation:1.15.0'
 }
