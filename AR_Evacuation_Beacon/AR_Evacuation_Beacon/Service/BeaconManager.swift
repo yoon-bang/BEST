@@ -22,9 +22,9 @@ class BeaconManager {
         
         var newbeaconArr = beacons
         newbeaconArr.sort { $0.filteredRssi > $1.filteredRssi }
-//        if beaconNum != 22 {
-//            newbeaconArr = Array(newbeaconArr[0..<beaconNum])
-//        }
+        if beaconNum != 22 {
+            newbeaconArr = Array(newbeaconArr[0..<beaconNum])
+        }
         
         for beacon in newbeaconArr {
             self.beaconDictionary.updateValue(beacon, forKey: beacon.beaconID)

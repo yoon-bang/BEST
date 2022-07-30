@@ -104,7 +104,7 @@ class IndoorLocationManager: NSObject, CLLocationManagerDelegate {
         
         // TEST
         getPath()
-        testMoveUserLocation()
+//        testMoveUserLocation()
     }
     
 }
@@ -156,14 +156,14 @@ extension IndoorLocationManager {
     }
     
     func getPath() {
-//                SocketIOManager.shared.receivePath { path in
-//                    NotificationCenter.default.post(name: .path, object: path)
-//                }
+                SocketIOManager.shared.receivePath { path in
+                    NotificationCenter.default.post(name: .path, object: path)
+                }
         
         //TEST
-        DispatchQueue.main.asyncAfter(deadline: .now() + 5) {
-            NotificationCenter.default.post(name: .path, object: [Position.R02, Position.A01, Position.A02, Position.A03, Position.A04, Position.A05, Position.A06])
-        }
+//        DispatchQueue.main.asyncAfter(deadline: .now() + 5) {
+//            NotificationCenter.default.post(name: .path, object: [Position.R02, Position.A01, Position.A02, Position.A03, Position.A04, Position.A05, Position.A06])
+//        }
     }
     
     func testMoveUserLocation() {
@@ -302,7 +302,7 @@ extension IndoorLocationManager {
             if direction {
                 let csv = createCSVWithPrevAndCurrentBeacons(prev: previousBeacons, current: currentBeacons, heading: heading)
             } else {
-//                userLocation(prevBeaconInfo: previousBeacons, currentBeaconInfo: currentBeacons)
+                userLocation(prevBeaconInfo: previousBeacons, currentBeaconInfo: currentBeacons)
                 previousBeacons.removeAll()
             }
         }

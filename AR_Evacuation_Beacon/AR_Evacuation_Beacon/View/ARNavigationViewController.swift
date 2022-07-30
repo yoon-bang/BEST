@@ -27,6 +27,7 @@ final class ARNavigationViewController: UIViewController, ARSCNViewDelegate, CLL
     private var map2Dview: UIView = UIView()
     private var bannerView: UIView = UIView()
     private var bannerLabel: UILabel = UILabel()
+    private var indoorLocationManager = IndoorLocationManager(mode: .real)
     private var map2DViewController = Map2DViewController()
     private let mapContentScrollView: UIScrollView = {
         let scrollView = UIScrollView()
@@ -190,7 +191,7 @@ extension ARNavigationViewController {
     
     
     private func generateSphereNode() -> SCNNode {
-        let sphere = SCNSphere(radius: 0.3)
+        let sphere = SCNSphere(radius: 0.2)
         let sphereNode = SCNNode()
         sphereNode.position.y += Float(sphere.radius)
         sphereNode.geometry = sphere

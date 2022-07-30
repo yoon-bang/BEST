@@ -30,6 +30,9 @@ class Map2DViewController: UIViewController {
     }
     var imageName: String = "KSW_0"
     
+    private let beaconManager = BeaconManager.shared
+    private let indoorLocationManager = IndoorLocationManager(mode: .real)
+    
     override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
         super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
     }
@@ -63,11 +66,10 @@ class Map2DViewController: UIViewController {
     
     @objc func movenotification(_ noti: Notification) {
         guard let location = noti.object as? Position else {return}
-        annotationView.isHidden = false
-        annotationView.showDirectionView()
         userlocation = location
         print("from beaconVC", userlocation)
-        
+        annotationView.isHidden = false
+        annotationView.showDirectionView()
         
         //move
         annotationView.move(to: userlocation) { [weak self] in
@@ -103,7 +105,6 @@ class Map2DViewController: UIViewController {
             didPathChanged()
             bringStartingPathView()
             mapImagView.addSubview(firstFloorPathView)
-
         }
     }
     
