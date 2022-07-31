@@ -102,7 +102,7 @@ enum Position: String {
         case .A06:
             return [[.A05], [.unknown], [.A07], [.A09]]
         case .A07:
-            return [[.A06], [.unknown], [.H02], [.A10]]
+            return [[.A06], [.unknown], [.H02, .S07], [.A10]]
         case .A08:
             return [[.A02, .A03], [.A03, .A04], [.A09], [.unknown]]
         case .A09:
@@ -136,7 +136,7 @@ enum Position: String {
         case .S04:
             return [[.unknown], [.S03], [.unknown], [.H01]]
         case .S05:
-            return [[.unknown], [.unknown], [.unknown], [.S06]]
+            return [[.H01], [.H01], [.H01], [.S06]]
         case .S06:
             return [[.S05], [.unknown], [.unknown], [.H02]]
         case .S07:

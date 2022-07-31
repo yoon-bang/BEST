@@ -41,7 +41,7 @@ final class ARNavigationViewController: UIViewController, ARSCNViewDelegate, CLL
     private var arrow = SCNNode()
     private var heading: Double = 360
     private var directionDegree: Float = 0
-    private var path: [Position] = []
+    private var path: Path = Path()
     private var bannerText: String = NavigationDirection.forward.description {
         didSet {
             self.bannerLabel.text = bannerText
@@ -72,8 +72,9 @@ final class ARNavigationViewController: UIViewController, ARSCNViewDelegate, CLL
     }
     
     @objc private func getPath(_ noti: Notification) {
-        guard let path = noti.object as? [Position] else {return}
+        guard let path = noti.object as? Path else {return}
         self.path = path
+        self.bannerText = "Path Changed"
     }
 
 }
@@ -256,19 +257,18 @@ extension ARNavigationViewController {
         mapContentScrollView.scroll(to: map2DViewController.annotationView.currentPoint)
         
         // 1.path가 들어왔다.
-        guard !path.isEmpty else {return}
+        guard !path.path.isEmpty else {return}
         // 2.현재위치를 파악한다.
-        guard let index = path.firstIndex(of: userLocation) else {return}
+        guard let index = path.path.firstIndex(of: userLocation) else {return}
         // 마지막 path가 아니라면
-        if index < path.count - 1 {
+        if index < path.path.count - 1 {
             // 다음꺼의 거리와 각도를 찾기
-            let start = VectorService.transformCellToCGPoint(cellname: path[index])
-            let end = VectorService.transformCellToCGPoint(cellname:path[index+1])
+            let start = VectorService.transformCellToCGPoint(cellname: path.path[index])
+            let end = VectorService.transformCellToCGPoint(cellname:path.path[index+1])
             let vector = VectorService.vectorBetween2Points(from: start, to: end)
             
             // get angle
             directionDegree = vector.angle
-            
             // get dist
             let dist = vector.dist
             
@@ -278,16 +278,23 @@ extension ARNavigationViewController {
             sceneView.scene.rootNode.addChildNode(newnode)
             newnode.position = SCNVector3(x: arrow.position.x, y: arrow.position.y, z: arrow.position.z - (Float(dist) / 10 * 0.36) + 1.0)
             
+        } else {
+            bannerText = "Safely Exit"
+            let alert = UIAlertController(title: "tt", message: nil, preferredStyle: .alert)
+            self.present(alert, animated: true)
         }
         
     }
     
     private func changeBannerText(degree: Float, heading: Double) {
-        
+        print(degree)
         let pointDirection = VectorService.headingToDirection(degree: degree)
         let headingDirection = VectorService.headingToDirection(degree: Float(heading))
         // 남동북서 0123 음수면 오른쪽으로 양수면
         // 현재 동쪽을 가리킬때,
+        print("pointing ",pointDirection)
+        print(headingDirection)
+        
         let direction = pointDirection.rawValue - headingDirection.rawValue
         if direction == 0 {
             self.bannerText = NavigationDirection.forward.description

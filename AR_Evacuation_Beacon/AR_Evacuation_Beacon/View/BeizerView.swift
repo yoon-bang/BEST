@@ -9,11 +9,10 @@ import UIKit
 
 class BeizerView: UIView {
     
-    var path: [Position] = [] {
-        didSet {
-            self.draw(self.frame)
-        }
-    }
+    var path: [Position] = []
+    var firecell: [Position] = []
+    var firePredictedCell: [Position] = []
+    var conjestionCell: [Position] = []
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -23,7 +22,7 @@ class BeizerView: UIView {
         fatalError("init(coder:) has not been implemented")
     }
     
-    private func drawCell(point: [(CGFloat, CGFloat)]) {
+    private func drawCell(point: [(CGFloat, CGFloat)], color: UIColor) {
         let path = UIBezierPath()
         var firstMove: CGPoint = CGPoint(x: 0.0, y: 0.0)
         for i in point.indices {
@@ -37,8 +36,24 @@ class BeizerView: UIView {
         }
         path.addLine(to: firstMove)
         path.close()
-        UIColor.systemYellow.withAlphaComponent(0.7).set()
+        color.withAlphaComponent(0.7).set()
         path.fill()
+    }
+    
+    private func drawPoint(positions: [Position], color: UIColor) {
+        for point in positions {
+
+            if let location1 = mapDic[point] {
+                drawCell(point: location1, color: color)
+            }
+            if let location2 = micDic2[point] {
+                drawCell(point: location2, color: color)
+            }
+            if let location3 = micDic0[point] {
+                drawCell(point: location3, color: color)
+            }
+
+        }
     }
     
     // x: 10
@@ -46,18 +61,10 @@ class BeizerView: UIView {
         var x: CGFloat = 10
         var y: CGFloat = 10
         
-        for point in path {
-
-            if let location1 = mapDic[point] {
-                drawCell(point: location1)
-            }
-            if let location2 = micDic2[point] {
-                drawCell(point: location2)
-            }
-            if let location3 = micDic0[point] {
-                drawCell(point: location3)
-            }
-
-        }
+        drawPoint(positions: path, color: .systemGreen)
+        drawPoint(positions: conjestionCell, color: .systemYellow)
+        drawPoint(positions: firePredictedCell, color: .systemOrange)
+        drawPoint(positions: firecell, color: .systemRed)
+        
     }
 }

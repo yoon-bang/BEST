@@ -17,7 +17,7 @@ class Map2DViewController: UIViewController {
     var baseFloorPathView: BeizerView = BeizerView()
     var annotationView = IndoorAnnotationView()
     
-    var path = [Position]()
+    var path: Path?
     
     var userlocation: Position = .unknown
     var prevLocation: Position = .unknown
@@ -31,7 +31,6 @@ class Map2DViewController: UIViewController {
     var imageName: String = "KSW_0"
     
     private let beaconManager = BeaconManager.shared
-    private let indoorLocationManager = IndoorLocationManager(mode: .real)
     
     override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
         super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
@@ -75,7 +74,7 @@ class Map2DViewController: UIViewController {
         annotationView.move(to: userlocation) { [weak self] in
             
             guard let self = self else {return}
-            guard let end = self.path.last else {return}
+            guard let end = self.path?.path.last else {return}
             
             if self.userlocation == end {
                 return
@@ -88,23 +87,20 @@ class Map2DViewController: UIViewController {
             self.previousUserLocation.append(location)
             self.prevLocation = location
         }
-        
-        // if map image is not the one?
-        // 만약에 1층칸이 previous 2 ~3 개인데, 1층칸 맵이 아니라면, 1층칸 맵으로 변경해야지
-        
-        
     }
     
     @objc func getPath(_ noti: Notification) {
-        guard let path = noti.object as? [Position] else {return}
-        self.path = path
+        guard let path = noti.object as? Path else {return}
         // 여기서 path 받으면 beizerview 3개 만들고 갈아껴야할듯
-        if self.path.count == 0 {
+        if self.path == nil {
+            self.path = path
+            injectPathToViews()
+            addPathView()
             bringStartingPathView()
         } else {
+            self.path = path
             didPathChanged()
             bringStartingPathView()
-            mapImagView.addSubview(firstFloorPathView)
         }
     }
     
@@ -205,32 +201,65 @@ class Map2DViewController: UIViewController {
     }
     
     private func injectPathToViews() {
-        var firstMapPath: [Position] = []
-        var secondMapPath: [Position] = []
-        var baseMapPath: [Position] = []
+        guard let path = path else { return }
         
-        path.forEach { point in
-            if mapDic.keys.contains(point) {
-                firstMapPath.append(point)
-            }
-            if micDic2.keys.contains(point) {
-                secondMapPath.append(point)
-            }
-            if micDic0.keys.contains(point) {
-                baseMapPath.append(point)
-            }
-        }
-        
-        firstFloorPathView.path = firstMapPath
-        secondFloorPathView.path = secondMapPath
-        baseFloorPathView.path = baseMapPath
+        injectEachCell(with: path.path, to: "path")
+        injectEachCell(with: path.fireCell, to: "fire")
+        injectEachCell(with: path.conjestionCell, to: "conjestion")
+        injectEachCell(with: path.firePredictedCell, to: "firePredict")
         
     }
     
+    private func injectEachCell(with position: [Position], to situation: String) {
+        position.forEach { point in
+            
+            if situation == "path" {
+                if mapDic.keys.contains(point) {
+                    firstFloorPathView.path.append(point)
+                }
+                if micDic2.keys.contains(point) {
+                    secondFloorPathView.path.append(point)
+                }
+                if micDic0.keys.contains(point) {
+                    baseFloorPathView.path.append(point)
+                }
+            } else if situation == "fire" {
+                if mapDic.keys.contains(point) {
+                    firstFloorPathView.firecell.append(point)
+                }
+                if micDic2.keys.contains(point) {
+                    secondFloorPathView.firecell.append(point)
+                }
+                if micDic0.keys.contains(point) {
+                    baseFloorPathView.firecell.append(point)
+                }
+            } else if situation == "conjestion" {
+                if mapDic.keys.contains(point) {
+                    firstFloorPathView.conjestionCell.append(point)
+                }
+                if micDic2.keys.contains(point) {
+                    secondFloorPathView.conjestionCell.append(point)
+                }
+                if micDic0.keys.contains(point) {
+                    baseFloorPathView.conjestionCell.append(point)
+                }
+            } else {
+                if mapDic.keys.contains(point) {
+                    firstFloorPathView.firePredictedCell.append(point)
+                }
+                if micDic2.keys.contains(point) {
+                    secondFloorPathView.firePredictedCell.append(point)
+                }
+                if micDic0.keys.contains(point) {
+                    baseFloorPathView.firePredictedCell.append(point)
+                }
+            }
+        }
+    }
+    
     private func bringStartingPathView() {
-        guard let startpoint = path.first else {return}
-        injectPathToViews()
-        addPathView()
+        guard let path = path else { return }
+        guard let startpoint = path.path.first else {return}
         if mapDic.keys.contains(startpoint) {
             changeBeizerpathView(to: firstFloorPathView)
             imageName = "KSW_1"
@@ -246,23 +275,46 @@ class Map2DViewController: UIViewController {
     
     // if path change -> Should remove the pathviews and start again
     private func didPathChanged() {
-        self.firstFloorPathView.path = path
+        
+        guard let path = path else { return }
+        
         firstFloorPathView.removeFromSuperview()
+        secondFloorPathView.removeFromSuperview()
+        baseFloorPathView.removeFromSuperview()
+        
         firstFloorPathView = BeizerView(frame: self.view.frame)
+        secondFloorPathView = BeizerView(frame: self.view.frame)
+        baseFloorPathView = BeizerView(frame: self.view.frame)
+        
+        firstFloorPathView.path.removeAll()
+        firstFloorPathView.firecell.removeAll()
+        firstFloorPathView.firePredictedCell.removeAll()
+        firstFloorPathView.conjestionCell.removeAll()
+        
+        secondFloorPathView.path.removeAll()
+        secondFloorPathView.firecell.removeAll()
+        secondFloorPathView.firePredictedCell.removeAll()
+        secondFloorPathView.conjestionCell.removeAll()
+        
+        baseFloorPathView.path.removeAll()
+        baseFloorPathView.firecell.removeAll()
+        baseFloorPathView.firePredictedCell.removeAll()
+        baseFloorPathView.conjestionCell.removeAll()
+        
+        injectEachCell(with: path.path, to: "path")
+        injectEachCell(with: path.conjestionCell, to: "conjestion")
+        injectEachCell(with: path.fireCell, to: "fire")
+        injectEachCell(with: path.firePredictedCell, to: "firePredicted")
+
         firstFloorPathView.backgroundColor = .clear
         mapImagView.addSubview(firstFloorPathView)
-        
-        secondFloorPathView.removeFromSuperview()
-        secondFloorPathView = BeizerView(frame: self.view.frame)
-        self.secondFloorPathView.path = path
+
         secondFloorPathView.backgroundColor = .clear
         mapImagView.addSubview(secondFloorPathView)
-        
-        baseFloorPathView.removeFromSuperview()
-        baseFloorPathView = BeizerView(frame: self.view.frame)
-        self.baseFloorPathView.path = path
+
         baseFloorPathView.backgroundColor = .clear
         mapImagView.addSubview(baseFloorPathView)
+
     }
     
     private func addPathView() {

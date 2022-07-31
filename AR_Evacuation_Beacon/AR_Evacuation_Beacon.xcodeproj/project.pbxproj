@@ -101,6 +101,7 @@
 		B14B8FB92880857900BE0E6E /* ios_clf_data7A01.csv in Resources */ = {isa = PBXBuildFile; fileRef = B14B8F9A2880857900BE0E6E /* ios_clf_data7A01.csv */; };
 		B14B8FBA2880857900BE0E6E /* ios_clf_data7S03.csv in Resources */ = {isa = PBXBuildFile; fileRef = B14B8F9B2880857900BE0E6E /* ios_clf_data7S03.csv */; };
 		B14B8FBB2880857900BE0E6E /* ios_clf_data7R03.csv in Resources */ = {isa = PBXBuildFile; fileRef = B14B8F9C2880857900BE0E6E /* ios_clf_data7R03.csv */; };
+		B16DB7032895E7ED008DCD15 /* SocketStreamManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B16DB7022895E7EC008DCD15 /* SocketStreamManager.swift */; };
 		B182BB8F288DFD9D0028A3F5 /* navigation.scnassets in Resources */ = {isa = PBXBuildFile; fileRef = B182BB8E288DFD9D0028A3F5 /* navigation.scnassets */; };
 		B182BB95288F56540028A3F5 /* iPhone_arrow.obj in Resources */ = {isa = PBXBuildFile; fileRef = B182BB94288F56540028A3F5 /* iPhone_arrow.obj */; };
 		B182BB99288F69E20028A3F5 /* KSW_2.png in Resources */ = {isa = PBXBuildFile; fileRef = B182BB96288F69E20028A3F5 /* KSW_2.png */; };
@@ -124,7 +125,6 @@
 		B191595B287A8681001CB91E /* BeaconCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B191595A287A8681001CB91E /* BeaconCell.swift */; };
 		B191595E287AA69F001CB91E /* ARNavigationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B191595D287AA69F001CB91E /* ARNavigationViewController.swift */; };
 		B1915961287DC053001CB91E /* SocketIO in Frameworks */ = {isa = PBXBuildFile; productRef = B1915960287DC053001CB91E /* SocketIO */; };
-		B1915963287DDDCF001CB91E /* SocketIOManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1915962287DDDCF001CB91E /* SocketIOManager.swift */; };
 		B19159EF287F345A001CB91E /* LabelTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B19159ED287F345A001CB91E /* LabelTableViewCell.swift */; };
 		B19159F0287F345A001CB91E /* LabelTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = B19159EE287F345A001CB91E /* LabelTableViewCell.xib */; };
 		B1A4F66C2886E9270000ECC9 /* ios_clf_data_allA05.csv in Resources */ = {isa = PBXBuildFile; fileRef = B1A4F64D2886E9260000ECC9 /* ios_clf_data_allA05.csv */; };
@@ -302,6 +302,7 @@
 		B14B8F9A2880857900BE0E6E /* ios_clf_data7A01.csv */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = ios_clf_data7A01.csv; path = ../../../iOS_clf_dataset/ios_clf_data_7/ios_clf_data7A01.csv; sourceTree = "<group>"; };
 		B14B8F9B2880857900BE0E6E /* ios_clf_data7S03.csv */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = ios_clf_data7S03.csv; path = ../../../iOS_clf_dataset/ios_clf_data_7/ios_clf_data7S03.csv; sourceTree = "<group>"; };
 		B14B8F9C2880857900BE0E6E /* ios_clf_data7R03.csv */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = ios_clf_data7R03.csv; path = ../../../iOS_clf_dataset/ios_clf_data_7/ios_clf_data7R03.csv; sourceTree = "<group>"; };
+		B16DB7022895E7EC008DCD15 /* SocketStreamManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SocketStreamManager.swift; sourceTree = "<group>"; };
 		B182BB8E288DFD9D0028A3F5 /* navigation.scnassets */ = {isa = PBXFileReference; lastKnownFileType = wrapper.scnassets; path = navigation.scnassets; sourceTree = "<group>"; };
 		B182BB94288F56540028A3F5 /* iPhone_arrow.obj */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = iPhone_arrow.obj; sourceTree = "<group>"; };
 		B182BB96288F69E20028A3F5 /* KSW_2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = KSW_2.png; sourceTree = "<group>"; };
@@ -325,7 +326,6 @@
 		B191595A287A8681001CB91E /* BeaconCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BeaconCell.swift; sourceTree = "<group>"; };
 		B191595C287AA58D001CB91E /* AR_Evacuation_Beacon.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = AR_Evacuation_Beacon.entitlements; sourceTree = "<group>"; };
 		B191595D287AA69F001CB91E /* ARNavigationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ARNavigationViewController.swift; sourceTree = "<group>"; };
-		B1915962287DDDCF001CB91E /* SocketIOManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SocketIOManager.swift; sourceTree = "<group>"; };
 		B19159ED287F345A001CB91E /* LabelTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LabelTableViewCell.swift; sourceTree = "<group>"; };
 		B19159EE287F345A001CB91E /* LabelTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = LabelTableViewCell.xib; sourceTree = "<group>"; };
 		B1A4F64D2886E9260000ECC9 /* ios_clf_data_allA05.csv */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = ios_clf_data_allA05.csv; sourceTree = "<group>"; };
@@ -676,12 +676,12 @@
 				B1915954287A7E28001CB91E /* KalmanFilter.swift */,
 				B1915956287A7E71001CB91E /* BeaconManager.swift */,
 				B1915958287A7EA7001CB91E /* CSVService.swift */,
-				B1915962287DDDCF001CB91E /* SocketIOManager.swift */,
 				B1A4F6F42889D9F90000ECC9 /* Notifiationcenter+Extension.swift */,
 				B1A4F6F6288B36FF0000ECC9 /* IndoorLocationManager.swift */,
 				B1A4F6F8288B3E0A0000ECC9 /* Operator+Extension.swift */,
 				B139C507288CA0DB00A9DE48 /* Position.swift */,
 				B182BB9E2891E02C0028A3F5 /* VectorService.swift */,
+				B16DB7022895E7EC008DCD15 /* SocketStreamManager.swift */,
 			);
 			path = Service;
 			sourceTree = "<group>";
@@ -984,7 +984,7 @@
 				B191595B287A8681001CB91E /* BeaconCell.swift in Sources */,
 				B1A4F6EF2889CA600000ECC9 /* DirectionView.swift in Sources */,
 				B1915957287A7E71001CB91E /* BeaconManager.swift in Sources */,
-				B1915963287DDDCF001CB91E /* SocketIOManager.swift in Sources */,
+				B16DB7032895E7ED008DCD15 /* SocketStreamManager.swift in Sources */,
 				B1915932287A76AA001CB91E /* AppDelegate.swift in Sources */,
 				B1A4F6F32889CAC50000ECC9 /* BeizerView.swift in Sources */,
 				B1A4F6F12889CA810000ECC9 /* AnnotationView.swift in Sources */,

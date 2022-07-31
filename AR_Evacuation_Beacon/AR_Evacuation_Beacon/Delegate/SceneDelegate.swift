@@ -20,7 +20,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     }
 
     func sceneDidBecomeActive(_ scene: UIScene) {
-        SocketIOManager.shared.establishConnection()
+        SocketStreamManager.shared.connectSocket()
     }
 
     func sceneWillResignActive(_ scene: UIScene) {
@@ -30,7 +30,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     }
 
     func sceneDidEnterBackground(_ scene: UIScene) {
-        SocketIOManager.shared.closeConnection()
+        SocketStreamManager.shared.stopSession()
     }
 
 

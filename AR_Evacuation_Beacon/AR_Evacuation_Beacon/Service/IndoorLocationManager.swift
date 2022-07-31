@@ -97,13 +97,14 @@ class IndoorLocationManager: NSObject, CLLocationManagerDelegate {
         super.init()
         beaconConfiguration()
         locationManager.delegate = self
+        SocketStreamManager.shared.delegate = self
         self.mode = mode
         modelNames.forEach {
             self.classificationModels.append(self.makeClassificationModel(modelName: $0))
         }
         
         // TEST
-        getPath()
+//        getPath()
 //        testMoveUserLocation()
     }
     
@@ -143,8 +144,6 @@ extension IndoorLocationManager {
                 let location = filterErrorWithHeading(previousLocation: previousUserLocation, currentLocation: Position(rawValue: locations[0]) ?? .unknown)
                 sendLocationToServerWithSocket(location: location.rawValue)
                 NotificationCenter.default.post(name: .movePosition, object: location)
-                SocketIOManager.shared.receivePath { path in
-                    NotificationCenter.default.post(name: .path, object: path) }
                 previousUserLocation = location
             }
         } else if mode == .collection {
@@ -156,19 +155,23 @@ extension IndoorLocationManager {
     }
     
     func getPath() {
-                SocketIOManager.shared.receivePath { path in
-                    NotificationCenter.default.post(name: .path, object: path)
-                }
         
         //TEST
-//        DispatchQueue.main.asyncAfter(deadline: .now() + 5) {
-//            NotificationCenter.default.post(name: .path, object: [Position.R02, Position.A01, Position.A02, Position.A03, Position.A04, Position.A05, Position.A06])
-//        }
+        
+        var path = Path(path: [.S05,.S06, .H02, .S07, .E02], conjestionCell: [.A01], fireCell: [.S02], firePredictedCell: [.E01])
+        DispatchQueue.main.asyncAfter(deadline: .now() + 5) {
+            NotificationCenter.default.post(name: .path, object: path)
+        }
+        
+        DispatchQueue.main.asyncAfter(deadline: .now() + 12) {
+            let path = Path(path: [.H02,.A07, .A10, .A11, .E03], conjestionCell: [.A01], fireCell: [.S02, .E02], firePredictedCell: [.E01])
+            NotificationCenter.default.post(name: .path, object: path)
+        }
     }
     
     func testMoveUserLocation() {
         DispatchQueue.main.asyncAfter(deadline: .now() + 5) {
-            var userlocations: [Position] = [.R02, .A01, .A02, .A03, .A04, .A05, .A06]
+            var userlocations: [Position] = [.S05,.S06, .H02, .S07]
             Timer.scheduledTimer(withTimeInterval: 2.0, repeats: true) { timer in
                 
                 if userlocations.isEmpty {
@@ -177,10 +180,24 @@ extension IndoorLocationManager {
                 }
                 let location = userlocations.removeFirst()
                 NotificationCenter.default.post(name: .movePosition, object: location)
-                SocketIOManager.shared.sendLocation(location: location.rawValue)
                 
             }
         }
+        
+        DispatchQueue.main.asyncAfter(deadline: .now() + 15) {
+            var userlocations: [Position] = [.H02,.A07, .A10, .A11, .E03]
+            Timer.scheduledTimer(withTimeInterval: 2.0, repeats: true) { timer in
+
+                if userlocations.isEmpty {
+                    timer.invalidate()
+                    return
+                }
+                let location = userlocations.removeFirst()
+                NotificationCenter.default.post(name: .movePosition, object: location)
+
+            }
+        }
+        
     }
     
     private func filterErrorWithHeading(previousLocation: Position, currentLocation: Position) -> Position {
@@ -231,7 +248,7 @@ extension IndoorLocationManager {
     }
     
     private func sendLocationToServerWithSocket(location: String) {
-        SocketIOManager.shared.sendLocation(location: location)
+        SocketStreamManager.shared.sendLocation(location: location)
     }
     
 }
@@ -365,6 +382,16 @@ extension IndoorLocationManager {
         }
         
         return result
+    }
+    
+}
+
+// MARK: - PathDelegate
+extension IndoorLocationManager: PathDelegate {
+    
+    func received(path: Path) {
+        print(path)
+        NotificationCenter.default.post(name: .path, object: path)
     }
     
 }

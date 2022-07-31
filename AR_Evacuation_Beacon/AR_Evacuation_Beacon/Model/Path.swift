@@ -7,8 +7,19 @@
 
 import Foundation
 
-class Path: Codable {
-    var path: [String]
+struct Path: Equatable {
+    
+    init(path: [Position] = [], conjestionCell: [Position] = [], fireCell: [Position] = [], firePredictedCell: [Position] = []) {
+        self.path = path
+        self.conjestionCell = conjestionCell
+        self.fireCell = fireCell
+        self.firePredictedCell = firePredictedCell
+    }
+    
+    var path: [Position] = []
+    var conjestionCell: [Position] = []
+    var fireCell: [Position] = []
+    var firePredictedCell: [Position] = []
 }
 
 
