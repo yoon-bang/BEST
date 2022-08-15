@@ -192,7 +192,7 @@ extension ARNavigationViewController {
     
     
     private func generateSphereNode() -> SCNNode {
-        let sphere = SCNSphere(radius: 0.2)
+        let sphere = SCNSphere(radius: 0.1)
         let sphereNode = SCNNode()
         sphereNode.position.y += Float(sphere.radius)
         sphereNode.geometry = sphere
@@ -280,29 +280,27 @@ extension ARNavigationViewController {
             
         } else {
             bannerText = "Safely Exit"
-            let alert = UIAlertController(title: "tt", message: nil, preferredStyle: .alert)
+            let alert = UIAlertController(title: "YOU ARE SAFE😀", message: nil, preferredStyle: .alert)
             self.present(alert, animated: true)
         }
         
     }
     
     private func changeBannerText(degree: Float, heading: Double) {
-        print(degree)
+        
         let pointDirection = VectorService.headingToDirection(degree: degree)
         let headingDirection = VectorService.headingToDirection(degree: Float(heading))
         // 남동북서 0123 음수면 오른쪽으로 양수면
         // 현재 동쪽을 가리킬때,
-        print("pointing ",pointDirection)
-        print(headingDirection)
         
         let direction = pointDirection.rawValue - headingDirection.rawValue
         if direction == 0 {
             self.bannerText = NavigationDirection.forward.description
-        } else if direction == -1 {
+        } else if direction == -1 || direction == 1{
             self.bannerText = NavigationDirection.right.description
-        } else if direction == 1 {
+        } else if direction == -3 || direction == 3{
             self.bannerText = NavigationDirection.left.description
-        } else {
+        } else if direction == -2 || direction == 2{
             self.bannerText = NavigationDirection.backward.description
         }
         

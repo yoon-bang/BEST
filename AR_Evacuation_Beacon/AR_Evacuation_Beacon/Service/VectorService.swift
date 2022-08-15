@@ -15,17 +15,18 @@ class VectorService {
     
     static func headingToDirection(degree: Float) -> Direction {
         var degree = degree
-        if degree < 0 {
+        if (degree < 0){
             degree += 360.0
         }
+        
         if ((315.0 <= degree) && (degree < 360.0)) || ((0.0 <= degree) && (degree < 45)) {
-            return Direction.North
-        } else if ((45.0 <= degree) && (degree < 135.0)) {
-            return Direction.East
-        } else if ((135.0 <= degree) && (degree < 225.0)) {
             return Direction.South
-        } else {
+        } else if ((45.0 <= degree) && (degree < 135.0)) {
             return Direction.West
+        } else if ((135.0 <= degree) && (degree < 225.0)) {
+            return Direction.North
+        } else {
+            return Direction.East
         }
     }
     

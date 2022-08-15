@@ -81,6 +81,7 @@ class IndoorLocationManager: NSObject, CLLocationManagerDelegate {
     private var heading: Double = 0.0
     private var firstposition = ""
     private var positionList: [String] = []
+    private var locationlist: [String] = []
     
     private var currentBeacons = [Beacon]() {
         didSet {
@@ -136,10 +137,34 @@ extension IndoorLocationManager {
             }
         }
         
+        locationlist.append(locations[0])
+        
+        var location = Position.unknown
+        
+        if locationlist.count < 5 {
+            print(locationlist.last)
+            return
+        }
+        
+        if locationlist.count == 5 {
+            var dic: [Position: Int] = [:]
+            var new: [Dictionary<Position, Int>.Element] = []
+            locationlist.forEach {
+                var count = dic[Position(rawValue: $0)!] ?? 0
+                dic.updateValue(count + 1, forKey: Position(rawValue: $0)!)
+                new = dic.sorted {
+                    $0.value > $1.value
+                }
+            }
+            location = new[0].key
+        } else {
+            location = Position(rawValue: locations[0]) ?? .unknown
+        }
+        
         // if cannot find the overlapped one, get the location from the Model with 4 beacons
         if mode == .real {
             if previousUserLocation == .unknown {
-                previousUserLocation = Position(rawValue: locations[0]) ?? .unknown
+                previousUserLocation = location
             } else {
                 let location = filterErrorWithHeading(previousLocation: previousUserLocation, currentLocation: Position(rawValue: locations[0]) ?? .unknown)
                 sendLocationToServerWithSocket(location: location.rawValue)
@@ -167,37 +192,6 @@ extension IndoorLocationManager {
             let path = Path(path: [.H02,.A07, .A10, .A11, .E03], conjestionCell: [.A01], fireCell: [.S02, .E02], firePredictedCell: [.E01])
             NotificationCenter.default.post(name: .path, object: path)
         }
-    }
-    
-    func testMoveUserLocation() {
-        DispatchQueue.main.asyncAfter(deadline: .now() + 5) {
-            var userlocations: [Position] = [.S05,.S06, .H02, .S07]
-            Timer.scheduledTimer(withTimeInterval: 2.0, repeats: true) { timer in
-                
-                if userlocations.isEmpty {
-                    timer.invalidate()
-                    return
-                }
-                let location = userlocations.removeFirst()
-                NotificationCenter.default.post(name: .movePosition, object: location)
-                
-            }
-        }
-        
-        DispatchQueue.main.asyncAfter(deadline: .now() + 15) {
-            var userlocations: [Position] = [.H02,.A07, .A10, .A11, .E03]
-            Timer.scheduledTimer(withTimeInterval: 2.0, repeats: true) { timer in
-
-                if userlocations.isEmpty {
-                    timer.invalidate()
-                    return
-                }
-                let location = userlocations.removeFirst()
-                NotificationCenter.default.post(name: .movePosition, object: location)
-
-            }
-        }
-        
     }
     
     private func filterErrorWithHeading(previousLocation: Position, currentLocation: Position) -> Position {
