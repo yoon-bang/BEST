@@ -4,11 +4,14 @@
 
 AR-Evacuation With Beacons is the Evacuation support Application with Beacons. AR-Evacuation With Beacons detects the beacons inside of [K-SW Square](https://m2m.tech.purdue.edu/) building which is in the Purdue University. The application estimates user's current location indoor and inform the optimized path to each user to flee safely from fire situation.
 
+<figure class="third">
+    <img src="https://user-images.githubusercontent.com/69891604/184859167-452ede1a-c84c-4631-9c0c-c539267ab04f.PNG" width="200" height="400"/>
+    <img src="https://user-images.githubusercontent.com/69891604/184859158-24189076-b67f-47e6-b57b-6d0d379bbe42.PNG" width="200" height="400"/>
+    <img src="https://user-images.githubusercontent.com/69891604/184859150-8ef583b9-0fb2-4395-9435-5cd54b76807b.PNG" width="200" height="400"/>
+</figure>
 
-<img src="https://user-images.githubusercontent.com/69891604/184859167-452ede1a-c84c-4631-9c0c-c539267ab04f.PNG" width="200" height="400"/>
-<img src="https://user-images.githubusercontent.com/69891604/184859158-24189076-b67f-47e6-b57b-6d0d379bbe42.PNG" width="200" height="400"/>
-<img src="https://user-images.githubusercontent.com/69891604/184859150-8ef583b9-0fb2-4395-9435-5cd54b76807b.PNG" width="200" height="400"/>
 ----------------
+
 ## Requirements
 - iOS 13.0+ 
 - Xcode 13.1+
