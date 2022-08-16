@@ -34,7 +34,9 @@ AR-Evacuation With Beacons is the Evacuation support Application with Beacons. A
     pod install --repo-update
 ```
 
-### 📎 ARNavigationViewController
+## How does it works?
+
+### ARNavigationViewController
 ARNavigationViewController mainly displays the AR Navigation system. The application is made of MVC pattern. So this viewcontroller does lots of works. Mainly this viewcontroller change angle of 3D AR arrow and spawn the 3d object in next route based on given angle and distance from VectorService and IndoorLocationManager. With these information, the app can help evacuee flee safely.
 
 This code block is main function of the viewcontroller. When the vector is set, the ARKit make the arrow change the angle in every 60 frames. The important things in AR world is that the app is using the gravityAndheading world configuration. With this, we are able to use absolute orientation, which means we can make our own 2d coordinate systems.
@@ -74,10 +76,10 @@ This code block is main function of the viewcontroller. When the vector is set, 
     }
 ```
 
-### 📎 Map2DViewController
+### Map2DViewController
 Map2DViewController can user see the 2D map. Map2DViewController contains 3 views drawn by UIBeizerPath and 1 view that annotate user's location. The view of viewcontroller is ported in the scrollview inside ARNavigationViewController. Also, Map2DViewController can display the status of fire situation. Green cell is the optimized path. Red cell is the fire cell. Orange Cell is the fire nearby cell. Yellow cell is the conjestion cell. 
 
-### 📎 IndoorLocationManager
+### IndoorLocationManager
 IndoorLocationManager manage the beacon part and heading part from CoreLocation. The app use trained model to estimate the user's location with beacons' RSSI. Also, in order to adjust the user's location, we fusioned the result of the model and compass sensor. 
 ```swift
 private func filterErrorWithHeading(previousLocation: Position, currentLocation: Position) -> Position {
@@ -120,10 +122,10 @@ private func filterErrorWithHeading(previousLocation: Position, currentLocation:
     }
 ```
 
-### 📎 KalmanFilter
+### KalmanFilter
 Kalman Filter is used to smooth the RSSI from beacons. We reinit the filter when beacon's RSSI exceed the threshold. The Threshold will be selected by top 5% and bottom 5% in normal distribution.
 
-### 📎 VectorService
+### VectorService
 In VectorService, we calculate the angle to direction in 2d coordinate. Also, we use atan2 function to find out angle between 2 points. 
 ```swift
 static func vectorBetween2Points(from: CGPoint, to: CGPoint) -> (angle: Float, dist: Double) {
