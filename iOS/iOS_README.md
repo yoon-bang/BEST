@@ -10,8 +10,6 @@ AR-Evacuation With Beacons is the Evacuation support Application with Beacons. A
     <img src="https://user-images.githubusercontent.com/69891604/184859150-8ef583b9-0fb2-4395-9435-5cd54b76807b.PNG" width="200" height="400"/>
 </p>
 
-----------------
-
 ## Requirements
 - iOS 13.0+ 
 - Xcode 13.1+
