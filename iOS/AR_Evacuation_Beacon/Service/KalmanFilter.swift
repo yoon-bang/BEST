@@ -9,22 +9,11 @@ import Foundation
 
 class KalmanFilter {
     
-    /* R models the process noise and describes how noisy a system internally is
-        How much noise can be expected from the systme itself
-        When a system is Constant R can be set to a very low value
-     */
+    var R: Float // process noise(system noise)
+    // How much noise can be expected from the systme itself
     
-    var R: Float
-    /*
-     Q resembels the measurement noise
-     How much noise is caused by the measurement?!!
-     When it's expected that the measurements will contain most of the noise
-     it makes sense to set this parameter to a high number
-     */
-    
-    var Q: Float
-    
-    // Usually you make an estimate of R and Q based on measurements or domain knowledge.
+    var Q: Float // measurement noise
+    // If the measurement can cause most of the noise, you shoud set this parameter to high number
     
     var stateVector: Float
     var controlVector: Float

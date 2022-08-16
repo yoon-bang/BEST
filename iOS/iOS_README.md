@@ -13,9 +13,6 @@ AR-Evacuation With Beacons is the Evacuation support Application with Beacons. A
 - iOS Real Device (Recommended: iphone 12)
 
 ## Dependencies
-- **Socket.IO 15.0**
-  - TCP connection is used with Socket.IO
-
 - **Firebase_iOS_sdk 9.2**
   -  Firebase Cloud Messaging for APNS(Apple Push Notification System)
   -  FirebaseMLModelDownloader for Deep Learning Model
@@ -30,50 +27,32 @@ AR-Evacuation With Beacons is the Evacuation support Application with Beacons. A
     pod install --repo-update
 ```
 
-### 📎 BeaconViewController
+### 📎 ARNavigationViewController
 
 ```swift
 
 ```
 
-### 📎 View & Controller
+### 📎 Map2DViewController
 ```swift
 
 ```
 
-### 📎 Model
+### 📎 IndoorLocationManager
 
 ```swift
 
 ```
 
-# Issues
+### 📎 KalmanFilter
 
-#### 📎  0000
+```swift
 
-<details>
-<summary>show Details</summary>
-<div markdown="1">
+```
 
-#### **▶︎  Problem**
-  
+### 📎 VectorService
 
-#### **▶︎  Solution**
+```swift
 
-</details>
-
-#### 📎  
-
-<details>
-<summary>show Details</summary>
-<div markdown="1">
-</br>
-
-#### **▶︎  Problems**
-
-
-#### **▶︎  Solutions**
-
-</div>
-</details>
+```
 

@@ -396,6 +396,7 @@ extension IndoorLocationManager {
     
     func locationManager(_ manager: CLLocationManager, didUpdateHeading newHeading: CLHeading) {
         self.heading = newHeading.trueHeading
+        NotificationCenter.default.post(name: .changeArrowAngle, object: heading)
     }
     
     private func headingToDirection(heading: Double) -> Direction {

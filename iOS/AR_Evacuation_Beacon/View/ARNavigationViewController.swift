@@ -18,7 +18,7 @@ let features = ["001","002","003","004","005","006","007","008","009","010",
                 "021", "022"]
 let direction = false
 
-final class ARNavigationViewController: UIViewController, ARSCNViewDelegate, CLLocationManagerDelegate {
+final class ARNavigationViewController: UIViewController, ARSCNViewDelegate {
     
     var map = [[Int]](repeating: [1,1,1,1,1], count: 5)
     
@@ -47,12 +47,7 @@ final class ARNavigationViewController: UIViewController, ARSCNViewDelegate, CLL
             self.bannerLabel.text = bannerText
         }
     }
-    
-    let locationManager: CLLocationManager = {
-        $0.requestWhenInUseAuthorization()
-        $0.startUpdatingHeading()
-        return $0
-    }(CLLocationManager())
+
     
     let configuration = ARWorldTrackingConfiguration()
     
@@ -62,7 +57,6 @@ final class ARNavigationViewController: UIViewController, ARSCNViewDelegate, CLL
         self.initARSession()
         self.set2DNavigationView()
         self.setBannerView()
-        locationManager.delegate = self
         arrow = generateArrowNode()
         self.sceneView.scene.rootNode.addChildNode(arrow)
         
@@ -80,7 +74,7 @@ final class ARNavigationViewController: UIViewController, ARSCNViewDelegate, CLL
 }
 
 
-// MARK: - AR Session Management (ARSCNViewDelegate)
+// MARK: - AR Session Management
 
 extension ARNavigationViewController {
     
@@ -92,11 +86,6 @@ extension ARNavigationViewController {
     func resetARSession() {
         let config = sceneView.session.configuration as! ARWorldTrackingConfiguration
         sceneView.session.run(config, options: [.resetTracking, .removeExistingAnchors])
-    }
-    
-    func locationManager(_ manager: CLLocationManager, didUpdateHeading newHeading: CLHeading) {
-        self.heading = newHeading.trueHeading
-        NotificationCenter.default.post(name: .changeArrowAngle, object: heading)
     }
     
 }
@@ -179,7 +168,6 @@ extension ARNavigationViewController {
         material.specular.contents = UIColor(white:0.00, alpha:1.0)
         material.shininess = 1.00
         
-        //Assign the SCNGeometry to a SCNNode, for example:
         let arrow = SCNNode()
         arrow.geometry = geometry
         arrow.scale = SCNVector3(0.05, 0.05, 0.05)
@@ -256,13 +244,13 @@ extension ARNavigationViewController {
         guard let userLocation = noti.object as? Position else {return}
         mapContentScrollView.scroll(to: map2DViewController.annotationView.currentPoint)
         
-        // 1.path가 들어왔다.
+        // 1.when the path is there
         guard !path.path.isEmpty else {return}
-        // 2.현재위치를 파악한다.
+        // 2. find the location
         guard let index = path.path.firstIndex(of: userLocation) else {return}
-        // 마지막 path가 아니라면
+        // 3. if the location is not the destination
         if index < path.path.count - 1 {
-            // 다음꺼의 거리와 각도를 찾기
+            // find the vector bwt 2 points
             let start = VectorService.transformCellToCGPoint(cellname: path.path[index])
             let end = VectorService.transformCellToCGPoint(cellname:path.path[index+1])
             let vector = VectorService.vectorBetween2Points(from: start, to: end)
@@ -290,8 +278,6 @@ extension ARNavigationViewController {
         
         let pointDirection = VectorService.headingToDirection(degree: degree)
         let headingDirection = VectorService.headingToDirection(degree: Float(heading))
-        // 남동북서 0123 음수면 오른쪽으로 양수면
-        // 현재 동쪽을 가리킬때,
         
         let direction = pointDirection.rawValue - headingDirection.rawValue
         if direction == 0 {
