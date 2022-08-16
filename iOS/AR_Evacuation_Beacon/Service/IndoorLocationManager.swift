@@ -5,64 +5,13 @@
 //  Created by Jung peter on 7/22/22.
 //
 
-// MARK: - 여기까지함
-// TODO: 코드 수정하기
-// 1. 비콘 잡히는 것 안보여줘도댐
-// 2. 어차피 하나로 합칠거임
-// 3. 비콘 5개 모이는 것을 어떠케 처리할까??
-// TODO: 모든모델이 전부다 나오게하기
-// 1. 모든 모델의 csv 저장하도록하기
-// 2.
-
 import Foundation
 import CoreLocation
-import SocketIO
-import SwiftUI
 
 enum Mode {
     case debug
     case collection
     case real
-}
-
-enum Direction: Int {
-    case South
-    case East
-    case North
-    case West
-}
-
-enum NavigationDirection: String, CustomStringConvertible {
-    var description: String {
-        switch self {
-        case .forward:
-            return "GO STRAIGHT"
-        case .backward:
-            return "GO BACK"
-        case .danger:
-            return "DANGER"
-        case .goUpstair:
-            return "GO UPSTAIR"
-        case .goDownstair:
-            return "GO DOWNSTAIR"
-        case .stair:
-            return "STAIRS, CAUTION"
-        case .left:
-            return "TURN LEFT"
-        case .right:
-            return "TURN RIGHT"
-        }
-    }
-    
-    case forward
-    case backward
-    case left
-    case right
-    case danger
-    case stair
-    case goUpstair
-    case goDownstair
-    
 }
 
 class IndoorLocationManager: NSObject, CLLocationManagerDelegate {
@@ -103,10 +52,7 @@ class IndoorLocationManager: NSObject, CLLocationManagerDelegate {
         modelNames.forEach {
             self.classificationModels.append(self.makeClassificationModel(modelName: $0))
         }
-        
-        // TEST
-//        getPath()
-//        testMoveUserLocation()
+    
     }
     
 }
@@ -140,17 +86,13 @@ extension IndoorLocationManager {
         locationlist.append(locations[0])
         
         var location = Position.unknown
-        
-        if locationlist.count < 5 {
-            print(locationlist.last)
-            return
-        }
+        guard locationlist.count >= 5 else {return}
         
         if locationlist.count == 5 {
             var dic: [Position: Int] = [:]
             var new: [Dictionary<Position, Int>.Element] = []
             locationlist.forEach {
-                var count = dic[Position(rawValue: $0)!] ?? 0
+                let count = dic[Position(rawValue: $0)!] ?? 0
                 dic.updateValue(count + 1, forKey: Position(rawValue: $0)!)
                 new = dic.sorted {
                     $0.value > $1.value
@@ -179,21 +121,6 @@ extension IndoorLocationManager {
         
     }
     
-    func getPath() {
-        
-        //TEST
-        
-        var path = Path(path: [.S05,.S06, .H02, .S07, .E02], conjestionCell: [.A01], fireCell: [.S02], firePredictedCell: [.E01])
-        DispatchQueue.main.asyncAfter(deadline: .now() + 5) {
-            NotificationCenter.default.post(name: .path, object: path)
-        }
-        
-        DispatchQueue.main.asyncAfter(deadline: .now() + 12) {
-            let path = Path(path: [.H02,.A07, .A10, .A11, .E03], conjestionCell: [.A01], fireCell: [.S02, .E02], firePredictedCell: [.E01])
-            NotificationCenter.default.post(name: .path, object: path)
-        }
-    }
-    
     private func filterErrorWithHeading(previousLocation: Position, currentLocation: Position) -> Position {
         
         if previousLocation == .unknown || currentLocation == .unknown {return .unknown}
@@ -208,33 +135,25 @@ extension IndoorLocationManager {
 
             var candidateCells = previousLocation.adjacentCell[currentDirection.rawValue]
             candidateCells.removeAll { $0 == .unknown }
-            // 인접셀이고, 방향과 맞는데, 그것을 빼줬다면, 맞는것이다.
+            // if candidate cell and direction and heading are same?, that is answer
             if candidateCells.contains(currentLocation) {
-//                print("인접셀, 뱡향, 모델")
                 return currentLocation
             } else {
-                // 인접셀이고, 방향과 맞지 않는데, 그것을 빼줬다면?
-                // 1. 움직였다고 해서 방향과 맞는 인접셀을 빼준다.
-                // 2. 움직이지 않았다고 생각한다.
-//                print("인접셀, 방향X, 그대로있기")
-                return previousLocation // 일단은 2번
+                // if adjacent cell, direction and heading not same, go previous cell
+                return previousLocation
             }
-        } else { // 인접셀이지 않을떄,
-            // 2-1-a 빠르게 움직였다고 판단한다. 방향과 같다면, 움직였다고 생각하기 옆셀로 이동시키기
+        } else {
+           // if not adjacent cell, but heading of user and angle between previous location and the result are same, we judge the user moves fast.
             let currentPosPoint = VectorService.transformCellToCGPoint(cellname: currentLocation)
             let prevPosPoint = VectorService.transformCellToCGPoint(cellname: previousLocation)
             let direction = headingToDirection(heading: Double(VectorService.vectorBetween2Points(from: prevPosPoint, to: currentPosPoint).angle))
             
-            // 방향이 같을때, 인접셀중에 방향이 같은 셀로 움직인다.
+            // then user can go to candidate cell with same direction
             if direction == currentDirection {
-//                print("인접셀X, 방향 같음, 변경")
                 var candidateCells = previousLocation.adjacentCell[direction.rawValue]
-                // 방향이 같은데, 혹시 unknown이 있다면 일단 다지운다.
                 candidateCells.removeAll { $0 == .unknown }
-                // 그리고 첫번째꺼를 빼고, 그렇지 않은 경우에는 제자리에 있게한다.
                 return candidateCells.first ?? previousLocation
             } else {
-//                print("인접셀X, 방향 다름, 변경")
                 return previousLocation
             }
             
