@@ -121,7 +121,19 @@ private func filterErrorWithHeading(previousLocation: Position, currentLocation:
 ```
 
 ### KalmanFilter
-Kalman Filter is used to smooth the RSSI from beacons. We reinit the filter when beacon's RSSI exceed the threshold. The Threshold will be selected by top 5% and bottom 5% in normal distribution.
+Kalman Filter is used to smooth the RSSI from beacons. Kalman Filter runs recursively to estimate the next state with current state.
+This code is the init of KalmanFilter
+```swift
+    init(R: Float, Q: Float, stateVector: Float = 1, controlVector: Float = 0, measureVector: Float = 1) {
+        self.R = R
+        self.Q = Q
+        self.stateVector = stateVector
+        self.controlVector = controlVector
+        self.measureVector = measureVector
+    }
+```
+R is system noise, Q is measurement noise, and there are 3 vector. stateVector is used to estimate the next statement with equation. measureVector is used to estimate the measure of RSSI. three vector are usually set by the machine that we use.
+ We reinit the filter when beacon's RSSI exceed the threshold. The Threshold will be selected by top 5% and bottom 5% in normal distribution.
 
 ### VectorService
 In VectorService, we calculate the angle to direction in 2d coordinate. Also, we use atan2 function to find out angle between 2 points. 
