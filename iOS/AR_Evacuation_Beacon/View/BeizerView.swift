@@ -58,8 +58,6 @@ class BeizerView: UIView {
     
     // x: 10
     override func draw(_ rect: CGRect) {
-        var x: CGFloat = 10
-        var y: CGFloat = 10
         
         drawPoint(positions: path, color: .systemGreen)
         drawPoint(positions: conjestionCell, color: .systemYellow)

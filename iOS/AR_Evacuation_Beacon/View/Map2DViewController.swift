@@ -7,7 +7,6 @@
 
 import UIKit
 import MapKit
-import SocketIO
 
 class Map2DViewController: UIViewController {
     

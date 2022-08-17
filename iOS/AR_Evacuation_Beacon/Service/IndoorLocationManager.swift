@@ -257,7 +257,7 @@ extension IndoorLocationManager {
         beaconRegionConstraint = CLBeaconIdentityConstraint(uuid: uuid)
         beaconRegion = CLBeaconRegion(uuid: uuid, identifier: uuid.uuidString)
         
-        if CLLocationManager.authorizationStatus() != .authorizedAlways {
+        if locationManager.authorizationStatus != .authorizedAlways {
             locationManager.requestAlwaysAuthorization()
         } else {
             locationManager.startMonitoring(for: beaconRegion)

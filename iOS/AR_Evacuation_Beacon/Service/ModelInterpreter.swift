@@ -39,7 +39,7 @@ class ModelInterpreter {
     
     func classifyLocationOfUser(with csv: String) -> String? {
         
-        var csv = csv
+        let csv = csv
         var inputData = Data()
         
         guard let interpreter = interpreter else {

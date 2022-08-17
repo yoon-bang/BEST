@@ -77,7 +77,7 @@ class SocketStreamManager: NSObject, StreamDelegate {
     }
     
     private func processedMessageString(buffer: UnsafeMutablePointer<UInt8>, length: Int) -> Path? {
-        guard var stringArray = String(bytesNoCopy: buffer, length: length, encoding: .utf8, freeWhenDone: true)?.components(separatedBy: "|") else {
+        guard let stringArray = String(bytesNoCopy: buffer, length: length, encoding: .utf8, freeWhenDone: true)?.components(separatedBy: "|") else {
             return nil
         }
 
