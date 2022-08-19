@@ -7,6 +7,7 @@ import android.graphics.Paint
 import android.graphics.Path
 import android.util.Log
 import android.view.View
+import com.example.aos_ar_evacuation_beacon.constant.CellType
 import com.example.aos_ar_evacuation_beacon.repository.LocationRepository
 
 class PaintBaseView : View {
@@ -24,20 +25,29 @@ class PaintBaseView : View {
       super.onDraw(canvas)
 
       if (canvas != null) {
-         locationRepository.basePath.value?.let { drawCell(it, canvas) }
+         locationRepository.basePath.value?.let { drawCell(it, canvas, CellType.PathList) }
+         locationRepository.baseFireCell.value?.let { drawCell(it, canvas, CellType.FireCell) }
+         locationRepository.basePredictedCell.value?.let { drawCell(it, canvas, CellType.PredictedCell) }
+         locationRepository.baseCongestionCell.value?.let { drawCell(it, canvas, CellType.CongestionCell) }
       }
    }
 
-   private fun drawCell(pathList: List<String>, canvas: Canvas) {
-      pathList?.forEach {
-         val paint = Paint().apply {
-            isAntiAlias = true
-            color = Color.GREEN
-            alpha = 50
-            style = Paint.Style.FILL
-            strokeWidth = 3f
-         }
+   private fun drawCell(pathList: List<String>, canvas: Canvas, cellType: CellType) {
+      val paint = Paint().apply {
+         isAntiAlias = true
+         style = Paint.Style.FILL
+         strokeWidth = 3f
+      }
 
+      when (cellType) {
+         CellType.PathList -> paint.color = Color.GREEN
+         CellType.FireCell -> paint.color = Color.RED
+         CellType.PredictedCell -> paint.color = Color.rgb(249, 162, 0)
+         else -> paint.color = Color.YELLOW
+      }
+      paint.alpha = 50
+
+      pathList?.forEach {
          val path = Path()
 
          val coordinateList = locationRepository.newMapDictBase[it]

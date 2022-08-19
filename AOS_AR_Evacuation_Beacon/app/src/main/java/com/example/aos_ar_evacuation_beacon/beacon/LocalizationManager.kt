@@ -4,7 +4,9 @@ import android.content.Context
 import android.util.Log
 import androidx.lifecycle.Observer
 import com.example.aos_ar_evacuation_beacon.BeaconApplication
+import com.example.aos_ar_evacuation_beacon.constant.AdjacentCell
 import com.example.aos_ar_evacuation_beacon.constant.BeaconConstants
+import com.example.aos_ar_evacuation_beacon.constant.Position
 import com.example.aos_ar_evacuation_beacon.kalman.KalmanFilter
 import com.example.aos_ar_evacuation_beacon.repository.DirectionRepository
 import com.example.aos_ar_evacuation_beacon.repository.LocationRepository
@@ -33,13 +35,15 @@ class LocalizationManager constructor(private val activity: ARActivity, private 
    private lateinit var beaconManager: BeaconCustomManager
 
    // bid, rssi
-   private var threshold = 10
+   private var threshold = 2
 
    private lateinit var conditions: CustomModelDownloadConditions
    private lateinit var interpreter: Interpreter
 
    private var currentBeaconArray = mutableListOf<Float>()
    private var previousBeaconArray = mutableListOf<Float>()
+
+   private var locationIndex = 0
 
    init {
       loadMLModel()
@@ -53,7 +57,7 @@ class LocalizationManager constructor(private val activity: ARActivity, private 
       kalman = KalmanFilter(R = 0.001f, Q = 2f)
    }
 
-   fun loadMLModel() {
+   private fun loadMLModel() {
       conditions = CustomModelDownloadConditions.Builder().requireWifi().build()
 
       FirebaseModelDownloader.getInstance()
@@ -67,7 +71,7 @@ class LocalizationManager constructor(private val activity: ARActivity, private 
          }
    }
 
-   val monitoringObserver = Observer<Int> { state ->
+   private val monitoringObserver = Observer<Int> { state ->
       var stateString = "inside"
 
       if (state == MonitorNotifier.OUTSIDE) {
@@ -79,7 +83,7 @@ class LocalizationManager constructor(private val activity: ARActivity, private 
       Log.d(LocalizationActivity.TAG, "monitoring state changed to : $stateString")
    }
 
-   val rangingObserver = Observer<Collection<Beacon>> { beacons ->
+   private val rangingObserver = Observer<Collection<Beacon>> { beacons ->
       Log.d(LocalizationActivity.TAG, "Ranged: ${beacons.count()} beacons")
       if (BeaconManager.getInstanceForApplication(activity).rangedRegions.isNotEmpty()) {
          val filteredBeaconList = java.util.ArrayList<String>()
@@ -112,7 +116,6 @@ class LocalizationManager constructor(private val activity: ARActivity, private 
             beaconManager.filteredRSSIDict[beacon.bID] = filteredRssi!!
 
             //Log.i("$$$ Detected Beacons $$$", "minor: ${beacon.bID}, RSSI: ${it.rssi}, Filtered: $filteredRssi")
-
             filteredBeaconList[beacon.minor] = filteredRssi.toString()
          }
 
@@ -196,10 +199,10 @@ class LocalizationManager constructor(private val activity: ARActivity, private 
             combinedString += "${combinedBeaconList[i]},"
          }
 
-         Log.i("Previous String ", previousString)
-         Log.i("Current String ", currentString)
+//         Log.i("Previous String ", previousString)
+//         Log.i("Current String ", currentString)
          // 두 개를 하나로 합친 결과
-         Log.i("$$$ Combined String $$$", combinedString)
+//         Log.i("$$$ Combined String $$$", combinedString)
 
          var sortedString = "[ "
          val combinedBeaconDict = mutableMapOf<String, Float>()
@@ -214,10 +217,12 @@ class LocalizationManager constructor(private val activity: ARActivity, private 
          //combinedBeaconList.add(currentBeaconArray.last())
 
          combinedBeaconList.forEachIndexed { index, fl ->
-            Log.w("combined $index: ", "${fl}")
+//            Log.w("combined $index: ", "${fl}")
          }
          // 상위 n개만 뽑아서 저장
-         Log.i("$$$ Filtered $beaconNum Beacon $$$", "$sortedString ]")
+//         Log.i("$$$ Filtered $beaconNum Beacon $$$", "$sortedString ]")
+
+
          getModelOutput(combinedBeaconList)
          previousBeaconArray.clear()
       }
@@ -246,30 +251,162 @@ class LocalizationManager constructor(private val activity: ARActivity, private 
          }
 
          val maxProbability = probabilityArray.maxOrNull()
-         val mappedLabel = BeaconConstants.labelList[probabilityArray.indexOf(maxProbability)]
+         var mappedLabel: String = BeaconConstants.labelList[probabilityArray.indexOf(maxProbability)]
 
-         if (locationRepository.isStart.value == true) {
-            locationRepository.updateStartPoint(mappedLabel)
-            Log.w("startPoint: ", mappedLabel)
-            locationRepository.updateIsStart(false)
+         if (BeaconConstants.testMode) {
+            // 처음
+            if (locationRepository.isStart.value == true) {
+               val curPosition = locationRepository.pathList.value?.get(0)!!
+               locationRepository.updateStartLocation(curPosition)
+               locationRepository.updateIsStart(false)
+               locationRepository.updatePreviousString(curPosition)
+               viewModel.addQueue(curPosition)
+               locationRepository.updatePathListIndex()
+            } else {
+               val index = locationRepository.pathListIndex.value!!
+               val position = locationRepository.pathList.value?.get(index)
+               val nextPosition = locationRepository.pathList.value?.get(index + 1)
+
+               position?.let {
+                  locationRepository.updatePreviousString(it)
+                  viewModel.addQueue(it)
+               }
+
+               if (index == locationRepository.pathList.value?.size!! - 1) {
+                  locationRepository.updateIsEvacuated()
+                  return
+               }
+
+               var currentPoint = locationRepository.calculateCenter(position!!)
+               var nextPoint = locationRepository.calculateCenter(nextPosition!!)
+               val degree = directionRepository.vectorBetween2Points(currentPoint.first, currentPoint.second, nextPoint.first, nextPoint.second)
+               directionRepository.updateArrowDegree(degree)
+               locationRepository.updatePathListIndex()
+            }
          } else {
-            val previousX = locationRepository.previousUserX.value!!
-            val previousY = locationRepository.previousUserY.value!!
-            val currentX = locationRepository.currentUserX.value!!
-            val currentY = locationRepository.currentUserY.value!!
+            // 처음
+            if (locationRepository.isStart.value == true) {
+               locationRepository.updateStartLocation("R01")
+               locationRepository.updateIsStart(false)
+               locationRepository.updatePreviousString("R01")
+               viewModel.addQueue(mappedLabel)
+            } else {
+               // 처음 아닐때
+               val previousLocation = locationRepository.previousLocation.value
+               Log.i("filteredLocationnn:", previousLocation.toString())
+               val location = filterErrorWithHeading(Position.valueOf(previousLocation!!), Position.valueOf(mappedLabel))
+               locationRepository.updatePreviousString(location.position)
+               Log.i("mappedLocationnn:", location.position)
 
-            val degree = directionRepository.angleBetween2Points(previousX, previousY, currentX, currentY)
-            Log.i("currentLocation ", locationRepository.currentLocation.value.toString())
-            Log.i("angleDegree: ", degree.toString())
+               // AR 화살표 돌리기
+               val index = locationRepository.pathList.value?.indexOf(location.position)
+               if (index!! < 0) return
+
+               if (index < locationRepository.pathList.value!!.size - 1) {
+                  val start = locationRepository.pathList.value?.get(index)
+                  val end = locationRepository.pathList.value?.get(index + 1)
+                  Log.w("Arrow start: ", start.toString())
+                  Log.w("Arrow end: ", end.toString())
+                  val startPoint = start?.let { locationRepository.calculateCenter(it) }
+                  val endPoint = end?.let { locationRepository.calculateCenter(it) }
+                  val degree = directionRepository.vectorBetween2Points(startPoint?.first!!, startPoint.second, endPoint?.first!!, endPoint.second)
+                  Log.w("Arrow Degree: ", degree.toString())
+                  directionRepository.updateArrowDegree(degree)
+               }
+               if (location.position.contains("E")) locationRepository.updateIsEvacuated()
+               Log.i("filteredLabelLocation111: ", location.toString())
+               Log.i("mappedLabelLocation111: ", mappedLabel)
+               viewModel.addQueue(location.position)
+            }
          }
-
-         locationRepository.updateLocationString(mappedLabel)
-
-         viewModel.addQueue(mappedLabel)
          Log.i("Output Label: ", mappedLabel)
-
       } catch (e: IOException) {
          Log.e("$$$ Output Error $$$", e.toString())
+      }
+   }
+
+   private fun filterErrorWithHeading(previousLocation: Position, currentLocation: Position = Position.unknown): Position {
+      if (previousLocation == Position.unknown || currentLocation == Position.unknown) return Position.unknown
+
+      Log.i("***previousLocation: ", previousLocation.position)
+      Log.i("***currentLocation: ", currentLocation.position)
+
+      val adjacentCellList = mutableListOf<String>()
+      val adjacentCells = AdjacentCell.valueOf(previousLocation.position).cell.toList()
+      for (cell in adjacentCells) {
+         if (cell is List<*>) {
+            val list = cell.filterIsInstance<Position>()
+            list.forEachIndexed { _, value ->
+               adjacentCellList.add(value.position)
+            }
+         } else {
+            adjacentCellList.add(cell.toString())
+         }
+      }
+
+      adjacentCellList.forEachIndexed { index, s ->
+         //Log.i("***adjacentCellList $index: ", s)
+      }
+
+      val userDirection = directionRepository.userDirection.value
+      Log.i("=== updateddirection ===", userDirection.toString())
+
+      // currentLocation 과 previousLocation 이 인접하면
+      if (adjacentCellList.contains(currentLocation.position)) {
+         var candidateCells = adjacentCells[userDirection?.index!!]
+         val newCandidateCells = mutableListOf<Position>()
+
+         if (candidateCells is List<*>) {
+            val list = candidateCells.filterIsInstance<Position>()
+            list.forEach { value ->
+               newCandidateCells.add(Position.valueOf(value.position))
+            }
+         } else {
+            newCandidateCells.add(Position.valueOf(candidateCells.toString()))
+         }
+         newCandidateCells.removeAll { it == Position.unknown }
+
+         return if (newCandidateCells.contains(currentLocation)) {
+            Log.i("***filterErrorWithHeading ", "인접셀, 방향, 모델")
+            currentLocation
+         } else {
+            Log.i("***filterErrorWithHeading ", "인접셀, 방향X, 그대로있기")
+            previousLocation
+         }
+      } else { // 인접셀 아닐 때
+         val currentPair = locationRepository.calculateCenter(currentLocation.position)
+         val currentX = currentPair.first
+         val currentY = currentPair.second
+
+         val previousPair = locationRepository.calculateCenter(previousLocation.position)
+         val previousX = previousPair.first
+         val previousY = previousPair.second
+         val direction = directionRepository.classifyDirection(directionRepository.vectorBetween2Points(previousX!!, previousY!!, currentX!!, currentY!!))
+
+         return if (direction == userDirection) {
+            Log.i("***filterErrorWithHeading ", "인접셀X, 방향 같음, 변경")
+            var candidateCells = adjacentCells[direction?.index!!]
+
+            var newCells = mutableListOf<Position>()
+            if (candidateCells is List<*>) {
+               val list = candidateCells.filterIsInstance<Position>()
+               list.forEach { value ->
+                  newCells.add(Position.valueOf(value.position))
+               }
+            } else {
+               newCells.add(Position.valueOf(candidateCells.toString()))
+            }
+            newCells.removeAll { it == Position.unknown }
+
+            if (newCells.isEmpty()) {
+               previousLocation
+            } else {
+               newCells.first()
+            }
+         } else {
+            Log.i("***filterErrorWithHeading ", "인접셀X, 방향 다름, 변경X")
+            previousLocation
+         }
       }
    }
 
