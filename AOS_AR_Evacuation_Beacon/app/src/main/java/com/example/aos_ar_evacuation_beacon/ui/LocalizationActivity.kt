@@ -38,13 +38,9 @@ import com.google.firebase.ml.modeldownloader.CustomModelDownloadConditions
 import com.google.firebase.ml.modeldownloader.DownloadType
 import com.google.firebase.ml.modeldownloader.FirebaseModelDownloader
 import com.opencsv.CSVReader
-import io.socket.client.IO
-import io.socket.client.Socket
-import io.socket.emitter.Emitter
 import org.altbeacon.beacon.Beacon
 import org.altbeacon.beacon.BeaconManager
 import org.altbeacon.beacon.MonitorNotifier
-import org.json.JSONObject
 import org.tensorflow.lite.Interpreter
 import java.io.IOException
 import java.io.InputStream
@@ -111,7 +107,7 @@ class LocalizationActivity : AppCompatActivity(), SensorEventListener {
    private var roll = 0F
    var currentDegree = 0.0f
 
-   lateinit var mSocket: Socket
+//   lateinit var mSocket: Socket
 
    override fun onCreate(savedInstanceState: Bundle?) {
       super.onCreate(savedInstanceState)
@@ -130,7 +126,7 @@ class LocalizationActivity : AppCompatActivity(), SensorEventListener {
       binding.beaconCount.text = "No beacons detected"
       binding.beaconList.adapter = ArrayAdapter(this, R.layout.simple_list_item_1, arrayOf("--"))
 
-      socketSetup()
+      //socketSetup()
       setting()
       //makeColumnName()
       makeEstimatedLocationColumn()
@@ -152,6 +148,7 @@ class LocalizationActivity : AppCompatActivity(), SensorEventListener {
       checkPermissions()
    }
 
+   /*
    private fun socketSetup() {
 //      mSocket = SocketApplication.get()
 
@@ -191,6 +188,8 @@ class LocalizationActivity : AppCompatActivity(), SensorEventListener {
          }
       })
    }
+
+    */
 
    private fun setBottomNavigation() {
       binding.bottomNavigation.selectedItemId = com.example.aos_ar_evacuation_beacon.R.id.localizationItem
@@ -523,7 +522,7 @@ class LocalizationActivity : AppCompatActivity(), SensorEventListener {
          binding.locationQueue.text = locationString
 
          if (locationRepository.isStart.value == true) {
-            locationRepository.updateStartPoint(mappedLabel)
+            locationRepository.updateStartLocation(mappedLabel)
             locationRepository.updateIsStart(false)
          }
 
