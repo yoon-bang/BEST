@@ -7,7 +7,7 @@ plugins {
     id 'com.google.ar.sceneform.plugin'
 }
 
-sceneform.asset (
+sceneform.asset(
         'sampledata/models/Aos_arrow.obj',
         'default',
         'sampledata/models/Aos_arrow.sfa',
@@ -19,7 +19,7 @@ android {
 
     defaultConfig {
         applicationId "com.example.aos_ar_evacuation_beacon"
-        minSdk 26
+        minSdk 30
         targetSdk 31
         versionCode 1
         versionName "1.0"
@@ -104,16 +104,17 @@ dependencies {
     implementation 'org.tensorflow:tensorflow-lite-metadata:0.1.0'
 
     // socket
-    implementation('io.socket:socket.io-client:2.0.0') {
-        exclude group: 'org.json', module: 'json'
-    }
+//    implementation('io.socket:socket.io-client:2.1.0') {
+//        exclude group: 'org.json', module: 'json'
+//    }
+    implementation 'com.github.nkzawa:socket.io-client:0.6.0'
 
     // navigation
     implementation "androidx.navigation:navigation-fragment-ktx:2.4.0"
     implementation "androidx.navigation:navigation-ui-ktx:2.4.0"
 
     // AR
-    implementation 'com.google.ar:core:1.15.0'
+    implementation 'com.google.ar:core:1.31.0'
     // 3d render
     implementation 'com.google.ar.sceneform.ux:sceneform-ux:1.15.0'
     implementation 'com.google.ar.sceneform:core:1.15.0'
