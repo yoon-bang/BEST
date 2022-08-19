@@ -19,14 +19,10 @@ class MyFirebaseMessagingService : FirebaseMessagingService() {
    override fun onMessageReceived(message: RemoteMessage) {
       super.onMessageReceived(message)
       if (message.data.isNotEmpty()) {
-         sendNotification(
-            message.data["title"].toString(), message.data["body"].toString()
-                         )
+         sendNotification(message.data["title"].toString(), message.data["body"].toString())
       } else {
          message.notification?.let {
-            sendNotification(
-               message.notification!!.title.toString(), message.notification!!.body.toString()
-                            )
+            sendNotification(message.notification!!.title.toString(), message.notification!!.body.toString())
          }
 
       }
@@ -44,7 +40,7 @@ class MyFirebaseMessagingService : FirebaseMessagingService() {
       val intent = Intent(this, LocalizationActivity::class.java)
       intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
 
-      val pendingIntent = PendingIntent.getActivity(this, notifyId, intent, PendingIntent.FLAG_ONE_SHOT)
+      val pendingIntent = PendingIntent.getActivity(this, notifyId, intent, PendingIntent.FLAG_IMMUTABLE)
 
       val channelId = getString(R.string.default_notification_channel_id)
       val notificationBuilder =
