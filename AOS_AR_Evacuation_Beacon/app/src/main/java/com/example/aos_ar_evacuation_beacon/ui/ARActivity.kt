@@ -19,49 +19,57 @@ import android.view.animation.TranslateAnimation
 import androidx.activity.viewModels
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
+import androidx.lifecycle.lifecycleScope
 import com.example.aos_ar_evacuation_beacon.BeaconApplication
 import com.example.aos_ar_evacuation_beacon.R
 import com.example.aos_ar_evacuation_beacon.beacon.LocalizationManager
+import com.example.aos_ar_evacuation_beacon.constant.BeaconConstants
 import com.example.aos_ar_evacuation_beacon.constant.Floor
 import com.example.aos_ar_evacuation_beacon.constant.MapInfo
+import com.example.aos_ar_evacuation_beacon.model.ServerData
 import com.example.aos_ar_evacuation_beacon.repository.DirectionRepository
 import com.example.aos_ar_evacuation_beacon.repository.LocationRepository
 import com.example.aos_ar_evacuation_beacon.ui.view.Paint1FView
 import com.example.aos_ar_evacuation_beacon.ui.view.Paint2FView
 import com.example.aos_ar_evacuation_beacon.ui.view.PaintBaseView
 import com.example.aos_ar_evacuation_beacon.viewModel.MainViewModel
+import com.google.android.gms.tasks.OnCompleteListener
+import com.google.ar.core.Config
 import com.google.ar.sceneform.ux.ArFragment
-import io.socket.client.IO
-import io.socket.client.Socket
-import io.socket.emitter.Emitter
+import com.google.firebase.messaging.FirebaseMessaging
 import kotlinx.android.synthetic.main.activity_ar.*
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
-import org.json.JSONObject
-import kotlin.math.abs
+import kotlinx.coroutines.*
+import java.io.BufferedReader
+import java.io.InputStreamReader
+import java.io.PrintWriter
+import java.net.Socket
+import kotlin.math.atan2
+import kotlin.math.sqrt
+
 
 class ARActivity : AppCompatActivity(), SensorEventListener {
    val mainViewModel: MainViewModel by viewModels()
-   private val coroutineScopeMain = CoroutineScope(Dispatchers.Main.immediate)
+
    var imageName = "ksw_base"
    val locationRepository = LocationRepository.instance
    val directionRepository = DirectionRepository.instance
    private lateinit var beaconApplication: BeaconApplication
+   lateinit var serverData: ServerData
 
    // Sensor
    private lateinit var sensorManager: SensorManager
    private lateinit var mAccelerometer: Sensor
    private lateinit var mMagneticField: Sensor
+   private lateinit var mRotationVector: Sensor
    private var accelerationList = FloatArray(3)
    private var magneticFieldList = FloatArray(3)
+   private var rotationVectorList = FloatArray(4)
+
+   var pathList: MutableList<String>? = null
 
    private lateinit var localizationManager: LocalizationManager
 
    private var azimuth = 0F
-   private var pitch = 0F
-   private var roll = 0F
-   var currentDegree = 0.0f
-   var previousDegree = 0.0f
 
    var currentUserX = 0f
    var currentUserY = 0f
@@ -78,10 +86,18 @@ class ARActivity : AppCompatActivity(), SensorEventListener {
    lateinit var baseFloorPathView: BaseFloorView
 
    lateinit var arFragment: ArFragment
-   lateinit var mSocket: Socket
-   lateinit var arRenderable: ArRenderable
+   lateinit var client: Socket
+   lateinit var output: PrintWriter
+   lateinit var input: BufferedReader
+   var isSocketConnect = false
 
+   lateinit var arRenderable: ArRenderable
    var neverAskAgainPermissions = ArrayList<String>()
+
+   override fun onPause() {
+      super.onPause()
+      client.close()
+   }
 
    override fun onCreate(savedInstanceState: Bundle?) {
       super.onCreate(savedInstanceState)
@@ -89,21 +105,75 @@ class ARActivity : AppCompatActivity(), SensorEventListener {
 
       beaconApplication = application as BeaconApplication
       localizationManager = LocalizationManager(this, applicationContext, beaconApplication, mainViewModel)
-      //localizationManager.setting()
+      localizationManager.setting()
       setSensor()
       calculateCoordinate()
-      //socketSetup()
 
+      mainViewModel.startPoint.observe(this) {
+         if (it != "") {
+            Thread(Runnable {
+               kotlin.run {
+                  try {
+                     client()
+                  } catch (e: Exception) {
+                     Log.e("Client Connect Error", e.toString())
+                  }
+               }
+            }).start()
+
+            CoroutineScope(Dispatchers.IO).launch {
+               delay(3500L)
+               var message: String
+
+               launch {
+                  message = input.readLine()
+                  Log.i("Client message", message)
+
+                  var data = message.split("|")
+                  var pathList = data[0].split(" ")
+                  var fireCell = data[1].split(" ")
+                  var predictedCell = data[2].split(" ")
+                  var congestionCell = data[3].split(" ")
+                  serverData = ServerData(pathList, fireCell, predictedCell, congestionCell)
+
+                  mainViewModel.updatePathList(serverData.pathList)
+                  mainViewModel.updateFireCellList(serverData.fireCell)
+                  mainViewModel.updatePredictedCellList(serverData.predictedCell)
+                  mainViewModel.updateCongestionCellList(serverData.congestionCell)
+               }.join()
+
+               launch {
+                  delay(1000L)
+                  setPath()
+               }.join()
+            }
+         }
+      }
+
+
+      FirebaseMessaging.getInstance().token.addOnCompleteListener(OnCompleteListener { task ->
+         if (!task.isSuccessful) {
+            Log.w(TAG, "Fetching FCM registration token failed", task.exception)
+            return@OnCompleteListener
+         }
+
+         // Get new FCM registration token
+         val token = task.result
+         Log.w("tokentoken", token.toString())
+      })
       // AR setup
       arFragment = fragment as ArFragment
       arFragment.planeDiscoveryController.hide()
       arFragment.planeDiscoveryController.setInstructionView(null)
-      //arFragment.arSceneView.planeRenderer.isEnabled = false
 
       arRenderable = ArRenderable(this, arFragment, R.raw.aos_arrow)
-      arRenderable.addNodeToScnee()
+      arFragment.arSceneView.session?.configure(arFragment.arSceneView.session!!.config.apply {
+         geospatialMode = Config.GeospatialMode.ENABLED
+      })
+
+      arRenderable.addNodeToScene()
       arFragment.arSceneView.scene.addOnUpdateListener {
-         arRenderable.onUpdateFrame(it)
+         arRenderable.onUpdateFrame(bannerText, it)
       }
 
       paint1FView = Paint1FView(applicationContext)
@@ -114,27 +184,46 @@ class ARActivity : AppCompatActivity(), SensorEventListener {
       secondFloorPathView = SecondFloorView(applicationContext)
       baseFloorPathView = BaseFloorView(applicationContext)
 
-      mainViewModel.timerStart(firstFloorPathView)
-      mainViewModel.isStart.observe(this) {
-         if (!it) {
-            setStartPathView()
-         } else {
-            updatePathView()
+      // 소켓 통신 성공하면 경로 그리도록
+      mainViewModel.pathList.observe(this) { pathList ->
+         if (pathList.isNotEmpty()) {
+            mainViewModel.isStart.observe(this) { isStart ->
+               if (!isStart) {
+                  Log.i("pathListisStart", "false")
+                  setStartPathView()
+               } else {
+                  Log.i("pathListisStart", "true")
+                  updatePathView()
+               }
+            }
          }
       }
 
-//      mainViewModel.currentFloor.observe(this) { floor ->
-//         Log.i("eeeeeeeeeeeee", floor.toString())
-//         changeMapView()
-//      }
+      mainViewModel.previousLocation.observe(this) { location ->
+         if (location.isNotEmpty()) {
+            changeMapView()
+            lifecycleScope.launch(Dispatchers.IO) {
+               if (isSocketConnect) {
+                  output.println(location)
+               }
+            }
 
-      mainViewModel.currentFloor.observe(this) { cur ->
-         mainViewModel.previousFloor.observe(this) { prev ->
-            Log.i("previousFloor", prev.toString())
-            Log.i("currentFloor", cur.toString())
+            mainViewModel.currentFloor.observe(this) { floor ->
+               when (floor) {
+                  Floor.First -> {
+                     firstFloorPathView?.invalidate()
+                  }
+                  Floor.Second -> {
+                     secondFloorPathView?.invalidate()
+                  }
+                  Floor.Base -> {
+                     baseFloorPathView?.invalidate()
+                  }
+               }
+            }
 
-            if (cur != prev) {
-               changeMapView()
+            if (location.contains("E")) {
+               bannerText.text = "Evacuate Safely!"
             }
          }
       }
@@ -150,29 +239,68 @@ class ARActivity : AppCompatActivity(), SensorEventListener {
       }
    }
 
+   fun client() {
+      CoroutineScope(Dispatchers.IO).launch {
+         launch {
+            client = Socket(BeaconConstants.IP_ADDRESS, BeaconConstants.port)
+            output = PrintWriter(client.getOutputStream(), true)
+            input = BufferedReader(InputStreamReader(client.inputStream))
+            output.println(locationRepository.startLocation.value)
+         }.join()
+
+         launch {
+            val message = input.readLine()
+            Log.i("Client message", message.toString())
+            isSocketConnect = true
+
+            // 경로 , 화재셀, predicted cell, congestion cell
+            var data = message.split("|")
+            var pathList = data[0].split(" ")
+
+            var fireCell = data[1].split("")
+            var predictedCell = data[2].split("")
+            var congestionCell = data[3].split("")
+            serverData = ServerData(pathList, fireCell, predictedCell, congestionCell)
+         }.join()
+
+         launch {
+            mainViewModel.updatePathList(serverData.pathList)
+            mainViewModel.updateFireCellList(serverData.fireCell)
+            mainViewModel.updatePredictedCellList(serverData.predictedCell)
+            mainViewModel.updateCongestionCellList(serverData.congestionCell)
+         }.join()
+
+      }
+   }
+
    private fun setStartPathView() {
       val startPoint = locationRepository.startLocation.value
       setPath()
-      startPoint?.let { Log.i("startPoint: ", it) }
+      Log.i("startPoint", startPoint.toString())
 
       if (startPoint != null) {
          if (locationRepository.is1F(startPoint)) {
+            Log.i("startPoint", "1f")
             mainViewModel.updateFloor(Floor.First)
             imageName = "ksw_1f"
 
-            if (paint1FView.parent != null) {
-               val viewGroup = paint1FView.parent as ViewGroup
-               viewGroup.removeView(paint1FView)
+            val paintViewIndex = containerFramelayout.indexOfChild(paint1FView)
+            val pathViewIndex = containerFramelayout.indexOfChild(firstFloorPathView)
+            if (paintViewIndex > 0 && pathViewIndex > 0) {
+               containerFramelayout.apply {
+                  removeView(paint1FView)
+                  removeView(firstFloorPathView)
+               }
             }
-
             mapImage.setImageResource(R.drawable.ksw_1f)
             containerFramelayout.addView(paint1FView)
             containerFramelayout.addView(firstFloorPathView)
             firstFloorPathView?.invalidate()
+            paint1FView?.invalidate()
          }
 
          if (locationRepository.is2F(startPoint)) {
-            Log.i("aaaaaa", "is2F")
+            Log.i("startPoint", "2f")
             mainViewModel.updateFloor(Floor.Second)
             imageName = "ksw_2f"
 
@@ -185,10 +313,11 @@ class ARActivity : AppCompatActivity(), SensorEventListener {
             containerFramelayout.addView(paint2FView)
             containerFramelayout.addView(secondFloorPathView)
             secondFloorPathView?.invalidate()
+            paint2FView?.invalidate()
          }
 
          if (locationRepository.isBase(startPoint)) {
-            Log.i("aaaaaa", "isBase")
+            Log.i("startPoint", "base")
             mainViewModel.updateFloor(Floor.Base)
             imageName = "ksw_base"
 
@@ -200,6 +329,7 @@ class ARActivity : AppCompatActivity(), SensorEventListener {
             mapImage.setImageResource(R.drawable.ksw_base)
             containerFramelayout.addView(paintBaseView)
             containerFramelayout.addView(baseFloorPathView)
+            paintBaseView?.invalidate()
             baseFloorPathView?.invalidate()
          }
       }
@@ -209,30 +339,82 @@ class ARActivity : AppCompatActivity(), SensorEventListener {
       sensorManager = getSystemService(SENSOR_SERVICE) as SensorManager
       sensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER)?.let { this.mAccelerometer = it }
       sensorManager.getDefaultSensor(Sensor.TYPE_MAGNETIC_FIELD)?.let { this.mMagneticField = it }
+      sensorManager.getDefaultSensor(Sensor.TYPE_ROTATION_VECTOR)?.let { this.mRotationVector = it }
    }
 
    override fun onResume() {
       super.onResume()
       sensorManager.registerListener(this, mAccelerometer, SensorManager.SENSOR_DELAY_NORMAL)
       sensorManager.registerListener(this, mMagneticField, SensorManager.SENSOR_DELAY_NORMAL)
+      sensorManager.registerListener(this, mRotationVector, SensorManager.SENSOR_DELAY_NORMAL)
    }
 
    private fun setPath() {
+      Log.i("setPath", "called")
       val path = locationRepository.pathList.value
+      val fireCell = locationRepository.fireCellList.value
+      val predictedCell = locationRepository.predictedCellList.value
+      val congestionCell = locationRepository.congestionCellList.value
+      locationRepository.clearFirstPath()
 
       path?.forEach { point ->
          if (locationRepository.is1F(point)) {
-            locationRepository.updateFirstPath(point)
+            locationRepository.updatePath(point, Floor.First)
          }
 
          if (locationRepository.is2F(point)) {
-            locationRepository.updateSecondPath(point)
+            locationRepository.updatePath(point, Floor.Second)
          }
 
          if (locationRepository.isBase(point)) {
-            locationRepository.updateBasePath(point)
+            locationRepository.updatePath(point, Floor.Base)
          }
       }
+
+      fireCell?.forEach { point ->
+         if (locationRepository.is1F(point)) {
+            locationRepository.updateFireCell(point, Floor.First)
+         }
+
+         if (locationRepository.is2F(point)) {
+            locationRepository.updateFireCell(point, Floor.Second)
+         }
+
+         if (locationRepository.isBase(point)) {
+            locationRepository.updateFireCell(point, Floor.Base)
+         }
+      }
+
+      predictedCell?.forEach { point ->
+         if (locationRepository.is1F(point)) {
+            locationRepository.updatePredictedCell(point, Floor.First)
+         }
+
+         if (locationRepository.is2F(point)) {
+            locationRepository.updatePredictedCell(point, Floor.Second)
+         }
+
+         if (locationRepository.isBase(point)) {
+            locationRepository.updatePredictedCell(point, Floor.Base)
+         }
+      }
+
+      congestionCell?.forEach { point ->
+         if (locationRepository.is1F(point)) {
+            locationRepository.updateCongestionCell(point, Floor.First)
+         }
+
+         if (locationRepository.is2F(point)) {
+            locationRepository.updateCongestionCell(point, Floor.Second)
+         }
+
+         if (locationRepository.isBase(point)) {
+            locationRepository.updateCongestionCell(point, Floor.Base)
+         }
+      }
+
+      firstFloorPathView?.invalidate()
+      paint1FView?.invalidate()
    }
 
    private fun changePaintView(floor: Floor) {
@@ -303,27 +485,7 @@ class ARActivity : AppCompatActivity(), SensorEventListener {
    }
 
    private fun changeMapView() {
-      /*
-      when (mainViewModel.currentFloor.value) {
-         Floor.First -> {
-            mapImage.setImageResource(R.drawable.ksw_1f)
-            changeCustomView(Floor.First)
-            changePaintView(Floor.First)
-         }
-         Floor.Second -> {
-            mapImage.setImageResource(R.drawable.ksw_base)
-            changeCustomView(Floor.Second)
-            changePaintView(Floor.Second)
-         }
-
-         Floor.Base -> {
-            mapImage.setImageResource(R.drawable.ksw_base)
-            changeCustomView(Floor.Base)
-            changePaintView(Floor.Base)
-         }
-      }
-
-       */
+      locationRepository.previousLocation.value?.let { Log.i("changeMapView() current Location: ", it) }
 
       if (mainViewModel.isBaseTo1f()) {
          Log.i("changeMapView() ", "here1111111")
@@ -367,10 +529,8 @@ class ARActivity : AppCompatActivity(), SensorEventListener {
          changeCustomView(Floor.First)
          changePaintView(Floor.First)
 
-      } else {
-         Log.i("changeMapView() ", "here88888")
       }
-      //mainViewModel.evacuationQueue.clear()
+      mainViewModel.clearQueue()
    }
 
    override fun onSensorChanged(event: SensorEvent?) {
@@ -379,7 +539,6 @@ class ARActivity : AppCompatActivity(), SensorEventListener {
             accelerationList[0] = event.values[0]
             accelerationList[1] = event.values[1]
             accelerationList[2] = event.values[2]
-
          }
 
          Sensor.TYPE_MAGNETIC_FIELD -> {
@@ -387,48 +546,89 @@ class ARActivity : AppCompatActivity(), SensorEventListener {
             magneticFieldList[1] = event.values[1]
             magneticFieldList[2] = event.values[2]
          }
-      }
 
-      // 행렬 계산
-      val rArray = FloatArray(9)
-      val iArray = FloatArray(9)
-      SensorManager.getRotationMatrix(rArray, iArray, accelerationList, magneticFieldList)
-
-      // 방위값 환산
-      val values = FloatArray(3)
-      SensorManager.getOrientation(rArray, values)
-
-      // 방위값 -> 각도 단위 변경
-      azimuth = Math.toDegrees(values[0].toDouble()).toFloat()
-      // 좌우 기울기 값
-      pitch = Math.toDegrees(values[1].toDouble()).toFloat()
-      // 앞뒤 기울기 값
-      roll = Math.toDegrees(values[2].toDouble()).toFloat()
-
-      var degree = Math.toDegrees(values[0].toDouble() + 360).toFloat() % 360
-//      val currentDegree = (Math.PI / 180 * (170 + degree)).toFloat()
-      var currentDegree = degree + 170
-      if (currentDegree > 360) {
-         currentDegree -= 360
-      }
-
-      val direction = directionRepository.classifyDirection(currentDegree)
-      directionRepository.updateUserCurrentHeading(currentDegree)
-      directionRepository.updateUserDirection(direction)
-//      currentDegree = -degree
-
-      if (abs(directionRepository.userPreviousHeading.value!!.minus(directionRepository.userCurrentHeading.value!!)) > 20) {
-         when (mainViewModel.currentFloor.value) {
-            Floor.First -> firstFloorPathView?.invalidate()
-            Floor.Second -> secondFloorPathView?.invalidate()
-            else -> baseFloorPathView?.invalidate()
+         Sensor.TYPE_ROTATION_VECTOR -> {
+            rotationVectorList[0] = event.values[0]
+            rotationVectorList[1] = event.values[1]
+            rotationVectorList[2] = event.values[2]
+            rotationVectorList[3] = event.values[3]
          }
       }
-      directionRepository.updateUserPreviousHeading(directionRepository.userCurrentHeading.value!!)
 
+      val norm =
+         sqrt(rotationVectorList[0] * rotationVectorList[0] + rotationVectorList[1] * rotationVectorList[1] + rotationVectorList[2] * rotationVectorList[2] + rotationVectorList[3] * rotationVectorList[3])
+      rotationVectorList[0] /= norm
+      rotationVectorList[1] /= norm
+      rotationVectorList[2] /= norm
+      rotationVectorList[3] /= norm
+
+      val x = rotationVectorList[0]
+      val y = rotationVectorList[1]
+      val z = rotationVectorList[2]
+      val w = rotationVectorList[3]
+
+      val sinA = 2.0 * (w * z + x * y)
+      val cosA = 1.0 - 2.0 * (y * y + z * z)
+
+      azimuth = (atan2(sinA, cosA) * (180 / Math.PI)).toFloat()
       if (azimuth < 0) {
          azimuth += 360
       }
+
+      if (45 < azimuth && azimuth < 135) {
+         azimuth += 180
+      } else if (225 < azimuth && azimuth < 315) {
+         azimuth -= 180
+      }
+
+      val direction = directionRepository.classifyDirection(azimuth)
+      directionRepository.updateUserCurrentHeading(azimuth)
+      directionRepository.updateUserDirection(direction)
+
+      // map 에서 유저 회전시키기위해 previousHeading 저장
+      directionRepository.updateUserPreviousHeading(directionRepository.userCurrentHeading.value!!)
+
+
+      /*
+      if (mMagneticField != null && mAccelerometer != null) {
+         val rArray = FloatArray(9)
+         val iArray = FloatArray(9)
+         val isSucess = SensorManager.getRotationMatrix(rArray, iArray, accelerationList, magneticFieldList)
+
+         if (isSucess) {
+            // 방위값 환산
+            val values = FloatArray(3)
+            SensorManager.getOrientation(rArray, values)
+            // 방위값 -> 각도 단위 변경
+//            azimuth = Math.toDegrees(values[0].toDouble()).toFloat()
+            azimuth = (values[0] * 180 / Math.PI).toFloat()
+            // -180 ~ 180 라서 양수로 변환
+            if (azimuth < 0) {
+               azimuth += 360
+            }
+
+//      val currentDegree = (Math.PI / 180 * (170 + degree)).toFloat()
+            //var currentDegree = degree + 170
+
+            // heading : 실제 value
+            // direction : 동 서 남 북
+            val direction = directionRepository.classifyDirection(azimuth)
+            Log.i("=== azimuth === ", azimuth.toString())
+            Log.i("=== sensor direction === ", direction.toString())
+            directionRepository.updateUserCurrentHeading(azimuth)
+            directionRepository.updateUserDirection(direction)
+
+//            when (mainViewModel.currentFloor.value) {
+//               Floor.First -> firstFloorPathView?.invalidate()
+//               Floor.Second -> secondFloorPathView?.invalidate()
+//               else -> baseFloorPathView?.invalidate()
+//            }
+
+            // map 에서 유저 회전시키기위해 previousHeading 저장
+            directionRepository.updateUserPreviousHeading(directionRepository.userCurrentHeading.value!!)
+         }
+      }
+      */
    }
 
    override fun onAccuracyChanged(p0: Sensor?, p1: Int) {
@@ -442,7 +642,7 @@ class ARActivity : AppCompatActivity(), SensorEventListener {
          super.onDraw(canvas)
          canvas?.let {
             rotateAnimation()
-            drawUser(locationRepository.currentUserX.value!!, locationRepository.currentUserY.value!!, it)
+            drawUser(locationRepository.previousUserX.value!!, locationRepository.previousUserY.value!!, it)
          }
       }
 
@@ -456,13 +656,10 @@ class ARActivity : AppCompatActivity(), SensorEventListener {
 
       private fun rotateAnimation() {
          val anim =
-            RotateAnimation(directionRepository.userPreviousHeading.value!!,
-                            directionRepository.userCurrentHeading.value!!,
-                            locationRepository.currentUserX.value!!,
-                            locationRepository.currentUserY.value!!)
-
-         Log.i("previousDegree: ", directionRepository.userPreviousHeading.value!!.toString())
-         Log.i("currentDegree: ", directionRepository.userCurrentHeading.value!!.toString())
+            RotateAnimation(directionRepository.userPreviousHeading.value!! + 180,
+                            directionRepository.userCurrentHeading.value!! + 180,
+                            locationRepository.previousUserX.value!!,
+                            locationRepository.previousUserY.value!!)
          anim.duration = 1000L
          startAnimation(anim)
       }
@@ -487,9 +684,7 @@ class ARActivity : AppCompatActivity(), SensorEventListener {
          super.onDraw(canvas)
          canvas?.let {
             rotateAnimation()
-            Log.i("222currentUserX", locationRepository.currentUserX.value.toString())
-            Log.i("222currentUserY", locationRepository.currentUserY.value.toString())
-            drawUser(locationRepository.currentUserX.value!!, locationRepository.currentUserY.value!!, it)
+            drawUser(locationRepository.previousUserX.value!!, locationRepository.previousUserY.value!!, it)
          }
       }
 
@@ -505,8 +700,8 @@ class ARActivity : AppCompatActivity(), SensorEventListener {
          val anim =
             RotateAnimation(directionRepository.userPreviousHeading.value!!,
                             directionRepository.userCurrentHeading.value!!,
-                            locationRepository.currentUserX.value!!,
-                            locationRepository.currentUserY.value!!)
+                            locationRepository.previousUserX.value!!,
+                            locationRepository.previousUserY.value!!)
          anim.duration = 1000L
          startAnimation(anim)
       }
@@ -531,18 +726,10 @@ class ARActivity : AppCompatActivity(), SensorEventListener {
          super.onDraw(canvas)
          canvas?.let {
             rotateAnimation()
-            Log.i("bbbcurrentUserX", locationRepository.currentUserX.value.toString())
-            Log.i("bbbcurrentUserY", locationRepository.currentUserY.value.toString())
-            drawUser(locationRepository.currentUserX.value!!, locationRepository.currentUserY.value!!, it)
+            Log.i("BasecurrentUserX", locationRepository.currentUserX.value.toString())
+            Log.i("BasecurrentUserY", locationRepository.currentUserY.value.toString())
+            drawUser(locationRepository.previousUserX.value!!, locationRepository.previousUserY.value!!, it)
          }
-      }
-
-      fun updateUserLocation(prevX: Float, prevY: Float, currX: Float, currY: Float) {
-         previousUserX = prevX
-         previousUserY = prevY
-         currentUserX = currX
-         currentUserY = currY
-         //moveAnimation(previousX.value!!, previousY.value!!, currentX.value!!, currentY.value!!)
       }
 
       private fun rotateAnimation() {
@@ -551,22 +738,10 @@ class ARActivity : AppCompatActivity(), SensorEventListener {
                             directionRepository.userCurrentHeading.value!!,
                             locationRepository.currentUserX.value!!,
                             locationRepository.currentUserY.value!!)
-         Log.i("bbbbbpreviousDegree: ", directionRepository.userPreviousHeading.value!!.toString())
-         Log.i("bbbbbcurrentDegree: ", directionRepository.userCurrentHeading.value!!.toString())
+         Log.i("BasepreviousDegree: ", directionRepository.userPreviousHeading.value!!.toString())
+         Log.i("BasecurrentDegree: ", directionRepository.userCurrentHeading.value!!.toString())
          anim.duration = 1000L
          startAnimation(anim)
-      }
-
-      fun moveAnimation(previousX: Float, previousY: Float, currentX: Float, currentY: Float) {
-         Log.w("previousUser222X", previousX.toString())
-         Log.w("previousUser222Y", previousY.toString())
-         Log.w("currentUser222X", currentX.toString())
-         Log.w("currentUser222Y", currentY.toString())
-
-         val anim = TranslateAnimation(previousX, previousY, currentX, currentY)
-         anim.duration = 1000
-         anim.fillAfter = true
-         //startAnimation(anim)
       }
    }
 
@@ -620,45 +795,6 @@ class ARActivity : AppCompatActivity(), SensorEventListener {
       m_path.lineTo(point1.x.toFloat(), point1.y.toFloat())
       m_path.close()
       canvas.drawPath(m_path, paint)
-   }
-
-   private fun socketSetup() {
-//      mSocket = SocketApplication.get()
-
-      val options = IO.Options()
-      options.port = 12000
-      options.reconnection = false
-
-      try {
-         mSocket = IO.socket("http://146.148.59.28:12000")
-         mSocket.on("path", onNewEvent)
-         mSocket.connect()
-
-         //Log.i("===socket===", mSocket.connected().toString())
-      } catch (e: Exception) {
-         Log.e("===aaasocket===", e.toString())
-      }
-
-//      if (mSocket != null) {
-//         Log.d("$$$ Socket ID $$$$", mSocket.isActive.toString())
-//      } else {
-//         Log.d("$$$ Socket ID $$$$", "empty")
-//      }
-//
-//      mSocket.on("path", onNewEvent)
-//      mSocket.emit("location", "A11")
-   }
-
-   private var onNewEvent: Emitter.Listener = Emitter.Listener { args ->
-      runOnUiThread(Runnable {
-         val data = args[0] as JSONObject
-         try {
-            Log.w("$$$ Socket Data from Server", data.toString())
-         } catch (e: Exception) {
-            e.printStackTrace()
-            return@Runnable
-         }
-      })
    }
 
    private fun checkPermissions() {
