@@ -22,30 +22,54 @@ class MainViewModel : ViewModel() {
    val directionRepository = DirectionRepository.instance
    private lateinit var job: Job
 
-   val queueSize = 3
-
    val evacuationQueue = locationRepository.evacuationQueue
    val currentLocation = locationRepository.currentLocation
+   val previousLocation = locationRepository.previousLocation
+   val isEvacuated = locationRepository.isEvacuated
+
+   val pathList = locationRepository.pathList
+   val fireCellList = locationRepository.fireCellList
+   val predictedCellList = locationRepository.predictedCellList
+   val congestionCellList = locationRepository.congestionCellList
 
    val currentFloor = locationRepository.currentFloor
    val previousFloor = locationRepository.previousFloor
 
-   private val _isEvacuated = MutableLiveData(false)
-   val isEvacuated: LiveData<Boolean> = _isEvacuated
-
-   var pathListIndex = 0
+   var pathListIndex = locationRepository.pathListIndex
    val isStart = locationRepository.isStart
+   val startPoint = locationRepository.startLocation
 
    init {
       _timerCount.value = locationRepository.pathList.value?.size
    }
 
-   fun isExit() {
-      _isEvacuated.value = currentLocation.value?.contains("E")
+   fun updatePathList(value: List<String>) {
+      locationRepository.updatePathList(value)
+   }
+
+   fun updateCongestionCellList(value: List<String>) {
+      locationRepository.updateCongestionCellList(value)
+   }
+
+   fun updatePredictedCellList(value: List<String>) {
+      locationRepository.updatePredictedCellList(value)
+   }
+
+   fun updateFireCellList(value: List<String>) {
+      locationRepository.updateFireCellList(value)
+   }
+
+
+   fun updateIsEvacuated() {
+      locationRepository.updateIsEvacuated()
    }
 
    fun addQueue(location: String) {
       locationRepository.addQueue(location)
+   }
+
+   fun clearQueue() {
+      locationRepository.clearQueue()
    }
 
    fun timerStart(aCustom1FView: ARActivity.FirstFloorView) {
@@ -53,18 +77,21 @@ class MainViewModel : ViewModel() {
 
       job = viewModelScope.launch {
          while ((_timerCount.value!! - 1) > 0) {
-            val currentCell = locationRepository.pathList.value?.get(pathListIndex)
+            val index = pathListIndex.value!!
+            val currentCell = locationRepository.pathList.value?.get(index)
             if (currentCell != null) {
                val pair = calculateCenter(currentCell)
                locationRepository.updateCurrentPoint(pair.first, pair.second)
-               Log.i("currentCell: ", currentCell)
+               Log.i("currentCellCell: ", currentCell)
+               //_currentCell.value = currentCell
                var currentX: Float
                var currentY: Float
                var nextX: Float
                var nextY: Float
 
-               val nextCell = locationRepository.pathList.value?.get(pathListIndex + 1)
-               nextCell?.let { Log.i("nextCell: ", it) }
+               val nextCell = locationRepository.pathList.value?.get(index + 1)
+               nextCell?.let { Log.i("nextCellCell: ", it) }
+               //_nextCell.value = nextCell
                var currentPair = currentCell?.let { calculateCenter(it) }
                currentX = currentPair?.first!!
                currentY = currentPair?.second!!
@@ -73,16 +100,35 @@ class MainViewModel : ViewModel() {
                nextX = nextPair?.first!!
                nextY = nextPair?.second!!
 
-               directionRepository.angleBetween2Points(currentX, currentY, nextX, nextY)
+               val degree = directionRepository.vectorBetween2Points(currentX, currentY, nextX, nextY)
+               Log.i("angleDegree: ", degree.toString())
                //locationRepository.updateLocationString(currentCell)
                //aCustom1FView?.invalidate()
-               pathListIndex += 1
+               locationRepository.updatePathListIndex()
                decreaseTimer()
                locationRepository.updatePreviousPoint(locationRepository.currentUserX.value!!, locationRepository.currentUserY.value!!)
                delay(3000L)
             }
 
          }
+      }
+   }
+
+   fun update3DArrowDegree() {
+      val currentCell = previousLocation.value
+      if (pathList.value?.isEmpty() == true) return
+
+      val index = pathList.value?.indexOf(currentCell)!!
+
+      if (index < pathList.value?.size?.minus(1)!!) {
+         val start = calculateCenter(pathList.value!![index])
+         val end = calculateCenter(pathList.value!![index + 1])
+         val vector = directionRepository.vectorBetween2Points(start.first, start.second, end.first, end.second)
+         directionRepository.updateArrowDegree(vector)
+
+      } else {
+         locationRepository.updateIsEvacuated()
+         Log.i("Safely Exit!!!", "Done!!! ")
       }
    }
 
@@ -94,13 +140,8 @@ class MainViewModel : ViewModel() {
       _timerCount.value = _timerCount.value?.minus(1)
    }
 
-//   fun clearQueue() {
-//      _evacuationQueue.value?.clear()
-//   }
-
-
    fun is2fTo1fBackDoor(): Boolean {
-      return if (currentLocation.value == "S06" && evacuationQueue.value!!.contains("S05")) {
+      return if (previousLocation.value == "S06" && evacuationQueue.value!!.contains("S05")) {
          locationRepository.updateCurrentFloor(Floor.First)
          true
       } else {
@@ -109,12 +150,7 @@ class MainViewModel : ViewModel() {
    }
 
    fun is2fTo1f(): Boolean {
-      Log.i("is2fTo1f curr: ", currentLocation.value.toString())
-      evacuationQueue.value!!.forEachIndexed { index, s ->
-         Log.i("is2fTo1f evacuationQueue $index: ", s)
-      }
-
-      return if ((currentLocation.value == "S03") && evacuationQueue.value!!.contains("S04")) {
+      return if ((previousLocation.value == "S03") && evacuationQueue.value!!.contains("S04")) {
          Log.i("is2fTo1f : ", "true")
          locationRepository.updateCurrentFloor(Floor.First)
          true
@@ -124,9 +160,10 @@ class MainViewModel : ViewModel() {
    }
 
    fun is1fTo2f(): Boolean {
-      return if (((currentLocation.value == "S03") || (currentLocation.value == "S04") || (currentLocation.value == "H01")) && (evacuationQueue.value!!.contains("S02") || evacuationQueue.value!!.contains(
+      return if (((previousLocation.value == "S03") || (previousLocation.value == "S04") || (previousLocation.value == "H01")) && (evacuationQueue.value!!.contains("S02") || evacuationQueue.value!!.contains(
             "E01"))
       ) {
+         Log.i("is1fTo2f : ", "true")
          locationRepository.updateCurrentFloor(Floor.Second)
          true
       } else {
@@ -135,7 +172,8 @@ class MainViewModel : ViewModel() {
    }
 
    fun is1fToBase(): Boolean {
-      return if ((currentLocation.value == "E02" || currentLocation.value == "S08") && (evacuationQueue.value!!.contains("S07") || evacuationQueue.value!!.contains("H02"))) {
+      Log.i("is1fToBase : ", "true")
+      return if ((previousLocation.value == "E02" || previousLocation.value == "S08") && (evacuationQueue.value!!.contains("S07") || evacuationQueue.value!!.contains("H02"))) {
          locationRepository.updateCurrentFloor(Floor.Base)
          true
       } else {
@@ -144,11 +182,8 @@ class MainViewModel : ViewModel() {
    }
 
    fun isBaseTo1f(): Boolean {
-      evacuationQueue.value?.forEach {
-         Log.i("isBaseTo1f", "evacuationQueue: $it")
-      }
-      Log.i("isBaseTo1f", "CurrentLocation: ${currentLocation.value}")
-      return if ((currentLocation.value == "E02" || currentLocation.value == "S07") && (evacuationQueue.value!!.contains("S08") || evacuationQueue.value!!.contains("S09"))) {
+      return if ((previousLocation.value == "E02" || previousLocation.value == "S07") && (evacuationQueue.value!!.contains("S08") || evacuationQueue.value!!.contains("S09"))) {
+         Log.i("isBaseTo1f : ", "true")
          locationRepository.updateCurrentFloor(Floor.First)
          true
       } else {
@@ -157,11 +192,8 @@ class MainViewModel : ViewModel() {
    }
 
    fun is1fTo2fBackDoor(): Boolean {
-//      evacuationQueue.value?.forEach {
-//         Log.i("is1fTo2fBackDoor", "evacuationQueue: $it")
-//      }
-//      Log.i("is1fTo2fBackDoor", "CurrentLocation: ${currentLocation.value}")
-      return if ((currentLocation.value == "S06") && (evacuationQueue.value!!.contains("H02") || evacuationQueue.value!!.contains("A07"))) {
+      return if ((previousLocation.value == "S06") && (evacuationQueue.value!!.contains("H02") || evacuationQueue.value!!.contains("A07"))) {
+         Log.i("is1fTo2fBackDoor : ", "true")
          locationRepository.updateCurrentFloor(Floor.Second)
          true
       } else {
@@ -174,7 +206,7 @@ class MainViewModel : ViewModel() {
       if (::job.isInitialized) job.cancel()
    }
 
-   private fun calculateCenter(location: String): Pair<Float, Float> {
+   fun calculateCenter(location: String): Pair<Float, Float> {
       val pointList = when (currentFloor.value) {
          Floor.First -> {
             Log.i("First5lllocation: ", location)
