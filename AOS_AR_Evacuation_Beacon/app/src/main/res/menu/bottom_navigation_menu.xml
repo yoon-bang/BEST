@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/localizationItem"
+        android:icon="@drawable/ic_location"
+        android:iconTint="@color/white"
+        android:title="Localization" />
+
+    <item
+        android:id="@+id/navigationItem"
+        android:icon="@drawable/ic_navigation"
+        android:iconTint="@color/white"
+        android:title="AR Navigation" />
+</menu>

@@ -1,0 +1,206 @@
+{
+  "project_info": {
+    "project_number": "654559994186",
+    "project_id": "bacon-beacon-353516",
+    "storage_bucket": "bacon-beacon-353516.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:654559994186:android:61cccab7757f20e5ba61b3",
+        "android_client_info": {
+          "package_name": "com.baconbeacon.beaconexample"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "654559994186-idan1548msohpglah3b5bgqdo1rpmiul.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.baconbeacon.beaconexample",
+            "certificate_hash": "eca95ca2e96078f38a23a77a56d94c56a68adfd7"
+          }
+        },
+        {
+          "client_id": "654559994186-hispu2g4ld1ivqs4btpdr7k3el3ivr0a.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB4dN3fDhvvP8Fd1hAacK6EH4Qug86tcL0"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "654559994186-hispu2g4ld1ivqs4btpdr7k3el3ivr0a.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "654559994186-gde63uo5tkccrlko6vjtr6e5afhuqjj3.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.baconbeacon.team2"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:654559994186:android:5e84006c1a9225a5ba61b3",
+        "android_client_info": {
+          "package_name": "com.example.aos_ar_evacuation_beacon"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "654559994186-hispu2g4ld1ivqs4btpdr7k3el3ivr0a.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB4dN3fDhvvP8Fd1hAacK6EH4Qug86tcL0"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "654559994186-hispu2g4ld1ivqs4btpdr7k3el3ivr0a.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "654559994186-gde63uo5tkccrlko6vjtr6e5afhuqjj3.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.baconbeacon.team2"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:654559994186:android:f36963e0975dd045ba61b3",
+        "android_client_info": {
+          "package_name": "org.altbeacon.beaconreference"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "654559994186-fc2vvo6v0srrvkaasqvtmoemonntg298.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "org.altbeacon.beaconreference",
+            "certificate_hash": "eca95ca2e96078f38a23a77a56d94c56a68adfd7"
+          }
+        },
+        {
+          "client_id": "654559994186-hispu2g4ld1ivqs4btpdr7k3el3ivr0a.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB4dN3fDhvvP8Fd1hAacK6EH4Qug86tcL0"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "654559994186-hispu2g4ld1ivqs4btpdr7k3el3ivr0a.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "654559994186-gde63uo5tkccrlko6vjtr6e5afhuqjj3.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.baconbeacon.team2"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:654559994186:android:6c6279fcda7b3164ba61b3",
+        "android_client_info": {
+          "package_name": "org.altbeacon.beaconreference22"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "654559994186-hispu2g4ld1ivqs4btpdr7k3el3ivr0a.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB4dN3fDhvvP8Fd1hAacK6EH4Qug86tcL0"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "654559994186-hispu2g4ld1ivqs4btpdr7k3el3ivr0a.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "654559994186-gde63uo5tkccrlko6vjtr6e5afhuqjj3.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.baconbeacon.team2"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:654559994186:android:cccb63e36cad6e9bba61b3",
+        "android_client_info": {
+          "package_name": "org.altbeacon.beaconreference5"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "654559994186-hispu2g4ld1ivqs4btpdr7k3el3ivr0a.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB4dN3fDhvvP8Fd1hAacK6EH4Qug86tcL0"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "654559994186-hispu2g4ld1ivqs4btpdr7k3el3ivr0a.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "654559994186-gde63uo5tkccrlko6vjtr6e5afhuqjj3.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.baconbeacon.team2"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
