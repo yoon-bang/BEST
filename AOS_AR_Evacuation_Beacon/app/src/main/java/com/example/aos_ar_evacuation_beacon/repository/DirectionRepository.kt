@@ -27,9 +27,9 @@ class DirectionRepository private constructor() : BaseRepository() {
    val userCurrentHeading: LiveData<Float> = _userCurrentHeading
 
    private val _userDirection = MutableLiveData<Direction>()
-   val userDegree: LiveData<Direction> = _userDirection
+   val userDirection: LiveData<Direction> = _userDirection
 
-   private val _arrowDegree = MutableLiveData<Float>(0f)
+   private val _arrowDegree = MutableLiveData(0f)
    val arrowDegree: LiveData<Float> = _arrowDegree
 
    fun updateUserPreviousHeading(heading: Float) {
@@ -60,10 +60,10 @@ class DirectionRepository private constructor() : BaseRepository() {
       }
    }
 
-   fun angleBetween2Points(previousX: Float, previousY: Float, currentX: Float, currentY: Float): Float {
+   fun vectorBetween2Points(previousX: Float, previousY: Float, currentX: Float, currentY: Float): Float {
       var degree: Float
       val tan = atan2(previousX - currentX, previousY - currentY) * 180 / Math.PI
-      Log.i("OriginalTan:", tan.toString())
+
       degree = if (tan < 0) {
          (-tan).toFloat() + 180f
       } else {
@@ -71,11 +71,9 @@ class DirectionRepository private constructor() : BaseRepository() {
       }
 
       // degree가 170~180 일 때 user 를 바라보는 문제
-      if (degree in 170.0..180.0) {
-         degree -= 180f
-      }
-
-      updateArrowDegree(degree)
+//      if (degree in 170.0..180.0) {
+//         degree -= 180f
+//      }
       return degree
    }
 
