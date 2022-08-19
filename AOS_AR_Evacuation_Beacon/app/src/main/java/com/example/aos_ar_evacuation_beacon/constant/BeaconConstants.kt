@@ -4,8 +4,10 @@ object BeaconConstants {
    const val IP_ADDRESS = "146.148.59.28"
    const val port = 12000
 
+   const val testMode = false
+   const val beaconPeriod = 1100L
    const val beaconNum = 5
-   const val modelName = "aos_beacon${beaconNum}"
+   const val modelName = "aos_beacon${beaconNum}_concat"
    const val beaconCSVName = "AOS_estimated${beaconNum}_"
    const val readCSVName = "aos_clf_data7U01.csv"
 

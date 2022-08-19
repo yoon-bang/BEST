@@ -6,6 +6,7 @@ import android.content.Intent
 import android.util.Log
 import androidx.core.app.NotificationCompat
 import androidx.lifecycle.Observer
+import com.example.aos_ar_evacuation_beacon.constant.BeaconConstants
 import com.example.aos_ar_evacuation_beacon.ui.LocalizationActivity
 import org.altbeacon.beacon.*
 
@@ -26,8 +27,8 @@ class BeaconApplication : Application() {
       //setupForegroundService()
       //beaconManager.setEnableScheduledScanJobs(false);
       //beaconManager.setBackgroundBetweenScanPeriod(0);
-      beaconManager.backgroundScanPeriod = 2000;
-      beaconManager.foregroundScanPeriod = 2000;
+      beaconManager.backgroundScanPeriod = BeaconConstants.beaconPeriod
+      beaconManager.foregroundScanPeriod = BeaconConstants.beaconPeriod
 
 
       // UUID 설정
