@@ -3,7 +3,6 @@ import mobile_flask
 from q_learning import *
 from threading import *
 
-
 def main():
 	try:
 		initialize_cells()
