@@ -16,6 +16,24 @@ To get more detail information about BEST, please refer to the BEST documentatio
 To get more detail information about technology used in BEST, we have written a series of documentation that explains how the BEST works.
 
 ## Installation for iOS
+### Requirements
+- iOS 13.0+ 
+- Xcode 13.1+
+- Swift 5.5+
+- CocoaPods 1.11.3
+- iOS Real Device (Recommended: iphone 12)
+### Dependencies
+- **Firebase_iOS_sdk 9.2**
+  -  Firebase Cloud Messaging for APNS(Apple Push Notification System)
+  -  FirebaseMLModelDownloader for Deep Learning Model
+  
+- **TensorflowLiteSwift 2.9.1**
+  -  TensorflowLiteSwift for Model interpreter
+### Installation
+- Dependencies installation
+```
+    pod install --repo-update
+```
 
 ## Installation for Android
 
