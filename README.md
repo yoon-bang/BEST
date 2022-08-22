@@ -1,15 +1,55 @@
 # ⚡2022 Purdue Fire Evacuation System by Bacon Beacon⚡
-<hr>
 
 ![Generic badge](https://img.shields.io/badge/Xcode-13.3.1-blue.svg)  ![Generic badge](https://img.shields.io/badge/iOS-13.0-yellow.svg)  ![Generic badge](https://img.shields.io/badge/Swift-5.5-green.svg)  ![Generic badge](https://img.shields.io/badge/Firebase-ios-sdk.svg)  ![Generic badge](https://img.shields.io/badge/Socket.IO-15.0-purple.svg)   ![Generic badge](https://img.shields.io/badge/TensorflowliteSwift-2.9.1-orange.svg)
 
-📑 *Project Title*
-        
-    Beacon-based Evacuation System and Technology
+BEST is the indoor Fire Evacuation System. The name BEST is short for Beacon-based Indoor Fire Evacuation System using Augmented Reality and Machine Learning. This system would be used for the multi-floor building as an function for evacuating people from the fire situations.
 
-📅 *Project Period*
+Best provides:
+    - **Indoor Fire Evacuation system across iOS and Android.** BEST can support iOS and Android, enabling for evacuate people regardelss of what devices they use. 
+    - **High Accuracy of Indoor localization**
+    - **2D map with cell status and 3D AR navigation system.** 
+    - **Real-Time socket communication and Optimized Route Algorithm.**
+    
+## Documentation
+To get more detail information about BEST, please refer to the BEST documentation. This describes key novelties on BEST, from what BEST is for, when BEST is useful.
 
-    04-17-2022(SUN) ~ 08-05-2022(FRI)
+To get more detail information about technology used in BEST, we have written a series of documentation that explains how the BEST works.
+
+## Installation for iOS
+
+## Installation for Android
+
+## Installation for Server
+
+## Installation for IoT
+
+## Related projects or Paper
+
+## License
+```
+MIT License
+
+Copyright (c) 2022 Bacon Beacon
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE.
+```
+
 
 🧖🏻‍♀️ *Problem Statement*
     
