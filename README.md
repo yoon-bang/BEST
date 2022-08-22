@@ -1,19 +1,19 @@
 # ⚡2022 Purdue Fire Evacuation System by Bacon Beacon⚡
 
-![Generic badge](https://img.shields.io/badge/Xcode-13.3.1-blue.svg)  ![Generic badge](https://img.shields.io/badge/iOS-13.0-yellow.svg)  ![Generic badge](https://img.shields.io/badge/Swift-5.5-green.svg)  ![Generic badge](https://img.shields.io/badge/Firebase-ios-sdk.svg)  ![Generic badge](https://img.shields.io/badge/Socket.IO-15.0-purple.svg)   ![Generic badge](https://img.shields.io/badge/TensorflowliteSwift-2.9.1-orange.svg)[![License](https://img.shields.io/badge/License-MIT%202.0-blue.svg)](https://opensource.org/licenses/MIT)
+![Generic badge](https://img.shields.io/badge/Xcode-13.3.1-blue.svg)  ![Generic badge](https://img.shields.io/badge/iOS-13.0-yellow.svg)  ![Generic badge](https://img.shields.io/badge/Swift-5.5-green.svg)  ![Generic badge](https://img.shields.io/badge/Firebase-ios-sdk.svg)  ![Generic badge](https://img.shields.io/badge/Socket.IO-15.0-purple.svg)   ![Generic badge](https://img.shields.io/badge/TensorflowliteSwift-2.9.1-orange.svg)[![License](https://img.shields.io/badge/License-MIT-blue.svg)](https://opensource.org/licenses/MIT)
 
 BEST is the indoor Fire Evacuation System. The name BEST is short for Beacon-based Indoor Fire Evacuation System using Augmented Reality and Machine Learning. This system would be used for the multi-floor building as an function for evacuating people from the fire situations.
 
 Best provides:
 * **Indoor Fire Evacuation system across iOS and Android.** BEST can support iOS and Android, enabling for evacuate people regardelss of what devices they use. 
-* **High Accuracy of Indoor localization**
-* **2D map with cell status and 3D AR navigation system.** 
-* **Real-Time socket communication and Optimized Route Algorithm.**
+* **High Accuracy of Indoor localization** BEST use the multi-classification with DNN. The accuracy of the Model is 78%. Also use the algorithm for adjust indoor localization.
+* **2D map with cell status and 3D AR navigation system.** BEST display 2D map and 3D AR arrow to navigate the optimal excaping path. The cell in 2D map inform users where the hazards are. User-friendly AR arrow inform users the direction to the exit.
+* **Real-Time socket communication and Optimized Route Algorithm.** BEST uses TCP connection for real-time. Q-learning algorithm derives optimal path based on user's location and indoor situation.
     
 ## Documentation
-To get more detail information about BEST, please refer to the BEST documentation. This describes key novelties on BEST, from what BEST is for, when BEST is useful.
+To get more detail information about BEST, please refer to the [BEST documentation](https://github.com/BeaconAR/BEST/wiki). This describes key novelties on BEST, from what BEST is for, when BEST is useful.
 
-To get more detail information about technology used in BEST, we have written a series of documentation that explains how the BEST works.
+To get more detail information about technology used in BEST, we have written a [series of documentation](https://github.com/BeaconAR/BEST/wiki) that explains how the BEST works, how did we troubleshoot.
 
 ## Installation for iOS
 ### Requirements
@@ -21,7 +21,7 @@ To get more detail information about technology used in BEST, we have written a 
 - Xcode 13.1+
 - Swift 5.5+
 - CocoaPods 1.11.3
-- iOS Real Device (Recommended: iphone 12)
+- iOS Real Device (Recommended: iPhone 12)
 ### Dependencies
 - **Firebase_iOS_sdk 9.2**
   -  Firebase Cloud Messaging for APNS(Apple Push Notification System)
