@@ -5,8 +5,8 @@
 BEST is the indoor Fire Evacuation System. The name BEST is short for Beacon-based Indoor Fire Evacuation System using Augmented Reality and Machine Learning. This system would be used for the multi-floor building as an function for evacuating people from the fire situations.
 
 <p class='center'>
-    <img src="https://user-images.githubusercontent.com/69891604/184859167-452ede1a-c84c-4631-9c0c-c539267ab04f.PNG" width="100" height="200"/>
-    <img src="https://user-images.githubusercontent.com/69891604/184859150-8ef583b9-0fb2-4395-9435-5cd54b76807b.PNG" width="100" height="200"/>
+    <img src="https://user-images.githubusercontent.com/69891604/184859167-452ede1a-c84c-4631-9c0c-c539267ab04f.PNG" width="150" height="300"/>
+    <img src="https://user-images.githubusercontent.com/69891604/184859150-8ef583b9-0fb2-4395-9435-5cd54b76807b.PNG" width="150" height="300"/>
 </p>
 
 
