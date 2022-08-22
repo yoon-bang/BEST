@@ -1,6 +1,6 @@
 # ⚡2022 Purdue Fire Evacuation System by Bacon Beacon⚡
 
-![Generic badge](https://img.shields.io/badge/Xcode-13.3.1-blue.svg)  ![Generic badge](https://img.shields.io/badge/iOS-13.0-yellow.svg)  ![Generic badge](https://img.shields.io/badge/Swift-5.5-green.svg)  ![Generic badge](https://img.shields.io/badge/Firebase-ios-sdk.svg)  ![Generic badge](https://img.shields.io/badge/Socket.IO-15.0-purple.svg)   ![Generic badge](https://img.shields.io/badge/TensorflowliteSwift-2.9.1-orange.svg)
+![Generic badge](https://img.shields.io/badge/Xcode-13.3.1-blue.svg)  ![Generic badge](https://img.shields.io/badge/iOS-13.0-yellow.svg)  ![Generic badge](https://img.shields.io/badge/Swift-5.5-green.svg)  ![Generic badge](https://img.shields.io/badge/Firebase-ios-sdk.svg)  ![Generic badge](https://img.shields.io/badge/Socket.IO-15.0-purple.svg)   ![Generic badge](https://img.shields.io/badge/TensorflowliteSwift-2.9.1-orange.svg)[![License](https://img.shields.io/badge/License-MIT%202.0-blue.svg)](https://opensource.org/licenses/MIT)
 
 BEST is the indoor Fire Evacuation System. The name BEST is short for Beacon-based Indoor Fire Evacuation System using Augmented Reality and Machine Learning. This system would be used for the multi-floor building as an function for evacuating people from the fire situations.
 
