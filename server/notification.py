@@ -7,11 +7,11 @@ def send_notification():
     datas = {
         "to": "dUvNnqwKwU8yjpFH8OzTJX:APA91bF8xVOIcIAsqWkb9f-DS-Q2YlkSCdxfDYA0dMQuOI318S1fv0H-ZJeCTEfLFaL8DT6ouyqLncn76hpmmzUTHhZnQRdyOECHlpey6A-b698RVCZBpr-1PIRfHay0NAVJ8Ry7K9p9",
         "data": {
-            "title": "FCM TEST",
-            "message": "Testing the FCM to iOS"
+            "title": "Fire Fire Fire!",
+            "message": "Open to start evacuate"
         },
         "notification": {
-            "title": "test1",
+            "title": "fire",
             "body": "test2",
             "sound": "default"
         }
