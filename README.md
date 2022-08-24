@@ -54,6 +54,7 @@ To get more detail information about technology used in BEST, we have written a 
   - DHT11 Temperature and Humidity sensor
   - pybluez, bluez-hcidump should be installed
   - Programming Language: Python 3.9
+
 -**Arduino**
   - ESP32 are recommended
   - DHT11 Temperature and Humidity sensor
