@@ -2,6 +2,8 @@ import notification
 from q_learning import *
 from flask import Flask, request
 
+# Due to the limit temperature that DHT11 capture, temperature_threshold is limited to 50.
+# If using DHT22 or better sensor, this value may be changed.
 app = Flask(__name__)
 on_fire = False
 temperature_threshold = 50
@@ -25,7 +27,9 @@ def fire_detected():
 def main():
 	pie_flask_main()
 
-#Receive temperature and humidity data from sensor.py and change the cells state if needed.
+# Receive temperature and humidity data from sensor.py and change the cells state if needed.
+# Input data: JSON {Raspberry Pi ID, Temperature, Humidity}
+# Returns nothing.
 @app.route("/get_sensor_data", methods = ["POST"])
 def post_sensor_data():
 	data = request.get_json()
@@ -42,7 +46,9 @@ def post_sensor_data():
 			on_fire = True
 			fire_detected()
 
-#Receive status of beacon from scanner.py and change the cells state if needed. 
+# Receive status of beacon from scanner.py and change the cells state if needed. 
+# Input data = JSON {beacon ID number}
+# Returns nothing
 @app.route("/get_status_data", methods = ["POST"])
 def post_status_data():
 	data = request.get_json()
