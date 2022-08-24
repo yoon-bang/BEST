@@ -44,11 +44,20 @@ To get more detail information about technology used in BEST, we have written a 
 ## Installation for Android
 
 ## Installation for Server
-  - Flask
+### Dependencies
+-**Google Cloud Platform or Amazon AWS needed**
+  - Python version 3.9
+  - Firewall: Port 12000 and 5000 should be permitted for data transfer
 ## Installation for IoT
-  - Raspbian OS for pybluez
-  - DHT11 Temperature and Humidity sensor needed for both Raspberry Pi and ESP32
-  - Arduino IDE, ESP32 are needed for code for Arduino
+-**Raspberry Pi**
+  - Raspbian OS
+  - DHT11 Temperature and Humidity sensor
+  - pybluez, bluez-hcidump should be installed
+  - Programming Language: Python 3.9
+-**Arduino**
+  - ESP32 are recommended
+  - DHT11 Temperature and Humidity sensor
+  - Programming Language: C++
 ## Related projects or Paper
 
 ## License
