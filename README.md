@@ -44,9 +44,11 @@ To get more detail information about technology used in BEST, we have written a 
 ## Installation for Android
 
 ## Installation for Server
-
+  - Flask
 ## Installation for IoT
-
+  - Raspbian OS for pybluez
+  - DHT11 Temperature and Humidity sensor needed for both Raspberry Pi and ESP32
+  - Arduino IDE, ESP32 are needed for code for Arduino
 ## Related projects or Paper
 
 ## License
