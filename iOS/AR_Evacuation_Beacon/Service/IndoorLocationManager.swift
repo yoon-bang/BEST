@@ -108,7 +108,7 @@ extension IndoorLocationManager {
             if previousUserLocation == .unknown {
                 previousUserLocation = location
             } else {
-                let location = filterErrorWithHeading(previousLocation: previousUserLocation, currentLocation: Position(rawValue: locations[0]) ?? .unknown)
+                let location = adjustLocation(from: previousUserLocation, to: Position(rawValue: locations[0]) ?? .unknown, with: self.heading)
                 sendLocationToServerWithSocket(location: location.rawValue)
                 NotificationCenter.default.post(name: .movePosition, object: location)
                 previousUserLocation = location
@@ -121,48 +121,65 @@ extension IndoorLocationManager {
         
     }
     
-    private func filterErrorWithHeading(previousLocation: Position, currentLocation: Position) -> Position {
-        
-        if previousLocation == .unknown || currentLocation == .unknown {return .unknown}
-        
-        let adjacentCells = previousLocation.adjacentCell.flatMap { (ele: [Position]) -> [Position] in
-            return ele
-        }
-        
-        // is CurrentLocation is Adjacent with previousLocation?
-        let currentDirection = headingToDirection(heading: self.heading)
+    private func adjustLocation(from previousLocation: Position, to currentLocation: Position, with heading: Double) -> Position {
+        if previousLocation == .unknown || currentLocation == .unknown {return previousLocation}
+        let adjacentCells = adjacentCells(nearby: previousLocation)
+        let currentDirection = headingToDirection(with: heading)
         if adjacentCells.contains(currentLocation) {
-
-            var candidateCells = previousLocation.adjacentCell[currentDirection.rawValue]
-            candidateCells.removeAll { $0 == .unknown }
-            // if candidate cell and direction and heading are same?, that is answer
-            if candidateCells.contains(currentLocation) {
-                return currentLocation
-            } else {
-                // if adjacent cell, direction and heading not same, go previous cell
-                return previousLocation
-            }
-        } else {
-           // if not adjacent cell, but heading of user and angle between previous location and the result are same, we judge the user moves fast.
-            let currentPosPoint = VectorService.transformCellToCGPoint(cellname: currentLocation)
-            let prevPosPoint = VectorService.transformCellToCGPoint(cellname: previousLocation)
-            let direction = headingToDirection(heading: Double(VectorService.vectorBetween2Points(from: prevPosPoint, to: currentPosPoint).angle))
-            
-            // then user can go to candidate cell with same direction
-            if direction == currentDirection {
-                var candidateCells = previousLocation.adjacentCell[direction.rawValue]
-                candidateCells.removeAll { $0 == .unknown }
-                return candidateCells.first ?? previousLocation
-            } else {
-                return previousLocation
-            }
-            
+            return locationWhenAdjacentCellInCandidateCells(from: previousLocation,
+                                                            to: currentLocation,
+                                                            with: currentDirection)
         }
+        return locationWhenAdjacentCellNotInCandidateCells(from: previousLocation,
+                                                           to: currentLocation,
+                                                           with: currentDirection)
     }
     
     private func sendLocationToServerWithSocket(location: String) {
         SocketStreamManager.shared.sendLocation(location: location)
     }
+    
+    
+    
+    private func adjacentCells(nearby previousLocation: Position) -> [Position] {
+        previousLocation.adjacentCell.flatMap { (ele: [Position]) -> [Position] in
+           return ele
+       }
+    }
+    
+    private func locationWhenAdjacentCellNotInCandidateCells(from previousLocation: Position, to currentLocation: Position, with currentDirection: Direction) -> Position {
+        // if not adjacent cell, but heading of user and angle between previous location and the result are same, we judge the user moves fast.
+         let currentPosPoint = VectorService.transformCellToCGPoint(cellname: currentLocation)
+         let prevPosPoint = VectorService.transformCellToCGPoint(cellname: previousLocation)
+         let indicatedHeading = Double(VectorService.vectorBetween2Points(from: prevPosPoint, to: currentPosPoint).angle)
+         let direction = headingToDirection(with: indicatedHeading)
+         
+         if direction == currentDirection {
+             return candidateCells(by: previousLocation, with: direction).first ?? previousLocation
+         }
+        return previousLocation
+    }
+    
+    private func candidateCells(by previousLocation: Position, with direction: Direction) -> [Position] {
+        var candidateCells = previousLocation.adjacentCell[direction.rawValue]
+        removeUnknownCellFromCandidateCells(candidateCells: &candidateCells)
+        return candidateCells
+    }
+    
+    private func locationWhenAdjacentCellInCandidateCells(from previousLocation: Position, to currentLocation: Position, with currentDirection: Direction) -> Position {
+        
+        let candidateCells = candidateCells(by: previousLocation, with: currentDirection)
+
+        if candidateCells.contains(currentLocation) {
+            return currentLocation
+        }
+        return previousLocation
+    }
+    
+    private func removeUnknownCellFromCandidateCells(candidateCells: inout [Position]) {
+        candidateCells.removeAll { $0 == .unknown }
+    }
+    
     
 }
 
@@ -318,16 +335,15 @@ extension IndoorLocationManager {
         NotificationCenter.default.post(name: .changeArrowAngle, object: heading)
     }
     
-    private func headingToDirection(heading: Double) -> Direction {
+    private func headingToDirection(with heading: Double) -> Direction {
         if ((315.0 <= heading) && (heading < 360.0)) || ((0.0 <= heading) && (heading < 45)) {
             return Direction.North
         } else if ((45.0 <= heading) && (heading < 135.0)) {
             return Direction.East
         } else if ((135.0 <= heading) && (heading < 225.0)) {
             return Direction.South
-        } else {
-            return Direction.West
         }
+        return Direction.West
     }
     
     @available(*, deprecated, renamed: "headingToDirection")
